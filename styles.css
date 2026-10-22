@@ -3,6 +3,7 @@
   /* Colors */
   --color-background: #ffffff;
   --color-accent: #ff0000;
+  --color-shadow: rgba(0, 0, 0, 0.3);
 
   /* Fonts: Helvetica Neue comes with Mac and iPhone, other devices use Arial */
   --font-display: "Helvetica Neue", Helvetica, Arial, sans-serif;
@@ -10,6 +11,9 @@
 
   /* Sizes: 300px in Figma, smaller on small screens */
   --size-title: min(300px, 20vw);
+
+  /* Fly: 181px wide in Figma, smaller on small screens */
+  --size-fly: min(181px, 30vw);
 
   /* Spacing */
   --space-page: 16px;
@@ -46,4 +50,24 @@ body {
   color: var(--color-accent);
   text-align: center;
   max-width: 1255px; /* text box width in Figma */
+}
+
+/* ===== Flying fly ===== */
+
+/* script.js moves the fly by changing its transform */
+.fly {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: var(--size-fly);
+  height: auto;
+  pointer-events: none; /* clicks go through the fly */
+  /* Close shadow: the fly is sitting on the page */
+  filter: drop-shadow(2px 3px 2px var(--color-shadow));
+  transition: filter 0.3s;
+}
+
+/* Far, soft shadow: the fly is in the air */
+.fly.is-flying {
+  filter: drop-shadow(14px 22px 8px var(--color-shadow));
 }
