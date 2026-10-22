@@ -1,0 +1,49 @@
+/* ===== Variables (from Figma) ===== */
+:root {
+  /* Colors */
+  --color-background: #ffffff;
+  --color-accent: #ff0000;
+
+  /* Fonts: Helvetica Neue comes with Mac and iPhone, other devices use Arial */
+  --font-display: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  --weight-display: 500; /* Medium */
+
+  /* Sizes: 300px in Figma, smaller on small screens */
+  --size-title: min(300px, 20vw);
+
+  /* Spacing */
+  --space-page: 16px;
+}
+
+/* ===== Base ===== */
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  background-color: var(--color-background);
+}
+
+/* ===== "Coming soon" page ===== */
+
+/* Fills the whole screen and puts the title in the middle */
+.coming-soon {
+  min-height: 100vh;
+  min-height: 100dvh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--space-page);
+}
+
+.coming-soon-title {
+  margin: 0;
+  font-family: var(--font-display);
+  font-size: var(--size-title);
+  font-weight: var(--weight-display);
+  line-height: normal;
+  color: var(--color-accent);
+  text-align: center;
+  max-width: 1255px; /* text box width in Figma */
+}
