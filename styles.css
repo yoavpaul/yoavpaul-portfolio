@@ -10,9 +10,8 @@
   --font-display: "Helvetica Neue", Helvetica, Arial, sans-serif;
   --weight-display: 500; /* Medium */
 
-  /* Font of the small name: ABC Maxi Round Mono in Figma.
-     It is not on the site yet, so for now devices show a monospace font */
-  --font-label: "ABC Maxi Round Mono", monospace;
+  /* Font of the small name: IBM Plex Mono (loaded from Google Fonts in index.html) */
+  --font-label: "IBM Plex Mono", monospace;
 
   /* Sizes: 300px in Figma, smaller on small screens */
   --size-title: min(300px, 20vw);
@@ -74,7 +73,7 @@ body {
   margin: 0;
   font-family: var(--font-label);
   font-size: var(--size-label);
-  line-height: 1.5;
+  line-height: 1.15; /* close lines, like in Figma */
   color: var(--color-text);
   text-align: center;
   white-space: nowrap;
