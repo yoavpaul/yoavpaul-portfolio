@@ -3,7 +3,7 @@
 אתר פורטפוליו אישי שנבנה מהעיצוב שלי בפיגמה.
 זה האתר הראשון שלי ואני מתחיל.ה, אז הקוד צריך להיות פשוט וקל לקריאה.
 
-קובץ הפיגמה: https://www.figma.com/design/NLK0rZST6VNiVlxuefGZiZ/portfolio
+קובץ הפיגמה: https://www.figma.com/design/CeWg4Ebe6AffFXahnSs7Xs/Yoav-Paul?node-id=3-2
 
 ## עיצוב
 - פיגמה היא מקור ההחלטות.

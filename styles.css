@@ -4,13 +4,21 @@
   --color-background: #ffffff;
   --color-accent: #ff0000;
   --color-shadow: rgba(0, 0, 0, 0.3);
+  --color-text: #000000;
 
   /* Fonts: Helvetica Neue comes with Mac and iPhone, other devices use Arial */
   --font-display: "Helvetica Neue", Helvetica, Arial, sans-serif;
   --weight-display: 500; /* Medium */
 
+  /* Font of the small name: ABC Maxi Round Mono in Figma.
+     It is not on the site yet, so for now devices show a monospace font */
+  --font-label: "ABC Maxi Round Mono", monospace;
+
   /* Sizes: 300px in Figma, smaller on small screens */
   --size-title: min(300px, 20vw);
+
+  /* Small name: 20px in Figma, smaller on small screens so it fits between the title lines */
+  --size-label: min(20px, 3.3vw);
 
   /* Fly: 181px wide in Figma, smaller on small screens */
   --size-fly: min(181px, 30vw);
@@ -52,6 +60,26 @@ body {
   max-width: 1255px; /* text box width in Figma */
 }
 
+/* Holds the title, so the name can be placed in its middle */
+.title-wrapper {
+  position: relative;
+}
+
+/* The name, in the gap between "Coming" and "Soon" */
+.coming-soon-name {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  margin: 0;
+  font-family: var(--font-label);
+  font-size: var(--size-label);
+  line-height: 1.5;
+  color: var(--color-text);
+  text-align: center;
+  white-space: nowrap;
+}
+
 /* ===== Flying fly ===== */
 
 /* script.js moves the fly by changing its transform */
@@ -61,7 +89,6 @@ body {
   left: 0;
   width: var(--size-fly);
   height: auto;
-  pointer-events: none; /* clicks go through the fly */
   /* Close shadow: the fly is sitting on the page */
   filter: drop-shadow(2px 3px 2px var(--color-shadow));
   transition: filter 0.3s;
@@ -70,4 +97,57 @@ body {
 /* Far, soft shadow: the fly is in the air */
 .fly.is-flying {
   filter: drop-shadow(14px 22px 8px var(--color-shadow));
+}
+
+/* A squashed fly lies flat on the page (no shadow), and can't be clicked again */
+.fly.is-squashed {
+  filter: none;
+  pointer-events: none;
+}
+
+/* ===== Red splat under a squashed fly ===== */
+
+/* script.js places it where the fly was */
+.splat {
+  position: fixed;
+  width: calc(var(--size-fly) * 0.6);
+  aspect-ratio: 1;
+  translate: -50% -50%; /* centered on the fly (works together with the grow animation) */
+  background-color: var(--color-accent);
+  border-radius: 45% 55% 40% 60% / 55% 40% 60% 45%; /* uneven, like a blob */
+  pointer-events: none;
+  animation: splat-appear 0.15s ease-out;
+}
+
+/* Two small drops around the splat */
+.splat::before,
+.splat::after {
+  content: "";
+  position: absolute;
+  border-radius: 50%;
+  background-color: var(--color-accent);
+}
+
+.splat::before {
+  width: 18%;
+  height: 18%;
+  top: -22%;
+  left: 70%;
+}
+
+.splat::after {
+  width: 12%;
+  height: 12%;
+  bottom: -10%;
+  left: -15%;
+}
+
+/* The splat grows quickly from nothing */
+@keyframes splat-appear {
+  from {
+    scale: 0;
+  }
+  to {
+    scale: 1;
+  }
 }
