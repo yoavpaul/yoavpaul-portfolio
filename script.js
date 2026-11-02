@@ -2,6 +2,9 @@
 // it buzzes around, changes direction suddenly, and lands for a moment.
 // The first click on the fly makes it escape, the second click squashes it,
 // and 2 seconds later a new fly comes in.
+//
+// On the home page the fly rests on the name until the mouse touches it,
+// and it only flies above the Motion Poster (it never goes over it).
 
 // "let" because a new fly image replaces it after the old one is squashed
 let fly = document.querySelector(".fly");
@@ -10,10 +13,35 @@ let hits = 0; // how many times this fly was clicked
 
 const NEW_FLY_DELAY = 2000; // milliseconds until a new fly comes
 
+// The home page has the works column; the "Coming soon" page doesn't
+const works = document.querySelector(".works");
+const isHomePage = works !== null;
+
+// The area where the fly may fly:
+// on the home page, from the top of the page down to the Motion Poster,
+// on the "Coming soon" page, the whole screen
+function getArea() {
+  if (isHomePage) {
+    const halfFly = fly.offsetWidth / 2; // so the whole fly stays above the poster
+    return { width: document.documentElement.clientWidth, height: works.offsetTop - halfFly };
+  }
+  return { width: window.innerWidth, height: window.innerHeight };
+}
+
 // Where the fly is (in pixels) and where it is facing (in degrees, 0 = right)
 let x = window.innerWidth * 0.86; // starts bottom right, like in Figma
 let y = window.innerHeight * 0.81;
 let heading = -116.64; // matches the fly's rotation in Figma
+
+// On the home page the fly starts on the name, at its spot in Figma
+// (in Figma the page is 1440px wide and the fly's middle is at 833, 257)
+if (isHomePage) {
+  const hero = document.querySelector(".hero");
+  const pageWidth = document.documentElement.clientWidth;
+  const figmaPixel = Math.min(1, pageWidth / 1440);
+  x = pageWidth / 2 + (833 - 720) * figmaPixel;
+  y = hero.offsetTop + 257 * figmaPixel;
+}
 let speed = 0; // pixels per second
 
 // The fly either rests or flies, each for a random amount of time
@@ -50,7 +78,8 @@ function update(seconds) {
   timeLeft -= seconds;
 
   if (!isFlying) {
-    if (timeLeft <= 0) startFlying();
+    // On the home page the fly waits for the mouse instead
+    if (timeLeft <= 0 && !isHomePage) startFlying();
     return;
   }
 
@@ -60,9 +89,10 @@ function update(seconds) {
     heading += randomBetween(-120, 120);
   }
 
-  // Near the edge of the screen: turn back toward the middle
-  const width = window.innerWidth;
-  const height = window.innerHeight;
+  // Near the edge of the area: turn back toward the middle
+  const area = getArea();
+  const width = area.width;
+  const height = area.height;
   if (x < EDGE || x > width - EDGE || y < EDGE || y > height - EDGE) {
     const angleToMiddle = Math.atan2(height / 2 - y, width / 2 - x) * (180 / Math.PI);
     heading = angleToMiddle + randomBetween(-30, 30);
@@ -77,7 +107,7 @@ function update(seconds) {
   x += Math.cos(radians) * speed * seconds;
   y += Math.sin(radians) * speed * seconds;
 
-  // Stay inside the screen (for example after the window gets smaller)
+  // Stay inside the area (for example after the window gets smaller)
   x = Math.min(width, Math.max(0, x));
   y = Math.min(height, Math.max(0, y));
 
@@ -106,8 +136,9 @@ function escapeFly() {
 
   // With animations turned off the fly can't fly, so it jumps to a new spot
   if (prefersStill) {
-    x = randomBetween(EDGE, window.innerWidth - EDGE);
-    y = randomBetween(EDGE, window.innerHeight - EDGE);
+    const area = getArea();
+    x = randomBetween(EDGE, area.width - EDGE);
+    y = randomBetween(EDGE, area.height - EDGE);
     land();
     draw();
   }
@@ -130,21 +161,22 @@ function squashFly() {
   setTimeout(bringNewFly, NEW_FLY_DELAY);
 }
 
-// A new fly comes in from the left or right edge of the screen
+// A new fly comes in from the left or right edge of the area
 function bringNewFly() {
   const newFly = fly.cloneNode();
   newFly.className = "fly";
   document.body.appendChild(newFly);
   fly = newFly; // from now on, the code moves the new fly
 
-  x = Math.random() < 0.5 ? 0 : window.innerWidth;
-  y = randomBetween(0.2, 0.8) * window.innerHeight;
+  const area = getArea();
+  x = Math.random() < 0.5 ? 0 : area.width;
+  y = randomBetween(0.2, 0.8) * area.height;
   isAlive = true;
   hits = 0;
   startFlying();
 
-  // Fly toward the middle of the screen
-  heading = Math.atan2(window.innerHeight / 2 - y, window.innerWidth / 2 - x) * (180 / Math.PI);
+  // Fly toward the middle of the area
+  heading = Math.atan2(area.height / 2 - y, area.width / 2 - x) * (180 / Math.PI);
   draw();
 }
 
@@ -158,6 +190,13 @@ document.addEventListener("pointerdown", function (event) {
     } else {
       squashFly();
     }
+  }
+});
+
+// Home page: the fly takes off when the mouse touches it
+document.addEventListener("pointerover", function (event) {
+  if (isHomePage && event.target === fly && isAlive && !isFlying) {
+    escapeFly();
   }
 });
 

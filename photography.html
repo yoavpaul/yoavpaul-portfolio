@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Photography – Yoav Paul</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <!-- Menu and big title (top and height in Figma pixels) -->
+  <header class="project-header" style="--title-top: 101; --header-height: 599;">
+    <nav class="project-nav">
+      <a class="page-link" href="projects.html">INDEX</a>
+      <a class="page-link" href="branding.html">Branding</a>
+      <a class="page-link is-current" href="photography.html">Photography</a>
+      <a class="page-link" href="graphics.html">Graphics</a>
+    </nav>
+    <h1 class="project-title">Photography</h1>
+  </header>
+
+  <!-- The photos. Sizes are in Figma pixels (see "Columns and rows" in styles.css) -->
+  <main class="figma-column">
+    <img class="work-image" src="images/yarzin-photoshoot.jpg" alt="Yarzin photoshoot" style="--width: 1107;">
+    <img class="work-image" src="images/photo-yoavp1150.jpg" alt="Portrait in a forest" style="--width: 1114; --space-before: 67;">
+    <img class="work-image" src="images/photo-yoav367.jpg" alt="Bed in an empty room" style="--width: 1318; --space-before: 74;">
+
+    <!-- This photo shows only its middle part, like in Figma -->
+    <div class="work-image crop-my-project" style="--width: 1323; --space-before: 94;">
+      <img src="images/photo-my-project-6.jpg" alt="Woman in a red dress with shopping carts">
+    </div>
+
+    <img class="work-image" src="images/photo-illustration-14.jpg" alt="Man working in a workshop" style="--width: 1318; --space-before: 94;">
+  </main>
+</body>
+</html>
