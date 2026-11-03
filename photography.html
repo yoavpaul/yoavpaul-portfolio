@@ -4,13 +4,24 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Photography – Yoav Paul</title>
+  <!-- Agdasima font from Google Fonts (top bar, menus, captions) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Agdasima:wght@400;700&display=swap">
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-  <!-- Menu and big title (top and height in Figma pixels) -->
-  <header class="project-header" style="--title-top: 101; --header-height: 599;">
+  <!-- Top bar: About, the name (leads home), Contact -->
+  <header class="top-bar">
+    <a class="top-bar-about" href="about.html#me">About</a>
+    <a class="top-bar-name" href="index.html">YOAV<br>PAUL</a>
+    <a class="top-bar-contact" href="about.html">Contact</a>
+  </header>
+
+  <!-- Menu and big title (sizes in Figma pixels) -->
+  <header class="project-header" style="--nav-top: 103; --title-top: 101; --title-size: 220; --header-height: 481;">
     <nav class="project-nav">
-      <a class="page-link" href="projects.html">INDEX</a>
+      <a class="page-link project-nav-index" href="projects.html">INDEX</a>
       <a class="page-link" href="branding.html">Branding</a>
       <a class="page-link is-current" href="photography.html">Photography</a>
       <a class="page-link" href="graphics.html">Graphics</a>
@@ -18,18 +29,38 @@
     <h1 class="project-title">Photography</h1>
   </header>
 
-  <!-- The photos. Sizes are in Figma pixels (see "Columns and rows" in styles.css) -->
+  <!-- The photos and their names. Sizes are in Figma pixels (see "Columns and rows" in styles.css) -->
   <main class="figma-column">
-    <img class="work-image" src="images/yarzin-photoshoot.jpg" alt="Yarzin photoshoot" style="--width: 1107;">
-    <img class="work-image" src="images/photo-yoavp1150.jpg" alt="Portrait in a forest" style="--width: 1114; --space-before: 67;">
-    <img class="work-image" src="images/photo-yoav367.jpg" alt="Bed in an empty room" style="--width: 1318; --space-before: 74;">
 
-    <!-- This photo shows only its middle part, like in Figma -->
-    <div class="work-image crop-my-project" style="--width: 1323; --space-before: 94;">
+    <!-- Dissociative self: shows only the middle of the photo, like in Figma -->
+    <div class="work-image crop-my-project" style="--width: 1382;">
       <img src="images/photo-my-project-6.jpg" alt="Woman in a red dress with shopping carts">
     </div>
+    <p class="photo-caption from-left" style="--left: 70; --width: 391; --height: 55; --space-before: 11;">Dissociative self</p>
 
-    <img class="work-image" src="images/photo-illustration-14.jpg" alt="Man working in a workshop" style="--width: 1318; --space-before: 94;">
+    <!-- Monsters Under The Bed: scroll sideways to see all the photos -->
+    <div class="photo-row from-left" style="--left: 294;">
+      <img src="images/yarzin-photoshoot.jpg" alt="Monsters Under The Bed, photo 1">
+      <img src="images/monsters-02.jpg" alt="Monsters Under The Bed, photo 2">
+      <img src="images/monsters-03.jpg" alt="Monsters Under The Bed, photo 3">
+      <img src="images/monsters-04.jpg" alt="Monsters Under The Bed, photo 4">
+      <img src="images/monsters-05.jpg" alt="Monsters Under The Bed, photo 5">
+      <img src="images/monsters-06.jpg" alt="Monsters Under The Bed, photo 6">
+      <img src="images/monsters-07.jpg" alt="Monsters Under The Bed, photo 7">
+      <img src="images/monsters-08.jpg" alt="Monsters Under The Bed, photo 8">
+      <img src="images/monsters-09.jpg" alt="Monsters Under The Bed, photo 9">
+      <img src="images/monsters-10.jpg" alt="Monsters Under The Bed, photo 10">
+    </div>
+    <p class="photo-caption from-left" style="--left: 293; --width: 481; --height: 59; --space-before: 11;">Monsters Under The Bed - Guy Jarzin</p>
+
+    <img class="work-image" src="images/photo-yoav367.jpg" alt="Bed in an empty room" style="--width: 1363;">
+    <p class="photo-caption from-left" style="--left: 37; --width: 391; --height: 50; --space-before: 12;">Four noble truths before bedtime</p>
+
+    <img class="work-image from-left" src="images/photo-yoavp1150.jpg" alt="Portrait in a forest" style="--left: 38; --width: 1114;">
+    <p class="photo-caption from-left" style="--left: 960; --width: 269; --height: 60; --space-before: 10; --align: center;">Magi Solar</p>
+
+    <img class="work-image" src="images/photo-illustration-14.jpg" alt="Man working in a workshop" style="--width: 1363;">
+    <p class="photo-caption from-left" style="--left: -53; --width: 491; --height: 26; --space-before: 5; --align: center;">Bank Leumi - Local Treasure</p>
   </main>
 </body>
 </html>

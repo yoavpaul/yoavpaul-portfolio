@@ -3,24 +3,56 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Coming Soon</title>
-  <!-- IBM Plex Mono font from Google Fonts (for the small name) -->
+  <title>Yoav Paul</title>
+  <!-- Agdasima font from Google Fonts (top bar, menus, captions) -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono&display=swap">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Agdasima:wght@400;700&display=swap">
   <link rel="stylesheet" href="styles.css">
 </head>
-<body>
-  <!-- One screen with the title in the middle -->
-  <main class="coming-soon">
-    <!-- The small name sits between the two lines of the title -->
-    <div class="title-wrapper">
-      <h1 class="coming-soon-title">Coming Soon</h1>
-      <p class="coming-soon-name">Yoav Paul<br>Portfolio</p>
+<body class="home-page">
+  <!-- Top bar: About, the name (leads home), Contact -->
+  <header class="top-bar">
+    <a class="top-bar-about" href="about.html#me">About</a>
+    <a class="top-bar-name" href="index.html">YOAV<br>PAUL</a>
+    <a class="top-bar-contact" href="about.html">Contact</a>
+  </header>
+
+  <!-- Big name (the fly sits on it, see below) -->
+  <section class="hero">
+    <!-- "INDEX" is grey here and leads to the index page -->
+    <p class="hero-index-link">OVER VIEW / <a class="page-link text-muted" href="projects.html">INDEX</a></p>
+    <h1 class="hero-title">YOAVPAUL</h1>
+  </section>
+
+  <!-- "ME" turns red under the mouse -->
+  <p class="catch-me">Catch <span class="catch-me-big">ME</span> if you can!</p>
+
+  <!-- The works, one under the other -->
+  <main class="works">
+    <video class="work" src="images/motion-poster.mp4" autoplay muted loop playsinline></video>
+
+    <!-- Four images in two columns -->
+    <div class="works-grid">
+      <img class="work" src="images/teamtag.jpg" alt="Team tag">
+      <img class="work" src="images/creator-tag.jpg" alt="Creator tag">
+      <!-- The sidebag image is zoomed in a little, like in Figma -->
+      <div class="work work-crop">
+        <img class="work-crop-sidebag" src="images/sidebag.jpg" alt="Side bag">
+      </div>
+      <div class="work work-crop">
+        <img class="work-crop-vest" src="images/vest.jpg" alt="Vest">
+      </div>
     </div>
+
+    <img class="work work-soccer" src="images/poster-joint-soccer.jpg" alt="Joint soccer poster">
+    <img class="work work-yarzin" src="images/yarzin-photoshoot.jpg" alt="Yarzin photoshoot">
+    <img class="work work-lodge" src="images/thelodge-logo.jpg" alt="The Lodge logo">
+    <img class="work work-logo" src="images/logo-1.png" alt="Logo">
+    <img class="work work-tartakover" src="images/tartakover-poster.jpg" alt="Tartakover poster">
   </main>
 
-  <!-- The fly that flies around the screen (moved by script.js) -->
+  <!-- The fly: sits on the name and flies away when the mouse touches it (moved by script.js) -->
   <img class="fly" src="images/fly.png" alt="" aria-hidden="true">
 
   <script src="script.js"></script>

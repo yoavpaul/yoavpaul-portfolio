@@ -4,24 +4,28 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Index – Yoav Paul</title>
+  <!-- Agdasima font from Google Fonts (top bar, menus, captions) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Agdasima:wght@400;700&display=swap">
   <link rel="stylesheet" href="styles.css">
 </head>
-<body>
-  <!-- Top bar: name, short description, contact -->
+<body class="index-page">
+  <!-- Top bar: About, the name (leads home), Contact -->
   <header class="top-bar">
-    <a class="top-bar-name" href="about.html">YOAV PAUL</a>
-    <p class="top-bar-description">A visual designer working across images and identities.</p>
-    <p class="top-bar-contact">Contact</p>
+    <a class="top-bar-about" href="about.html#me">About</a>
+    <a class="top-bar-name" href="index.html">YOAV<br>PAUL</a>
+    <a class="top-bar-contact" href="about.html">Contact</a>
   </header>
 
-  <!-- Big name -->
+  <!-- Big name (the fly sits on it, see below) -->
   <section class="hero">
     <!-- "OVER VIEW" is grey here and leads back to the home page -->
-    <p class="hero-index-link"><a class="page-link text-muted" href="home.html">OVER VIEW</a> / INDEX</p>
+    <p class="hero-index-link"><a class="page-link text-muted" href="index.html">OVER VIEW</a> / INDEX</p>
     <h1 class="hero-title">YOAVPAUL</h1>
   </section>
 
-  <!-- The three projects, with thick lines between them.
+  <!-- The three categories, with thick lines between them. Each one leads to its page.
        Sizes are in Figma pixels: space above the text, and the height of each one -->
   <main>
     <hr class="index-line" style="margin-top: calc(67 * var(--px));">
@@ -33,14 +37,19 @@
     <hr class="index-line">
 
     <a class="index-item" href="photography.html" style="--padding-top: 5; --height: 487;">
-      <span class="index-item-title">Photogrphy:</span> Four noble truths before bedtime, Dissociative self, The mask
+      <span class="index-item-title">Photography:</span> Dissociative self, Four noble truths before bedtime, Monsters under the bed, Megi solar
     </a>
 
     <hr class="index-line">
 
     <a class="index-item" href="graphics.html" style="--padding-top: 44; --height: 404;">
-      <span class="index-item-title">Graphics:</span> football - joint, Tartoctober posters,
+      <span class="index-item-title">Graphics:</span> football - joint, Tartoctober posters
     </a>
   </main>
+
+  <!-- The fly: sits on the name and flies away when the mouse touches it (moved by script.js) -->
+  <img class="fly" src="images/fly.png" alt="" aria-hidden="true">
+
+  <script src="script.js"></script>
 </body>
 </html>

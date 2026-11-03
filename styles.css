@@ -31,28 +31,25 @@
   --color-shadow: rgba(0, 0, 0, 0.3);
   --color-text: #000000;
   --color-text-muted: rgba(0, 0, 0, 0.6);
+  --color-dark: #191919; /* dark half on the branding page, like polafilm.com */
+  --color-light-text: #d9d9d9; /* text on the dark half */
+  --color-line: #333333; /* thin lines between the halves */
 
   /* Title font: TAN - MEMORIES (Regular), a serif font is used until it loads */
   --font-display: "TAN Memories", Georgia, serif;
   --weight-display: 400; /* Regular */
 
-  /* Font of the small name: IBM Plex Mono (loaded from Google Fonts in index.html) */
-  --font-label: "IBM Plex Mono", monospace;
+  /* Font of the top bar, the menus and the captions: Agdasima (loaded from Google Fonts in every page) */
+  --font-nav: "Agdasima", Arial, sans-serif;
+  --size-nav: max(12px, calc(24 * var(--px))); /* "About", "Contact", "OVER VIEW / INDEX": 24px in Figma */
 
   /* Font of the small texts on the home page */
   --font-body: "ArbelG", Arial, sans-serif;
-  --size-small: 12px; /* top bar */
   --size-link: max(12px, calc(20 * var(--px))); /* "OVER VIEW / INDEX": 20px in Figma */
 
   /* One Figma pixel: the home page is 1440px wide in Figma,
      so on smaller screens everything gets smaller together */
   --px: min(1px, calc(100vw / 1440));
-
-  /* Sizes: 400px in Figma (on a 1440px wide screen), smaller on small screens */
-  --size-title: min(400px, 27vw);
-
-  /* Small name: 20px in Figma, smaller on small screens so it fits between the title lines */
-  --size-label: clamp(10px, 1.4vw, 20px);
 
   /* Fly: 181px wide in Figma, smaller on small screens */
   --size-fly: min(181px, 30vw);
@@ -69,49 +66,6 @@
 body {
   margin: 0;
   background-color: var(--color-background);
-}
-
-/* ===== "Coming soon" page ===== */
-
-/* Fills the whole screen and puts the title in the middle */
-.coming-soon {
-  min-height: 100vh;
-  min-height: 100dvh;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: var(--space-page);
-}
-
-.coming-soon-title {
-  margin: 0;
-  font-family: var(--font-display);
-  font-size: var(--size-title);
-  font-weight: var(--weight-display);
-  line-height: 1.07; /* line height from Figma */
-  color: var(--color-accent);
-  text-align: center;
-  max-width: 1440px; /* text box width in Figma */
-}
-
-/* Holds the title, so the name can be placed in its middle */
-.title-wrapper {
-  position: relative;
-}
-
-/* The name, in the gap between "Coming" and "Soon" */
-.coming-soon-name {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  margin: 0;
-  font-family: var(--font-label);
-  font-size: var(--size-label);
-  line-height: 1.15; /* close lines, like in Figma */
-  color: var(--color-text);
-  text-align: center;
-  white-space: nowrap;
 }
 
 /* ===== Flying fly ===== */
@@ -186,36 +140,54 @@ body {
   }
 }
 
-/* ===== Home page (home.html) ===== */
+/* ===== Top bar (all pages except branding) ===== */
 
-/* Links look like the rest of the text */
-.top-bar a,
-.hero a {
-  color: inherit;
-  text-decoration: none;
-}
-
-/* Top bar: name on the left, description in the middle, contact on the right */
+/* "About" on the left, "YOAV PAUL" in the middle, "Contact" on the right.
+   Each one is placed by its middle point, like in Figma (the page is 1440px wide there) */
 .top-bar {
   position: absolute;
-  top: 21px;
-  left: 25px;
-  right: 25px;
+  top: 0;
+  left: 0;
+  right: 0;
   z-index: 1;
-  display: grid;
-  grid-template-columns: 1fr auto 1fr;
-  gap: 16px;
-  font-family: var(--font-body);
-  font-size: var(--size-small);
+  font-family: var(--font-nav);
+  font-size: var(--size-nav);
+  line-height: normal;
   color: var(--color-text);
 }
 
-.top-bar p {
-  margin: 0;
+.top-bar a {
+  position: absolute;
+  transform: translateX(-50%); /* the middle of the word sits on "left" */
+  color: inherit;
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.top-bar-about {
+  top: calc(25 * var(--px));
+  left: calc(50% - 393.5 * var(--px)); /* 326.5px in Figma */
 }
 
 .top-bar-contact {
-  text-align: right;
+  top: calc(25 * var(--px));
+  left: calc(50% + 425.5 * var(--px)); /* 1145.5px in Figma */
+}
+
+/* "YOAV" above "PAUL", in the title font */
+.top-bar-name {
+  top: calc(14 * var(--px));
+  left: 50%;
+  font-family: var(--font-display);
+  line-height: 1.04;
+  text-align: center;
+}
+
+/* ===== Home page (index.html) and index page (projects.html) ===== */
+
+.hero a {
+  color: inherit;
+  text-decoration: none;
 }
 
 /* Big name. All sizes are Figma pixels times --px */
@@ -235,39 +207,61 @@ body {
   text-align: center;
 }
 
-/* "OVER VIEW / INDEX" sits on top of the big name, in the middle */
+/* "OVER VIEW / INDEX" sits on top of the big name, in the middle.
+   On phones it stays at least 36px from the top, so it doesn't touch "YOAV PAUL" */
 .hero-index-link {
   position: absolute;
-  top: calc(82 * var(--px));
+  top: max(36px, calc(100 * var(--px)));
   left: 50%;
   transform: translateX(-50%);
   margin: 0;
-  font-family: var(--font-body);
-  font-size: var(--size-link);
-  font-weight: 700; /* Bold */
+  font-family: var(--font-nav);
+  font-size: var(--size-nav);
   color: var(--color-text);
   white-space: nowrap;
 }
 
-.text-muted {
+/* The grey link in "OVER VIEW / INDEX" */
+.hero-index-link .text-muted {
   color: var(--color-text-muted);
 }
 
-/* The fly on the home page: 113px wide in Figma, and it moves with the page
-   (script.js places it on the name and keeps it above the Motion Poster) */
-.home-page {
+/* "Catch ME if you can!" under the big name. "ME" turns red under the mouse */
+.catch-me {
+  margin: calc(102 * var(--px)) 0 0;
+  font-family: var(--font-display);
+  font-size: calc(70.82 * var(--px));
+  line-height: normal;
+  color: var(--color-text);
+  text-align: center;
+}
+
+.catch-me-big {
+  font-size: calc(96 * var(--px));
+}
+
+.catch-me:hover .catch-me-big {
+  color: var(--color-accent);
+}
+
+/* The fly on the home and index pages: 113px wide in Figma, and it moves with the page
+   (script.js places it on the name and keeps it above the works) */
+.home-page,
+.index-page {
   --size-fly: calc(113 * var(--px));
 }
 
 .home-page .fly,
-.home-page .splat {
+.home-page .splat,
+.index-page .fly,
+.index-page .splat {
   position: absolute;
 }
 
 /* The works column: 1189px wide in Figma, in the middle of the page */
 .works {
   width: calc(1189 * var(--px));
-  margin: calc(519 * var(--px)) auto 0;
+  margin: calc(288 * var(--px)) auto 0;
   padding-bottom: calc(220 * var(--px));
   display: flex;
   flex-direction: column;
@@ -340,18 +334,11 @@ body {
   margin-top: calc(430 * var(--px));
 }
 
-/* Phones: the top bar is in two rows, and the works use the full width */
+/* Phones: the big name moves down a little, so it doesn't touch "OVER VIEW / INDEX",
+   and the works use the full width */
 @media (max-width: 700px) {
-  .top-bar {
-    position: static;
-    padding: 16px var(--space-page) 0;
-    grid-template-columns: 1fr 1fr;
-  }
-
-  /* The description goes to its own row under the name and contact */
-  .top-bar-description {
-    grid-column: 1 / -1;
-    grid-row: 2;
+  .hero {
+    padding-top: 40px;
   }
 
   .works {
@@ -385,6 +372,8 @@ body {
    style="--gap: 11"            = 11 Figma pixels between the items of a row */
 
 .figma-column {
+  width: calc(1440 * var(--px)); /* the width of the page in Figma */
+  margin: 0 auto;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -393,6 +382,12 @@ body {
 
 .figma-column > * {
   margin-top: calc(var(--space-before, 0) * var(--px));
+}
+
+/* Items that are not in the middle: they start --left Figma pixels from the left edge */
+.figma-column > .from-left {
+  align-self: flex-start;
+  margin-left: calc(var(--left) * var(--px));
 }
 
 /* Items side by side */
@@ -416,20 +411,10 @@ body {
   height: auto;
 }
 
-/* Small bold title above a group of works, like "Cinema South Festival" */
-.project-label {
-  margin-bottom: 0;
-  font-family: var(--font-body);
-  font-size: var(--size-link);
-  font-weight: 700; /* Bold */
-  line-height: 0.85; /* 17px high, like in Figma */
-  text-align: center;
-}
-
-/* ===== Project pages (branding.html, photography.html, graphics.html) ===== */
+/* ===== Project pages (photography.html, graphics.html) ===== */
 
 /* The top part: the menu and the big title.
-   Each page sets --title-top and --header-height (in Figma pixels) */
+   Each page sets --nav-top, --title-top, --title-size and --header-height (in Figma pixels) */
 .project-header {
   position: relative;
   height: calc(var(--header-height) * var(--px));
@@ -438,14 +423,15 @@ body {
 /* Menu: INDEX / Branding / Photography / Graphics */
 .project-nav {
   position: absolute;
-  top: calc(29 * var(--px));
+  top: calc(var(--nav-top) * var(--px));
   left: 50%;
   transform: translateX(-50%);
+  z-index: 1; /* above the big title */
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: calc(15 * var(--px)); /* an empty line between the words, like in Figma */
-  font-family: var(--font-body);
+  font-family: var(--font-nav);
   font-size: var(--size-link);
   line-height: calc(15 * var(--px));
 }
@@ -457,17 +443,23 @@ body {
   right: 0;
   margin: 0;
   font-family: var(--font-display);
-  font-size: calc(230 * var(--px));
+  font-size: calc(var(--title-size) * var(--px));
   font-weight: var(--weight-display);
   line-height: 1.96;
   color: var(--color-text);
   text-align: center;
 }
 
+/* In the menu, "INDEX" and the page you are on are bold */
+.project-nav-index,
+.project-nav .is-current {
+  font-weight: 700;
+}
+
 /* My project-6: shows only the middle of the photo (sizes from Figma) */
 .crop-my-project {
   position: relative;
-  aspect-ratio: 1323 / 1079;
+  aspect-ratio: 1382 / 1127;
   overflow: hidden;
 }
 
@@ -479,10 +471,33 @@ body {
   height: 188.58%;
 }
 
-/* biss Instagram video: fills its box (1340 x 2743 in Figma), cutting the edges */
-.biss-video {
-  aspect-ratio: 1340 / 2743;
-  object-fit: cover;
+/* "Monsters Under The Bed": a row of photos that scrolls sideways.
+   It starts --left Figma pixels from the left and goes to the edge of the page */
+.photo-row {
+  width: calc((1440 - var(--left)) * var(--px));
+  display: flex;
+  gap: calc(7 * var(--px));
+  overflow-x: auto;
+}
+
+.photo-row img {
+  display: block;
+  flex: none;
+  width: auto;
+  height: calc(1603 * var(--px)); /* all the photos are 1603px high in Figma */
+}
+
+/* The name of a project under its photo.
+   --height = the space from the top of the caption to the next photo (Figma pixels) */
+.photo-caption {
+  width: calc(var(--width) * var(--px));
+  min-height: calc(var(--height) * var(--px));
+  margin-bottom: 0;
+  font-family: var(--font-nav);
+  font-size: max(12px, calc(32 * var(--px)));
+  font-weight: 700;
+  line-height: normal;
+  text-align: var(--align, left);
 }
 
 /* ===== Index page (projects.html) ===== */
@@ -516,36 +531,57 @@ body {
   font-size: calc(114.594 * var(--px));
 }
 
-/* ===== About page (about.html) ===== */
+/* ===== About and contact page (about.html) ===== */
 
-/* Everything is placed where it is in Figma. The page is 1968px high */
+/* Everything is placed where it is in Figma ("Content" frame, 1440 x 2146).
+   Each item says its top (and middle or left) in Figma pixels */
 .about {
   position: relative;
-  height: calc(1968 * var(--px));
-  overflow: hidden; /* the big bed photo is wider than the page */
+  width: calc(1440 * var(--px));
+  height: calc(2146 * var(--px));
+  margin: 0 auto;
 }
 
-.about-title {
+.about > * {
   position: absolute;
-  top: calc(93 * var(--px));
-  left: 0;
-  right: 0;
   margin: 0;
+}
+
+/* Big red words: "EMAIL ME", "CALL ME", "ME" */
+.about-title {
+  top: calc(var(--top) * var(--px));
+  left: calc(var(--middle) * var(--px));
+  transform: translateX(-50%);
   font-family: var(--font-display);
-  font-size: calc(300 * var(--px));
+  font-size: calc(270 * var(--px));
   font-weight: var(--weight-display);
+  letter-spacing: calc(var(--spacing, 0) * var(--px));
   line-height: normal;
   color: var(--color-accent);
-  text-align: center;
+  white-space: nowrap;
+}
+
+/* The email address and the phone number under the big words */
+.about-contact {
+  top: calc(var(--top) * var(--px));
+  left: calc(691.5 * var(--px));
+  transform: translateX(-50%);
+  font-family: var(--font-nav);
+  font-size: calc(48 * var(--px));
+  font-weight: 700;
+  line-height: normal;
+  color: var(--color-text);
+  text-decoration: none;
+  white-space: nowrap;
 }
 
 .about-text {
-  position: absolute;
-  top: calc(572 * var(--px));
-  left: calc(148 * var(--px));
+  top: calc(var(--top) * var(--px));
+  left: calc(133 * var(--px));
   width: calc(1175 * var(--px));
-  font-family: var(--font-body);
+  font-family: var(--font-nav);
   font-size: calc(48 * var(--px));
+  font-weight: 700;
   line-height: calc(61 * var(--px));
   color: var(--color-text);
 }
@@ -554,30 +590,27 @@ body {
   margin: 0;
 }
 
-/* An empty line after the first paragraph */
-.about-text p:first-child {
-  margin-bottom: calc(61 * var(--px));
+/* The second paragraph starts a little to the right, like in Figma */
+.about-text p + p {
+  text-indent: calc(42 * var(--px));
 }
 
-.about-photo {
-  position: absolute;
-  top: calc(347 * var(--px));
-  left: calc(-399 * var(--px));
-  width: calc(2180 * var(--px));
-  height: auto;
-  pointer-events: none;
-}
+/* Phones: everything moves down a little, so "EMAIL ME" doesn't touch "OVER VIEW / INDEX" */
+@media (max-width: 700px) {
+  .about {
+    margin-top: 24px;
+  }
 
-/* On the about page "OVER VIEW / INDEX" is higher (66px in Figma) and all black */
-.about .hero-index-link {
-  top: calc(66 * var(--px));
+  .about .hero-index-link {
+    top: 12px; /* stays where it is on the other pages */
+  }
 }
 
 /* ===== Phones: the project menu and title are in the page flow ===== */
 @media (max-width: 700px) {
   .project-header {
     height: auto;
-    padding-top: var(--space-page);
+    padding-top: 40px; /* room for the top bar */
   }
 
   .project-nav,
@@ -595,4 +628,189 @@ body {
     line-height: 1.6; /* room for letters like "g" and "y" */
   }
 
+  /* Captions start at the page edge, under their photo */
+  .figma-column > .photo-caption {
+    width: auto;
+    min-height: 0;
+    margin: 4px var(--space-page) 16px;
+    text-align: left;
+  }
+
+}
+
+/* ===== Branding page (branding.html): split screen, like polafilm.com =====
+   Two states:
+   1. No project open: the logos, two side by side, scrolling down.
+   2. A project is open (its id is in the address, e.g. #the-lodge = ":target"):
+      the works scroll on the left half, the logo stays on the right half. */
+
+.branding-page {
+  background-color: var(--color-dark);
+  font-family: var(--font-body);
+}
+
+/* State 1: logos in two columns, each one half of the screen */
+.brands {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); /* two equal halves */
+  gap: 1px; /* the thin line between the halves */
+  background-color: var(--color-dark);
+  padding-bottom: 32px; /* room for the bottom bar */
+}
+
+/* One logo: a square, half the screen wide */
+.brand-logo {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  aspect-ratio: 1;
+  background-color: var(--color-background);
+  color: var(--color-text);
+  text-decoration: none;
+  overflow: hidden;
+}
+
+/* When the number of logos is odd, the last one (biss) sits alone
+   in the middle, under the others, with the same size */
+.brands:not(:has(.brand:target)) > .brand:last-child:nth-child(odd) {
+  grid-column: 1 / -1;
+  justify-self: center;
+  width: calc((100% - 1px) / 2); /* half the screen, minus the thin line */
+}
+
+/* Logos on a black square get a black half */
+.brand-logo-dark {
+  background-color: #000000;
+}
+
+.brand-logo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Until the real logo image is added */
+.brand-logo-placeholder {
+  font-size: 32px;
+}
+
+/* The works are hidden until the project is opened */
+.brand-details {
+  display: none;
+}
+
+/* State 2: a project is open */
+
+/* Hide the other projects */
+.brands:has(.brand:target) .brand:not(:target) {
+  display: none;
+}
+
+/* The open project fills the whole width: works on the left, logo on the right */
+.brands:has(.brand:target) {
+  grid-template-columns: minmax(0, 1fr);
+}
+
+.brand:target {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: 1px;
+}
+
+/* The logo stays in place on the right while the works scroll */
+.brand:target .brand-logo {
+  grid-column: 2;
+  grid-row: 1;
+  align-self: start; /* needed so "sticky" works inside a grid */
+  position: sticky;
+  top: max(0px, calc((100dvh - 50vw) / 2)); /* in the middle of the screen height */
+}
+
+.brand:target .brand-details {
+  display: block;
+  grid-column: 1;
+  grid-row: 1;
+  padding: 8px;
+  background-color: var(--color-dark);
+  color: var(--color-light-text);
+}
+
+/* Project name and short description above the works */
+.brand-text {
+  max-width: 560px;
+  padding: 8px 0 24px;
+  font-size: 14px;
+  line-height: 1.4;
+}
+
+.brand-text h2 {
+  margin: 0 0 8px;
+  font-size: inherit;
+  font-weight: 700;
+}
+
+.brand-text p {
+  margin: 0 0 8px;
+}
+
+/* The works: two columns */
+.brand-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: 8px;
+}
+
+.brand-grid img,
+.brand-grid video {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+/* Some works take the full width */
+.brand-grid .is-wide {
+  grid-column: 1 / -1;
+}
+
+/* Bottom bar: the menu (INDEX, Branding, Photography, Graphics) on the left,
+   "Information" on the right */
+.brands-bar {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  justify-content: space-between;
+  padding: 6px 8px;
+  border-top: 1px solid var(--color-line);
+  background-color: var(--color-dark);
+  color: var(--color-light-text);
+  font-size: 14px;
+}
+
+.brands-bar-menu {
+  display: flex;
+  gap: 16px;
+}
+
+/* Phones: one column. Logos one under the other,
+   an open project shows its logo on top and the works under it */
+@media (max-width: 700px) {
+  .brands,
+  .brand:target {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .brand:target .brand-logo,
+  .brand:target .brand-details {
+    grid-column: 1;
+    grid-row: auto;
+    position: static;
+  }
+
+  /* One column: biss is full width like the others */
+  .brands:not(:has(.brand:target)) > .brand:last-child:nth-child(odd) {
+    justify-self: stretch;
+    width: auto;
+  }
 }

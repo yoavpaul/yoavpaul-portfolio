@@ -3,8 +3,8 @@
 // The first click on the fly makes it escape, the second click squashes it,
 // and 2 seconds later a new fly comes in.
 //
-// On the home page the fly rests on the name until the mouse touches it,
-// and it only flies above the Motion Poster (it never goes over it).
+// On the home and index pages the fly rests on the name until the mouse touches it,
+// and it only flies above the works (it never goes over them).
 
 // "let" because a new fly image replaces it after the old one is squashed
 let fly = document.querySelector(".fly");
@@ -13,17 +13,21 @@ let hits = 0; // how many times this fly was clicked
 
 const NEW_FLY_DELAY = 2000; // milliseconds until a new fly comes
 
-// The home page has the works column; the "Coming soon" page doesn't
-const works = document.querySelector(".works");
-const isHomePage = works !== null;
+// Pages with the big name (home and index): the fly rests on the name
+const hero = document.querySelector(".hero");
+const isHomePage = hero !== null;
+
+// The fly never goes below the top of <main> (the works on the home page,
+// the first line on the index page)
+const flyFloor = document.querySelector("main");
 
 // The area where the fly may fly:
-// on the home page, from the top of the page down to the Motion Poster,
-// on the "Coming soon" page, the whole screen
+// on pages with the big name, from the top of the page down to <main>,
+// on other pages, the whole screen
 function getArea() {
   if (isHomePage) {
-    const halfFly = fly.offsetWidth / 2; // so the whole fly stays above the poster
-    return { width: document.documentElement.clientWidth, height: works.offsetTop - halfFly };
+    const halfFly = fly.offsetWidth / 2; // so the whole fly stays above <main>
+    return { width: document.documentElement.clientWidth, height: flyFloor.offsetTop - halfFly };
   }
   return { width: window.innerWidth, height: window.innerHeight };
 }
@@ -33,10 +37,9 @@ let x = window.innerWidth * 0.86; // starts bottom right, like in Figma
 let y = window.innerHeight * 0.81;
 let heading = -116.64; // matches the fly's rotation in Figma
 
-// On the home page the fly starts on the name, at its spot in Figma
+// The fly starts on the name, at its spot in Figma
 // (in Figma the page is 1440px wide and the fly's middle is at 833, 257)
 if (isHomePage) {
-  const hero = document.querySelector(".hero");
   const pageWidth = document.documentElement.clientWidth;
   const figmaPixel = Math.min(1, pageWidth / 1440);
   x = pageWidth / 2 + (833 - 720) * figmaPixel;
@@ -78,7 +81,7 @@ function update(seconds) {
   timeLeft -= seconds;
 
   if (!isFlying) {
-    // On the home page the fly waits for the mouse instead
+    // On pages with the big name the fly waits for the mouse instead
     if (timeLeft <= 0 && !isHomePage) startFlying();
     return;
   }
@@ -193,7 +196,7 @@ document.addEventListener("pointerdown", function (event) {
   }
 });
 
-// Home page: the fly takes off when the mouse touches it
+// Pages with the big name: the fly takes off when the mouse touches it
 document.addEventListener("pointerover", function (event) {
   if (isHomePage && event.target === fly && isAlive && !isFlying) {
     escapeFly();

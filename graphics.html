@@ -4,13 +4,24 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Graphics – Yoav Paul</title>
+  <!-- Agdasima font from Google Fonts (top bar, menus, captions) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Agdasima:wght@400;700&display=swap">
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-  <!-- Menu and big title (top and height in Figma pixels) -->
-  <header class="project-header" style="--title-top: 90; --header-height: 595;">
+  <!-- Top bar: About, the name (leads home), Contact -->
+  <header class="top-bar">
+    <a class="top-bar-about" href="about.html#me">About</a>
+    <a class="top-bar-name" href="index.html">YOAV<br>PAUL</a>
+    <a class="top-bar-contact" href="about.html">Contact</a>
+  </header>
+
+  <!-- Menu and big title (sizes in Figma pixels) -->
+  <header class="project-header" style="--nav-top: 80; --title-top: 90; --title-size: 230; --header-height: 595;">
     <nav class="project-nav">
-      <a class="page-link" href="projects.html">INDEX</a>
+      <a class="page-link project-nav-index" href="projects.html">INDEX</a>
       <a class="page-link" href="branding.html">Branding</a>
       <a class="page-link" href="photography.html">Photography</a>
       <a class="page-link is-current" href="graphics.html">Graphics</a>

@@ -3,32 +3,41 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Me – Yoav Paul</title>
+  <title>Contact – Yoav Paul</title>
+  <!-- Agdasima font from Google Fonts (top bar, menus, texts) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Agdasima:wght@400;700&display=swap">
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-  <!-- Top bar: name, short description, contact -->
+  <!-- Top bar: About, the name (leads home), Contact -->
   <header class="top-bar">
-    <a class="top-bar-name" href="about.html">YOAV PAUL</a>
-    <p class="top-bar-description">A visual designer working across images and identities.</p>
-    <p class="top-bar-contact">Contact</p>
+    <a class="top-bar-about" href="about.html#me">About</a>
+    <a class="top-bar-name" href="index.html">YOAV<br>PAUL</a>
+    <a class="top-bar-contact" href="about.html">Contact</a>
   </header>
 
-  <!-- Everything here is placed where it is in Figma (see .about in styles.css) -->
+  <!-- Everything here is placed where it is in Figma (see .about in styles.css).
+       --top = top in Figma pixels, --middle = the middle of the word -->
   <main class="about">
     <p class="hero-index-link">
-      <a class="page-link" href="home.html">OVER VIEW</a> / <a class="page-link" href="projects.html">INDEX</a>
+      <a class="page-link" href="index.html">OVER VIEW</a> / <a class="page-link text-muted" href="projects.html">INDEX</a>
     </p>
 
-    <h1 class="about-title">ME</h1>
+    <h1 class="about-title" style="--top: 118; --middle: 720; --spacing: 10.8;">EMAIL ME</h1>
+    <a class="about-contact" href="mailto:Yoavpaul2012@gmail.com" style="--top: 519;">Yoavpaul2012@gmail.com</a>
 
-    <div class="about-text">
+    <h2 class="about-title" style="--top: 636; --middle: 720; --spacing: 10.8;">CALL ME</h2>
+    <a class="about-contact" href="tel:+972543017810" style="--top: 1037;">+972543017810</a>
+
+    <!-- "About" in the top bar jumps here -->
+    <h2 class="about-title" id="me" style="--top: 1167; --middle: 691;">ME</h2>
+
+    <div class="about-text" style="--top: 1590;">
       <p>I'm Yoav, a visual communication student at Bezalel with a background in photography and filmmaking.</p>
-      <p>My work moves between graphic design, branding, photography, and moving images.</p>
-      <p>I'm interested in exploring how different visual languages come together to create identities and tell stories. Always curious, experimenting, and looking for what's next.</p>
+      <p>My work moves between graphic design, branding, photography, and moving images. I'm interested in exploring how different visual languages come together to create identities and tell stories. Always curious, experimenting, and looking for what's next.</p>
     </div>
-
-    <img class="about-photo" src="images/me-in-bed.png" alt="Yoav lying on a bed">
   </main>
 </body>
 </html>
