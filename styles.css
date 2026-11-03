@@ -226,7 +226,8 @@ body {
   color: var(--color-text-muted);
 }
 
-/* "Catch ME if you can!" under the big name. "ME" turns red under the mouse */
+/* "Catch ME if you can!" under the big name, a link to the contact page.
+   "ME" turns red under the mouse */
 .catch-me {
   margin: calc(102 * var(--px)) 0 0;
   font-family: var(--font-display);
