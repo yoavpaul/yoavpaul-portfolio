@@ -4,13 +4,9 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Photography – Yoav Paul</title>
-  <!-- Agdasima font from Google Fonts (top bar, menus, captions) -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Agdasima:wght@400;700&display=swap">
   <link rel="stylesheet" href="styles.css">
 </head>
-<body>
+<body class="photography-page">
   <!-- Top bar: About, the name (leads home), Contact -->
   <header class="top-bar">
     <a class="top-bar-about" href="about.html#me">About</a>
@@ -18,9 +14,9 @@
     <a class="top-bar-contact" href="about.html">Contact</a>
   </header>
 
-  <!-- Menu and big title (sizes in Figma pixels) -->
-  <header class="project-header" style="--nav-top: 103; --title-top: 101; --title-size: 220; --header-height: 481;">
-    <nav class="project-nav">
+  <!-- Menu (on the left) and big title. Sizes in Figma pixels -->
+  <header class="project-header" style="--nav-top: 32; --title-top: 101; --title-size: 220; --header-height: 583;">
+    <nav class="project-nav at-left">
       <a class="page-link project-nav-index" href="projects.html">INDEX</a>
       <a class="page-link" href="branding.html">Branding</a>
       <a class="page-link is-current" href="photography.html">Photography</a>
@@ -29,38 +25,80 @@
     <h1 class="project-title">Photography</h1>
   </header>
 
-  <!-- The photos and their names. Sizes are in Figma pixels (see "Columns and rows" in styles.css) -->
+  <!-- The photos and their names. Sizes are in Figma pixels (see "Columns and rows" in styles.css).
+
+       Photo overlays (like in the Figma prototype): a click on a photo opens a row with more photos
+       from the same project, to the right of it. The row scrolls sideways, with the photo you clicked in it.
+       A second click on the same photo closes the row. Every row opens and closes on its own.
+       In each row the extra photos have their place next to the first photo:
+       --x, --y = where it starts, --w, --h = its size, --width = the width of the open row (Figma pixels) -->
   <main class="figma-column">
 
-    <!-- Dissociative self: shows only the middle of the photo, like in Figma -->
-    <div class="work-image crop-my-project" style="--width: 1382;">
-      <img src="images/photo-my-project-6.jpg" alt="Woman in a red dress with shopping carts">
+    <!-- Dissociative self: the first photo shows only the middle of the photo, like in Figma -->
+    <div class="photo-overlay from-left" style="--left: 198;">
+      <div class="photo-overlay-row" style="--width: 3180;">
+        <button class="photo-box" aria-expanded="false" style="--width: 1049; --height: 855;">
+          <img class="is-cropped" src="images/photo-my-project-6.jpg" alt="Dissociative self: woman in a red dress with shopping carts"
+               style="--img-top: -44.06; --img-left: -4.36; --img-width: 108.75; --img-height: 188.58;">
+        </button>
+        <div style="--x: 1072; --y: 1; --w: 1039; --h: 849;">
+          <img class="is-cropped" src="images/photo-my-project-7.jpg" alt="Dissociative self, photo 2" loading="lazy"
+               style="--img-top: -42.54; --img-left: -3.47; --img-width: 107.02; --img-height: 185.17;">
+        </div>
+        <div style="--x: 2141; --y: 3; --w: 1038.74; --h: 849;">
+          <img class="is-cropped" src="images/photo-my-project-8.jpg" alt="Dissociative self, photo 3" loading="lazy"
+               style="--img-top: -43.15; --img-left: -3.91; --img-width: 107.74; --img-height: 186.44;">
+        </div>
+      </div>
     </div>
-    <p class="photo-caption from-left" style="--left: 70; --width: 391; --height: 55; --space-before: 11;">Dissociative self</p>
 
-    <!-- Monsters Under The Bed: scroll sideways to see all the photos -->
-    <div class="photo-row from-left" style="--left: 294;">
-      <img src="images/yarzin-photoshoot.jpg" alt="Monsters Under The Bed, photo 1">
-      <img src="images/monsters-02.jpg" alt="Monsters Under The Bed, photo 2">
-      <img src="images/monsters-03.jpg" alt="Monsters Under The Bed, photo 3">
-      <img src="images/monsters-04.jpg" alt="Monsters Under The Bed, photo 4">
-      <img src="images/monsters-05.jpg" alt="Monsters Under The Bed, photo 5">
-      <img src="images/monsters-06.jpg" alt="Monsters Under The Bed, photo 6">
-      <img src="images/monsters-07.jpg" alt="Monsters Under The Bed, photo 7">
-      <img src="images/monsters-08.jpg" alt="Monsters Under The Bed, photo 8">
-      <img src="images/monsters-09.jpg" alt="Monsters Under The Bed, photo 9">
-      <img src="images/monsters-10.jpg" alt="Monsters Under The Bed, photo 10">
+    <div class="photo-overlay from-left" style="--left: 409; --space-before: 63;">
+      <div class="photo-overlay-row" style="--width: 8823;">
+        <button class="photo-box" aria-expanded="false" style="--width: 840; --height: 1216;">
+          <img src="images/yarzin-photoshoot.jpg" alt="Monsters Under The Bed, photo 1">
+        </button>
+        <div style="--x: 875; --w: 840; --h: 1216;"><img src="images/monsters-02.jpg" alt="Monsters Under The Bed, photo 2" loading="lazy"></div>
+        <div style="--x: 1750; --w: 840; --h: 1216;"><img src="images/monsters-03.jpg" alt="Monsters Under The Bed, photo 3" loading="lazy"></div>
+        <div style="--x: 2635; --w: 856; --h: 1216;"><img src="images/monsters-04.jpg" alt="Monsters Under The Bed, photo 4" loading="lazy"></div>
+        <div style="--x: 3526; --w: 857; --h: 1216;"><img src="images/monsters-05.jpg" alt="Monsters Under The Bed, photo 5" loading="lazy"></div>
+        <div style="--x: 4418; --w: 856; --h: 1216;"><img src="images/monsters-06.jpg" alt="Monsters Under The Bed, photo 6" loading="lazy"></div>
+        <div style="--x: 5309; --w: 857; --h: 1216;"><img src="images/monsters-07.jpg" alt="Monsters Under The Bed, photo 7" loading="lazy"></div>
+        <div style="--x: 6201; --w: 856; --h: 1216;"><img src="images/monsters-08.jpg" alt="Monsters Under The Bed, photo 8" loading="lazy"></div>
+        <div style="--x: 7092; --w: 856; --h: 1216;"><img src="images/monsters-09.jpg" alt="Monsters Under The Bed, photo 9" loading="lazy"></div>
+        <div style="--x: 7983; --w: 840; --h: 1216;"><img src="images/monsters-10.jpg" alt="Monsters Under The Bed, photo 10" loading="lazy"></div>
+      </div>
     </div>
-    <p class="photo-caption from-left" style="--left: 293; --width: 481; --height: 59; --space-before: 11;">Monsters Under The Bed - Guy Jarzin</p>
+    <p class="photo-caption from-left" style="--left: 407; --width: 557; --height: 63; --space-before: 19;">Monsters Under The Bed - Guy Jarzin</p>
 
-    <img class="work-image" src="images/photo-yoav367.jpg" alt="Bed in an empty room" style="--width: 1363;">
-    <p class="photo-caption from-left" style="--left: 37; --width: 391; --height: 50; --space-before: 12;">Four noble truths before bedtime</p>
+    <div class="photo-overlay from-left" style="--left: 205;">
+      <div class="photo-overlay-row" style="--width: 3399;">
+        <button class="photo-box" aria-expanded="false" style="--width: 1044; --height: 818;">
+          <img src="images/photo-yoav367.jpg" alt="Four noble truths before bedtime: bed in an empty room">
+        </button>
+        <div style="--x: 1063; --y: 10; --w: 1129; --h: 808;"><img src="images/photo-yoav369.jpg" alt="Four noble truths before bedtime, photo 2" loading="lazy"></div>
+        <div style="--x: 2214; --y: 10; --w: 581; --h: 808;"><img src="images/photo-yoav371.jpg" alt="Four noble truths before bedtime, photo 3" loading="lazy"></div>
+        <div style="--x: 2818; --y: 10; --w: 581; --h: 808;"><img src="images/photo-yoav372.jpg" alt="Four noble truths before bedtime, photo 4" loading="lazy"></div>
+      </div>
+    </div>
+    <p class="photo-caption from-left" style="--left: 204; --width: 521; --height: 26; --space-before: 20;">Four noble truths before bedtime</p>
 
-    <img class="work-image from-left" src="images/photo-yoavp1150.jpg" alt="Portrait in a forest" style="--left: 38; --width: 1114;">
-    <p class="photo-caption from-left" style="--left: 960; --width: 269; --height: 60; --space-before: 10; --align: center;">Magi Solar</p>
+    <div class="photo-overlay from-left" style="--left: 205; --space-before: 30;">
+      <div class="photo-overlay-row" style="--width: 2598;">
+        <button class="photo-box" aria-expanded="false" style="--width: 845.913; --height: 1216;">
+          <img src="images/photo-yoavp1150.jpg" alt="Megi Solar: portrait in a forest">
+        </button>
+        <div style="--x: 876; --w: 846; --h: 1216;"><img src="images/photo-megi-solar-2.jpg" alt="Megi Solar, photo 2" loading="lazy"></div>
+        <div style="--x: 1752; --w: 846; --h: 1216;"><img src="images/photo-megi-solar-3.jpg" alt="Megi Solar, photo 3" loading="lazy"></div>
+      </div>
+    </div>
+    <p class="photo-caption from-left" style="--left: 205; --width: 521; --height: 26; --space-before: 20;">Megi Solar</p>
 
-    <img class="work-image" src="images/photo-illustration-14.jpg" alt="Man working in a workshop" style="--width: 1363;">
-    <p class="photo-caption from-left" style="--left: -53; --width: 491; --height: 26; --space-before: 5; --align: center;">Bank Leumi - Local Treasure</p>
+    <div class="photo-box from-left" style="--left: 205; --width: 1034; --height: 686; --space-before: 40;">
+      <img src="images/photo-illustration-14.jpg" alt="Bank Leumi - Local Treasure: man working in a workshop">
+    </div>
+    <p class="photo-caption from-left" style="--left: 205; --width: 491; --height: 26; --space-before: 20;">Bank Leumi - Local Treasure</p>
   </main>
+
+  <script src="photo-overlays.js"></script>
 </body>
 </html>
