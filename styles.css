@@ -511,8 +511,7 @@ body {
   text-align: center;
 }
 
-/* In the menu, "INDEX" and the page you are on are bold */
-.project-nav-index,
+/* In the menu, only the page you are on is bold (and red) */
 .project-nav .is-current {
   font-weight: 700;
 }
