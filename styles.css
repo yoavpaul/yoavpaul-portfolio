@@ -23,6 +23,14 @@
   font-display: swap;
 }
 
+/* Editor Sans (Normal): the font of "About", "Contact" and "OVER VIEW / INDEX" on the home and index pages */
+@font-face {
+  font-family: "Editor Sans";
+  src: url("fonts/EditorSans-Normal.otf") format("opentype");
+  font-weight: 400;
+  font-display: swap;
+}
+
 /* ===== Variables (from Figma) ===== */
 :root {
   /* Colors */
@@ -230,6 +238,7 @@ body {
    "ME" turns red under the mouse */
 .catch-me {
   margin: calc(102 * var(--px)) 0 0;
+  height: calc(129 * var(--px)); /* text box height in Figma */
   font-family: var(--font-display);
   font-size: calc(70.82 * var(--px));
   line-height: normal;
@@ -252,6 +261,12 @@ body {
   --size-fly: calc(113 * var(--px));
 }
 
+/* On the home and index pages the top bar and "OVER VIEW / INDEX" use Editor Sans (like in Figma) */
+.home-page,
+.index-page {
+  --font-nav: "Editor Sans", Arial, sans-serif;
+}
+
 .home-page .fly,
 .home-page .splat,
 .index-page .fly,
@@ -259,10 +274,12 @@ body {
   position: absolute;
 }
 
-/* The works column: 1189px wide in Figma, in the middle of the page */
+/* The works column: 1189px wide in Figma, starting 127px from the left
+   (593px left of the middle of the page) */
 .works {
   width: calc(1189 * var(--px));
-  margin: calc(288 * var(--px)) auto 0;
+  margin-top: calc(288 * var(--px));
+  margin-left: calc(50% - 593 * var(--px));
   padding-bottom: calc(220 * var(--px));
   display: flex;
   flex-direction: column;
@@ -309,29 +326,44 @@ body {
   object-position: right;
 }
 
-/* Widths and spaces between the big works (from Figma) */
+/* Widths, spaces and left positions of the big works (from Figma).
+   --left is how far the work is from the left of the column, in Figma pixels */
+.work-soccer,
+.work-yarzin,
+.work-lodge,
+.work-logo,
+.work-tartakover {
+  align-self: flex-start;
+  margin-left: calc(var(--left) * var(--px));
+}
+
 .work-soccer {
-  width: 99.5%;
+  --left: -2;
+  width: calc(1183 / 1189 * 100%);
   margin-top: calc(83 * var(--px));
 }
 
 .work-yarzin {
-  width: 97%;
+  --left: 23;
+  width: calc(1154 / 1189 * 100%);
   margin-top: calc(220 * var(--px));
 }
 
 .work-lodge {
-  width: 73.3%;
+  --left: 159;
+  width: calc(871 / 1189 * 100%);
   margin-top: calc(220 * var(--px));
 }
 
 .work-logo {
-  width: 75.2%;
+  --left: 136;
+  width: calc(894 / 1189 * 100%);
   margin-top: calc(312 * var(--px));
 }
 
 .work-tartakover {
-  width: 99.5%;
+  --left: 3;
+  width: calc(1183 / 1189 * 100%);
   margin-top: calc(430 * var(--px));
 }
 
