@@ -7,111 +7,119 @@
   <link rel="stylesheet" href="styles.css">
 </head>
 <body class="branding-page">
-  <!--
-    How this page works (no JavaScript needed):
-    - The logos are shown two side by side, the screen is split in two.
-    - Each logo is a link to its project, for example href="#the-lodge".
-    - Clicking it opens that project: the works on the left half,
-      the logo stays on the right half (see "Branding page" in styles.css).
-    - "Branding" at the bottom closes the project and shows all the logos again.
-      The other words at the bottom lead to the other pages.
-  -->
+  <!-- Top bar: About, the name (leads home), Contact -->
+  <header class="top-bar">
+    <a class="top-bar-about" href="about.html#me">About</a>
+    <a class="top-bar-name" href="index.html">YOAV<br>PAUL</a>
+    <a class="top-bar-contact" href="about.html">Contact</a>
+  </header>
 
-  <main class="brands">
-
-    <!-- ===== The Lodge x Core De Roy ===== -->
-    <article class="brand" id="the-lodge">
-      <a class="brand-logo brand-logo-dark" href="#the-lodge">
-        <img src="images/thelodge-corederoy-logo.jpg" alt="The Lodge x Core De Roy">
-      </a>
-
-      <div class="brand-details">
-        <div class="brand-text">
-          <h2>Rebranding of "The Lodge x Core De Roy"</h2>
-          <p>The Lodge x Core de Roy is a Berlin bar characterized by sculptural floral compositions and low lighting, inspiring a monochrome identity built on contrast and organic form.</p>
-        </div>
-
-        <div class="brand-grid">
-          <img src="images/thelodge-logo.jpg" alt="The Lodge logo">
-          <img src="images/lodge-02-november.jpg" alt="The Lodge November post">
-          <img src="images/lodge-03-january.jpg" alt="The Lodge January post">
-          <img src="images/lodge-07-november-2.jpg" alt="The Lodge November post 2">
-          <img src="images/lodge-04-february.jpg" alt="The Lodge February post">
-          <img src="images/lodge-05-march.jpg" alt="The Lodge March timetable">
-          <img src="images/lodge-06-april.jpg" alt="The Lodge April post">
-          <img src="images/lodge-08-menu.jpg" alt="The Lodge menu">
-          <img src="images/lodge-09-menu-2.jpg" alt="The Lodge menu, second page">
-          <img src="images/lodge-10-happy-hour-5.jpg" alt="Happy hour menu">
-          <img src="images/lodge-11-happy-hour-3.jpg" alt="Happy hour menu">
-          <img src="images/lodge-13-pickled-pickles.png" alt="Pickled story: pickles">
-          <img src="images/lodge-14-pickled-orange.png" alt="Pickled story: orange">
-          <img src="images/lodge-12-pickled-onion.png" alt="Pickled story: onion">
-        </div>
-      </div>
-    </article>
-
-    <!-- ===== Cinema South Festival ===== -->
-    <article class="brand" id="south-film-festival">
-      <a class="brand-logo" href="#south-film-festival">
-        <!-- TODO: the logo image is still missing. Save it as images/sff-logo.jpg
-             and replace the line below with:
-             <img src="images/sff-logo.jpg" alt="South Film Festival"> -->
-        <span class="brand-logo-placeholder">South Film Festival</span>
-      </a>
-
-      <div class="brand-details">
-        <div class="brand-text">
-          <h2>Rebranding of the "South Film Festival"</h2>
-          <p>The inspiration for the graphic language of this project is the road to the festival. I developed a complete visual identity for the festival, including a graphic language, logo, poster series, daily posters, motion poster, motion logo, signage, merchandise, and website.</p>
-          <p>Created as part of the Cultural Branding course, lecturer Eyal Zaken, 2026</p>
-        </div>
-
-        <div class="brand-grid">
-          <!-- "is-wide" = takes the full width of the half -->
-          <video class="is-wide" src="images/motion-poster.mp4" autoplay muted loop playsinline></video>
-          <img src="images/teamtag.jpg" alt="Team tag">
-          <img src="images/creator-tag.jpg" alt="Creator tag">
-          <img src="images/sidebag.jpg" alt="Side bag">
-          <img src="images/vest.jpg" alt="Vest">
-        </div>
-      </div>
-    </article>
-
-    <!-- ===== biss ===== -->
-    <article class="brand" id="biss">
-      <a class="brand-logo" href="#biss">
-        <img src="images/logo-1.png" alt="biss">
-      </a>
-
-      <div class="brand-details">
-        <div class="brand-text">
-          <h2>biss</h2>
-        </div>
-
-        <div class="brand-grid">
-          <img class="is-wide" src="images/biss-product-boxes.png" alt="biss product boxes">
-          <img class="is-wide" src="images/biss-gum-boxes.png" alt="biss gum boxes">
-          <img class="is-wide" src="images/biss-chews-wisely.png" alt="biss Chews Wisely gum boxes">
-          <img class="is-wide" src="images/biss-product-display.png" alt="biss product display">
-          <img class="is-wide" src="images/biss-display-booth.png" alt="biss display booth">
-          <img class="is-wide" src="images/biss-underwear-rack.png" alt="biss underwear rack">
-          <video class="is-wide" src="images/biss-instagram.mp4" autoplay muted loop playsinline></video>
-        </div>
-      </div>
-    </article>
-
-  </main>
-
-  <!-- Bottom bar: the menu on the left, "Information" (the about page) on the right.
-       "Branding" (red, the page you are on) closes the open project -->
-  <footer class="brands-bar">
-    <nav class="brands-bar-menu">
-      <a class="page-link" href="projects.html">INDEX</a>
+  <!-- Menu (on the left) and big title. Sizes in Figma pixels -->
+  <header class="project-header" style="--nav-top: 32; --title-top: 79; --title-size: 230; --header-height: 583;">
+    <nav class="project-nav at-left">
+      <a class="page-link project-nav-index" href="projects.html">INDEX</a>
       <a class="page-link is-current" href="branding.html">Branding</a>
       <a class="page-link" href="photography.html">Photography</a>
       <a class="page-link" href="graphics.html">Graphics</a>
     </nav>
-    <a class="page-link" href="about.html#me">Information</a>
-  </footer>
+    <h1 class="project-title" style="right: calc(30 * var(--px));">Branding</h1>
+  </header>
+
+  <!-- The projects, like the photography page: one photo for each project, and its name under it.
+       A click on the photo opens a row with all the works of the project, to the right of it.
+       The row scrolls sideways. A click on any photo of an open row closes it.
+
+       Each row: --height = how high the works are, --gap = space between them (Figma pixels).
+       To add a work, add one more <div> with an <img> (or a <video>) to the row. -->
+  <main class="figma-column">
+
+    <!-- ===== The Lodge x Core De Roy =====
+         Text for later: "The Lodge x Core de Roy is a Berlin bar characterized by sculptural floral
+         compositions and low lighting, inspiring a monochrome identity built on contrast and organic form." -->
+    <div class="photo-overlay from-left" style="--left: 205;">
+      <div class="photo-overlay-row is-flowing" style="--height: 818; --gap: 35;">
+        <button class="photo-box" aria-expanded="false" style="--width: 818; --height: 818;">
+          <img src="images/thelodge-corederoy-logo.jpg" alt="The Lodge x Core De Roy logo">
+        </button>
+        <div><img src="images/thelodge-logo.jpg" alt="The Lodge logo" loading="lazy"></div>
+        <div><img src="images/lodge-02-november.jpg" alt="The Lodge November post" loading="lazy"></div>
+        <div><img src="images/lodge-03-january.jpg" alt="The Lodge January post" loading="lazy"></div>
+        <div><img src="images/lodge-07-november-2.jpg" alt="The Lodge November post 2" loading="lazy"></div>
+        <div><img src="images/lodge-04-february.jpg" alt="The Lodge February post" loading="lazy"></div>
+        <div><img src="images/lodge-05-march.jpg" alt="The Lodge March timetable" loading="lazy"></div>
+        <div><img src="images/lodge-06-april.jpg" alt="The Lodge April post" loading="lazy"></div>
+        <div><img src="images/lodge-08-menu.jpg" alt="The Lodge menu" loading="lazy"></div>
+        <div><img src="images/lodge-09-menu-2.jpg" alt="The Lodge menu, second page" loading="lazy"></div>
+        <div><img src="images/lodge-10-happy-hour-5.jpg" alt="Happy hour menu" loading="lazy"></div>
+        <div><img src="images/lodge-11-happy-hour-3.jpg" alt="Happy hour menu 2" loading="lazy"></div>
+        <div><img src="images/lodge-13-pickled-pickles.png" alt="Pickled story: pickles" loading="lazy"></div>
+        <div><img src="images/lodge-14-pickled-orange.png" alt="Pickled story: orange" loading="lazy"></div>
+        <div><img src="images/lodge-12-pickled-onion.png" alt="Pickled story: onion" loading="lazy"></div>
+      </div>
+    </div>
+    <p class="photo-caption from-left" style="--left: 205; --width: 521; --height: 26; --space-before: 20;">The Lodge x Core De Roy</p>
+
+    <!-- ===== Cinema South Festival =====
+         Text for later: "The inspiration for the graphic language of this project is the road to the festival.
+         I developed a complete visual identity for the festival, including a graphic language, logo, poster series,
+         daily posters, motion poster, motion logo, signage, merchandise, and website.
+         Created as part of the Cultural Branding course, lecturer Eyal Zaken, 2026"
+         TODO: sff-logo.png is a screenshot of the logo. Replace it with the better file when it is ready
+         (same name, or change the name below) -->
+    <div class="photo-overlay from-left" style="--left: 205; --space-before: 40;">
+      <div class="photo-overlay-row is-flowing" style="--height: 818; --gap: 35;">
+        <button class="photo-box" aria-expanded="false" style="--width: 795; --height: 818;">
+          <img src="images/sff-logo.png" alt="Cinema South Festival logo">
+        </button>
+        <div><video src="images/sff-motion-logo.mp4" muted loop playsinline preload="none" aria-label="Motion logo"></video></div>
+        <div><video src="images/motion-poster.mp4" muted loop playsinline preload="none" aria-label="Motion poster"></video></div>
+        <div><img src="images/sff-poster-bus-stop.jpg" alt="Main poster at a bus stop" loading="lazy"></div>
+        <div><img src="images/sff-daily-poster-1.jpg" alt="Daily poster 1" loading="lazy"></div>
+        <div><img src="images/sff-daily-poster-2.jpg" alt="Daily poster 2" loading="lazy"></div>
+        <div><img src="images/sff-daily-poster-3.jpg" alt="Daily poster 3" loading="lazy"></div>
+        <div><img src="images/sff-daily-poster-4.jpg" alt="Daily poster 4" loading="lazy"></div>
+        <div><img src="images/sff-daily-poster-5.jpg" alt="Daily poster 5" loading="lazy"></div>
+        <div><img src="images/sff-daily-poster-6.jpg" alt="Daily poster 6" loading="lazy"></div>
+        <div><img src="images/sff-daily-poster-7.jpg" alt="Daily poster 7" loading="lazy"></div>
+        <div><img src="images/sff-posters-wall.jpg" alt="Posters on a wall" loading="lazy"></div>
+        <div><img src="images/sff-posters-fence.jpg" alt="Posters on a fence" loading="lazy"></div>
+        <div><img src="images/creator-tag.jpg" alt="Creator tag" loading="lazy"></div>
+        <div><img src="images/teamtag.jpg" alt="Team tag" loading="lazy"></div>
+        <div><img src="images/sff-lanyard.jpg" alt="Lanyard" loading="lazy"></div>
+        <div><img src="images/sff-signage.jpg" alt="Signage" loading="lazy"></div>
+        <div><img src="images/vest.jpg" alt="Vest" loading="lazy"></div>
+        <div><img src="images/sff-vest-back.jpg" alt="Vest, back" loading="lazy"></div>
+        <div><img src="images/sff-vest-full.jpg" alt="Vest, full look" loading="lazy"></div>
+        <div><img src="images/sff-bag-side.jpg" alt="Side bag, worn" loading="lazy"></div>
+        <div><img src="images/sidebag.jpg" alt="Side bag" loading="lazy"></div>
+        <div><img src="images/sff-bag-detail.jpg" alt="Side bag, detail" loading="lazy"></div>
+        <div><img src="images/sff-keychain-straps.jpg" alt="Keychain straps" loading="lazy"></div>
+        <div><img src="images/sff-pants.jpg" alt="Pants with reflective tape" loading="lazy"></div>
+        <div><img src="images/sff-keychains.jpg" alt="Keychains" loading="lazy"></div>
+        <div><img src="images/sff-hat-1.jpg" alt="Bucket hat" loading="lazy"></div>
+        <div><img src="images/sff-hat-2.jpg" alt="Bucket hat, close up" loading="lazy"></div>
+      </div>
+    </div>
+    <p class="photo-caption from-left" style="--left: 205; --width: 521; --height: 26; --space-before: 20;">Cinema South Festival</p>
+
+    <!-- ===== biss ===== -->
+    <div class="photo-overlay from-left" style="--left: 205; --space-before: 40;">
+      <div class="photo-overlay-row is-flowing" style="--height: 818; --gap: 35;">
+        <button class="photo-box" aria-expanded="false" style="--width: 821; --height: 818;">
+          <img src="images/logo-1.png" alt="biss logo">
+        </button>
+        <div><img src="images/biss-product-boxes.png" alt="biss product boxes" loading="lazy"></div>
+        <div><img src="images/biss-gum-boxes.png" alt="biss gum boxes" loading="lazy"></div>
+        <div><img src="images/biss-chews-wisely.png" alt="biss Chews Wisely gum boxes" loading="lazy"></div>
+        <div><img src="images/biss-product-display.png" alt="biss product display" loading="lazy"></div>
+        <div><img src="images/biss-display-booth.png" alt="biss display booth" loading="lazy"></div>
+        <div><img src="images/biss-underwear-rack.png" alt="biss underwear rack" loading="lazy"></div>
+        <div><video src="images/biss-instagram.mp4" muted loop playsinline preload="none" aria-label="biss Instagram"></video></div>
+      </div>
+    </div>
+    <p class="photo-caption from-left" style="--left: 205; --width: 521; --height: 26; --space-before: 20;">biss</p>
+  </main>
+
+  <script src="photo-overlays.js"></script>
 </body>
 </html>

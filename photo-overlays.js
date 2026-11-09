@@ -1,14 +1,14 @@
-// Photo overlays (photography page), like the overlays in the Figma prototype:
+// Photo overlays (photography and branding pages), like the overlays in the Figma prototype:
 // a click on a photo opens a row with more photos from the same project, to the right of it.
 // The photo you clicked is the first photo of the row, and the whole row scrolls sideways
-// (also with the mouse wheel). A second click on the same photo closes the row.
+// (also with the mouse wheel). A click on any photo of an open row closes it.
 // Every row opens and closes on its own, so a few rows can be open together.
 
 for (const overlay of document.querySelectorAll(".photo-overlay")) {
   const photo = overlay.querySelector(".photo-box");
 
-  // Click on the photo: open the row, or close it if it is open
-  photo.addEventListener("click", () => {
+  // Opens the row, or closes it if it is open
+  function toggleRow() {
     const isOpen = overlay.classList.toggle("is-open");
     photo.setAttribute("aria-expanded", isOpen);
 
@@ -16,7 +16,24 @@ for (const overlay of document.querySelectorAll(".photo-overlay")) {
     if (!isOpen) {
       overlay.scrollLeft = 0;
     }
-  });
+
+    // Videos in the row (branding page) play only while the row is open
+    for (const video of overlay.querySelectorAll(".photo-overlay-row > div video")) {
+      if (isOpen) {
+        video.play();
+      } else {
+        video.pause();
+      }
+    }
+  }
+
+  // Click on the first photo: open or close the row
+  photo.addEventListener("click", toggleRow);
+
+  // Click on one of the other photos (they show only when the row is open): close the row
+  for (const otherPhoto of overlay.querySelectorAll(".photo-overlay-row > div")) {
+    otherPhoto.addEventListener("click", toggleRow);
+  }
 
   // The mouse wheel scrolls an open row sideways.
   // At the start or the end of the row the page scrolls as usual.

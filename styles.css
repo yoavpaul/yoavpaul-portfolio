@@ -54,9 +54,6 @@
   --color-shadow: rgba(0, 0, 0, 0.3);
   --color-text: #000000;
   --color-text-muted: rgba(0, 0, 0, 0.6);
-  --color-dark: #191919; /* dark half on the branding page, like polafilm.com */
-  --color-light-text: #d9d9d9; /* text on the dark half */
-  --color-line: #333333; /* thin lines between the halves */
 
   /* Title font: TAN - MEMORIES (Regular), a serif font is used until it loads */
   --font-display: "TAN Memories", Georgia, serif;
@@ -163,7 +160,7 @@ body {
   }
 }
 
-/* ===== Top bar (all pages except branding) ===== */
+/* ===== Top bar (all pages) ===== */
 
 /* "About" on the left, "YOAV PAUL" in the middle, "Contact" on the right.
    Each one is placed by its middle point, like in Figma (the page is 1440px wide there) */
@@ -247,6 +244,11 @@ body {
 /* The grey link in "OVER VIEW / INDEX" */
 .hero-index-link .text-muted {
   color: var(--color-text-muted);
+}
+
+/* "OVER VIEW" and "INDEX" turn red under the mouse (the same red as the site) */
+.hero-index-link .page-link:hover {
+  color: var(--color-accent);
 }
 
 /* "Catch ME if you can!" under the big name, a link to the contact page.
@@ -517,20 +519,23 @@ body {
   text-align: var(--align, left);
 }
 
-/* ===== Photography page (photography.html) ===== */
+/* ===== Photography and branding pages (photography.html, branding.html) ===== */
 
 /* The top bar, menu and captions use Editor Sans (like in Figma) */
-.photography-page {
+.photography-page,
+.branding-page {
   --font-nav: "Editor Sans", Arial, sans-serif;
 }
 
 /* On this page "About" and "Contact" sit on the left side (Figma: middle of "About" at 298.5px, "Contact" at 527.5px) */
-.photography-page .top-bar-about {
+.photography-page .top-bar-about,
+.branding-page .top-bar-about {
   top: calc(27 * var(--px));
   left: calc(50% - 421.5 * var(--px));
 }
 
-.photography-page .top-bar-contact {
+.photography-page .top-bar-contact,
+.branding-page .top-bar-contact {
   top: calc(22 * var(--px));
   left: calc(50% - 192.5 * var(--px));
 }
@@ -559,7 +564,9 @@ button.photo-box {
 }
 
 .photo-box img,
-.photo-overlay-row img {
+.photo-box video,
+.photo-overlay-row img,
+.photo-overlay-row video {
   display: block;
   width: 100%;
   height: 100%;
@@ -608,6 +615,7 @@ button.photo-box {
 .photo-overlay-row > div {
   display: none;
   position: absolute;
+  cursor: pointer; /* a click closes the row */
   left: calc(var(--x) * var(--px));
   top: calc(var(--y, 0) * var(--px));
   width: calc(var(--w) * var(--px));
@@ -617,6 +625,35 @@ button.photo-box {
 
 .photo-overlay.is-open .photo-overlay-row > div {
   display: block;
+}
+
+/* Rows without places from Figma (branding page): the works stand side by side,
+   all --height Figma pixels high, with --gap between them. Each work keeps its own shape */
+.photo-overlay-row.is-flowing {
+  display: flex;
+  gap: calc(var(--gap) * var(--px));
+  height: calc(var(--height) * var(--px));
+}
+
+.photo-overlay.is-open .photo-overlay-row.is-flowing {
+  width: max-content;
+}
+
+.photo-overlay-row.is-flowing > div {
+  position: static;
+  flex: none;
+  width: auto;
+  height: 100%;
+}
+
+.photo-overlay.is-open .photo-overlay-row.is-flowing > div {
+  display: block;
+}
+
+.photo-overlay-row.is-flowing > div img,
+.photo-overlay-row.is-flowing > div video {
+  width: auto;
+  height: 100%;
 }
 
 /* ===== Index page (projects.html) ===== */
@@ -755,181 +792,4 @@ button.photo-box {
     text-align: left;
   }
 
-}
-
-/* ===== Branding page (branding.html): split screen, like polafilm.com =====
-   Two states:
-   1. No project open: the logos, two side by side, scrolling down.
-   2. A project is open (its id is in the address, e.g. #the-lodge = ":target"):
-      the works scroll on the left half, the logo stays on the right half. */
-
-.branding-page {
-  background-color: var(--color-dark);
-  font-family: var(--font-body);
-}
-
-/* State 1: logos in two columns, each one half of the screen */
-.brands {
-  display: grid;
-  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); /* two equal halves */
-  gap: 1px; /* the thin line between the halves */
-  background-color: var(--color-dark);
-  padding-bottom: 32px; /* room for the bottom bar */
-}
-
-/* One logo: a square, half the screen wide */
-.brand-logo {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  aspect-ratio: 1;
-  background-color: var(--color-background);
-  color: var(--color-text);
-  text-decoration: none;
-  overflow: hidden;
-}
-
-/* When the number of logos is odd, the last one (biss) sits alone
-   in the middle, under the others, with the same size */
-.brands:not(:has(.brand:target)) > .brand:last-child:nth-child(odd) {
-  grid-column: 1 / -1;
-  justify-self: center;
-  width: calc((100% - 1px) / 2); /* half the screen, minus the thin line */
-}
-
-/* Logos on a black square get a black half */
-.brand-logo-dark {
-  background-color: #000000;
-}
-
-.brand-logo img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
-
-/* Until the real logo image is added */
-.brand-logo-placeholder {
-  font-size: 32px;
-}
-
-/* The works are hidden until the project is opened */
-.brand-details {
-  display: none;
-}
-
-/* State 2: a project is open */
-
-/* Hide the other projects */
-.brands:has(.brand:target) .brand:not(:target) {
-  display: none;
-}
-
-/* The open project fills the whole width: works on the left, logo on the right */
-.brands:has(.brand:target) {
-  grid-template-columns: minmax(0, 1fr);
-}
-
-.brand:target {
-  display: grid;
-  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
-  gap: 1px;
-}
-
-/* The logo stays in place on the right while the works scroll */
-.brand:target .brand-logo {
-  grid-column: 2;
-  grid-row: 1;
-  align-self: start; /* needed so "sticky" works inside a grid */
-  position: sticky;
-  top: max(0px, calc((100dvh - 50vw) / 2)); /* in the middle of the screen height */
-}
-
-.brand:target .brand-details {
-  display: block;
-  grid-column: 1;
-  grid-row: 1;
-  padding: 8px;
-  background-color: var(--color-dark);
-  color: var(--color-light-text);
-}
-
-/* Project name and short description above the works */
-.brand-text {
-  max-width: 560px;
-  padding: 8px 0 24px;
-  font-size: 14px;
-  line-height: 1.4;
-}
-
-.brand-text h2 {
-  margin: 0 0 8px;
-  font-size: inherit;
-  font-weight: 700;
-}
-
-.brand-text p {
-  margin: 0 0 8px;
-}
-
-/* The works: two columns */
-.brand-grid {
-  display: grid;
-  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
-  gap: 8px;
-}
-
-.brand-grid img,
-.brand-grid video {
-  display: block;
-  width: 100%;
-  height: auto;
-}
-
-/* Some works take the full width */
-.brand-grid .is-wide {
-  grid-column: 1 / -1;
-}
-
-/* Bottom bar: the menu (INDEX, Branding, Photography, Graphics) on the left,
-   "Information" on the right */
-.brands-bar {
-  position: fixed;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  display: flex;
-  justify-content: space-between;
-  padding: 6px 8px;
-  border-top: 1px solid var(--color-line);
-  background-color: var(--color-dark);
-  color: var(--color-light-text);
-  font-size: 14px;
-}
-
-.brands-bar-menu {
-  display: flex;
-  gap: 16px;
-}
-
-/* Phones: one column. Logos one under the other,
-   an open project shows its logo on top and the works under it */
-@media (max-width: 700px) {
-  .brands,
-  .brand:target {
-    grid-template-columns: minmax(0, 1fr);
-  }
-
-  .brand:target .brand-logo,
-  .brand:target .brand-details {
-    grid-column: 1;
-    grid-row: auto;
-    position: static;
-  }
-
-  /* One column: biss is full width like the others */
-  .brands:not(:has(.brand:target)) > .brand:last-child:nth-child(odd) {
-    justify-self: stretch;
-    width: auto;
-  }
 }
