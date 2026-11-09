@@ -23,7 +23,7 @@
   font-display: swap;
 }
 
-/* Editor Sans (Normal): the font of "About", "Contact" and "OVER VIEW / INDEX" on the home and index pages */
+/* Editor Sans (Normal): the top bar, the menus and the small texts on every page */
 @font-face {
   font-family: "Editor Sans";
   src: url("fonts/EditorSans-Normal.otf") format("opentype");
@@ -59,8 +59,8 @@
   --font-display: "TAN Memories", Georgia, serif;
   --weight-display: 400; /* Regular */
 
-  /* Font of the top bar, the menus and the captions: Agdasima (loaded from Google Fonts in every page) */
-  --font-nav: "Agdasima", Arial, sans-serif;
+  /* Font of the top bar, the menus, the captions and the small texts: Editor Sans (from the fonts folder) */
+  --font-nav: "Editor Sans", Arial, sans-serif;
   --size-nav: max(12px, calc(24 * var(--px))); /* "About", "Contact", "OVER VIEW / INDEX": 24px in Figma */
 
   /* Font of the small texts on the home page */
@@ -276,12 +276,6 @@ body {
 .home-page,
 .index-page {
   --size-fly: calc(113 * var(--px));
-}
-
-/* On the home and index pages the top bar and "OVER VIEW / INDEX" use Editor Sans (like in Figma) */
-.home-page,
-.index-page {
-  --font-nav: "Editor Sans", Arial, sans-serif;
 }
 
 .home-page .fly,
@@ -519,23 +513,19 @@ body {
   text-align: var(--align, left);
 }
 
-/* ===== Photography and branding pages (photography.html, branding.html) ===== */
+/* ===== Photography, branding and graphics pages ===== */
 
-/* The top bar, menu and captions use Editor Sans (like in Figma) */
-.photography-page,
-.branding-page {
-  --font-nav: "Editor Sans", Arial, sans-serif;
-}
-
-/* On this page "About" and "Contact" sit on the left side (Figma: middle of "About" at 298.5px, "Contact" at 527.5px) */
+/* On these pages "About" and "Contact" sit on the left side (Figma: middle of "About" at 298.5px, "Contact" at 527.5px) */
 .photography-page .top-bar-about,
-.branding-page .top-bar-about {
+.branding-page .top-bar-about,
+.graphics-page .top-bar-about {
   top: calc(27 * var(--px));
   left: calc(50% - 421.5 * var(--px));
 }
 
 .photography-page .top-bar-contact,
-.branding-page .top-bar-contact {
+.branding-page .top-bar-contact,
+.graphics-page .top-bar-contact {
   top: calc(22 * var(--px));
   left: calc(50% - 192.5 * var(--px));
 }
