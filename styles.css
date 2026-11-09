@@ -194,13 +194,30 @@ body {
   left: calc(50% + 425.5 * var(--px)); /* 1145.5px in Figma */
 }
 
-/* "YOAV" above "PAUL", in the title font */
-.top-bar-name {
-  top: calc(14 * var(--px));
-  left: 50%;
+/* "YP" in the title font (Figma: 24px, letter spacing -24%, middle at 721.5px, 19px from the top).
+   It stays on the screen while scrolling, so there is always a way back home.
+   (".top-bar" in front, so "fixed" wins over "absolute" from ".top-bar a") */
+.top-bar .top-bar-name {
+  position: fixed;
+  z-index: 1; /* above the photos */
+  top: calc(19 * var(--px));
+  left: calc(50% + 1.5 * var(--px));
   font-family: var(--font-display);
+  letter-spacing: -0.24em;
   line-height: 1.04;
   text-align: center;
+}
+
+/* A soft blurred layer under "YP", so it can still be read on top of photos */
+.top-bar-name::before {
+  content: "";
+  position: absolute;
+  inset: -0.3em -0.5em;
+  z-index: -1; /* under the letters */
+  border-radius: 999px;
+  background-color: rgba(255, 255, 255, 0.3);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px); /* Safari */
 }
 
 /* ===== Home page (index.html) and index page (projects.html) ===== */
