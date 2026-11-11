@@ -302,11 +302,12 @@ body {
 }
 
 /* ===== Over view on the home page: all the works moving in a row =====
-   Figma: a 1440 x 600 box, 1233px from the top of the page */
+   Figma: a 1440 x 600 box, 1081px from the top of the page, and "Random / Index" under it.
+   home-carousel.js moves the row and changes its order */
 
 .carousel-section {
-  margin-top: calc(437 * var(--px)); /* + the name (60) = 1233 - 736 */
-  padding-bottom: calc(231 * var(--px));
+  margin-top: calc(285 * var(--px)); /* + the name (60) = 1081 - 736 */
+  padding-bottom: calc(30 * var(--px));
 }
 
 /* The name of the work under the mouse, above the box, in the middle */
@@ -324,34 +325,49 @@ body {
   color: var(--color-text);
 }
 
-/* The box: where the works move (no background, the grey box in Figma only marks the place) */
+/* The box: it scrolls sideways (no scrollbar, like in Figma) */
 .carousel {
   height: calc(600 * var(--px));
-  overflow: hidden;
+  overflow-x: auto;
+  overflow-y: hidden;
+  scrollbar-width: none;
 }
 
-/* The row of works. It moves from left to right: from -50% (the copy is on the screen)
-   to 0 (the original is on the screen), and then starts again, so it looks endless */
+.carousel::-webkit-scrollbar {
+  display: none;
+}
+
+/* The row of works */
 .carousel-track {
   display: flex;
   width: max-content;
   height: 100%;
-  animation: carousel-move 75s linear infinite; /* one full round in 75 seconds */
 }
 
-@keyframes carousel-move {
-  from {
-    transform: translateX(-50%);
-  }
-  to {
-    transform: translateX(0);
-  }
+/* "Random / Index" under the box (Figma: 27px under it, Editor Sans 24px).
+   Red under the mouse, and the one that is chosen stays red */
+.carousel-modes {
+  margin: calc(27 * var(--px)) 0 0;
+  min-height: calc(35 * var(--px));
+  font-family: var(--font-nav);
+  font-size: var(--size-nav);
+  line-height: normal;
+  text-align: center;
+  color: var(--color-text);
 }
 
-/* Stops under the mouse (or when a work has focus from the Tab key) */
-.carousel:hover .carousel-track,
-.carousel:focus-within .carousel-track {
-  animation-play-state: paused;
+.carousel-mode {
+  padding: 0;
+  border: none;
+  background: none;
+  font: inherit;
+  color: inherit;
+  cursor: pointer;
+}
+
+.carousel-mode:hover,
+.carousel-mode.is-active {
+  color: var(--color-accent);
 }
 
 /* One work: as high as the box, its width from its shape (--ratio = width / height).
@@ -372,18 +388,7 @@ body {
   object-fit: cover;
 }
 
-/* People who asked their computer for less movement: no moving, scroll the row by hand */
-@media (prefers-reduced-motion: reduce) {
-  .carousel {
-    overflow-x: auto;
-  }
-
-  .carousel-track {
-    animation: none;
-  }
-}
-
-/* Phones: the big name moves down a little, so it doesn't touch "OVER VIEW / INDEX" */
+/* Phones: the big name moves down a little, so it starts under the top bar */
 @media (max-width: 700px) {
   .hero {
     padding-top: 52px; /* under the top bar (44px high on phones) */
