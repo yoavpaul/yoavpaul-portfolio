@@ -7,21 +7,16 @@
   <link rel="stylesheet" href="styles.css">
 </head>
 <body class="graphics-page">
-  <!-- Top bar: About, "YP" (leads home, stays on top while scrolling), Contact -->
+  <!-- Top bar (stays at the top while scrolling, with a soft blur behind it):
+       on the left where you are, "YP" in the middle (leads home), Contact on the right -->
   <header class="top-bar">
-    <a class="top-bar-about" href="about.html#me">About</a>
+    <p class="top-bar-left"><a class="page-link" href="projects.html">INDEX</a><br><span class="is-current">Graphics</span></p>
     <a class="top-bar-name" href="index.html" aria-label="Yoav Paul, home page">YP</a>
     <a class="top-bar-contact" href="about.html">Contact</a>
   </header>
 
-  <!-- Menu (on the left) and big title. Sizes in Figma pixels -->
-  <header class="project-header" style="--nav-top: 32; --title-top: 90; --title-size: 230; --header-height: 613;">
-    <nav class="project-nav at-left">
-      <a class="page-link project-nav-index" href="projects.html">INDEX</a>
-      <a class="page-link" href="branding.html">Branding</a>
-      <a class="page-link" href="photography.html">Photography</a>
-      <a class="page-link is-current" href="graphics.html">Graphics</a>
-    </nav>
+  <!-- Big title. Sizes in Figma pixels -->
+  <header class="project-header" style="--title-top: 90; --title-size: 230; --header-height: 613;">
     <h1 class="project-title">Graphics</h1>
   </header>
 

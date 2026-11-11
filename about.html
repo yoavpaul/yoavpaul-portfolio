@@ -7,9 +7,10 @@
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-  <!-- Top bar: About, "YP" (leads home, stays on top while scrolling), Contact -->
+  <!-- Top bar (stays at the top while scrolling, with a soft blur behind it):
+       on the left where you are, "YP" in the middle (leads home), Contact on the right -->
   <header class="top-bar">
-    <a class="top-bar-about" href="about.html#me">About</a>
+    <p class="top-bar-left"><a class="page-link" href="index.html">OVER VIEW</a> / <a class="page-link text-muted" href="projects.html">INDEX</a></p>
     <a class="top-bar-name" href="index.html" aria-label="Yoav Paul, home page">YP</a>
     <a class="top-bar-contact" href="about.html">Contact</a>
   </header>
@@ -17,9 +18,6 @@
   <!-- Everything here is placed where it is in Figma (see .about in styles.css).
        --top = top in Figma pixels, --middle = the middle of the word -->
   <main class="about">
-    <p class="hero-index-link">
-      <a class="page-link" href="index.html">OVER VIEW</a> / <a class="page-link text-muted" href="projects.html">INDEX</a>
-    </p>
 
     <h1 class="about-title" style="--top: 118; --middle: 720; --spacing: 10.8;">EMAIL ME</h1>
     <a class="about-contact" href="mailto:Yoavpaul2012@gmail.com" style="--top: 519;">Yoavpaul2012@gmail.com</a>

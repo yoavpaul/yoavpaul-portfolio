@@ -46,6 +46,14 @@
   font-display: swap;
 }
 
+/* Editor Sans Semibold: the page you are on, in the top bar */
+@font-face {
+  font-family: "Editor Sans";
+  src: url("fonts/EditorSans-Semibold.otf") format("opentype");
+  font-weight: 600;
+  font-display: swap;
+}
+
 /* ===== Variables (from Figma) ===== */
 :root {
   /* Colors */
@@ -54,6 +62,7 @@
   --color-shadow: rgba(0, 0, 0, 0.3);
   --color-text: #000000;
   --color-text-muted: rgba(0, 0, 0, 0.6);
+  --color-bar: rgba(255, 255, 255, 0.3); /* the top bar, over the blur */
 
   /* Title font: TAN - MEMORIES (Regular), a serif font is used until it loads */
   --font-display: "TAN Memories", Georgia, serif;
@@ -65,7 +74,6 @@
 
   /* Font of the small texts on the home page */
   --font-body: "ArbelG", Arial, sans-serif;
-  --size-link: max(12px, calc(20 * var(--px))); /* "OVER VIEW / INDEX": 20px in Figma */
 
   /* One Figma pixel: the home page is 1440px wide in Figma,
      so on smaller screens everything gets smaller together */
@@ -160,16 +168,21 @@ body {
   }
 }
 
-/* ===== Top bar (all pages) ===== */
-
-/* "About" on the left, "YOAV PAUL" in the middle, "Contact" on the right.
-   Each one is placed by its middle point, like in Figma (the page is 1440px wide there) */
+/* ===== Top bar (all pages) =====
+   On the left where you are, "YP" in the middle, "Contact" on the right.
+   Each one is placed by its middle point, like in Figma (the page is 1440px wide there).
+   The bar stays at the top while scrolling, with a soft blur behind it,
+   so it can always be read, also on top of photos */
 .top-bar {
-  position: absolute;
+  position: fixed;
   top: 0;
   left: 0;
   right: 0;
-  z-index: 1;
+  z-index: 5; /* above everything on the page */
+  height: max(44px, calc(90 * var(--px))); /* down to just under the two lines on the left */
+  background-color: var(--color-bar);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px); /* Safari */
   font-family: var(--font-nav);
   font-size: var(--size-nav);
   line-height: normal;
@@ -177,47 +190,57 @@ body {
 }
 
 .top-bar a {
-  position: absolute;
-  transform: translateX(-50%); /* the middle of the word sits on "left" */
   color: inherit;
   text-decoration: none;
+}
+
+/* The three parts of the bar */
+.top-bar-left,
+.top-bar-name,
+.top-bar-contact {
+  position: absolute;
+  margin: 0;
+  transform: translateX(-50%); /* the middle of the words sits on "left" */
+  text-align: center;
   white-space: nowrap;
 }
 
-.top-bar-about {
+/* On the left: "OVER VIEW / INDEX", or "INDEX" with the page you are on under it
+   (Figma: middle at 258px, 25px from the top) */
+.top-bar-left {
   top: calc(25 * var(--px));
-  left: calc(50% - 393.5 * var(--px)); /* 326.5px in Figma */
+  left: calc(50% - 462 * var(--px));
 }
 
-.top-bar-contact {
-  top: calc(25 * var(--px));
-  left: calc(50% + 425.5 * var(--px)); /* 1145.5px in Figma */
+/* The grey link ("INDEX" on the home page, "OVER VIEW" on the index page) */
+.top-bar-left .text-muted {
+  color: var(--color-text-muted);
 }
 
-/* "YP" in the title font (Figma: 24px, letter spacing -24%, middle at 721.5px, 19px from the top).
-   It stays on the screen while scrolling, so there is always a way back home.
-   (".top-bar" in front, so "fixed" wins over "absolute" from ".top-bar a") */
-.top-bar .top-bar-name {
-  position: fixed;
-  z-index: 1; /* above the photos */
+/* The page you are on: red and Semibold */
+.top-bar-left .is-current {
+  color: var(--color-accent);
+  font-weight: 600;
+}
+
+/* The links turn red under the mouse */
+.top-bar-left .page-link:hover {
+  color: var(--color-accent);
+}
+
+/* "YP" in the title font (Figma: 24px, letter spacing -24%, middle at 721.5px, 19px from the top) */
+.top-bar-name {
   top: calc(19 * var(--px));
   left: calc(50% + 1.5 * var(--px));
   font-family: var(--font-display);
   letter-spacing: -0.24em;
   line-height: 1.04;
-  text-align: center;
 }
 
-/* A soft blurred layer under "YP", so it can still be read on top of photos */
-.top-bar-name::before {
-  content: "";
-  position: absolute;
-  inset: -0.3em -0.5em;
-  z-index: -1; /* under the letters */
-  border-radius: 999px;
-  background-color: rgba(255, 255, 255, 0.3);
-  backdrop-filter: blur(6px);
-  -webkit-backdrop-filter: blur(6px); /* Safari */
+/* Figma: middle at 1145.5px, 25px from the top */
+.top-bar-contact {
+  top: calc(25 * var(--px));
+  left: calc(50% + 425.5 * var(--px));
 }
 
 /* ===== Home page (index.html) and index page (projects.html) ===== */
@@ -242,30 +265,6 @@ body {
   height: calc(423 * var(--px)); /* text box height in Figma */
   color: var(--color-accent);
   text-align: center;
-}
-
-/* "OVER VIEW / INDEX" sits on top of the big name, in the middle.
-   On phones it stays at least 36px from the top, so it doesn't touch "YOAV PAUL" */
-.hero-index-link {
-  position: absolute;
-  top: max(36px, calc(100 * var(--px)));
-  left: 50%;
-  transform: translateX(-50%);
-  margin: 0;
-  font-family: var(--font-nav);
-  font-size: var(--size-nav);
-  color: var(--color-text);
-  white-space: nowrap;
-}
-
-/* The grey link in "OVER VIEW / INDEX" */
-.hero-index-link .text-muted {
-  color: var(--color-text-muted);
-}
-
-/* "OVER VIEW" and "INDEX" turn red under the mouse (the same red as the site) */
-.hero-index-link .page-link:hover {
-  color: var(--color-accent);
 }
 
 /* "Catch ME if you can!" under the big name, a link to the contact page.
@@ -300,13 +299,6 @@ body {
 .index-page .fly,
 .index-page .splat {
   position: absolute;
-}
-
-/* On the home page "OVER VIEW / INDEX" sits on the left of the top bar
-   (Figma: its middle at 258px, 25px from the top) */
-.home-page .hero-index-link {
-  top: calc(25 * var(--px));
-  left: calc(50% - 462 * var(--px));
 }
 
 /* ===== Over view on the home page: all the works moving in a row =====
@@ -344,7 +336,7 @@ body {
   display: flex;
   width: max-content;
   height: 100%;
-  animation: carousel-move 90s linear infinite;
+  animation: carousel-move 75s linear infinite; /* one full round in 75 seconds */
 }
 
 @keyframes carousel-move {
@@ -394,7 +386,7 @@ body {
 /* Phones: the big name moves down a little, so it doesn't touch "OVER VIEW / INDEX" */
 @media (max-width: 700px) {
   .hero {
-    padding-top: 40px;
+    padding-top: 52px; /* under the top bar (44px high on phones) */
   }
 }
 
@@ -459,26 +451,10 @@ body {
 /* ===== Project pages (photography.html, graphics.html) ===== */
 
 /* The top part: the menu and the big title.
-   Each page sets --nav-top, --title-top, --title-size and --header-height (in Figma pixels) */
+   Each page sets --title-top, --title-size and --header-height (in Figma pixels) */
 .project-header {
   position: relative;
   height: calc(var(--header-height) * var(--px));
-}
-
-/* Menu: INDEX / Branding / Photography / Graphics */
-.project-nav {
-  position: absolute;
-  top: calc(var(--nav-top) * var(--px));
-  left: 50%;
-  transform: translateX(-50%);
-  z-index: 1; /* above the big title */
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: calc(15 * var(--px)); /* an empty line between the words, like in Figma */
-  font-family: var(--font-nav);
-  font-size: var(--size-link);
-  line-height: calc(15 * var(--px));
 }
 
 .project-title {
@@ -495,11 +471,6 @@ body {
   text-align: center;
 }
 
-/* In the menu, only the page you are on is bold (and red) */
-.project-nav .is-current {
-  font-weight: 700;
-}
-
 /* The name of a project under its photo.
    --height = the space from the top of the caption to the next photo (Figma pixels) */
 .photo-caption {
@@ -514,26 +485,6 @@ body {
 }
 
 /* ===== Photography, branding and graphics pages ===== */
-
-/* On these pages "About" and "Contact" sit on the left side (Figma: middle of "About" at 298.5px, "Contact" at 527.5px) */
-.photography-page .top-bar-about,
-.branding-page .top-bar-about,
-.graphics-page .top-bar-about {
-  top: calc(27 * var(--px));
-  left: calc(50% - 421.5 * var(--px));
-}
-
-.photography-page .top-bar-contact,
-.branding-page .top-bar-contact,
-.graphics-page .top-bar-contact {
-  top: calc(22 * var(--px));
-  left: calc(50% - 192.5 * var(--px));
-}
-
-/* The menu on the left (its middle is 96.5px from the left in Figma) */
-.project-nav.at-left {
-  left: calc(96.5 * var(--px));
-}
 
 /* A photo in a box with its Figma size (--width x --height).
    The photo fills the box, and is cut at the edges if it has a different shape */
@@ -648,18 +599,6 @@ button.photo-box {
 }
 
 /* ===== Index page (projects.html) ===== */
-
-/* On the index page "About" and "Contact" sit near the edges
-   (Figma: middle of "About" at 221.5px, 12px from the top; "Contact" at 1203.5px, 23px from the top) */
-.index-page .top-bar-about {
-  top: calc(12 * var(--px));
-  left: calc(50% - 498.5 * var(--px));
-}
-
-.index-page .top-bar-contact {
-  top: calc(23 * var(--px));
-  left: calc(50% + 483.5 * var(--px));
-}
 
 /* The area under the big name (1032 - 505 Figma pixels high).
    The categories and lists are placed in it by --x, --y and --w */
@@ -820,33 +759,22 @@ button.photo-box {
   text-indent: calc(42 * var(--px));
 }
 
-/* Phones: everything moves down a little, so "EMAIL ME" doesn't touch "OVER VIEW / INDEX" */
+/* Phones: everything moves down a little, so "EMAIL ME" doesn't touch the top bar */
 @media (max-width: 700px) {
   .about {
     margin-top: 24px;
   }
-
-  .about .hero-index-link {
-    top: 12px; /* stays where it is on the other pages */
-  }
 }
 
-/* ===== Phones: the project menu and title are in the page flow ===== */
+/* ===== Phones: the project title is in the page flow ===== */
 @media (max-width: 700px) {
   .project-header {
     height: auto;
-    padding-top: 40px; /* room for the top bar */
+    padding-top: 52px; /* room for the top bar (44px high on phones) */
   }
 
-  .project-nav,
   .project-title {
     position: static;
-    transform: none;
-  }
-
-  .project-nav {
-    gap: 4px;
-    line-height: 1.2;
   }
 
   .project-title {
