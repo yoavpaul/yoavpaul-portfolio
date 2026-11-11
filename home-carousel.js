@@ -1,15 +1,22 @@
 // Home page "over view": a row of all the works that moves from left to right in a loop.
-// - It stops under the mouse, and the name of the work under the mouse shows above it.
+// - It stops under the mouse, and "Random / Index" under it turns into the category (red) / name
+//   of the work under the mouse.
 // - It can be scrolled sideways: trackpad, mouse wheel or finger.
 // - "Random / Index" under it changes the order of the works.
 //
 // How the endless loop works: the works are in the row twice, one copy after the other.
 // The row is scrolled (scrollLeft) between 0 and the width of one copy.
 // When it reaches one end it jumps to the same place in the other copy, so nobody sees the jump.
+//
+// The row moves to the right, so new works come in from the left.
+// That is why the works are put in the row in reverse order: this way they come in
+// one after the other in the right order (first work first).
 
 const carousel = document.querySelector(".carousel");
 const track = document.querySelector(".carousel-track");
-const workName = document.querySelector(".carousel-name");
+const section = document.querySelector(".carousel-section");
+const workCategory = document.querySelector(".carousel-category");
+const workName = document.querySelector(".carousel-work");
 const modeButtons = document.querySelectorAll(".carousel-mode");
 
 const SECONDS_PER_ROUND = 75; // time for all the works to pass once
@@ -40,17 +47,20 @@ function keepInLoop() {
   carousel.scrollLeft = position;
 }
 
-// Puts the works in the row in this order, and the copy after them
+// Puts the works in the row (in reverse, see above), and the copy after them
 function fillRow(order) {
-  track.replaceChildren(...order);
-  for (const item of order) {
+  const reversed = [...order].reverse();
+  track.replaceChildren(...reversed);
+  for (const item of reversed) {
     const copy = item.cloneNode(true);
     copy.setAttribute("aria-hidden", "true"); // the copy is only for the loop
     copy.setAttribute("tabindex", "-1");
     track.appendChild(copy);
   }
-  // Start at the beginning of the copy, so the row can move to the right
-  position = oneCopyWidth();
+  // Start with the first work at the right edge of the box, and the next ones to its left
+  const first = track.children[reversed.length - 1];
+  const space = parseFloat(getComputedStyle(first).marginRight);
+  position = oneCopyWidth() - space - carousel.clientWidth;
   keepInLoop();
 }
 
@@ -72,7 +82,7 @@ carousel.addEventListener("mouseenter", () => {
 });
 carousel.addEventListener("mouseleave", () => {
   paused = false;
-  workName.textContent = "";
+  clearName();
 });
 carousel.addEventListener("pointerdown", () => {
   paused = true;
@@ -83,9 +93,20 @@ carousel.addEventListener("pointerup", (event) => {
   }
 });
 
+// The category and name of the work under the mouse
 function showName(event) {
   const item = event.target.closest(".carousel-item");
-  workName.textContent = item ? item.dataset.name : "";
+  if (!item) {
+    clearName();
+    return;
+  }
+  workCategory.textContent = item.dataset.category;
+  workName.textContent = item.dataset.name;
+  section.classList.add("is-showing-name"); // hides "Random / Index" (see styles.css)
+}
+
+function clearName() {
+  section.classList.remove("is-showing-name");
 }
 track.addEventListener("mouseover", showName);
 track.addEventListener("focusin", (event) => {
@@ -94,7 +115,7 @@ track.addEventListener("focusin", (event) => {
 });
 track.addEventListener("focusout", () => {
   paused = false;
-  workName.textContent = "";
+  clearName();
 });
 
 // --- Scrolling by hand ---

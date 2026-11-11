@@ -62,7 +62,7 @@
   --color-shadow: rgba(0, 0, 0, 0.3);
   --color-text: #000000;
   --color-text-muted: rgba(0, 0, 0, 0.6);
-  --color-bar: rgba(255, 255, 255, 0.3); /* the top bar, over the blur */
+  --color-bar: rgba(255, 255, 255, 0.3); /* behind the words of the top bar, over the blur */
 
   /* Title font: TAN - MEMORIES (Regular), a serif font is used until it loads */
   --font-display: "TAN Memories", Georgia, serif;
@@ -171,8 +171,8 @@ body {
 /* ===== Top bar (all pages) =====
    On the left where you are, "YP" in the middle, "Contact" on the right.
    Each one is placed by its middle point, like in Figma (the page is 1440px wide there).
-   The bar stays at the top while scrolling, with a soft blur behind it,
-   so it can always be read, also on top of photos */
+   The bar stays at the top while scrolling. Each part has a soft blurred ellipse behind it,
+   so it can always be read, also on top of photos (the rest of the bar is see-through) */
 .top-bar {
   position: fixed;
   top: 0;
@@ -180,9 +180,7 @@ body {
   right: 0;
   z-index: 5; /* above everything on the page */
   height: max(44px, calc(90 * var(--px))); /* down to just under the two lines on the left */
-  background-color: var(--color-bar);
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px); /* Safari */
+  pointer-events: none; /* clicks go through the see-through parts of the bar... */
   font-family: var(--font-nav);
   font-size: var(--size-nav);
   line-height: normal;
@@ -199,10 +197,26 @@ body {
 .top-bar-name,
 .top-bar-contact {
   position: absolute;
+  z-index: 0; /* so the ellipse below stays behind the words */
   margin: 0;
   transform: translateX(-50%); /* the middle of the words sits on "left" */
   text-align: center;
   white-space: nowrap;
+  pointer-events: auto; /* ...but not through the words */
+}
+
+/* The blurred ellipse behind each part of the bar */
+.top-bar-left::before,
+.top-bar-name::before,
+.top-bar-contact::before {
+  content: "";
+  position: absolute;
+  inset: -0.45em -0.9em;
+  z-index: -1;
+  border-radius: 50%; /* an ellipse */
+  background-color: var(--color-bar);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px); /* Safari */
 }
 
 /* On the left: "OVER VIEW / INDEX", or "INDEX" with the page you are on under it
@@ -302,27 +316,12 @@ body {
 }
 
 /* ===== Over view on the home page: all the works moving in a row =====
-   Figma: a 1440 x 600 box, 1081px from the top of the page, and "Random / Index" under it.
+   Figma: a 1440 x 600 box, 985px from the top of the page, and "Random / Index" under it.
    home-carousel.js moves the row and changes its order */
 
 .carousel-section {
-  margin-top: calc(285 * var(--px)); /* + the name (60) = 1081 - 736 */
-  padding-bottom: calc(30 * var(--px));
-}
-
-/* The name of the work under the mouse, above the box, in the middle */
-.carousel-name {
-  height: calc(60 * var(--px));
-  margin: 0;
-  display: flex;
-  align-items: flex-end;
-  justify-content: center;
-  padding-bottom: calc(16 * var(--px));
-  font-family: var(--font-nav);
-  font-size: max(14px, calc(32 * var(--px)));
-  font-weight: 500; /* Medium, like the names under the photos */
-  line-height: 1;
-  color: var(--color-text);
+  margin-top: calc(249 * var(--px)); /* 985 - 736 */
+  padding-bottom: calc(92 * var(--px)); /* the page ends at 1773 */
 }
 
 /* The box: it scrolls sideways (no scrollbar, like in Figma) */
@@ -344,10 +343,11 @@ body {
   height: 100%;
 }
 
-/* "Random / Index" under the box (Figma: 27px under it, Editor Sans 24px).
+/* "Random / Index" under the box (Figma: 61px under it, Editor Sans 24px).
    Red under the mouse, and the one that is chosen stays red */
 .carousel-modes {
-  margin: calc(27 * var(--px)) 0 0;
+  position: relative;
+  margin: calc(61 * var(--px)) 0 0;
   min-height: calc(35 * var(--px));
   font-family: var(--font-nav);
   font-size: var(--size-nav);
@@ -368,6 +368,25 @@ body {
 .carousel-mode:hover,
 .carousel-mode.is-active {
   color: var(--color-accent);
+}
+
+/* Under the mouse a work's category (red) / name show in the same place, instead of "Random / Index" */
+.carousel-name {
+  position: absolute;
+  inset: 0;
+  display: none;
+}
+
+.carousel-category {
+  color: var(--color-accent);
+}
+
+.carousel-section.is-showing-name .carousel-name {
+  display: block;
+}
+
+.carousel-section.is-showing-name .carousel-switch {
+  visibility: hidden; /* keeps its place, so nothing moves */
 }
 
 /* One work: as high as the box, its width from its shape (--ratio = width / height).
