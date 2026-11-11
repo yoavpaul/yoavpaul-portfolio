@@ -1,7 +1,9 @@
 // A fly that flies around the screen at random, like a real fly:
 // it buzzes around, changes direction suddenly, and lands for a moment.
-// The first click on the fly makes it escape, the second click squashes it,
-// and 2 seconds later a new fly comes in.
+// A click on a resting fly makes it escape, a click on a flying fly squashes it,
+// and 2 seconds later a new fly comes in (already flying, so one click is enough).
+// To make it a bit easier: a click near the fly also counts, and near the fly
+// the mouse turns into a fly swatter (see "Fly swatter" in styles.css).
 //
 // On the home and index pages the fly rests on the name until the mouse touches it,
 // and it only flies above the works (it never goes over them).
@@ -51,8 +53,8 @@ let speed = 0; // pixels per second
 let isFlying = false;
 let timeLeft = 1.5; // seconds until it switches
 
-const MIN_SPEED = 250;
-const MAX_SPEED = 650;
+const MIN_SPEED = 210;
+const MAX_SPEED = 540;
 const EDGE = 80; // how close to the edge before it turns back
 
 function randomBetween(min, max) {
@@ -183,24 +185,60 @@ function bringNewFly() {
   draw();
 }
 
+// How far the mouse is from the middle of the fly (in pixels).
+// On pages with the big name the fly moves with the page, on other pages it stays on the screen
+function distanceToFly(event) {
+  const mouseX = isHomePage ? event.pageX : event.clientX;
+  const mouseY = isHomePage ? event.pageY : event.clientY;
+  return Math.hypot(mouseX - x, mouseY - y);
+}
+
+// A click this close to the middle of the fly counts as a hit (a bit more than the fly itself)
+function hitDistance() {
+  return fly.offsetWidth * 0.9;
+}
+
+// True right after a click hit the fly, so that click doesn't also open a link under it
+let clickHitFly = false;
+
 // "pointerdown" reacts the moment the button goes down (also a finger tap),
 // so a fast fly is easier to hit than with "click"
 document.addEventListener("pointerdown", function (event) {
-  if (event.target === fly && isAlive) {
-    hits += 1;
-    if (hits === 1) {
-      escapeFly();
-    } else {
-      squashFly();
-    }
+  clickHitFly = false;
+  if (!isAlive || distanceToFly(event) > hitDistance()) return;
+
+  clickHitFly = true;
+  hits += 1;
+  // A resting fly escapes first, a flying fly is squashed
+  if (!isFlying && hits === 1) {
+    escapeFly();
+  } else {
+    squashFly();
+    document.documentElement.classList.remove("is-near-fly");
   }
 });
 
-// Pages with the big name: the fly takes off when the mouse touches it
-document.addEventListener("pointerover", function (event) {
-  if (isHomePage && event.target === fly && isAlive && !isFlying) {
-    escapeFly();
+// A click that hit the fly doesn't open the link under it (like "ME")
+document.addEventListener("click", function (event) {
+  if (clickHitFly) {
+    event.preventDefault();
+    clickHitFly = false;
   }
+}, true);
+
+// Pages with the big name: the fly takes off when the mouse touches it.
+// This counts as the first hit, so one more click squashes it
+document.addEventListener("pointerover", function (event) {
+  if (isHomePage && event.target === fly && isAlive && !isFlying && hits === 0) {
+    escapeFly();
+    hits = 1;
+  }
+});
+
+// Fly swatter: near the fly the mouse turns into a fly swatter
+document.addEventListener("pointermove", function (event) {
+  const isNear = isAlive && distanceToFly(event) < hitDistance() * 2.5;
+  document.documentElement.classList.toggle("is-near-fly", isNear);
 });
 
 // Runs about 60 times a second

@@ -62,7 +62,36 @@
   --color-shadow: rgba(0, 0, 0, 0.3);
   --color-text: #000000;
   --color-text-muted: rgba(0, 0, 0, 0.6);
-  --color-bar: rgba(255, 255, 255, 0.3); /* behind the words of the top bar, over the blur */
+  --color-panel: #000000; /* behind a project panel (branding page) */
+  /* The blurred strips behind the words of the top bar */
+  --bar-white: 0.3;      /* how white the strip is (0 = clear, 1 = fully white) */
+  --bar-blur: 10px;      /* how blurry the photo behind it is */
+  --bar-radius: 0.03em;  /* roundness of the corners */
+  --bar-line-gap: 0.25em; /* extra space between the lines of the menu on the project pages */
+  /* Each part has its own strip:
+     pad-x = space left and right of the words, pad-y = space above and under them,
+     move-x = moves the strip right (+) or left (-), move-y = moves it down (+) or up (-) */
+  --left-pad-x: 0.6em;    /* "Over view / Index" */
+  --left-pad-y: 0.1em;
+  --left-move-x: 0em;
+  --left-move-y: 0em;
+  --index-pad-x: 0.31em;   /* the menu on the project pages: "Index" and the other pages */
+  --index-pad-y: 0.03em;
+  --index-move-x: 0em;
+  --index-move-y: -0.03em;
+  --page-pad-x: 0.37em;    /* the page you are on (Branding, Photography, Graphics) */
+  --page-pad-y: 0.1em;
+  --page-move-x: 0em;
+  --page-move-y: 0em;
+  --yp-pad-x: 0.16em;     /* "YP" */
+  --yp-pad-y: 0.31em;
+  --yp-move-x: 0em;
+  --yp-move-y: 0em;
+  --contact-pad-x: 0.32em; /* "Contact" */
+  --contact-pad-y: 0.1em;
+  --contact-move-x: 0em;
+  --contact-move-y: 0em;
+  --color-bar: rgba(255, 255, 255, var(--bar-white));
 
   /* Title font: TAN - MEMORIES (Regular), a serif font is used until it loads */
   --font-display: "TAN Memories", Georgia, serif;
@@ -108,6 +137,14 @@ body {
   /* Close shadow: the fly is sitting on the page */
   filter: drop-shadow(2px 3px 2px var(--color-shadow));
   transition: filter 0.3s;
+}
+
+/* Fly swatter: near the fly the mouse turns into a fly swatter (script.js adds "is-near-fly"),
+   so people understand they can squash it. The middle of the swatter is the point that hits */
+.is-near-fly,
+.is-near-fly * {
+  cursor: -webkit-image-set(url("images/cursor-swatter.png") 1x, url("images/cursor-swatter@2x.png") 2x) 17 17, crosshair !important;
+  cursor: image-set(url("images/cursor-swatter.png") 1x, url("images/cursor-swatter@2x.png") 2x) 17 17, crosshair !important;
 }
 
 /* Far, soft shadow: the fly is in the air */
@@ -171,7 +208,7 @@ body {
 /* ===== Top bar (all pages) =====
    On the left where you are, "YP" in the middle, "Contact" on the right.
    Each one is placed by its middle point, like in Figma (the page is 1440px wide there).
-   The bar stays at the top while scrolling. Each part has a soft blurred ellipse behind it,
+   The bar stays at the top while scrolling. Each part has a blurred horizontal strip behind it,
    so it can always be read, also on top of photos (the rest of the bar is see-through) */
 .top-bar {
   position: fixed;
@@ -205,18 +242,69 @@ body {
   pointer-events: auto; /* ...but not through the words */
 }
 
-/* The blurred ellipse behind each part of the bar */
+/* The blurred strip behind each part of the bar (a flat rectangle around the words).
+   Each part sets its own --pad-x, --pad-y, --move-x and --move-y (see the variables at the top) */
 .top-bar-left::before,
 .top-bar-name::before,
-.top-bar-contact::before {
+.top-bar-contact::before,
+.top-bar-left:has(.is-current) > a::before,
+.top-bar-left:has(.is-current) > span::before {
   content: "";
   position: absolute;
-  inset: -0.45em -0.9em;
+  top: calc(var(--move-y) - var(--pad-y));
+  bottom: calc(-1 * var(--move-y) - var(--pad-y));
+  left: calc(var(--move-x) - var(--pad-x));
+  right: calc(-1 * var(--move-x) - var(--pad-x) - var(--extra-right, 0em));
   z-index: -1;
-  border-radius: 50%; /* an ellipse */
+  border-radius: var(--bar-radius);
   background-color: var(--color-bar);
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px); /* Safari */
+  backdrop-filter: blur(var(--bar-blur));
+  -webkit-backdrop-filter: blur(var(--bar-blur)); /* Safari */
+  /* Shows only when there is a picture or text under the word (top-bar-blur.js adds "has-backdrop") */
+  opacity: var(--strip-opacity, 0);
+  transition: opacity 0.2s;
+}
+
+.top-bar .has-backdrop {
+  --strip-opacity: 1;
+}
+
+.top-bar-left::before {
+  --pad-x: var(--left-pad-x);
+  --pad-y: var(--left-pad-y);
+  --move-x: var(--left-move-x);
+  --move-y: var(--left-move-y);
+}
+
+.top-bar-left:has(.is-current) > a::before {
+  --pad-x: var(--index-pad-x);
+  --pad-y: var(--index-pad-y);
+  --move-x: var(--index-move-x);
+  --move-y: var(--index-move-y);
+}
+
+.top-bar-left:has(.is-current) > span::before {
+  --pad-x: var(--page-pad-x);
+  --pad-y: var(--page-pad-y);
+  --move-x: var(--page-move-x);
+  --move-y: var(--page-move-y);
+}
+
+/* "YP": the letters are pulled together (-24%), which makes its box end before the "P",
+   so its strip gets 0.24em more on the right, to have the same space on both sides */
+.top-bar-name::before {
+  --pad-x: var(--yp-pad-x);
+  --pad-y: var(--yp-pad-y);
+  --move-x: var(--yp-move-x);
+  --move-y: var(--yp-move-y);
+  --extra-right: 0.24em;
+}
+
+.top-bar-contact::before {
+  --pad-x: var(--contact-pad-x);
+  --pad-y: var(--contact-pad-y);
+  --move-x: var(--contact-move-x);
+  --move-y: var(--contact-move-y);
 }
 
 /* On the left: "OVER VIEW / INDEX", or "INDEX" with the page you are on under it
@@ -235,6 +323,37 @@ body {
 .top-bar-left .is-current {
   color: var(--color-accent);
   font-weight: 600;
+}
+
+/* On the project pages the left part is a menu of a few lines:
+   each word gets its own blurred strip (see above), instead of one strip around all */
+.top-bar-left:has(.is-current)::before {
+  display: none;
+}
+
+.top-bar-left:has(.is-current) > a,
+.top-bar-left:has(.is-current) > span {
+  position: relative;
+  z-index: 0;
+  display: inline-block;
+}
+
+/* The menu on the project pages: "Index", then Branding, Photography and Graphics, one under the other
+   (Figma: its middle at 209px, 27px between the lines). Each line goes a little lower, so the strips don't touch */
+.top-bar-left:has(.is-current) {
+  left: calc(50% - 511 * var(--px));
+  line-height: 1.125;
+}
+
+.top-bar-left:has(.is-current) > :is(a, span):not(:first-child) {
+  margin-top: var(--bar-line-gap);
+}
+
+/* On the project pages "Contact" is a little more to the right (Figma: its middle at 1202.5px) */
+.branding-page .top-bar-contact,
+.photography-page .top-bar-contact,
+.graphics-page .top-bar-contact {
+  left: calc(50% + 482.5 * var(--px));
 }
 
 /* The links turn red under the mouse */
@@ -620,6 +739,136 @@ button.photo-box {
 .photo-overlay-row.is-flowing > div video {
   width: auto;
   height: 100%;
+}
+
+/* ===== Project panels (branding page): the whole project on one screen =====
+   project-panels.js opens and closes them. Everything inside is placed in Figma pixels
+   (--x, --y, --w, --h) and grows or shrinks with the height of the screen:
+   the Figma frame is 1069px high, so one Figma pixel = the screen height / 1069 */
+
+.project-panel {
+  --s: calc(100vh / 1069); /* one Figma pixel */
+  position: fixed;
+  inset: 0;
+  z-index: 4; /* above the page, under the top bar */
+  overflow-x: auto;
+  overflow-y: hidden; /* only sideways */
+  background-color: var(--color-panel);
+  scrollbar-width: none;
+  outline: none;
+}
+
+.project-panel::-webkit-scrollbar {
+  display: none;
+}
+
+.project-panel[hidden] {
+  display: none;
+}
+
+/* While a panel is open: the page under it doesn't scroll, and the top bar turns white (like in Figma) */
+body.has-open-panel {
+  overflow: hidden;
+}
+
+body.has-open-panel .top-bar {
+  color: #fff;
+}
+
+/* The whole width of the project, as high as the screen */
+.project-panel-stage {
+  position: relative;
+  width: calc(var(--width) * var(--s));
+  height: 100vh;
+  overflow: hidden; /* things that go over the top are cut, like in Figma */
+}
+
+/* A work: its place and size (a click on it closes the panel) */
+.panel-item {
+  position: absolute;
+  left: calc(var(--x) * var(--s));
+  top: calc(var(--y) * var(--s));
+  width: calc(var(--w) * var(--s));
+  height: calc(var(--h) * var(--s));
+  overflow: hidden;
+  cursor: pointer;
+}
+
+.panel-item img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.panel-item img.is-cropped {
+  position: absolute;
+  top: calc(var(--img-top) * 1%);
+  left: calc(var(--img-left) * 1%);
+  width: calc(var(--img-width) * 1%);
+  height: calc(var(--img-height) * 1%);
+  max-width: none;
+  object-fit: fill;
+}
+
+/* Texts: --x is their middle */
+.panel-text {
+  position: absolute;
+  left: calc(var(--x) * var(--s));
+  top: calc(var(--y) * var(--s));
+  width: calc(var(--w) * var(--s));
+  margin: 0;
+  z-index: 1; /* on top of the works, like in Figma */
+  transform: translateX(-50%);
+  color: #fff;
+  font-weight: normal;
+  text-align: center;
+}
+
+/* The names of the parts (Logotype, Menus...): Editor Sans 18px */
+.panel-label {
+  font-family: var(--font-nav);
+  font-size: calc(18 * var(--s));
+  line-height: calc(37 * var(--s));
+}
+
+/* Some names start at --x (on the left of their works) instead of having their middle there */
+.panel-label.is-left {
+  transform: none;
+  text-align: left;
+}
+
+/* About the project: name (Bold 30px), kind of work (Medium 25px) and text (25px), in Editor Sans */
+.panel-about {
+  position: absolute;
+  left: calc(var(--x) * var(--s));
+  top: calc(var(--y) * var(--s));
+  width: calc(var(--w) * var(--s));
+  z-index: 1;
+  font-family: var(--font-nav);
+  color: #fff;
+}
+
+.panel-about h2 {
+  margin: 0 0 calc(28 * 1.96 * var(--s)); /* an empty line under it, like in Figma */
+  font-size: calc(30 * var(--s));
+  font-weight: 700;
+  line-height: 1.96;
+}
+
+.panel-about p {
+  margin: 0;
+  font-size: calc(25 * var(--s));
+  line-height: calc(36 * var(--s));
+}
+
+.panel-about .panel-about-kind {
+  font-weight: 500;
+}
+
+/* The second paragraph starts a little to the right, like in Figma */
+.panel-about .is-indented {
+  text-indent: 1.25em;
 }
 
 /* ===== Index page (projects.html) ===== */

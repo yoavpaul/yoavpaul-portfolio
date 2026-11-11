@@ -8,9 +8,9 @@
 </head>
 <body class="branding-page">
   <!-- Top bar (stays at the top while scrolling, with a soft blur behind it):
-       on the left where you are, "YP" in the middle (leads home), Contact on the right -->
+       on the left the menu (the page you are on in red), "YP" in the middle (leads home), Contact on the right -->
   <header class="top-bar">
-    <p class="top-bar-left"><a class="page-link" href="projects.html">Index</a><br><span class="is-current">Branding</span></p>
+    <p class="top-bar-left"><a class="page-link" href="projects.html">Index</a><br><span class="is-current">Branding</span><br><a class="page-link" href="photography.html">Photography</a><br><a class="page-link" href="graphics.html">Graphics</a></p>
     <a class="top-bar-name" href="index.html" aria-label="Yoav Paul, home page">YP</a>
     <a class="top-bar-contact" href="about.html">Contact</a>
   </header>
@@ -31,27 +31,10 @@
     <!-- ===== The Lodge x Core De Roy =====
          Text for later: "The Lodge x Core de Roy is a Berlin bar characterized by sculptural floral
          compositions and low lighting, inspiring a monochrome identity built on contrast and organic form." -->
-    <div id="the-lodge" class="photo-overlay from-left" style="--left: 205;">
-      <div class="photo-overlay-row is-flowing" style="--height: 818; --gap: 35;">
-        <button class="photo-box" aria-expanded="false" style="--width: 818; --height: 818;">
-          <img src="images/thelodge-corederoy-logo.jpg" alt="The Lodge x Core De Roy logo">
-        </button>
-        <div><img src="images/thelodge-logo.jpg" alt="The Lodge logo" loading="lazy"></div>
-        <div><img src="images/lodge-02-november.jpg" alt="The Lodge November post" loading="lazy"></div>
-        <div><img src="images/lodge-03-january.jpg" alt="The Lodge January post" loading="lazy"></div>
-        <div><img src="images/lodge-07-november-2.jpg" alt="The Lodge November post 2" loading="lazy"></div>
-        <div><img src="images/lodge-04-february.jpg" alt="The Lodge February post" loading="lazy"></div>
-        <div><img src="images/lodge-05-march.jpg" alt="The Lodge March timetable" loading="lazy"></div>
-        <div><img src="images/lodge-06-april.jpg" alt="The Lodge April post" loading="lazy"></div>
-        <div><img src="images/lodge-08-menu.jpg" alt="The Lodge menu" loading="lazy"></div>
-        <div><img src="images/lodge-09-menu-2.jpg" alt="The Lodge menu, second page" loading="lazy"></div>
-        <div><img src="images/lodge-10-happy-hour-5.jpg" alt="Happy hour menu" loading="lazy"></div>
-        <div><img src="images/lodge-11-happy-hour-3.jpg" alt="Happy hour menu 2" loading="lazy"></div>
-        <div><img src="images/lodge-13-pickled-pickles.png" alt="Pickled story: pickles" loading="lazy"></div>
-        <div><img src="images/lodge-14-pickled-orange.png" alt="Pickled story: orange" loading="lazy"></div>
-        <div><img src="images/lodge-12-pickled-onion.png" alt="Pickled story: onion" loading="lazy"></div>
-      </div>
-    </div>
+    <!-- The Lodge: a click opens the whole project on the screen (see "the-lodge-panel" at the bottom) -->
+    <button id="the-lodge" class="photo-box from-left" type="button" data-panel="the-lodge-panel" aria-haspopup="dialog" style="--left: 205; --width: 818; --height: 818;">
+      <img src="images/thelodge-corederoy-logo.jpg" alt="The Lodge x Core De Roy logo">
+    </button>
     <p class="photo-caption from-left" style="--left: 205; --width: 521; --height: 26; --space-before: 20;">The Lodge x Core De Roy</p>
 
     <!-- ===== Cinema South Festival =====
@@ -115,6 +98,49 @@
     <p class="photo-caption from-left" style="--left: 205; --width: 521; --height: 26; --space-before: 20;">biss</p>
   </main>
 
+
+  <!-- ===== The Lodge x Core De Roy: the whole project on one screen =====
+       It opens on top of the page and scrolls only sideways (project-panels.js).
+       Everything is placed like in the Figma frame "The Lodge x Core De Roy" (11793 x 1069),
+       and grows or shrinks with the height of the screen.
+       --x, --y = where it starts (for the small titles: their middle, or their left with "is-left"),
+       --w, --h = its size (Figma pixels).
+       A click on any work (or the Esc key) closes it. -->
+  <div class="project-panel" id="the-lodge-panel" role="dialog" aria-label="The Lodge x Core De Roy" tabindex="-1" hidden>
+    <div class="project-panel-stage" style="--width: 11793;">
+      <!-- About the project -->
+      <div class="panel-about" style="--x: 962; --y: 272; --w: 478;">
+        <h2>The Lodge X Core De Roy, Berlin</h2>
+        <p class="panel-about-kind">Brand Identity &amp; Graphic Design</p>
+        <p>A rebranding project for a Berlin listening bar, merging The Lodge with Core De Roy.</p>
+        <p class="is-indented">Inspired by the floral ornaments on the bar’s back door and its unique tradition of fresh flowers, the identity combines the bar’s history with its musical character. The logo incorporates subtle references to vinyl records, a turntable needle, and the bar itself.</p>
+      </div>
+      <div class="panel-item" style="--x: 105; --y: 238; --w: 801; --h: 376;"><img class="is-cropped" style="--img-top: -90.96; --img-left: -13.11; --img-width: 124.97; --img-height: 266.22;" src="images/thelodge-corederoy-logo.jpg" alt="The Lodge x Core De Roy logo" loading="lazy"></div>
+      <p class="panel-text panel-label" style="--x: 2524.5; --y: 115; --w: 151;">Logotype</p>
+      <div class="panel-item" style="--x: 1970; --y: -268; --w: 1141; --h: 1141;"><img class="is-cropped" src="images/thelodge-corederoy-logo.jpg" alt="The Lodge x Core De Roy logotype" loading="lazy" style="--img-top: 0; --img-left: 0; --img-width: 100; --img-height: 100.5;"></div>
+      <p class="panel-text panel-label" style="--x: 2524.5; --y: 590; --w: 151;">Logo</p>
+      <div class="panel-item" style="--x: 2336; --y: 613; --w: 378; --h: 378;"><img class="is-cropped" style="--img-top: -54.15; --img-left: -47.92; --img-width: 197.05; --img-height: 196.81;" src="images/thelodge-logo.jpg" alt="The Lodge logo" loading="lazy"></div>
+      <p class="panel-text panel-label" style="--x: 3289.5; --y: 55; --w: 183;">Instagram posts</p>
+      <div class="panel-item" style="--x: 3227; --y: 97; --w: 701; --h: 877;"><img src="images/lodge-02-november.jpg" alt="November post" loading="lazy"></div>
+      <div class="panel-item" style="--x: 3953; --y: 98; --w: 701; --h: 876;"><img src="images/lodge-03-january.jpg" alt="January post" loading="lazy"></div>
+      <div class="panel-item" style="--x: 4676; --y: 96; --w: 702; --h: 878;"><img src="images/lodge-07-november-2.jpg" alt="November post 2" loading="lazy"></div>
+      <div class="panel-item" style="--x: 5432; --y: 97; --w: 702; --h: 877;"><img src="images/lodge-04-february.jpg" alt="February post" loading="lazy"></div>
+      <div class="panel-item" style="--x: 6158; --y: 98; --w: 701; --h: 876;"><img src="images/lodge-05-march.jpg" alt="March timetable" loading="lazy"></div>
+      <div class="panel-item" style="--x: 6883; --y: 96; --w: 702; --h: 878;"><img src="images/lodge-06-april.jpg" alt="April post" loading="lazy"></div>
+      <p class="panel-text panel-label is-left" style="--x: 7656; --y: 63; --w: 183;">Instagram stories</p>
+      <div class="panel-item" style="--x: 7656; --y: 104; --w: 494; --h: 878;"><img src="images/lodge-13-pickled-pickles.png" alt="Pickled story: pickles" loading="lazy"></div>
+      <div class="panel-item" style="--x: 8166; --y: 104; --w: 493.875; --h: 878;"><img src="images/lodge-14-pickled-orange.png" alt="Pickled story: orange" loading="lazy"></div>
+      <div class="panel-item" style="--x: 8677; --y: 106; --w: 493; --h: 876;"><img src="images/lodge-12-pickled-onion.png" alt="Pickled story: onion" loading="lazy"></div>
+      <p class="panel-text panel-label is-left" style="--x: 9234; --y: 63; --w: 183;">Menus</p>
+      <div class="panel-item" style="--x: 9234; --y: 113; --w: 605; --h: 859;"><img src="images/lodge-08-menu.jpg" alt="Menu" loading="lazy"></div>
+      <div class="panel-item" style="--x: 9863; --y: 113; --w: 605; --h: 859;"><img src="images/lodge-09-menu-2.jpg" alt="Menu, second page" loading="lazy"></div>
+      <div class="panel-item" style="--x: 10532; --y: 246; --w: 514; --h: 725;"><img src="images/lodge-10-happy-hour-5.jpg" alt="Happy hour menu" loading="lazy"></div>
+      <div class="panel-item" style="--x: 11062; --y: 246; --w: 515; --h: 726;"><img src="images/lodge-11-happy-hour-3.jpg" alt="Happy hour menu 2" loading="lazy"></div>
+    </div>
+  </div>
+
   <script src="photo-overlays.js"></script>
+  <script src="project-panels.js"></script>
+  <script src="top-bar-blur.js"></script>
 </body>
 </html>
