@@ -302,115 +302,99 @@ body {
   position: absolute;
 }
 
-/* The works column: 1189px wide in Figma, starting 127px from the left
-   (593px left of the middle of the page) */
-.works {
-  width: calc(1189 * var(--px));
-  margin-top: calc(288 * var(--px));
-  margin-left: calc(50% - 593 * var(--px));
-  padding-bottom: calc(220 * var(--px));
+/* On the home page "OVER VIEW / INDEX" sits on the left of the top bar
+   (Figma: its middle at 258px, 25px from the top) */
+.home-page .hero-index-link {
+  top: calc(25 * var(--px));
+  left: calc(50% - 462 * var(--px));
+}
+
+/* ===== Over view on the home page: all the works moving in a row =====
+   Figma: a 1440 x 600 box, 1233px from the top of the page */
+
+.carousel-section {
+  margin-top: calc(437 * var(--px)); /* + the name (60) = 1233 - 736 */
+  padding-bottom: calc(231 * var(--px));
+}
+
+/* The name of the work under the mouse, above the box, in the middle */
+.carousel-name {
+  height: calc(60 * var(--px));
+  margin: 0;
   display: flex;
-  flex-direction: column;
-  align-items: center;
+  align-items: flex-end;
+  justify-content: center;
+  padding-bottom: calc(16 * var(--px));
+  font-family: var(--font-nav);
+  font-size: max(14px, calc(32 * var(--px)));
+  font-weight: 500; /* Medium, like the names under the photos */
+  line-height: 1;
+  color: var(--color-text);
 }
 
-/* Every work fills its place */
-.work {
-  display: block;
-  width: 100%;
-  height: auto;
-}
-
-/* Two columns of images */
-.works-grid {
-  width: 100%;
-  margin-top: calc(8 * var(--px));
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: calc(8 * var(--px)) calc(11 * var(--px));
-}
-
-/* A box that shows only part of an image (589 x 744 in Figma) */
-.work-crop {
-  position: relative;
-  aspect-ratio: 589 / 744;
+/* The box: where the works move (no background, the grey box in Figma only marks the place) */
+.carousel {
+  height: calc(600 * var(--px));
   overflow: hidden;
 }
 
-/* Sidebag: zoomed in a little (sizes from Figma) */
-.work-crop-sidebag {
-  position: absolute;
-  top: -6.14%;
-  left: 0;
-  width: 108.3%;
-  height: 107.23%;
+/* The row of works. It moves from left to right: from -50% (the copy is on the screen)
+   to 0 (the original is on the screen), and then starts again, so it looks endless */
+.carousel-track {
+  display: flex;
+  width: max-content;
+  height: 100%;
+  animation: carousel-move 90s linear infinite;
 }
 
-/* Vest: fills the box, keeps its right side */
-.work-crop-vest {
+@keyframes carousel-move {
+  from {
+    transform: translateX(-50%);
+  }
+  to {
+    transform: translateX(0);
+  }
+}
+
+/* Stops under the mouse (or when a work has focus from the Tab key) */
+.carousel:hover .carousel-track,
+.carousel:focus-within .carousel-track {
+  animation-play-state: paused;
+}
+
+/* One work: as high as the box, its width from its shape (--ratio = width / height).
+   The space after each work (not "gap"), so the copy follows with the same space */
+.carousel-item {
+  position: relative;
+  flex: none;
+  height: 100%;
+  aspect-ratio: var(--ratio);
+  margin-right: calc(35 * var(--px));
+  overflow: hidden;
+}
+
+.carousel-item img {
+  display: block;
   width: 100%;
   height: 100%;
   object-fit: cover;
-  object-position: right;
 }
 
-/* Widths, spaces and left positions of the big works (from Figma).
-   --left is how far the work is from the left of the column, in Figma pixels */
-.work-soccer,
-.work-yarzin,
-.work-lodge,
-.work-logo,
-.work-tartakover {
-  align-self: flex-start;
-  margin-left: calc(var(--left) * var(--px));
+/* People who asked their computer for less movement: no moving, scroll the row by hand */
+@media (prefers-reduced-motion: reduce) {
+  .carousel {
+    overflow-x: auto;
+  }
+
+  .carousel-track {
+    animation: none;
+  }
 }
 
-.work-soccer {
-  --left: -2;
-  width: calc(1183 / 1189 * 100%);
-  margin-top: calc(83 * var(--px));
-}
-
-.work-yarzin {
-  --left: 23;
-  width: calc(1154 / 1189 * 100%);
-  margin-top: calc(220 * var(--px));
-}
-
-.work-lodge {
-  --left: 159;
-  width: calc(871 / 1189 * 100%);
-  margin-top: calc(220 * var(--px));
-}
-
-.work-logo {
-  --left: 136;
-  width: calc(894 / 1189 * 100%);
-  margin-top: calc(312 * var(--px));
-}
-
-.work-tartakover {
-  --left: 3;
-  width: calc(1183 / 1189 * 100%);
-  margin-top: calc(430 * var(--px));
-}
-
-/* Phones: the big name moves down a little, so it doesn't touch "OVER VIEW / INDEX",
-   and the works use the full width */
+/* Phones: the big name moves down a little, so it doesn't touch "OVER VIEW / INDEX" */
 @media (max-width: 700px) {
   .hero {
     padding-top: 40px;
-  }
-
-  .works {
-    width: auto;
-    margin-left: var(--space-page);
-    margin-right: var(--space-page);
-  }
-
-  .works-grid {
-    grid-template-columns: 1fr;
-    gap: var(--space-page);
   }
 }
 
@@ -581,7 +565,8 @@ button.photo-box {
 
 /* A photo that shows only part of itself, placed like in Figma (in % of its box) */
 .photo-box img.is-cropped,
-.photo-overlay-row img.is-cropped {
+.photo-overlay-row img.is-cropped,
+.carousel-item img.is-cropped {
   position: absolute;
   top: calc(var(--img-top) * 1%);
   left: calc(var(--img-left) * 1%);

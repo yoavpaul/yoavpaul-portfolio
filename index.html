@@ -7,9 +7,9 @@
   <link rel="stylesheet" href="styles.css">
 </head>
 <body class="home-page">
-  <!-- Top bar: About, "YP" (leads home, stays on top while scrolling), Contact -->
+  <!-- Top bar: "YP" (leads home, stays on top while scrolling) and Contact.
+       "OVER VIEW / INDEX" sits on the left of the top bar (see .hero-index-link) -->
   <header class="top-bar">
-    <a class="top-bar-about" href="about.html#me">About</a>
     <a class="top-bar-name" href="index.html" aria-label="Yoav Paul, home page">YP</a>
     <a class="top-bar-contact" href="about.html">Contact</a>
   </header>
@@ -24,33 +24,32 @@
   <!-- Leads to the contact page. "ME" turns red under the mouse -->
   <p class="catch-me"><a class="page-link" href="about.html">Catch <span class="catch-me-big">ME</span> if you can!</a></p>
 
-  <!-- The works, one under the other -->
-  <main class="works">
-    <video class="work" src="images/motion-poster.mp4" autoplay muted loop playsinline></video>
-
-    <!-- Four images in two columns -->
-    <div class="works-grid">
-      <img class="work" src="images/teamtag.jpg" alt="Team tag">
-      <img class="work" src="images/creator-tag.jpg" alt="Creator tag">
-      <!-- The sidebag image is zoomed in a little, like in Figma -->
-      <div class="work work-crop">
-        <img class="work-crop-sidebag" src="images/sidebag.jpg" alt="Side bag">
-      </div>
-      <div class="work work-crop">
-        <img class="work-crop-vest" src="images/vest.jpg" alt="Vest">
+  <!-- Over view: all the works move slowly from left to right, in a loop.
+       The row stops under the mouse, and the name of the work under the mouse shows above it.
+       A click on a work leads to it. home-carousel.js makes the loop.
+       To add a work, add one more line like these (--ratio = its width / height) -->
+  <main class="carousel-section">
+    <p class="carousel-name" aria-hidden="true"></p>
+    <div class="carousel">
+      <div class="carousel-track">
+      <a class="carousel-item" href="branding.html#the-lodge" data-name="The Lodge x Core De Roy" style="--ratio: 1 / 1;"><img src="images/thelodge-corederoy-logo.jpg" alt="The Lodge x Core De Roy"></a>
+      <a class="carousel-item" href="branding.html#cinema-south-festival" data-name="Cinema South Festival" style="--ratio: 1484 / 1526;"><img src="images/sff-logo.png" alt="Cinema South Festival"></a>
+      <a class="carousel-item" href="branding.html#biss" data-name="biss" style="--ratio: 2560 / 2551;"><img src="images/logo-1.png" alt="biss"></a>
+      <a class="carousel-item" href="photography.html#dissociative-self" data-name="Dissociative self" style="--ratio: 1049 / 855;"><img class="is-cropped" style="--img-top: -44.06; --img-left: -4.36; --img-width: 108.75; --img-height: 188.58;" src="images/photo-my-project-6.jpg" alt="Dissociative self"></a>
+      <a class="carousel-item" href="photography.html#monsters-under-the-bed" data-name="Monsters Under The Bed - Guy Jarzin" style="--ratio: 840 / 1216;"><img src="images/yarzin-photoshoot.jpg" alt="Monsters Under The Bed - Guy Jarzin"></a>
+      <a class="carousel-item" href="photography.html#four-noble-truths" data-name="Four noble truths before bedtime" style="--ratio: 1044 / 818;"><img src="images/photo-yoav367.jpg" alt="Four noble truths before bedtime"></a>
+      <a class="carousel-item" href="photography.html#megi-solar" data-name="Megi Solar" style="--ratio: 845.913 / 1216;"><img src="images/photo-yoavp1150.jpg" alt="Megi Solar"></a>
+      <a class="carousel-item" href="photography.html#bank-leumi" data-name="Bank Leumi - Local Treasure" style="--ratio: 1034 / 686;"><img src="images/photo-illustration-14.jpg" alt="Bank Leumi - Local Treasure"></a>
+      <a class="carousel-item" href="graphics.html#im-here" data-name="I’M HERE?" style="--ratio: 694 / 982;"><img src="images/tartakover-poster.jpg" alt="I’M HERE?"></a>
+      <a class="carousel-item" href="graphics.html#soccer-joint" data-name="Soccer - Joint" style="--ratio: 907 / 1296;"><img src="images/poster-joint-soccer.jpg" alt="Soccer - Joint"></a>
       </div>
     </div>
-
-    <img class="work work-soccer" src="images/poster-joint-soccer.jpg" alt="Joint soccer poster">
-    <img class="work work-yarzin" src="images/yarzin-photoshoot.jpg" alt="Yarzin photoshoot">
-    <img class="work work-lodge" src="images/thelodge-logo.jpg" alt="The Lodge logo">
-    <img class="work work-logo" src="images/logo-1.png" alt="Logo">
-    <img class="work work-tartakover" src="images/tartakover-poster.jpg" alt="Tartakover poster">
   </main>
 
   <!-- The fly: sits on the name and flies away when the mouse touches it (moved by script.js) -->
   <img class="fly" src="images/fly.png" alt="" aria-hidden="true">
 
   <script src="script.js"></script>
+  <script src="home-carousel.js"></script>
 </body>
 </html>
