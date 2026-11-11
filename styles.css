@@ -664,33 +664,111 @@ button.photo-box {
 
 /* ===== Index page (projects.html) ===== */
 
-/* Thick black line between the projects (8px in Figma) */
-.index-line {
-  margin: 0;
-  border: none;
-  border-top: max(2px, calc(8 * var(--px))) solid var(--color-text);
+/* On the index page "About" and "Contact" sit near the edges
+   (Figma: middle of "About" at 221.5px, 12px from the top; "Contact" at 1203.5px, 23px from the top) */
+.index-page .top-bar-about {
+  top: calc(12 * var(--px));
+  left: calc(50% - 498.5 * var(--px));
 }
 
-/* One project: a link that turns red under the mouse.
-   Each one sets --padding-top and --height (in Figma pixels) */
-.index-item {
-  display: block;
-  height: calc(var(--height) * var(--px));
-  padding: calc(var(--padding-top) * var(--px)) calc(12 * var(--px)) 0 calc(36 * var(--px));
+.index-page .top-bar-contact {
+  top: calc(23 * var(--px));
+  left: calc(50% + 483.5 * var(--px));
+}
+
+/* The area under the big name (1032 - 505 Figma pixels high).
+   The categories and lists are placed in it by --x, --y and --w */
+.index-categories {
+  position: relative;
+  width: calc(1440 * var(--px));
+  height: calc(527 * var(--px));
+  margin: 0 auto;
+}
+
+.index-category,
+.index-list {
+  position: absolute;
+  left: calc(var(--x) * var(--px));
+  top: calc(var(--y) * var(--px));
+  width: calc(var(--w) * var(--px));
+  margin: 0;
   font-family: var(--font-display);
-  font-size: calc(70.824 * var(--px));
-  line-height: normal;
+  font-weight: var(--weight-display);
   color: var(--color-text);
+}
+
+/* A category: a button with no button look, the text on the left */
+.index-category {
+  padding: 0;
+  border: none;
+  background: none;
+  font-size: calc(70.82 * var(--px));
+  line-height: normal;
+  text-align: left;
+  cursor: pointer;
+}
+
+/* The list of projects under a category (hidden until the category is clicked) */
+.index-list {
+  padding: 0;
+  list-style: none;
+  font-size: calc(27 * var(--px));
+  line-height: normal;
+  text-align: center;
+}
+
+/* The Branding list has more space between the lines in Figma */
+.index-list.is-tall {
+  line-height: 2.1;
+}
+
+.index-list[hidden] {
+  display: none;
+}
+
+.index-list a {
+  color: inherit;
   text-decoration: none;
 }
 
-.index-item:hover {
+/* Red under the mouse: the categories and the projects */
+.index-category:hover,
+.index-list a:hover {
   color: var(--color-accent);
 }
 
-/* The first word ("Branding:") is bigger */
-.index-item-title {
-  font-size: calc(114.594 * var(--px));
+/* Phones: the categories one under the other, each list under its category */
+@media (max-width: 700px) {
+  .index-categories {
+    width: auto;
+    height: auto;
+    padding: 24px var(--space-page) 48px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .index-category,
+  .index-list {
+    position: static;
+    width: auto;
+    text-align: center;
+  }
+
+  .index-category {
+    font-size: 40px;
+  }
+
+  .index-list {
+    font-size: 18px;
+    margin-bottom: 12px;
+  }
+}
+
+/* When a link leads to a project on another page, leave room for "YP" above it */
+.figma-column > [id] {
+  scroll-margin-top: max(56px, calc(70 * var(--px)));
 }
 
 /* ===== About and contact page (about.html) ===== */

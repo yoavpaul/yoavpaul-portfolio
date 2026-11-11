@@ -21,31 +21,39 @@
     <h1 class="hero-title">YOAVPAUL</h1>
   </section>
 
-  <!-- The three categories, with thick lines between them. Each one leads to its page.
-       Sizes are in Figma pixels: space above the text, and the height of each one -->
-  <main>
-    <hr class="index-line" style="margin-top: calc(67 * var(--px));">
+  <!-- The three categories. Each one turns red under the mouse.
+       A click on a category opens (or closes) the list of its projects under it.
+       Each project in the list turns red under the mouse and leads to that project.
+       Places are in Figma pixels, measured from the bottom of the big name:
+       --x, --y = where it starts, --w = its width -->
+  <main class="index-categories">
+    <button class="index-category" aria-expanded="false" aria-controls="list-branding" style="--x: 82; --y: 79; --w: 352;">Branding</button>
+    <ul class="index-list is-tall" id="list-branding" style="--x: 82; --y: 234; --w: 282;" hidden>
+      <li><a href="branding.html#cinema-south-festival">Cinema South Festival</a></li>
+      <li><a href="branding.html#the-lodge">The Lodge</a></li>
+      <li><a href="branding.html#biss">biss</a></li>
+    </ul>
 
-    <a class="index-item" href="branding.html" style="--padding-top: 45; --height: 435;">
-      <span class="index-item-title">Branding:</span> Cinema South Festival,<br>The Lodge, biss
-    </a>
+    <button class="index-category" aria-expanded="false" aria-controls="list-photography" style="--x: 527; --y: 86; --w: 448;">Photography</button>
+    <ul class="index-list" id="list-photography" style="--x: 519; --y: 241; --w: 425;" hidden>
+      <li><a href="photography.html#dissociative-self">Dissociative self</a></li>
+      <li><a href="photography.html#four-noble-truths">Four noble truths before bedtime</a></li>
+      <li><a href="photography.html#monsters-under-the-bed">Monsters under the bed</a></li>
+      <li><a href="photography.html#megi-solar">Megi solar</a></li>
+      <li><a href="photography.html#bank-leumi">Bank Leumi - Local Treasure</a></li>
+    </ul>
 
-    <hr class="index-line">
-
-    <a class="index-item" href="photography.html" style="--padding-top: 5; --height: 487;">
-      <span class="index-item-title">Photography:</span> Dissociative self, Four noble truths before bedtime, Monsters under the bed, Megi solar
-    </a>
-
-    <hr class="index-line">
-
-    <a class="index-item" href="graphics.html" style="--padding-top: 44; --height: 404;">
-      <span class="index-item-title">Graphics:</span> football - joint, Tartoctober posters
-    </a>
+    <button class="index-category" aria-expanded="false" aria-controls="list-graphics" style="--x: 1068; --y: 93; --w: 316;">Graphics</button>
+    <ul class="index-list" id="list-graphics" style="--x: 1084; --y: 241; --w: 285;" hidden>
+      <li><a href="graphics.html#soccer-joint">football - joint</a></li>
+      <li><a href="graphics.html#im-here">Tartoctober posters</a></li>
+    </ul>
   </main>
 
   <!-- The fly: sits on the name and flies away when the mouse touches it (moved by script.js) -->
   <img class="fly" src="images/fly.png" alt="" aria-hidden="true">
 
   <script src="script.js"></script>
+  <script src="index-menu.js"></script>
 </body>
 </html>
