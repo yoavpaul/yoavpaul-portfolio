@@ -17,17 +17,26 @@
   </header>
 
   <!-- Big title. Sizes in Figma pixels -->
-  <header class="project-header" style="--title-top: 90; --title-size: 230; --header-height: 613;">
+  <header class="project-header" style="--title-top: 90; --title-size: 230; --header-height: 638;">
     <h1 class="project-title">Graphics</h1>
   </header>
 
   <!-- The works and their names. Sizes are in Figma pixels (see "Columns and rows" in styles.css) -->
   <main class="figma-column">
 
+    <!-- 1+1= : a video of the book's pages turning, with a see-through background.
+         Two copies of the video: .mov for Safari, .webm for Chrome and Firefox -->
+    <div id="one-plus-one" class="photo-box from-left" style="--left: 335; --width: 800; --height: 602;">
+      <video autoplay muted loop playsinline aria-label="1+1=, the pages turning">
+        <source src="images/one-plus-one-spreads.mov" type="video/quicktime">
+        <source src="images/one-plus-one-spreads.webm" type="video/webm">
+      </video>
+    </div>
+
     <!-- I'M HERE? (Tartoctober posters): a click on the poster opens a row with the 3 posters,
          like the photography page. A click on any poster of the open row closes it.
          --x, --y = where each poster starts, --w, --h = its size (Figma pixels) -->
-    <div id="im-here" class="photo-overlay from-left" style="--left: 345;">
+    <div id="im-here" class="photo-overlay from-left" style="--left: 344; --space-before: 162;">
       <div class="photo-overlay-row" style="--width: 2197;">
         <button class="photo-box" aria-expanded="false" style="--width: 694; --height: 982;">
           <img src="images/tartakover-poster.jpg" alt="I'M HERE? poster, red">
@@ -36,16 +45,24 @@
         <div style="--x: 1508; --y: 1; --w: 689; --h: 974;"><img src="images/tartakover-poster-green.jpg" alt="I'M HERE? poster, green" loading="lazy"></div>
       </div>
     </div>
-    <p class="photo-caption from-left" style="--left: 345; --width: 391; --height: 38; --space-before: 10;">I’M HERE?</p>
+    <p class="photo-caption from-left" style="--left: 344; --width: 391; --height: 38; --space-before: 30;">I’M HERE?</p>
 
-    <div id="soccer-joint" class="photo-box from-left" style="--left: 267; --width: 907; --height: 1296; --space-before: 119;">
+    <div id="soccer-joint" class="photo-box from-left" style="--left: 256; --width: 907; --height: 1296; --space-before: 135;">
       <img src="images/poster-joint-soccer.jpg" alt="Soccer - Joint poster">
     </div>
-    <p class="photo-caption from-left" style="--left: 267; --width: 391; --height: 38; --space-before: 6;">Soccer - Joint</p>
+    <p class="photo-caption from-left" style="--left: 256; --width: 391; --height: 38; --space-before: 20;">Soccer - Joint</p>
 
-    <!-- The notebook flipbook video (from the old site). The picture shows until the video loads -->
-    <div class="photo-box from-left" style="--left: 129; --width: 1183; --height: 789; --space-before: 122;">
-      <video src="images/football-joint-notebook.mp4" poster="images/football-joint-flipbook.png" autoplay muted loop playsinline aria-label="Soccer - Joint, notebook flipbook"></video>
+    <!-- The poster moving (a screen recording) -->
+    <div class="photo-box from-left" style="--left: 207; --width: 1005; --height: 589; --space-before: 135;">
+      <video src="images/soccer-joint-poster-motion.mp4" autoplay muted loop playsinline aria-label="Soccer - Joint, the poster moving"></video>
+    </div>
+
+    <!-- The notebook's pages turning, with a see-through background (.mov for Safari, .webm for the others) -->
+    <div class="photo-box from-left" style="--left: 277; --width: 886; --height: 667; --space-before: 193;">
+      <video autoplay muted loop playsinline aria-label="Soccer - Joint, the notebook's pages turning">
+        <source src="images/soccer-joint-spreads.mov" type="video/quicktime">
+        <source src="images/soccer-joint-spreads.webm" type="video/webm">
+      </video>
     </div>
   </main>
 

@@ -450,12 +450,12 @@ body {
 }
 
 /* ===== Over view on the home page: all the works moving in a row =====
-   Figma: a 1440 x 600 box, 985px from the top of the page, and "Random / Index" under it.
+   Figma: a 1440 x 600 box, 907px from the top of the page, and "Random / Index" under it.
    home-carousel.js moves the row and changes its order */
 
 .carousel-section {
-  margin-top: calc(249 * var(--px)); /* 985 - 736 */
-  padding-bottom: calc(92 * var(--px)); /* the page ends at 1773 */
+  margin-top: calc(171 * var(--px)); /* 907 - 736 */
+  padding-bottom: calc(201 * var(--px)); /* the page ends at 1773 */
 }
 
 /* The box: it scrolls sideways (no scrollbar, like in Figma) */
@@ -477,11 +477,11 @@ body {
   height: 100%;
 }
 
-/* "Random / Index" under the box (Figma: 61px under it, Editor Sans 24px).
+/* "Random / Index" under the box (Figma: 30px under it, Editor Sans 24px).
    Red under the mouse, and the one that is chosen stays red */
 .carousel-modes {
   position: relative;
-  margin: calc(61 * var(--px)) 0 0;
+  margin: calc(30 * var(--px)) 0 0;
   min-height: calc(35 * var(--px));
   font-family: var(--font-nav);
   font-size: var(--size-nav);
