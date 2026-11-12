@@ -247,8 +247,7 @@ body {
 .top-bar-left::before,
 .top-bar-name::before,
 .top-bar-contact::before,
-.top-bar-left:has(.is-current) > a::before,
-.top-bar-left:has(.is-current) > span::before {
+.top-bar-left:has(.is-current) > *::before {
   content: "";
   position: absolute;
   top: calc(var(--move-y) - var(--pad-y));
@@ -276,14 +275,14 @@ body {
   --move-y: var(--left-move-y);
 }
 
-.top-bar-left:has(.is-current) > a::before {
+.top-bar-left:has(.is-current) > :not(.is-current)::before {
   --pad-x: var(--index-pad-x);
   --pad-y: var(--index-pad-y);
   --move-x: var(--index-move-x);
   --move-y: var(--index-move-y);
 }
 
-.top-bar-left:has(.is-current) > span::before {
+.top-bar-left:has(.is-current) > .is-current::before {
   --pad-x: var(--page-pad-x);
   --pad-y: var(--page-pad-y);
   --move-x: var(--page-move-x);
@@ -331,22 +330,38 @@ body {
   display: none;
 }
 
-.top-bar-left:has(.is-current) > a,
-.top-bar-left:has(.is-current) > span {
+.top-bar-left:has(.is-current) > * {
   position: relative;
   z-index: 0;
-  display: inline-block;
 }
 
 /* The menu on the project pages: "Index", then Branding, Photography and Graphics, one under the other
    (Figma: its middle at 209px, 27px between the lines). Each line goes a little lower, so the strips don't touch */
 .top-bar-left:has(.is-current) {
   left: calc(50% - 511 * var(--px));
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   line-height: 1.125;
 }
 
-.top-bar-left:has(.is-current) > :is(a, span):not(:first-child) {
+.top-bar-left:has(.is-current) > :not(:first-child) {
   margin-top: var(--bar-line-gap);
+}
+
+/* "Index" is a button: a click folds the menu (top-bar-menu.js). No button look */
+.top-bar-index {
+  padding: 0;
+  border: none;
+  background: none;
+  font: inherit;
+  color: inherit;
+  cursor: pointer;
+}
+
+/* The folded menu: only "Index" and the page you are on */
+.top-bar-left.is-folded .menu-other {
+  display: none;
 }
 
 /* On the project pages "Contact" is a little more to the right (Figma: its middle at 1202.5px) */

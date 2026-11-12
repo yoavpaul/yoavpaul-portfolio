@@ -9,7 +9,7 @@
   // The words of the bar that can have a strip
   const barWords = () => [
     ...document.querySelectorAll(".top-bar-left:not(:has(.is-current))"),
-    ...document.querySelectorAll(".top-bar-left:has(.is-current) > a, .top-bar-left:has(.is-current) > span"),
+    ...document.querySelectorAll(".top-bar-left:has(.is-current) > *"),
     ...document.querySelectorAll(".top-bar-name, .top-bar-contact"),
   ];
 

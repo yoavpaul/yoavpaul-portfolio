@@ -8,9 +8,10 @@
 </head>
 <body class="photography-page">
   <!-- Top bar (stays at the top while scrolling, with a soft blur behind it):
-       on the left the menu (the page you are on in red), "YP" in the middle (leads home), Contact on the right -->
+       on the left the menu (the page you are on in red; a click on "Index" folds it, see top-bar-menu.js),
+       "YP" in the middle (leads home), Contact on the right -->
   <header class="top-bar">
-    <p class="top-bar-left"><a class="page-link" href="projects.html">Index</a><br><a class="page-link" href="branding.html">Branding</a><br><span class="is-current">Photography</span><br><a class="page-link" href="graphics.html">Graphics</a></p>
+    <p class="top-bar-left"><button class="page-link top-bar-index" type="button" aria-expanded="true">Index</button><a class="page-link menu-other" href="branding.html">Branding</a><span class="is-current">Photography</span><a class="page-link menu-other" href="graphics.html">Graphics</a></p>
     <a class="top-bar-name" href="index.html" aria-label="Yoav Paul, home page">YP</a>
     <a class="top-bar-contact" href="about.html">Contact</a>
   </header>
@@ -120,6 +121,7 @@
 
   <script src="photo-overlays.js"></script>
   <script src="photography-texts.js"></script>
+  <script src="top-bar-menu.js"></script>
   <script src="top-bar-blur.js"></script>
 </body>
 </html>
