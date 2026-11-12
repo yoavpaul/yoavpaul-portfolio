@@ -552,6 +552,7 @@ body {
    style="--gap: 11"            = 11 Figma pixels between the items of a row */
 
 .figma-column {
+  position: relative; /* the texts about the projects are placed inside it */
   width: calc(1440 * var(--px)); /* the width of the page in Figma */
   margin: 0 auto;
   display: flex;
@@ -692,7 +693,7 @@ button.photo-box {
 }
 
 .photo-overlay.is-open .photo-overlay-row {
-  width: calc(var(--width) * var(--px));
+  width: calc(var(--width) * var(--px) * var(--row-scale, 1));
 }
 
 /* The extra photos: hidden until the row opens.
@@ -701,10 +702,10 @@ button.photo-box {
   display: none;
   position: absolute;
   cursor: pointer; /* a click closes the row */
-  left: calc(var(--x) * var(--px));
-  top: calc(var(--y, 0) * var(--px));
-  width: calc(var(--w) * var(--px));
-  height: calc(var(--h) * var(--px));
+  left: calc(var(--x) * var(--px) * var(--row-scale, 1));
+  top: calc(var(--y, 0) * var(--px) * var(--row-scale, 1));
+  width: calc(var(--w) * var(--px) * var(--row-scale, 1));
+  height: calc(var(--h) * var(--px) * var(--row-scale, 1));
   overflow: hidden;
 }
 
@@ -712,33 +713,130 @@ button.photo-box {
   display: block;
 }
 
-/* Rows without places from Figma (branding page): the works stand side by side,
-   all --height Figma pixels high, with --gap between them. Each work keeps its own shape */
-.photo-overlay-row.is-flowing {
-  display: flex;
-  gap: calc(var(--gap) * var(--px));
-  height: calc(var(--height) * var(--px));
+/* ===== Photography page: the text layout =====
+   When a row is open, photography-texts.js adds "is-reading" to the page.
+   Then every item uses its "-open" sizes and places (from the Figma frame "Photography option 2 with text"):
+   --left-open, --space-open, --width-open, --height-open, and --scale-open for the rows.
+   The text about the open project shows on the left. (Only on computers: phones keep their layout) */
+
+/* A caption that shows only in the text layout ("Dissociative self") */
+.photo-caption.only-open {
+  display: none;
 }
 
-.photo-overlay.is-open .photo-overlay-row.is-flowing {
-  width: max-content;
+/* The caption of the open project hides (its name is in the text), but keeps its place */
+.photo-caption.is-hidden {
+  visibility: hidden;
 }
 
-.photo-overlay-row.is-flowing > div {
-  position: static;
-  flex: none;
-  width: auto;
-  height: 100%;
+@media (min-width: 701px) {
+  body.is-reading .project-header {
+    height: calc(var(--header-height-open, var(--header-height)) * var(--px));
+  }
+
+  body.is-reading .figma-column > * {
+    margin-top: calc(var(--space-open, var(--space-before, 0)) * var(--px));
+  }
+
+  body.is-reading .figma-column > .from-left {
+    margin-left: calc(var(--left-open, var(--left)) * var(--px));
+  }
+
+  body.is-reading .photo-box {
+    width: calc(var(--width-open, var(--width)) * var(--px));
+    aspect-ratio: var(--width-open, var(--width)) / var(--height-open, var(--height));
+  }
+
+  body.is-reading .photo-overlay {
+    width: calc((1440 - var(--left-open, var(--left))) * var(--px));
+    --row-scale: var(--scale-open, 1);
+  }
+
+  body.is-reading .photo-caption.only-open {
+    display: block;
+  }
 }
 
-.photo-overlay.is-open .photo-overlay-row.is-flowing > div {
-  display: block;
+/* The text about a project (Figma: 15px from the left, 450px wide, Editor Sans) */
+.project-text {
+  position: absolute;
+  left: calc(15 * var(--px));
+  width: calc(450 * var(--px));
+  margin: 0;
+  font-family: var(--font-nav);
+  color: var(--color-text);
 }
 
-.photo-overlay-row.is-flowing > div img,
-.photo-overlay-row.is-flowing > div video {
-  width: auto;
-  height: 100%;
+.project-text[hidden] {
+  display: none;
+}
+
+/* Name (Bold 28px) and year (Medium) */
+.project-text h2 {
+  margin: 0 0 calc(30 * var(--px));
+  font-size: calc(28 * var(--px));
+  font-weight: 700;
+  line-height: normal;
+}
+
+.project-text-year {
+  margin-left: 0.4em;
+  font-weight: 500;
+}
+
+/* The text: 25px */
+.project-text p {
+  margin: 0;
+  font-size: calc(25 * var(--px));
+  line-height: calc(26 * var(--px));
+}
+
+/* The second paragraph starts a little to the right, like in Figma */
+.project-text .is-indented {
+  text-indent: 1em;
+}
+
+/* An empty line above */
+.project-text .has-space,
+.project-text .project-text-quote {
+  margin-top: calc(30 * var(--px));
+}
+
+/* The quote: Semibold 19px */
+.project-text .project-text-quote {
+  font-size: calc(19 * var(--px));
+  font-weight: 600;
+}
+
+/* Materials and thanks: 20px */
+.project-text .project-text-small {
+  font-size: calc(20 * var(--px));
+}
+
+/* Phones: the text comes under the photo, in the page flow, big enough to read */
+@media (max-width: 700px) {
+  .project-text {
+    position: static;
+    width: auto;
+    margin: 0 var(--space-page) 24px;
+  }
+
+  .project-text h2 {
+    margin-bottom: 8px;
+    font-size: 17px;
+  }
+
+  .project-text p,
+  .project-text .project-text-quote,
+  .project-text .project-text-small {
+    font-size: 14px;
+    line-height: 1.35;
+  }
+
+  .project-text .has-space,
+  .project-text .project-text-quote {
+    margin-top: 10px;
+  }
 }
 
 /* ===== Project panels (branding page): the whole project on one screen =====
@@ -771,8 +869,18 @@ body.has-open-panel {
   overflow: hidden;
 }
 
-body.has-open-panel .top-bar {
+body.has-dark-panel .top-bar {
   color: #fff;
+}
+
+/* A light panel (like biss): white, with black texts */
+.project-panel.is-light {
+  --color-panel: #ffffff;
+}
+
+.project-panel.is-light .panel-text,
+.project-panel.is-light .panel-about {
+  color: var(--color-text);
 }
 
 /* The whole width of the project, as high as the screen */
@@ -794,7 +902,8 @@ body.has-open-panel .top-bar {
   cursor: pointer;
 }
 
-.panel-item img {
+.panel-item img,
+.panel-item video {
   display: block;
   width: 100%;
   height: 100%;
@@ -849,11 +958,17 @@ body.has-open-panel .top-bar {
   color: #fff;
 }
 
+/* The name. Each panel can set its line height (--title-line) and the empty space under it (--title-space) */
 .panel-about h2 {
-  margin: 0 0 calc(28 * 1.96 * var(--s)); /* an empty line under it, like in Figma */
+  margin: 0 0 calc(var(--title-space, 54.88) * var(--s)); /* an empty line under it, like in Figma */
   font-size: calc(30 * var(--s));
   font-weight: 700;
   line-height: 1.96;
+}
+
+/* Panels that set --title-line (in Figma pixels) use it instead */
+.panel-about[style*="--title-line"] h2 {
+  line-height: calc(var(--title-line) * var(--s));
 }
 
 .panel-about p {
@@ -862,8 +977,19 @@ body.has-open-panel .top-bar {
   line-height: calc(36 * var(--s));
 }
 
-.panel-about .panel-about-kind {
+.panel-about .panel-about-kind,
+.panel-about .is-medium {
   font-weight: 500;
+}
+
+/* Credits: 20px */
+.panel-about .panel-about-small {
+  font-size: calc(20 * var(--s));
+}
+
+/* An empty line above */
+.panel-about .has-space {
+  margin-top: calc(49 * var(--s));
 }
 
 /* The second paragraph starts a little to the right, like in Figma */

@@ -37,64 +37,16 @@
     </button>
     <p class="photo-caption from-left" style="--left: 205; --width: 521; --height: 26; --space-before: 20;">The Lodge x Core De Roy</p>
 
-    <!-- ===== Cinema South Festival =====
-         Text for later: "The inspiration for the graphic language of this project is the road to the festival.
-         I developed a complete visual identity for the festival, including a graphic language, logo, poster series,
-         daily posters, motion poster, motion logo, signage, merchandise, and website.
-         Created as part of the Cultural Branding course, lecturer Eyal Zaken, 2026"
-         TODO: sff-logo.png is a screenshot of the logo. Replace it with the better file when it is ready
-         (same name, or change the name below) -->
-    <div id="cinema-south-festival" class="photo-overlay from-left" style="--left: 205; --space-before: 40;">
-      <div class="photo-overlay-row is-flowing" style="--height: 818; --gap: 35;">
-        <button class="photo-box" aria-expanded="false" style="--width: 795; --height: 818;">
-          <img src="images/sff-logo.png" alt="Cinema South Festival logo">
-        </button>
-        <div><video src="images/sff-motion-logo.mp4" muted loop playsinline preload="none" aria-label="Motion logo"></video></div>
-        <div><video src="images/motion-poster.mp4" muted loop playsinline preload="none" aria-label="Motion poster"></video></div>
-        <div><img src="images/sff-poster-bus-stop.jpg" alt="Main poster at a bus stop" loading="lazy"></div>
-        <div><img src="images/sff-daily-poster-1.jpg" alt="Daily poster 1" loading="lazy"></div>
-        <div><img src="images/sff-daily-poster-2.jpg" alt="Daily poster 2" loading="lazy"></div>
-        <div><img src="images/sff-daily-poster-3.jpg" alt="Daily poster 3" loading="lazy"></div>
-        <div><img src="images/sff-daily-poster-4.jpg" alt="Daily poster 4" loading="lazy"></div>
-        <div><img src="images/sff-daily-poster-5.jpg" alt="Daily poster 5" loading="lazy"></div>
-        <div><img src="images/sff-daily-poster-6.jpg" alt="Daily poster 6" loading="lazy"></div>
-        <div><img src="images/sff-daily-poster-7.jpg" alt="Daily poster 7" loading="lazy"></div>
-        <div><img src="images/sff-posters-wall.jpg" alt="Posters on a wall" loading="lazy"></div>
-        <div><img src="images/sff-posters-fence.jpg" alt="Posters on a fence" loading="lazy"></div>
-        <div><img src="images/creator-tag.jpg" alt="Creator tag" loading="lazy"></div>
-        <div><img src="images/teamtag.jpg" alt="Team tag" loading="lazy"></div>
-        <div><img src="images/sff-lanyard.jpg" alt="Lanyard" loading="lazy"></div>
-        <div><img src="images/sff-signage.jpg" alt="Signage" loading="lazy"></div>
-        <div><img src="images/vest.jpg" alt="Vest" loading="lazy"></div>
-        <div><img src="images/sff-vest-back.jpg" alt="Vest, back" loading="lazy"></div>
-        <div><img src="images/sff-vest-full.jpg" alt="Vest, full look" loading="lazy"></div>
-        <div><img src="images/sff-bag-side.jpg" alt="Side bag, worn" loading="lazy"></div>
-        <div><img src="images/sidebag.jpg" alt="Side bag" loading="lazy"></div>
-        <div><img src="images/sff-bag-detail.jpg" alt="Side bag, detail" loading="lazy"></div>
-        <div><img src="images/sff-keychain-straps.jpg" alt="Keychain straps" loading="lazy"></div>
-        <div><img src="images/sff-pants.jpg" alt="Pants with reflective tape" loading="lazy"></div>
-        <div><img src="images/sff-keychains.jpg" alt="Keychains" loading="lazy"></div>
-        <div><img src="images/sff-hat-1.jpg" alt="Bucket hat" loading="lazy"></div>
-        <div><img src="images/sff-hat-2.jpg" alt="Bucket hat, close up" loading="lazy"></div>
-      </div>
-    </div>
+    <!-- ===== Cinema South Festival: a click opens the whole project (see "sff-panel" at the bottom) ===== -->
+    <button id="cinema-south-festival" class="photo-box from-left" type="button" data-panel="sff-panel" aria-haspopup="dialog" style="--left: 205; --width: 795; --height: 818; --space-before: 40;">
+      <img src="images/sff-logo.png" alt="Cinema South Festival logo">
+    </button>
     <p class="photo-caption from-left" style="--left: 205; --width: 521; --height: 26; --space-before: 20;">Cinema South Festival</p>
 
-    <!-- ===== biss ===== -->
-    <div id="biss" class="photo-overlay from-left" style="--left: 205; --space-before: 40;">
-      <div class="photo-overlay-row is-flowing" style="--height: 818; --gap: 35;">
-        <button class="photo-box" aria-expanded="false" style="--width: 821; --height: 818;">
-          <img src="images/logo-1.png" alt="biss logo">
-        </button>
-        <div><img src="images/biss-product-boxes.png" alt="biss product boxes" loading="lazy"></div>
-        <div><img src="images/biss-gum-boxes.png" alt="biss gum boxes" loading="lazy"></div>
-        <div><img src="images/biss-chews-wisely.png" alt="biss Chews Wisely gum boxes" loading="lazy"></div>
-        <div><img src="images/biss-product-display.png" alt="biss product display" loading="lazy"></div>
-        <div><img src="images/biss-display-booth.png" alt="biss display booth" loading="lazy"></div>
-        <div><img src="images/biss-underwear-rack.png" alt="biss underwear rack" loading="lazy"></div>
-        <div><video src="images/biss-instagram.mp4" muted loop playsinline preload="none" aria-label="biss Instagram"></video></div>
-      </div>
-    </div>
+    <!-- ===== biss: a click opens the whole project (see "biss-panel" at the bottom) ===== -->
+    <button id="biss" class="photo-box from-left" type="button" data-panel="biss-panel" aria-haspopup="dialog" style="--left: 205; --width: 821; --height: 818; --space-before: 40;">
+      <img src="images/logo-1.png" alt="biss logo">
+    </button>
     <p class="photo-caption from-left" style="--left: 205; --width: 521; --height: 26; --space-before: 20;">biss</p>
   </main>
 
@@ -139,7 +91,76 @@
     </div>
   </div>
 
-  <script src="photo-overlays.js"></script>
+  <!-- ===== Cinema South Festival: the whole project on one screen (Figma frame "South film festival") =====
+       It is 16317 wide, like the frame -->
+  <div class="project-panel" id="sff-panel" role="dialog" aria-label="Cinema South Festival" tabindex="-1" hidden>
+    <div class="project-panel-stage" style="--width: 16317;">
+      <div class="panel-about" style="--x: 962; --y: 272; --w: 478; --title-line: 36; --title-space: 54.88;">
+        <h2>Cinema South Film Festival</h2>
+        <p class="panel-about-kind">Brand Identity &amp; Motion Design</p>
+        <p class="is-medium">A visual identity project for the Cinema South Film Festival. Inspired by the journey to the festival, road markings, and signage, the identity uses a system of graphic strips that also reference cinematic film reels. Reflective elements connect the visual language of roads and cinema through their shared relationship with darkness and light. The identity was applied across a logo, festival opening sequence, motion posters, film posters, signage, badges, staff vests, and merchandise.</p>
+        <p class="panel-about-small is-medium">led by Eyal Zaken</p>
+      </div>
+      <p class="panel-text panel-label" style="--x: 822; --y: 271; --w: 140;">Logo</p>
+      <div class="panel-item" style="--x: 82; --y: 317; --w: 795; --h: 292;"><img class="is-cropped" style="--img-top: -147.93; --img-left: -16.01; --img-width: 132.07; --img-height: 359.56;" src="images/sff-logo-white.png" alt="Cinema South Festival logo" loading="lazy"></div>
+      <p class="panel-text panel-label" style="--x: 1755.5; --y: 145; --w: 169;">Opening Transition</p>
+      <div class="panel-item" style="--x: 1675; --y: 203; --w: 1271; --h: 715;"><video src="images/sff-motion-logo.mp4" muted loop playsinline preload="none" aria-label="Festival opening"></video></div>
+      <p class="panel-text panel-label" style="--x: 3177.5; --y: 86; --w: 169;">Motion Poster</p>
+      <div class="panel-item" style="--x: 3118; --y: 144; --w: 591; --h: 833;"><video src="images/motion-poster.mp4" muted loop playsinline preload="none" aria-label="Motion poster"></video></div>
+      <div class="panel-item" style="--x: 3764; --y: 144; --w: 1215; --h: 810;"><img src="images/sff-poster-bus-stop.jpg" alt="Main poster at a bus stop" loading="lazy"></div>
+      <p class="panel-text panel-label" style="--x: 5166.5; --y: 193; --w: 169;">Movies Posters</p>
+      <div class="panel-item" style="--x: 5105; --y: 241; --w: 438.526; --h: 613.876;"><img src="images/sff-daily-poster-1.jpg" alt="Movie poster 1" loading="lazy"></div>
+      <div class="panel-item" style="--x: 5553.76; --y: 241; --w: 438.614; --h: 614;"><img src="images/sff-daily-poster-2.jpg" alt="Movie poster 2" loading="lazy"></div>
+      <div class="panel-item" style="--x: 6003.47; --y: 241; --w: 438.526; --h: 613.876;"><img src="images/sff-daily-poster-3.jpg" alt="Movie poster 3" loading="lazy"></div>
+      <div class="panel-item" style="--x: 6453.08; --y: 241; --w: 438.526; --h: 613.876;"><img src="images/sff-daily-poster-4.jpg" alt="Movie poster 4" loading="lazy"></div>
+      <div class="panel-item" style="--x: 6901; --y: 240; --w: 438.526; --h: 613.876;"><img src="images/sff-daily-poster-5.jpg" alt="Movie poster 5" loading="lazy"></div>
+      <div class="panel-item" style="--x: 7349.76; --y: 240; --w: 438.526; --h: 613.876;"><img src="images/sff-daily-poster-6.jpg" alt="Movie poster 6" loading="lazy"></div>
+      <div class="panel-item" style="--x: 7797.5; --y: 240.12; --w: 438.526; --h: 613.876;"><img src="images/sff-daily-poster-7.jpg" alt="Movie poster 7" loading="lazy"></div>
+      <div class="panel-item" style="--x: 8410; --y: 76; --w: 1376; --h: 917;"><img src="images/sff-posters-fence.jpg" alt="Posters on a fence" loading="lazy"></div>
+      <p class="panel-text panel-label is-left" style="--x: 9927; --y: 419; --w: 169;">Signs</p>
+      <div class="panel-item" style="--x: 9927; --y: 473; --w: 695; --h: 520;"><img src="images/sff-lanyard.jpg" alt="Reflective strip on the pavement" loading="lazy"></div>
+      <p class="panel-text panel-label is-left" style="--x: 11091; --y: 118; --w: 169;">Tags</p>
+      <div class="panel-item" style="--x: 10645; --y: 0; --w: 589; --h: 736;"><img src="images/sff-tag-creator.png" alt="Creator tag" loading="lazy"></div>
+      <div class="panel-item" style="--x: 10987; --y: 0; --w: 590; --h: 738;"><img src="images/sff-tag-staff.png" alt="Staff tag" loading="lazy"></div>
+      <p class="panel-text panel-label is-left" style="--x: 11644; --y: 228; --w: 169;">Vest</p>
+      <div class="panel-item" style="--x: 11646; --y: 282; --w: 523; --h: 639;"><img class="is-cropped" style="--img-top: -115.57; --img-left: -112.19; --img-width: 300; --img-height: 367.64;" src="images/sff-vest-full.jpg" alt="Vest" loading="lazy"></div>
+      <div class="panel-item" style="--x: 12206; --y: 283; --w: 426; --h: 638;"><img src="images/sff-vest-back.jpg" alt="Vest, back" loading="lazy"></div>
+      <p class="panel-text panel-label is-left" style="--x: 12691; --y: 228; --w: 169;">Side Bag</p>
+      <div class="panel-item" style="--x: 12691; --y: 280; --w: 427; --h: 641;"><img class="is-cropped" style="--img-top: -27.69; --img-left: -30.81; --img-width: 171; --img-height: 142.42;" src="images/sidebag.jpg" alt="Side bag" loading="lazy"></div>
+      <div class="panel-item" style="--x: 13140; --y: 280; --w: 427; --h: 641;"><img src="images/sff-bag-worn.jpg" alt="Side bag, worn" loading="lazy"></div>
+      <p class="panel-text panel-label is-left" style="--x: 13589; --y: 228; --w: 169;">Reflective Hat</p>
+      <div class="panel-item" style="--x: 13592; --y: 283; --w: 481; --h: 642;"><img src="images/sff-hat-2.jpg" alt="Reflective hat" loading="lazy"></div>
+      <div class="panel-item" style="--x: 14091; --y: 283; --w: 482; --h: 642;"><img src="images/sff-hat-1.jpg" alt="Reflective hat, worn" loading="lazy"></div>
+      <p class="panel-text panel-label is-left" style="--x: 14644; --y: 228; --w: 206;">Reflective Key Chain</p>
+      <div class="panel-item" style="--x: 14644; --y: 280; --w: 515; --h: 644;"><img src="images/sff-pants.jpg" alt="Reflective strip" loading="lazy"></div>
+      <div class="panel-item" style="--x: 15205; --y: 283; --w: 514; --h: 642;"><img src="images/sff-keychain-straps.jpg" alt="Reflective key chains" loading="lazy"></div>
+      <div class="panel-item" style="--x: 15722; --y: 283; --w: 513; --h: 642;"><img src="images/sff-keychains.jpg" alt="Key chains" loading="lazy"></div>
+    </div>
+  </div>
+
+  <!-- ===== biss: the whole project on one screen (Figma frame "biss"), on white =====
+       The frame is 16712 wide, but its last work ends at 10183, so the panel ends a little after it -->
+  <div class="project-panel is-light" id="biss-panel" role="dialog" aria-label="biss" tabindex="-1" hidden>
+    <div class="project-panel-stage" style="--width: 10288;">
+      <p class="panel-text panel-label" style="--x: 621; --y: 281; --w: 140;">Logo</p>
+      <div class="panel-item" style="--x: 168; --y: 256; --w: 627; --h: 625;"><img src="images/logo-1.png" alt="biss logo" loading="lazy"></div>
+      <div class="panel-about" style="--x: 962; --y: 232; --w: 478; --title-line: 36; --title-space: 49;">
+        <h2>biss</h2>
+        <p>Brand Identity &amp; Packaging Design</p>
+        <p>A branding project for a conceptual, swallowable chewing gum designed to promote oral health while reducing environmental waste. Created for a young, environmentally conscious audience. the visual identity combines pharmaceutical-inspired design with playful typography, bold colors, and a lighthearted approach.</p>
+        <p class="is-indented">The branding balances health, sustainability, fun and reimagining chewing gum as a functional everyday product.</p>
+        <p class="panel-about-small has-space">Created in collaboration with Noga Reshef, under the guidance of the late Adlai Stock.</p>
+      </div>
+      <div class="panel-item" style="--x: 1883; --y: 137; --w: 1193; --h: 796;"><img src="images/biss-display-booth.png" alt="biss display booth" loading="lazy"></div>
+      <div class="panel-item" style="--x: 3146; --y: 137; --w: 1193; --h: 796;"><img src="images/biss-product-boxes.png" alt="biss product boxes" loading="lazy"></div>
+      <div class="panel-item" style="--x: 4409; --y: 137; --w: 1113; --h: 796;"><img src="images/biss-gum-boxes.png" alt="biss gum boxes" loading="lazy"></div>
+      <div class="panel-item" style="--x: 5592; --y: 134; --w: 1193; --h: 796;"><img src="images/biss-chews-wisely.png" alt="biss Chews Wisely gum boxes" loading="lazy"></div>
+      <div class="panel-item" style="--x: 6855; --y: 125; --w: 1222; --h: 796;"><img src="images/biss-product-display.png" alt="biss product display" loading="lazy"></div>
+      <div class="panel-item" style="--x: 8147; --y: 137; --w: 1192; --h: 796;"><img src="images/biss-underwear-rack.png" alt="biss underwear rack" loading="lazy"></div>
+      <div class="panel-item" style="--x: 9736; --y: 81; --w: 447; --h: 907;"><video src="images/biss-instagram.mp4" muted loop playsinline preload="none" aria-label="biss Instagram"></video></div>
+    </div>
+  </div>
+
   <script src="project-panels.js"></script>
   <script src="top-bar-blur.js"></script>
 </body>
