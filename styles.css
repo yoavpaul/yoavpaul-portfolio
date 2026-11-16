@@ -1034,18 +1034,14 @@ body.has-dark-panel .top-bar {
   cursor: pointer;
 }
 
-/* The list of projects under a category (hidden until the category is clicked) */
+/* The list of projects under a category (hidden until the category is clicked).
+   Figma: 27px, lines 50px apart (the same in all three lists) */
 .index-list {
   padding: 0;
   list-style: none;
   font-size: calc(27 * var(--px));
-  line-height: normal;
+  line-height: calc(50 * var(--px));
   text-align: center;
-}
-
-/* The Branding list has more space between the lines in Figma */
-.index-list.is-tall {
-  line-height: 2.1;
 }
 
 .index-list[hidden] {
@@ -1120,12 +1116,12 @@ body.has-dark-panel .top-bar {
 
 /* "Copy" next to the email / phone: shows under the mouse (computers),
    or after a tap (phones, contact-copy.js adds "is-showing-copy").
-   Its holder starts right at the end of the words, so the mouse can move to it without it closing */
+   Its holder starts right at the end of the words, so the mouse can move to it without it closing.
+   The holder has the same line as the email / phone, so "Copy" sits on the same line (baseline) as them */
 .copy-holder {
   position: absolute;
-  top: 50%;
+  top: 0;
   left: 100%;
-  transform: translateY(-50%);
   padding-left: calc(20 * var(--px));
   display: none;
 }
@@ -1136,13 +1132,17 @@ body.has-dark-panel .top-bar {
   display: block;
 }
 
+/* Just the word, no frame, half the size of the email / phone */
 .copy-button {
-  padding: 0.2em 0.6em;
-  border: 1px solid currentColor;
+  -webkit-appearance: none; /* no button look in Safari */
+  appearance: none;
+  padding: 0;
+  border: none;
   border-radius: 0;
-  background: var(--color-background);
+  background: none;
+  vertical-align: baseline;
   font-family: var(--font-nav);
-  font-size: var(--size-nav);
+  font-size: 0.5em;
   font-weight: 500;
   line-height: normal;
   color: var(--color-text);

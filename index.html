@@ -28,7 +28,7 @@
   <!-- Over view: all the works move slowly from left to right, in a loop (home-carousel.js).
        It stops under the mouse, and "Random / Index" under it shows the category and name of the work,
        and it can be scrolled sideways (trackpad, mouse wheel or finger). A click on a work leads to it.
-       "Random / Index" under it changes the order:
+       "Random / Index" under it changes the order (the page always starts in Index):
        Random = the order here (the works take turns: branding, photography, graphics...),
        Index = by category, like the lists on the index page (data-index = the place in that order).
        To add a work, add one more line like these (--ratio = its width / height) -->
@@ -45,14 +45,14 @@
       <a class="carousel-item" href="photography.html#megi-solar" data-name="Megi Solar" data-category="Photography" data-index="7" style="--ratio: 845.913 / 1216;"><img src="images/photo-yoavp1150.webp" width="1670" height="2400" alt="Megi Solar"></a>
       <a class="carousel-item" href="branding.html#biss" data-name="biss" data-category="Branding" data-index="3" style="--ratio: 2560 / 2551;"><img src="images/logo-1.webp" width="2400" height="2392" alt="biss"></a>
       <a class="carousel-item" href="photography.html#bank-leumi" data-name="Bank Leumi - Local Treasure" data-category="Photography" data-index="8" style="--ratio: 1034 / 686;"><img src="images/photo-illustration-14.webp" width="2400" height="1591" alt="Bank Leumi - Local Treasure"></a>
-      <a class="carousel-item" href="graphics.html#one-plus-one" data-name="1+1=" data-category="Graphics" data-index="11" style="--ratio: 2560 / 1838;"><img src="images/one-plus-one-cover.webp" width="2400" height="1723" alt="1+1="></a>
+      <a class="carousel-item" href="graphics.html#one-plus-one" data-name="1+1=" data-category="Graphics" data-index="11" style="--ratio: 600 / 864;"><img class="is-cropped" style="--img-top: -8.56; --img-left: -63.33; --img-width: 226.67; --img-height: 118.52;" src="images/one-plus-one-page-00.webp" width="1360" height="1024" alt="1+1="></a>
       </div>
     </div>
     <!-- Under the row: "Random / Index". Under the mouse it turns into the category (red) / the name of the work -->
     <p class="carousel-modes">
       <span class="carousel-switch">
-        <button class="carousel-mode is-active" type="button" data-mode="random" aria-pressed="true">Random</button> /
-        <button class="carousel-mode" type="button" data-mode="index" aria-pressed="false">Index</button>
+        <button class="carousel-mode" type="button" data-mode="random" aria-pressed="false">Random</button> /
+        <button class="carousel-mode is-active" type="button" data-mode="index" aria-pressed="true">Index</button>
       </span>
       <span class="carousel-name" aria-hidden="true"><span class="carousel-category"></span> / <span class="carousel-work"></span></span>
     </p>

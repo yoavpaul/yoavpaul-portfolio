@@ -141,6 +141,7 @@
 
 .index-list {
   font-size: 18px;
+  line-height: 1.85; /* like Figma: 50px lines for 27px text */
   margin-bottom: 12px;
 }
 

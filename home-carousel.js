@@ -154,6 +154,6 @@ for (const button of modeButtons) {
   });
 }
 
-// --- Start ---
-fillRow(works);
+// --- Start (always in Index order) ---
+fillRow(sortedByIndex());
 requestAnimationFrame(step);
