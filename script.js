@@ -5,7 +5,7 @@
 // A click close to the fly also counts, and near the fly the mouse turns into a fly swatter
 // (see "Fly swatter" in styles.css). To keep it a challenge, a flying fly sometimes
 // feels the swatter coming and darts away.
-// Every squashed fly looks a little different: its own splat and its own squashed shape.
+// Every squashed fly looks a little different: its own splat and its own crushed shape.
 //
 // On the home and index pages the fly rests on the name until the mouse touches it,
 // and it only flies above the works (it never goes over them).
@@ -128,7 +128,7 @@ function draw() {
   const drawX = x + randomBetween(-buzz, buzz);
   const drawY = y + randomBetween(-buzz, buzz);
 
-  // A squashed fly is wider, flatter and a little twisted (different for every fly, see squashFly)
+  // A squashed fly is pressed a little flatter and turned (different for every fly, see squashFly)
   const squash = isAlive ? "" : squashShape;
 
   // +90 because the fly's head points up in the image
@@ -161,11 +161,11 @@ function squashFly() {
   fly.classList.remove("is-flying");
   fly.classList.add("is-squashed");
 
-  // Flatter or wider, a little turned and slanted: never the same twice
+  // A little flatter and turned, and crushed out of shape: never the same twice
   squashShape =
-    ` rotate(${randomBetween(-25, 25)}deg)` +
-    ` skewX(${randomBetween(-18, 18)}deg)` +
-    ` scale(${randomBetween(1.15, 1.45)}, ${randomBetween(0.35, 0.6)})`;
+    ` rotate(${randomBetween(-30, 30)}deg)` +
+    ` scale(${randomBetween(1.05, 1.25)}, ${randomBetween(0.7, 0.9)})`;
+  fly.style.filter = `url(#${makeCrushFilter()}) brightness(0.75) saturate(0.85)`;
 
   const splat = makeSplat();
   splat.style.left = x + "px";
@@ -177,8 +177,8 @@ function squashFly() {
 }
 
 // A splat drawn at random (SVG), so every one is different:
-// an uneven blob with a darker middle, a little yellow-brown from the fly's inside,
-// and drops and short streaks that flew out to the sides
+// an uneven red blob, and drops and short streaks that flew out to the sides.
+// Its color is the red of the site (.splat in styles.css)
 const SVG = "http://www.w3.org/2000/svg";
 
 function svgElement(name, attributes) {
@@ -213,23 +213,10 @@ function makeSplat() {
   const svg = svgElement("svg", { viewBox: "-100 -100 200 200", "aria-hidden": "true" });
   svg.classList.add("splat");
   // A different size for every splat (compared to the fly)
-  svg.style.setProperty("--splat-size", randomBetween(1.8, 2.4).toFixed(2));
-
-  // Dark red, a little different every time
-  const hue = randomBetween(352, 368) % 360;
-  const red = `hsl(${hue.toFixed(0)} ${randomBetween(70, 90).toFixed(0)}% ${randomBetween(24, 34).toFixed(0)}%)`;
-  const darkRed = `hsl(${hue.toFixed(0)} 80% ${randomBetween(12, 18).toFixed(0)}%)`;
+  svg.style.setProperty("--splat-size", randomBetween(1.3, 1.7).toFixed(2));
 
   const group = svgElement("g", { transform: `rotate(${randomBetween(0, 360).toFixed(0)})` });
-  group.appendChild(svgElement("path", { d: blobPath(randomBetween(34, 44), 0.3), fill: red, opacity: 0.88 }));
-  group.appendChild(svgElement("path", { d: blobPath(randomBetween(14, 22), 0.15), fill: darkRed, opacity: 0.7 }));
-  // A little yellow-brown from the fly's inside
-  group.appendChild(svgElement("path", {
-    d: blobPath(randomBetween(6, 11), 0),
-    fill: "hsl(40 45% 32%)",
-    opacity: 0.55,
-    transform: `translate(${randomBetween(-10, 10).toFixed(1)} ${randomBetween(-10, 10).toFixed(1)})`,
-  }));
+  group.appendChild(svgElement("path", { d: blobPath(randomBetween(34, 44), 0.3) }));
 
   // Drops and short streaks around it, pointing away from the middle
   const drops = Math.floor(randomBetween(4, 10));
@@ -241,8 +228,6 @@ function makeSplat() {
     const width = isStreak ? randomBetween(1.2, 2.8) : length * randomBetween(0.8, 1);
     group.appendChild(svgElement("ellipse", {
       cx: distance, cy: 0, rx: length, ry: width,
-      fill: red,
-      opacity: randomBetween(0.7, 0.95).toFixed(2),
       transform: `rotate(${angle.toFixed(0)})`,
     }));
   }
@@ -251,10 +236,41 @@ function makeSplat() {
   return svg;
 }
 
+// Crushes the fly out of shape: an SVG filter that pushes the picture around
+// in uneven, random waves (feTurbulence + feDisplacementMap), different for every fly.
+// Returns the filter's id, to use as filter: url(#id)
+let crushCount = 0;
+
+function makeCrushFilter() {
+  crushCount += 1;
+  const id = "crush-" + crushCount;
+  const svg = svgElement("svg", { width: 0, height: 0, "aria-hidden": "true" });
+  svg.style.position = "absolute";
+  const filter = svgElement("filter", { id: id, x: "-25%", y: "-25%", width: "150%", height: "150%" });
+  filter.appendChild(svgElement("feTurbulence", {
+    type: "fractalNoise",
+    baseFrequency: randomBetween(0.03, 0.07).toFixed(3), // how small the bumps are
+    numOctaves: 2,
+    seed: Math.floor(randomBetween(1, 1000)),
+    result: "bumps",
+  }));
+  filter.appendChild(svgElement("feDisplacementMap", {
+    in: "SourceGraphic",
+    in2: "bumps",
+    scale: randomBetween(14, 26).toFixed(1), // how strongly it is crushed
+    xChannelSelector: "R",
+    yChannelSelector: "G",
+  }));
+  svg.appendChild(filter);
+  document.body.appendChild(svg);
+  return id;
+}
+
 // A new fly comes in from the left or right edge of the area
 function bringNewFly() {
   const newFly = fly.cloneNode();
   newFly.className = "fly";
+  newFly.style.filter = ""; // the crush belongs only to the squashed fly
   document.body.appendChild(newFly);
   fly = newFly; // from now on, the code moves the new fly
 

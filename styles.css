@@ -152,11 +152,11 @@ body {
   filter: drop-shadow(14px 22px 8px var(--color-shadow));
 }
 
-/* A squashed fly lies flat on the page (no shadow), a little darker and blurry,
-   and can't be clicked again. It is pressed flat fast, like by a swatter */
+/* A squashed fly lies flat on the page (no shadow) and can't be clicked again.
+   It is pressed flat fast, like by a swatter. script.js also crushes it out of shape
+   and makes it a little darker (its own filter for every fly) */
 .fly.is-squashed {
-  filter: brightness(0.7) saturate(0.8) blur(0.4px);
-  opacity: 0.92;
+  filter: none;
   pointer-events: none;
   transition: filter 0.2s, transform 0.07s ease-in;
 }
@@ -172,6 +172,7 @@ body {
   aspect-ratio: 1;
   overflow: visible;
   translate: -50% -50%; /* centered on the fly (works together with the grow animation) */
+  fill: var(--color-accent); /* the red of the site */
   pointer-events: none;
   animation: splat-appear 0.14s ease-out;
 }
