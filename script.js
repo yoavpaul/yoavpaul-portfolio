@@ -2,8 +2,10 @@
 // it buzzes around, changes direction suddenly, and lands for a moment.
 // A click on a resting fly makes it escape, a click on a flying fly squashes it,
 // and 2 seconds later a new fly comes in (already flying, so one click is enough).
-// To make it a bit easier: a click near the fly also counts, and near the fly
-// the mouse turns into a fly swatter (see "Fly swatter" in styles.css).
+// A click close to the fly also counts, and near the fly the mouse turns into a fly swatter
+// (see "Fly swatter" in styles.css). To keep it a challenge, a flying fly sometimes
+// feels the swatter coming and darts away.
+// Every squashed fly looks a little different: its own splat and its own squashed shape.
 //
 // On the home and index pages the fly rests on the name until the mouse touches it,
 // and it only flies above the works (it never goes over them).
@@ -53,8 +55,8 @@ let speed = 0; // pixels per second
 let isFlying = false;
 let timeLeft = 1.5; // seconds until it switches
 
-const MIN_SPEED = 210;
-const MAX_SPEED = 540;
+const MIN_SPEED = 250;
+const MAX_SPEED = 650;
 const EDGE = 80; // how close to the edge before it turns back
 
 function randomBetween(min, max) {
@@ -126,8 +128,8 @@ function draw() {
   const drawX = x + randomBetween(-buzz, buzz);
   const drawY = y + randomBetween(-buzz, buzz);
 
-  // A squashed fly is wider and flatter
-  const squash = isAlive ? "" : " scale(1.3, 0.5)";
+  // A squashed fly is wider, flatter and a little twisted (different for every fly, see squashFly)
+  const squash = isAlive ? "" : squashShape;
 
   // +90 because the fly's head points up in the image
   fly.style.transform =
@@ -149,21 +151,104 @@ function escapeFly() {
   }
 }
 
-// Squashes the fly and leaves a red splat under it
+// The shape of the squashed fly (made new for every fly in squashFly)
+let squashShape = "";
+
+// Squashes the fly and leaves a splat under it
 function squashFly() {
   isAlive = false;
   isFlying = false;
   fly.classList.remove("is-flying");
   fly.classList.add("is-squashed");
 
-  const splat = document.createElement("div");
-  splat.className = "splat";
+  // Flatter or wider, a little turned and slanted: never the same twice
+  squashShape =
+    ` rotate(${randomBetween(-25, 25)}deg)` +
+    ` skewX(${randomBetween(-18, 18)}deg)` +
+    ` scale(${randomBetween(1.15, 1.45)}, ${randomBetween(0.35, 0.6)})`;
+
+  const splat = makeSplat();
   splat.style.left = x + "px";
   splat.style.top = y + "px";
   document.body.insertBefore(splat, fly); // before the fly, so it is under it
 
   draw();
   setTimeout(bringNewFly, NEW_FLY_DELAY);
+}
+
+// A splat drawn at random (SVG), so every one is different:
+// an uneven blob with a darker middle, a little yellow-brown from the fly's inside,
+// and drops and short streaks that flew out to the sides
+const SVG = "http://www.w3.org/2000/svg";
+
+function svgElement(name, attributes) {
+  const element = document.createElementNS(SVG, name);
+  for (const key in attributes) element.setAttribute(key, attributes[key]);
+  return element;
+}
+
+// An uneven round shape: points around a circle at random distances,
+// joined with soft curves (the size is about "radius", "spikes" = how many arms stick out)
+function blobPath(radius, spikes) {
+  const count = Math.floor(randomBetween(11, 17));
+  const points = [];
+  for (let i = 0; i < count; i++) {
+    const angle = (i / count) * Math.PI * 2 + randomBetween(-0.15, 0.15);
+    let distance = radius * randomBetween(0.75, 1.1);
+    if (Math.random() < spikes) distance = radius * randomBetween(1.3, 1.7); // an arm
+    points.push([Math.cos(angle) * distance, Math.sin(angle) * distance]);
+  }
+  // A curve through the middle of each pair of points, bent by the point itself
+  const middle = (a, b) => [(a[0] + b[0]) / 2, (a[1] + b[1]) / 2];
+  let start = middle(points[count - 1], points[0]);
+  let path = `M ${start[0].toFixed(1)} ${start[1].toFixed(1)}`;
+  for (let i = 0; i < count; i++) {
+    const end = middle(points[i], points[(i + 1) % count]);
+    path += ` Q ${points[i][0].toFixed(1)} ${points[i][1].toFixed(1)} ${end[0].toFixed(1)} ${end[1].toFixed(1)}`;
+  }
+  return path + " Z";
+}
+
+function makeSplat() {
+  const svg = svgElement("svg", { viewBox: "-100 -100 200 200", "aria-hidden": "true" });
+  svg.classList.add("splat");
+  // A different size for every splat (compared to the fly)
+  svg.style.setProperty("--splat-size", randomBetween(1.8, 2.4).toFixed(2));
+
+  // Dark red, a little different every time
+  const hue = randomBetween(352, 368) % 360;
+  const red = `hsl(${hue.toFixed(0)} ${randomBetween(70, 90).toFixed(0)}% ${randomBetween(24, 34).toFixed(0)}%)`;
+  const darkRed = `hsl(${hue.toFixed(0)} 80% ${randomBetween(12, 18).toFixed(0)}%)`;
+
+  const group = svgElement("g", { transform: `rotate(${randomBetween(0, 360).toFixed(0)})` });
+  group.appendChild(svgElement("path", { d: blobPath(randomBetween(34, 44), 0.3), fill: red, opacity: 0.88 }));
+  group.appendChild(svgElement("path", { d: blobPath(randomBetween(14, 22), 0.15), fill: darkRed, opacity: 0.7 }));
+  // A little yellow-brown from the fly's inside
+  group.appendChild(svgElement("path", {
+    d: blobPath(randomBetween(6, 11), 0),
+    fill: "hsl(40 45% 32%)",
+    opacity: 0.55,
+    transform: `translate(${randomBetween(-10, 10).toFixed(1)} ${randomBetween(-10, 10).toFixed(1)})`,
+  }));
+
+  // Drops and short streaks around it, pointing away from the middle
+  const drops = Math.floor(randomBetween(4, 10));
+  for (let i = 0; i < drops; i++) {
+    const angle = randomBetween(0, 360);
+    const distance = randomBetween(55, 90);
+    const isStreak = Math.random() < 0.4;
+    const length = isStreak ? randomBetween(5, 10) : randomBetween(1.5, 6);
+    const width = isStreak ? randomBetween(1.2, 2.8) : length * randomBetween(0.8, 1);
+    group.appendChild(svgElement("ellipse", {
+      cx: distance, cy: 0, rx: length, ry: width,
+      fill: red,
+      opacity: randomBetween(0.7, 0.95).toFixed(2),
+      transform: `rotate(${angle.toFixed(0)})`,
+    }));
+  }
+
+  svg.appendChild(group);
+  return svg;
 }
 
 // A new fly comes in from the left or right edge of the area
@@ -193,9 +278,9 @@ function distanceToFly(event) {
   return Math.hypot(mouseX - x, mouseY - y);
 }
 
-// A click this close to the middle of the fly counts as a hit (a bit more than the fly itself)
+// A click this close to the middle of the fly counts as a hit (a little more than its body)
 function hitDistance() {
-  return fly.offsetWidth * 0.9;
+  return fly.offsetWidth * 0.6;
 }
 
 // True right after a click hit the fly, so that click doesn't also open a link under it
@@ -235,10 +320,27 @@ document.addEventListener("pointerover", function (event) {
   }
 });
 
-// Fly swatter: near the fly the mouse turns into a fly swatter
+// Fly swatter: near the fly the mouse turns into a fly swatter.
+// When the swatter comes close to a flying fly, sometimes (1 in 3) the fly feels it
+// and darts away from it, fast
+let swatterWasNear = false;
+const DODGE_CHANCE = 0.35;
+
 document.addEventListener("pointermove", function (event) {
-  const isNear = isAlive && distanceToFly(event) < hitDistance() * 2.5;
+  const distance = distanceToFly(event);
+  const isNear = isAlive && distance < hitDistance() * 3;
   document.documentElement.classList.toggle("is-near-fly", isNear);
+
+  const isClose = isAlive && distance < hitDistance() * 1.8;
+  if (isClose && !swatterWasNear && isFlying && Math.random() < DODGE_CHANCE) {
+    const mouseX = isHomePage ? event.pageX : event.clientX;
+    const mouseY = isHomePage ? event.pageY : event.clientY;
+    const awayFromMouse = Math.atan2(y - mouseY, x - mouseX) * (180 / Math.PI);
+    heading = awayFromMouse + randomBetween(-40, 40);
+    speed = MAX_SPEED;
+    timeLeft = Math.max(timeLeft, 0.6); // it doesn't land right away
+  }
+  swatterWasNear = isClose;
 });
 
 // Runs about 60 times a second
