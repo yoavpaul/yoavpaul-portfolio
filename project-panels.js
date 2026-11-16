@@ -56,3 +56,14 @@ document.addEventListener("keydown", (event) => {
     closeProjectPanel();
   }
 });
+
+// The tags swing under the mouse (see .is-tag in styles.css).
+// The swing always plays to the end, even if the mouse leaves before, so it never jumps
+for (const tag of document.querySelectorAll(".panel-item.is-tag")) {
+  tag.addEventListener("mouseenter", () => {
+    tag.classList.add("is-swinging");
+  });
+  tag.addEventListener("animationend", () => {
+    tag.classList.remove("is-swinging");
+  });
+}
