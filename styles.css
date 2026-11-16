@@ -541,13 +541,6 @@ body {
   object-fit: cover;
 }
 
-/* Phones: the big name moves down a little, so it starts under the top bar */
-@media (max-width: 700px) {
-  .hero {
-    padding-top: 52px; /* under the top bar (44px high on phones) */
-  }
-}
-
 /* ===== Links in the top bar and menus (all pages) ===== */
 
 .page-link {
@@ -828,30 +821,25 @@ button.photo-box {
   font-size: calc(20 * var(--px));
 }
 
-/* Phones: the text comes under the photo, in the page flow, big enough to read */
-@media (max-width: 700px) {
-  .project-text {
-    position: static;
-    width: auto;
-    margin: 0 var(--space-page) 24px;
-  }
+/* Smaller text (Dissociative self): 19px */
+.project-text .project-text-body {
+  font-size: calc(19 * var(--px));
+}
 
-  .project-text h2 {
-    margin-bottom: 8px;
-    font-size: 17px;
-  }
+/* Where it was exhibited: Semibold 19px */
+.project-text .project-text-strong {
+  font-size: calc(19 * var(--px));
+  font-weight: 600;
+}
 
-  .project-text p,
-  .project-text .project-text-quote,
-  .project-text .project-text-small {
-    font-size: 14px;
-    line-height: 1.35;
-  }
+/* A smaller empty line above (one empty line of 19px text) */
+.project-text .has-line-space {
+  margin-top: calc(23 * var(--px));
+}
 
-  .project-text .has-space,
-  .project-text .project-text-quote {
-    margin-top: 10px;
-  }
+/* ===== The 1+1= book (graphics page): book-pages.js turns its pages on a click ===== */
+.book {
+  cursor: pointer;
 }
 
 /* ===== Project panels (branding page): the whole project on one screen =====
@@ -1075,35 +1063,6 @@ body.has-dark-panel .top-bar {
   color: var(--color-accent);
 }
 
-/* Phones: the categories one under the other, each list under its category */
-@media (max-width: 700px) {
-  .index-categories {
-    width: auto;
-    height: auto;
-    padding: 24px var(--space-page) 48px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 12px;
-  }
-
-  .index-category,
-  .index-list {
-    position: static;
-    width: auto;
-    text-align: center;
-  }
-
-  .index-category {
-    font-size: 40px;
-  }
-
-  .index-list {
-    font-size: 18px;
-    margin-bottom: 12px;
-  }
-}
-
 /* When a link leads to a project on another page, leave room for "YP" above it */
 .figma-column > [id] {
   scroll-margin-top: max(56px, calc(70 * var(--px)));
@@ -1111,12 +1070,12 @@ body.has-dark-panel .top-bar {
 
 /* ===== About and contact page (about.html) ===== */
 
-/* Everything is placed where it is in Figma ("Content" frame, 1440 x 2146).
+/* Everything is placed where it is in Figma ("Content" frame, 1440 x 2021).
    Each item says its top (and middle or left) in Figma pixels */
 .about {
   position: relative;
   width: calc(1440 * var(--px));
-  height: calc(2146 * var(--px));
+  height: calc(2021 * var(--px));
   margin: 0 auto;
 }
 
@@ -1139,28 +1098,69 @@ body.has-dark-panel .top-bar {
   white-space: nowrap;
 }
 
-/* The email address and the phone number under the big words */
+/* The email address and the phone number under the big words (Medium 48px) */
 .about-contact {
   top: calc(var(--top) * var(--px));
-  left: calc(691.5 * var(--px));
+  left: calc(var(--middle) * var(--px));
   transform: translateX(-50%);
   font-family: var(--font-nav);
   font-size: calc(48 * var(--px));
-  font-weight: 700;
+  font-weight: 500;
   line-height: normal;
   color: var(--color-text);
   text-decoration: none;
   white-space: nowrap;
 }
 
+/* The text about me (Medium 32px, lines 62px apart) */
+.about-contact a {
+  color: inherit;
+  text-decoration: none;
+}
+
+/* "Copy" next to the email / phone: shows under the mouse (computers),
+   or after a tap (phones, contact-copy.js adds "is-showing-copy").
+   Its holder starts right at the end of the words, so the mouse can move to it without it closing */
+.copy-holder {
+  position: absolute;
+  top: 50%;
+  left: 100%;
+  transform: translateY(-50%);
+  padding-left: calc(20 * var(--px));
+  display: none;
+}
+
+.about-contact:hover .copy-holder,
+.about-contact:focus-within .copy-holder,
+.about-contact.is-showing-copy .copy-holder {
+  display: block;
+}
+
+.copy-button {
+  padding: 0.2em 0.6em;
+  border: 1px solid currentColor;
+  border-radius: 0;
+  background: var(--color-background);
+  font-family: var(--font-nav);
+  font-size: var(--size-nav);
+  font-weight: 500;
+  line-height: normal;
+  color: var(--color-text);
+  cursor: pointer;
+}
+
+.copy-button:hover {
+  color: var(--color-accent);
+}
+
 .about-text {
   top: calc(var(--top) * var(--px));
-  left: calc(133 * var(--px));
+  left: calc(164 * var(--px));
   width: calc(1175 * var(--px));
   font-family: var(--font-nav);
-  font-size: calc(48 * var(--px));
-  font-weight: 700;
-  line-height: calc(61 * var(--px));
+  font-size: calc(32 * var(--px));
+  font-weight: 500;
+  line-height: calc(62 * var(--px));
   color: var(--color-text);
 }
 
@@ -1170,37 +1170,6 @@ body.has-dark-panel .top-bar {
 
 /* The second paragraph starts a little to the right, like in Figma */
 .about-text p + p {
-  text-indent: calc(42 * var(--px));
+  text-indent: calc(30 * var(--px)); /* 4 spaces, like in Figma */
 }
 
-/* Phones: everything moves down a little, so "EMAIL ME" doesn't touch the top bar */
-@media (max-width: 700px) {
-  .about {
-    margin-top: 24px;
-  }
-}
-
-/* ===== Phones: the project title is in the page flow ===== */
-@media (max-width: 700px) {
-  .project-header {
-    height: auto;
-    padding-top: 52px; /* room for the top bar (44px high on phones) */
-  }
-
-  .project-title {
-    position: static;
-  }
-
-  .project-title {
-    line-height: 1.6; /* room for letters like "g" and "y" */
-  }
-
-  /* Captions start under the left side of their photo, and can take 2 lines */
-  .figma-column > .photo-caption {
-    width: auto;
-    height: auto;
-    margin: 4px var(--space-page) 16px calc(var(--left) * var(--px));
-    text-align: left;
-  }
-
-}

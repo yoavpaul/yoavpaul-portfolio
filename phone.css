@@ -1,0 +1,182 @@
+/* ===== phone.css: the phone version of the site =====
+   Only phones use this file (screens up to 700px wide): every page loads it with
+   <link rel="stylesheet" href="phone.css" media="(max-width: 700px)">
+   after styles.css, so the rules here change the computer design only on phones.
+   The computer version is in styles.css (its colours, fonts and spacing are used here too).
+   Write here anything that should look different on a phone. */
+
+/* ===== Top bar (all pages) =====
+   On phones the three parts sit by the edges: the menu on the left, YP in the middle,
+   Contact on the right. The words are 15px, big enough to tap */
+.top-bar {
+  --size-nav: 15px;
+  height: 44px;
+}
+
+.top-bar-left,
+.top-bar-left:has(.is-current) {
+  top: 14px;
+  left: var(--space-page);
+  transform: none;
+  text-align: left;
+}
+
+/* The menu on the project pages: its lines start on the left */
+.top-bar-left:has(.is-current) {
+  align-items: flex-start;
+}
+
+.top-bar-name {
+  top: 11px;
+  left: 50%;
+}
+
+.top-bar-contact,
+.branding-page .top-bar-contact,
+.photography-page .top-bar-contact,
+.graphics-page .top-bar-contact {
+  top: 14px;
+  left: auto;
+  right: var(--space-page);
+  transform: none;
+}
+
+/* ===== Home page (index.html) ===== */
+
+/* The fly is 60px wide on phones */
+.home-page {
+  --size-fly: 60px;
+}
+
+/* The big name fills the width of the screen (its width is 4.654 times its font size) */
+.hero {
+  padding-top: 64px;
+}
+
+.hero-title {
+  height: auto;
+  font-size: calc((100vw - 2 * var(--space-page)) / 4.654);
+}
+
+/* "Catch ME if you can!" */
+.catch-me {
+  height: auto;
+  margin-top: 8px;
+  font-size: 30px;
+}
+
+.catch-me-big {
+  font-size: 40px;
+}
+
+/* The row of works: bigger, a square work takes 75% of the width. Swipe it with a finger */
+.carousel-section {
+  margin-top: 40px;
+  padding-bottom: 48px;
+}
+
+.carousel {
+  height: 75vw;
+}
+
+.carousel-item {
+  margin-right: 12px;
+}
+
+/* "Random / Index" under the row */
+.carousel-modes {
+  margin-top: 14px;
+  min-height: 0;
+  font-size: 15px;
+}
+
+/* The text comes under the photo, in the page flow, big enough to read */
+.project-text {
+  position: static;
+  width: auto;
+  margin: 0 var(--space-page) 24px;
+}
+
+.project-text h2 {
+  margin-bottom: 8px;
+  font-size: 17px;
+}
+
+.project-text p,
+.project-text .project-text-quote,
+.project-text .project-text-small,
+.project-text .project-text-body,
+.project-text .project-text-strong {
+  font-size: 14px;
+  line-height: 1.35;
+}
+
+.project-text .has-space,
+.project-text .has-line-space,
+.project-text .project-text-quote {
+  margin-top: 10px;
+}
+
+/* The categories one under the other, each list under its category */
+.index-categories {
+  width: auto;
+  height: auto;
+  padding: 24px var(--space-page) 48px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+}
+
+.index-category,
+.index-list {
+  position: static;
+  width: auto;
+  text-align: center;
+}
+
+.index-category {
+  font-size: 40px;
+}
+
+.index-list {
+  font-size: 18px;
+  margin-bottom: 12px;
+}
+
+/* Everything moves down a little, so "EMAIL ME" doesn't touch the top bar */
+.about {
+  margin-top: 24px;
+}
+
+/* ===== The project title is in the page flow ===== */
+.project-header {
+  height: auto;
+  padding-top: 52px; /* room for the top bar (44px high on phones) */
+}
+
+.project-title {
+  position: static;
+}
+
+.project-title {
+  line-height: 1.6; /* room for letters like "g" and "y" */
+}
+
+/* Captions start under the left side of their photo, and can take 2 lines */
+.figma-column > .photo-caption {
+  width: auto;
+  height: auto;
+  margin: 4px var(--space-page) 16px calc(var(--left) * var(--px));
+  text-align: left;
+}
+
+/* ===== Me page (about.html) ===== */
+
+/* "Copy" shows under the email / phone, in the middle (there is no room next to them) */
+.copy-holder {
+  top: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  padding: 8px 0 0;
+}

@@ -5,13 +5,15 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Graphics – Yoav Paul</title>
   <link rel="stylesheet" href="styles.css">
+  <!-- The phone version: only on screens up to 700px wide -->
+  <link rel="stylesheet" href="phone.css" media="(max-width: 700px)">
 </head>
 <body class="graphics-page">
   <!-- Top bar (stays at the top while scrolling, with a soft blur behind it):
        on the left the menu (the page you are on in red; a click on "Index" folds it, see top-bar-menu.js),
        "YP" in the middle (leads home), Contact on the right -->
   <header class="top-bar">
-    <p class="top-bar-left"><button class="page-link top-bar-index" type="button" aria-expanded="true">Index</button><a class="page-link menu-other" href="branding.html">Branding</a><a class="page-link menu-other" href="photography.html">Photography</a><span class="is-current">Graphics</span></p>
+    <p class="top-bar-left is-folded"><button class="page-link top-bar-index" type="button" aria-expanded="false">Index</button><a class="page-link menu-other" href="branding.html">Branding</a><a class="page-link menu-other" href="photography.html">Photography</a><span class="is-current">Graphics</span></p>
     <a class="top-bar-name" href="index.html" aria-label="Yoav Paul, home page">YP</a>
     <a class="top-bar-contact" href="about.html">Contact</a>
   </header>
@@ -24,13 +26,11 @@
   <!-- The works and their names. Sizes are in Figma pixels (see "Columns and rows" in styles.css) -->
   <main class="figma-column">
 
-    <!-- 1+1= : a video of the book's pages turning, with a see-through background.
-         Two copies of the video: .mov for Safari, .webm for Chrome and Firefox -->
-    <div id="one-plus-one" class="photo-box from-left" style="--left: 335; --width: 800; --height: 602;">
-      <video autoplay muted loop playsinline aria-label="1+1=, the pages turning">
-        <source src="images/one-plus-one-spreads.mov" type="video/quicktime">
-        <source src="images/one-plus-one-spreads.webm" type="video/webm">
-      </video>
+    <!-- 1+1= : the book (Hebrew, right to left). It turns its pages by itself until a click;
+         then a click on the left page shows the next pages, on the right page the pages before (book-pages.js).
+         images/one-plus-one-page-00.webp is the cover, 01 to 28 are the pages (see-through background) -->
+    <div id="one-plus-one" class="photo-box from-left book" tabindex="0" role="button" aria-label="1+1=, click to turn the pages" style="--left: 335; --width: 800; --height: 602;">
+      <img src="images/one-plus-one-page-00.webp" width="1360" height="1024" alt="1+1=, the cover">
     </div>
 
     <!-- I'M HERE? (Tartoctober posters): a click on the poster opens a row with the 3 posters,
@@ -39,16 +39,16 @@
     <div id="im-here" class="photo-overlay from-left" style="--left: 344; --space-before: 162;">
       <div class="photo-overlay-row" style="--width: 2197;">
         <button class="photo-box" aria-expanded="false" style="--width: 694; --height: 982;">
-          <img src="images/tartakover-poster.jpg" alt="I'M HERE? poster, red">
+          <img src="images/tartakover-poster.webp" width="1697" height="2400" alt="I'M HERE? poster, red">
         </button>
-        <div style="--x: 754; --y: 0; --w: 689; --h: 975;"><img src="images/tartakover-poster-black.jpg" alt="I'M HERE? poster, black (exhibition)" loading="lazy"></div>
-        <div style="--x: 1508; --y: 1; --w: 689; --h: 974;"><img src="images/tartakover-poster-green.jpg" alt="I'M HERE? poster, green" loading="lazy"></div>
+        <div style="--x: 754; --y: 0; --w: 689; --h: 975;"><img src="images/tartakover-poster-black.webp" width="1697" height="2400" alt="I'M HERE? poster, black (exhibition)" loading="lazy"></div>
+        <div style="--x: 1508; --y: 1; --w: 689; --h: 974;"><img src="images/tartakover-poster-green.webp" width="1697" height="2400" alt="I'M HERE? poster, green" loading="lazy"></div>
       </div>
     </div>
     <p class="photo-caption from-left" style="--left: 344; --width: 391; --height: 38; --space-before: 30;">I’M HERE?</p>
 
     <div id="soccer-joint" class="photo-box from-left" style="--left: 256; --width: 907; --height: 1296; --space-before: 135;">
-      <img src="images/poster-joint-soccer.jpg" alt="Soccer - Joint poster">
+      <img src="images/poster-joint-soccer.webp" width="1680" height="2400" alt="Soccer - Joint poster" loading="lazy">
     </div>
     <p class="photo-caption from-left" style="--left: 256; --width: 391; --height: 38; --space-before: 20;">Soccer - Joint</p>
 
@@ -67,6 +67,7 @@
   </main>
 
   <script src="photo-overlays.js"></script>
+  <script src="book-pages.js"></script>
   <script src="top-bar-menu.js"></script>
   <script src="top-bar-blur.js"></script>
 </body>

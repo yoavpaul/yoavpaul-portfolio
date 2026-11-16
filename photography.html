@@ -5,13 +5,15 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Photography – Yoav Paul</title>
   <link rel="stylesheet" href="styles.css">
+  <!-- The phone version: only on screens up to 700px wide -->
+  <link rel="stylesheet" href="phone.css" media="(max-width: 700px)">
 </head>
 <body class="photography-page">
   <!-- Top bar (stays at the top while scrolling, with a soft blur behind it):
        on the left the menu (the page you are on in red; a click on "Index" folds it, see top-bar-menu.js),
        "YP" in the middle (leads home), Contact on the right -->
   <header class="top-bar">
-    <p class="top-bar-left"><button class="page-link top-bar-index" type="button" aria-expanded="true">Index</button><a class="page-link menu-other" href="branding.html">Branding</a><span class="is-current">Photography</span><a class="page-link menu-other" href="graphics.html">Graphics</a></p>
+    <p class="top-bar-left is-folded"><button class="page-link top-bar-index" type="button" aria-expanded="false">Index</button><a class="page-link menu-other" href="branding.html">Branding</a><span class="is-current">Photography</span><a class="page-link menu-other" href="graphics.html">Graphics</a></p>
     <a class="top-bar-name" href="index.html" aria-label="Yoav Paul, home page">YP</a>
     <a class="top-bar-contact" href="about.html">Contact</a>
   </header>
@@ -34,15 +36,15 @@
     <div id="dissociative-self" class="photo-overlay from-left" style="--left: 198; --left-open: 477; --scale-open: 0.757;">
       <div class="photo-overlay-row" style="--width: 3180;">
         <button class="photo-box" aria-expanded="false" style="--width: 1049; --height: 855; --width-open: 794; --height-open: 648;">
-          <img class="is-cropped" src="images/photo-my-project-6.jpg" alt="Dissociative self: woman in a red dress with shopping carts"
+          <img class="is-cropped" src="images/photo-my-project-6.webp" width="1697" height="2400" alt="Dissociative self: woman in a red dress with shopping carts"
                style="--img-top: -44.06; --img-left: -4.36; --img-width: 108.75; --img-height: 188.58;">
         </button>
         <div style="--x: 1072; --y: 1; --w: 1039; --h: 849;">
-          <img class="is-cropped" src="images/photo-my-project-7.jpg" alt="Dissociative self, photo 2" loading="lazy"
+          <img class="is-cropped" src="images/photo-my-project-7.webp" width="1697" height="2400" alt="Dissociative self, photo 2" loading="lazy"
                style="--img-top: -42.54; --img-left: -3.47; --img-width: 107.02; --img-height: 185.17;">
         </div>
         <div style="--x: 2141; --y: 3; --w: 1038.74; --h: 849;">
-          <img class="is-cropped" src="images/photo-my-project-8.jpg" alt="Dissociative self, photo 3" loading="lazy"
+          <img class="is-cropped" src="images/photo-my-project-8.webp" width="1697" height="2400" alt="Dissociative self, photo 3" loading="lazy"
                style="--img-top: -43.15; --img-left: -3.91; --img-width: 107.74; --img-height: 186.44;">
         </div>
       </div>
@@ -52,17 +54,17 @@
     <div id="monsters-under-the-bed" class="photo-overlay from-left" style="--left: 409; --space-before: 63; --left-open: 477; --space-open: 39; --scale-open: 0.757;">
       <div class="photo-overlay-row" style="--width: 8823;">
         <button class="photo-box" aria-expanded="false" style="--width: 840; --height: 1216; --width-open: 636; --height-open: 922;">
-          <img src="images/yarzin-photoshoot.jpg" alt="Monsters Under The Bed, photo 1">
+          <img src="images/yarzin-photoshoot.webp" width="1658" height="2400" alt="Monsters Under The Bed, photo 1">
         </button>
-        <div style="--x: 875; --w: 840; --h: 1216;"><img src="images/monsters-02.jpg" alt="Monsters Under The Bed, photo 2" loading="lazy"></div>
-        <div style="--x: 1750; --w: 840; --h: 1216;"><img src="images/monsters-03.jpg" alt="Monsters Under The Bed, photo 3" loading="lazy"></div>
-        <div style="--x: 2635; --w: 856; --h: 1216;"><img src="images/monsters-04.jpg" alt="Monsters Under The Bed, photo 4" loading="lazy"></div>
-        <div style="--x: 3526; --w: 857; --h: 1216;"><img src="images/monsters-05.jpg" alt="Monsters Under The Bed, photo 5" loading="lazy"></div>
-        <div style="--x: 4418; --w: 856; --h: 1216;"><img src="images/monsters-06.jpg" alt="Monsters Under The Bed, photo 6" loading="lazy"></div>
-        <div style="--x: 5309; --w: 857; --h: 1216;"><img src="images/monsters-07.jpg" alt="Monsters Under The Bed, photo 7" loading="lazy"></div>
-        <div style="--x: 6201; --w: 856; --h: 1216;"><img src="images/monsters-08.jpg" alt="Monsters Under The Bed, photo 8" loading="lazy"></div>
-        <div style="--x: 7092; --w: 856; --h: 1216;"><img src="images/monsters-09.jpg" alt="Monsters Under The Bed, photo 9" loading="lazy"></div>
-        <div style="--x: 7983; --w: 840; --h: 1216;"><img src="images/monsters-10.jpg" alt="Monsters Under The Bed, photo 10" loading="lazy"></div>
+        <div style="--x: 875; --w: 840; --h: 1216;"><img src="images/monsters-02.webp" width="1658" height="2400" alt="Monsters Under The Bed, photo 2" loading="lazy"></div>
+        <div style="--x: 1750; --w: 840; --h: 1216;"><img src="images/monsters-03.webp" width="1658" height="2400" alt="Monsters Under The Bed, photo 3" loading="lazy"></div>
+        <div style="--x: 2635; --w: 856; --h: 1216;"><img src="images/monsters-04.webp" width="1688" height="2396" alt="Monsters Under The Bed, photo 4" loading="lazy"></div>
+        <div style="--x: 3526; --w: 857; --h: 1216;"><img src="images/monsters-05.webp" width="1688" height="2396" alt="Monsters Under The Bed, photo 5" loading="lazy"></div>
+        <div style="--x: 4418; --w: 856; --h: 1216;"><img src="images/monsters-06.webp" width="1688" height="2396" alt="Monsters Under The Bed, photo 6" loading="lazy"></div>
+        <div style="--x: 5309; --w: 857; --h: 1216;"><img src="images/monsters-07.webp" width="1688" height="2396" alt="Monsters Under The Bed, photo 7" loading="lazy"></div>
+        <div style="--x: 6201; --w: 856; --h: 1216;"><img src="images/monsters-08.webp" width="1688" height="2396" alt="Monsters Under The Bed, photo 8" loading="lazy"></div>
+        <div style="--x: 7092; --w: 856; --h: 1216;"><img src="images/monsters-09.webp" width="1688" height="2396" alt="Monsters Under The Bed, photo 9" loading="lazy"></div>
+        <div style="--x: 7983; --w: 840; --h: 1216;"><img src="images/monsters-10.webp" width="1658" height="2400" alt="Monsters Under The Bed, photo 10" loading="lazy"></div>
       </div>
     </div>
     <p class="photo-caption from-left" style="--left: 407; --width: 557; --height: 63; --space-before: 19; --left-open: 482; --space-open: 30;">Monsters Under The Bed - Guy Jarzin</p>
@@ -70,11 +72,11 @@
     <div id="four-noble-truths" class="photo-overlay from-left" style="--left: 205; --left-open: 482; --space-open: -7; --scale-open: 0.7566;">
       <div class="photo-overlay-row" style="--width: 3399;">
         <button class="photo-box" aria-expanded="false" style="--width: 1044; --height: 818; --width-open: 789.852; --height-open: 619;">
-          <img src="images/photo-yoav367.jpg" alt="Four noble truths before bedtime: bed in an empty room">
+          <img src="images/photo-yoav367.webp" width="2400" height="1881" alt="Four noble truths before bedtime: bed in an empty room" loading="lazy">
         </button>
-        <div style="--x: 1063; --y: 10; --w: 1129; --h: 808;"><img src="images/photo-yoav369.jpg" alt="Four noble truths before bedtime, photo 2" loading="lazy"></div>
-        <div style="--x: 2214; --y: 10; --w: 581; --h: 808;"><img src="images/photo-yoav371.jpg" alt="Four noble truths before bedtime, photo 3" loading="lazy"></div>
-        <div style="--x: 2818; --y: 10; --w: 581; --h: 808;"><img src="images/photo-yoav372.jpg" alt="Four noble truths before bedtime, photo 4" loading="lazy"></div>
+        <div style="--x: 1063; --y: 10; --w: 1129; --h: 808;"><img src="images/photo-yoav369.webp" width="2400" height="1751" alt="Four noble truths before bedtime, photo 2" loading="lazy"></div>
+        <div style="--x: 2214; --y: 10; --w: 581; --h: 808;"><img src="images/photo-yoav371.webp" width="1465" height="2400" alt="Four noble truths before bedtime, photo 3" loading="lazy"></div>
+        <div style="--x: 2818; --y: 10; --w: 581; --h: 808;"><img src="images/photo-yoav372.webp" width="1909" height="2400" alt="Four noble truths before bedtime, photo 4" loading="lazy"></div>
       </div>
     </div>
     <p class="photo-caption from-left" style="--left: 204; --width: 521; --height: 26; --space-before: 20; --left-open: 482; --space-open: 20;">Four noble truths before bedtime</p>
@@ -82,16 +84,16 @@
     <div id="megi-solar" class="photo-overlay from-left" style="--left: 205; --space-before: 30; --left-open: 482; --space-open: 25; --scale-open: 0.7578;">
       <div class="photo-overlay-row" style="--width: 2598;">
         <button class="photo-box" aria-expanded="false" style="--width: 845.913; --height: 1216; --width-open: 641; --height-open: 921;">
-          <img src="images/photo-yoavp1150.jpg" alt="Megi Solar: portrait in a forest">
+          <img src="images/photo-yoavp1150.webp" width="1670" height="2400" alt="Megi Solar: portrait in a forest" loading="lazy">
         </button>
-        <div style="--x: 876; --w: 846; --h: 1216;"><img src="images/photo-megi-solar-2.jpg" alt="Megi Solar, photo 2" loading="lazy"></div>
-        <div style="--x: 1752; --w: 846; --h: 1216;"><img src="images/photo-megi-solar-3.jpg" alt="Megi Solar, photo 3" loading="lazy"></div>
+        <div style="--x: 876; --w: 846; --h: 1216;"><img src="images/photo-megi-solar-2.webp" width="1670" height="2400" alt="Megi Solar, photo 2" loading="lazy"></div>
+        <div style="--x: 1752; --w: 846; --h: 1216;"><img src="images/photo-megi-solar-3.webp" width="1670" height="2400" alt="Megi Solar, photo 3" loading="lazy"></div>
       </div>
     </div>
     <p class="photo-caption from-left" style="--left: 205; --width: 521; --height: 26; --space-before: 20; --left-open: 480; --space-open: 30;">Megi Solar</p>
 
     <div id="bank-leumi" class="photo-box from-left" style="--left: 205; --width: 1034; --height: 686; --space-before: 40; --left-open: 482; --space-open: 38; --width-open: 784; --height-open: 520;">
-      <img src="images/photo-illustration-14.jpg" alt="Bank Leumi - Local Treasure: man working in a workshop">
+      <img src="images/photo-illustration-14.webp" width="2400" height="1591" alt="Bank Leumi - Local Treasure: man working in a workshop" loading="lazy">
     </div>
     <p class="photo-caption from-left" style="--left: 205; --width: 491; --height: 26; --space-before: 20; --left-open: 479; --space-open: 29;">Bank Leumi - Local Treasure</p>
     <!-- ===== Texts about the projects =====
@@ -100,7 +102,16 @@
          Each text belongs to the row with the same name (id="text-" + the id of the row).
          TODO: the year of each project, and texts for the projects that only have a name for now -->
     <aside class="project-text" id="text-dissociative-self" hidden>
-      <h2>Dissociative self</h2>
+      <h2>Dissociative self<br>2021 -2026</h2>
+      <p class="project-text-body">A series of three photographic works in collaboration with Noa Ferder.</p>
+      <p class="project-text-body">The trilogy of photographs exploring the three fears in Noa's life: motherhood, aging and sexuality.</p>
+      <p class="project-text-body">Concept development, production, stills photography and editing: Yoav Paul</p>
+      <p class="project-text-body">Concept development, production and modeling: Noa Ferder.</p>
+      <p class="project-text-strong has-line-space">A work from the series was exhibited at:<br>Permanent exhibition, Museum of Gloucester, England (2021)</p>
+      <p class="project-text-strong has-line-space">PE163, International Photography Exhibition of The Royal Photographic Society, Bristol, England (2022)</p>
+      <p class="project-text-strong has-line-space">The Glasgow Gallery of Photography - IDENTITY exhibition 3rd (2026)</p>
+      <p class="project-text-small has-space">Materials:<br>Analog photography, 120 and 35mm film</p>
+      <p class="project-text-small has-line-space">Special thanks:<br>Eden Amit, Nir Erez, Tami and Ami from Panda</p>
     </aside>
     <aside class="project-text" id="text-monsters-under-the-bed" hidden>
       <h2>Monsters Under The Bed - Guy Jarzin</h2>
