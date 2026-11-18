@@ -766,9 +766,9 @@ button.photo-box {
   display: none;
 }
 
-/* Name (Bold 28px) and year (Medium) */
+/* Name and year: Bold 28px (Figma "Photography option 2 with text") */
 .project-text h2 {
-  margin: 0 0 calc(30 * var(--px));
+  margin: 0;
   font-size: calc(28 * var(--px));
   font-weight: 700;
   line-height: normal;
@@ -776,52 +776,44 @@ button.photo-box {
 
 .project-text-year {
   margin-left: 0.4em;
-  font-weight: 500;
 }
 
-/* The text: 25px */
+/* The text: 16px, lines 26px apart */
 .project-text p {
   margin: 0;
-  font-size: calc(25 * var(--px));
-  line-height: calc(26 * var(--px));
+  font-size: max(12px, calc(16 * var(--px)));
+  font-weight: 400;
+  line-height: max(19px, calc(26 * var(--px)));
 }
 
-/* The second paragraph starts a little to the right, like in Figma */
+/* The second paragraph starts a little to the right (4 spaces in Figma) */
 .project-text .is-indented {
   text-indent: 1em;
 }
 
-/* An empty line above */
-.project-text .has-space,
-.project-text .project-text-quote {
+/* Bolder words: Semibold (the quote, "A work from the series was exhibited at:")
+   and Medium (where it was exhibited, "Materials:", "Special thanks:") */
+.project-text .is-semibold {
+  font-weight: 600;
+}
+
+.project-text .is-medium {
+  font-weight: 500;
+}
+
+/* An empty line above (one empty line of 16px text) */
+.project-text .has-space {
+  margin-top: calc(19 * var(--px));
+}
+
+/* An empty line of 25px text under the name (Four noble truths) */
+.project-text .has-title-space {
   margin-top: calc(30 * var(--px));
 }
 
-/* The quote: Semibold 19px */
-.project-text .project-text-quote {
-  font-size: calc(19 * var(--px));
-  font-weight: 600;
-}
-
-/* Materials and thanks: 20px */
-.project-text .project-text-small {
-  font-size: calc(20 * var(--px));
-}
-
-/* Smaller text (Dissociative self): 19px */
-.project-text .project-text-body {
-  font-size: calc(19 * var(--px));
-}
-
-/* Where it was exhibited: Semibold 19px */
-.project-text .project-text-strong {
-  font-size: calc(19 * var(--px));
-  font-weight: 600;
-}
-
-/* A smaller empty line above (one empty line of 19px text) */
-.project-text .has-line-space {
-  margin-top: calc(23 * var(--px));
+/* A taller first line in Figma (38px instead of 26px): a little more space above */
+.project-text .has-tall-line {
+  margin-top: calc(12 * var(--px));
 }
 
 /* ===== The 1+1= book (graphics page): book-pages.js turns its pages on a click ===== */

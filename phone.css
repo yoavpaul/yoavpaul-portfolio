@@ -102,19 +102,18 @@
   font-size: 17px;
 }
 
-.project-text p,
-.project-text .project-text-quote,
-.project-text .project-text-small,
-.project-text .project-text-body,
-.project-text .project-text-strong {
+.project-text p {
   font-size: 14px;
-  line-height: 1.35;
+  line-height: 1.6; /* like Figma: 26px lines for 16px text */
 }
 
 .project-text .has-space,
-.project-text .has-line-space,
-.project-text .project-text-quote {
-  margin-top: 10px;
+.project-text .has-title-space {
+  margin-top: 12px;
+}
+
+.project-text .has-tall-line {
+  margin-top: 6px;
 }
 
 /* The categories one under the other, each list under its category */
