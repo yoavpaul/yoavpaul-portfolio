@@ -778,6 +778,11 @@ button.photo-box {
   margin-left: 0.4em;
 }
 
+/* Megi Solar and Otzar Mekomi: the name's lines are 26px apart, like the text under it */
+.project-text h2.has-tight-lines {
+  line-height: calc(26 * var(--px));
+}
+
 /* The text: 16px, lines 26px apart */
 .project-text p {
   margin: 0;
@@ -809,6 +814,11 @@ button.photo-box {
 /* An empty line of 25px text under the name (Four noble truths) */
 .project-text .has-title-space {
   margin-top: calc(30 * var(--px));
+}
+
+/* An empty line of 26px above (Megi Solar, Otzar Mekomi) */
+.project-text .has-line-space {
+  margin-top: calc(26 * var(--px));
 }
 
 /* A taller first line in Figma (38px instead of 26px): a little more space above */

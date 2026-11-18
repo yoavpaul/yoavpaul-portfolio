@@ -97,9 +97,11 @@
   margin: 0 var(--space-page) 24px;
 }
 
-.project-text h2 {
+.project-text h2,
+.project-text h2.has-tight-lines {
   margin-bottom: 8px;
   font-size: 17px;
+  line-height: 1.25;
 }
 
 .project-text p {
@@ -108,7 +110,8 @@
 }
 
 .project-text .has-space,
-.project-text .has-title-space {
+.project-text .has-title-space,
+.project-text .has-line-space {
   margin-top: 12px;
 }
 
