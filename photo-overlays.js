@@ -54,3 +54,13 @@ for (const overlay of document.querySelectorAll(".photo-overlay")) {
     overlay.scrollLeft += event.deltaY;
   }, { passive: false });
 }
+
+// Coming from a link to a project (like photography.html#megi-solar from the home page):
+// its row opens right away (on the photography page with its text), and the page goes to it.
+// "load" = after all the scripts of the page are ready, so photography-texts.js also hears the click
+window.addEventListener("load", () => {
+  const linkedRow = location.hash && document.querySelector(location.hash + ".photo-overlay");
+  if (!linkedRow) return;
+  linkedRow.querySelector(".photo-box").click();
+  linkedRow.scrollIntoView({ block: "start" });
+});

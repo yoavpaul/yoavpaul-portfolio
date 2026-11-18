@@ -50,6 +50,13 @@ for (const panel of document.querySelectorAll(".project-panel")) {
   }, { passive: false });
 }
 
+// Coming from a link to a project (like branding.html#the-lodge from the home page):
+// its panel opens right away
+const linkedButton = location.hash && document.querySelector(location.hash + "[data-panel]");
+if (linkedButton) {
+  openProjectPanel(linkedButton);
+}
+
 // The Esc key closes the panel
 document.addEventListener("keydown", (event) => {
   if (event.key === "Escape") {
