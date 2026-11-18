@@ -33,37 +33,40 @@
       <img src="images/one-plus-one-page-00.webp" width="1360" height="1024" alt="1+1=, the cover">
     </div>
 
+    <p class="photo-caption from-left" style="--left: 448; --width: 391; --height: 38;">1+1 =</p>
+
     <!-- I'M HERE? (Tartoctober posters): a click on the poster opens a row with the 3 posters,
          like the photography page. A click on any poster of the open row closes it.
-         --x, --y = where each poster starts, --w, --h = its size (Figma pixels) -->
-    <div id="im-here" class="photo-overlay from-left" style="--left: 344; --space-before: 162;">
-      <div class="photo-overlay-row" style="--width: 2197;">
-        <button class="photo-box" aria-expanded="false" style="--width: 694; --height: 982;">
+         --x, --y = where each poster starts, --w, --h = its size (Figma frame "Im here?").
+         The first poster is smaller on the page (523 instead of 689), so the whole row is
+         made smaller the same way: --row-scale = 523 / 689 -->
+    <div id="im-here" class="photo-overlay from-left" style="--left: 448; --space-before: 179; --row-scale: 0.759;">
+      <div class="photo-overlay-row" style="--width: 2167;">
+        <button class="photo-box" aria-expanded="false" style="--width: 523; --height: 740;">
           <img src="images/tartakover-poster.webp" width="1697" height="2400" alt="I'M HERE? poster, red">
         </button>
-        <div style="--x: 754; --y: 0; --w: 689; --h: 975;"><img src="images/tartakover-poster-black.webp" width="1697" height="2400" alt="I'M HERE? poster, black (exhibition)" loading="lazy"></div>
-        <div style="--x: 1508; --y: 1; --w: 689; --h: 974;"><img src="images/tartakover-poster-green.webp" width="1697" height="2400" alt="I'M HERE? poster, green" loading="lazy"></div>
+        <div style="--x: 739; --y: 0; --w: 689; --h: 975;"><img src="images/tartakover-poster-black.webp" width="1697" height="2400" alt="I'M HERE? poster, black (exhibition)" loading="lazy"></div>
+        <div style="--x: 1478; --y: 0; --w: 689; --h: 974;"><img src="images/tartakover-poster-green.webp" width="1697" height="2400" alt="I'M HERE? poster, green" loading="lazy"></div>
       </div>
     </div>
-    <p class="photo-caption from-left" style="--left: 344; --width: 391; --height: 38; --space-before: 30;">I’M HERE?</p>
+    <p class="photo-caption from-left" style="--left: 448; --width: 391; --height: 38; --space-before: 33;">I’M HERE?</p>
 
-    <div id="soccer-joint" class="photo-box from-left" style="--left: 256; --width: 907; --height: 1296; --space-before: 135;">
-      <img src="images/poster-joint-soccer.webp" width="1680" height="2400" alt="Soccer - Joint poster" loading="lazy">
+    <!-- Soccer - Joint: the notebook's pages turning (see-through background, .mov for Safari, .webm for the others).
+         A click opens a row like I'M HERE?: the poster and the poster moving (a screen recording),
+         all as high as the notebook (667), 50 apart. A click on any of them closes the row -->
+    <div id="soccer-joint" class="photo-overlay from-left" style="--left: 267; --space-before: 50;">
+      <div class="photo-overlay-row" style="--width: 2591;">
+        <button class="photo-box" aria-expanded="false" style="--width: 886; --height: 667;">
+          <video autoplay muted loop playsinline aria-label="Soccer - Joint, the notebook's pages turning">
+            <source src="images/soccer-joint-spreads.mov" type="video/quicktime">
+            <source src="images/soccer-joint-spreads.webm" type="video/webm">
+          </video>
+        </button>
+        <div style="--x: 936; --y: 0; --w: 467; --h: 667;"><img src="images/poster-joint-soccer.webp" width="1680" height="2400" alt="Soccer - Joint poster" loading="lazy"></div>
+        <div style="--x: 1453; --y: 0; --w: 1138; --h: 667;"><video src="images/soccer-joint-poster-motion.mp4" muted loop playsinline preload="none" aria-label="Soccer - Joint, the poster moving"></video></div>
+      </div>
     </div>
-    <p class="photo-caption from-left" style="--left: 256; --width: 391; --height: 38; --space-before: 20;">Soccer - Joint</p>
-
-    <!-- The poster moving (a screen recording) -->
-    <div class="photo-box from-left" style="--left: 207; --width: 1005; --height: 589; --space-before: 135;">
-      <video src="images/soccer-joint-poster-motion.mp4" autoplay muted loop playsinline aria-label="Soccer - Joint, the poster moving"></video>
-    </div>
-
-    <!-- The notebook's pages turning, with a see-through background (.mov for Safari, .webm for the others) -->
-    <div class="photo-box from-left" style="--left: 277; --width: 886; --height: 667; --space-before: 193;">
-      <video autoplay muted loop playsinline aria-label="Soccer - Joint, the notebook's pages turning">
-        <source src="images/soccer-joint-spreads.mov" type="video/quicktime">
-        <source src="images/soccer-joint-spreads.webm" type="video/webm">
-      </video>
-    </div>
+    <p class="photo-caption from-left" style="--left: 479; --width: 241; --height: 23;">Soccer - Joint</p>
   </main>
 
   <script src="photo-overlays.js"></script>
