@@ -99,7 +99,7 @@
 
   /* Font of the top bar, the menus, the captions and the small texts: Editor Sans (from the fonts folder) */
   --font-nav: "Editor Sans", Arial, sans-serif;
-  --size-nav: max(12px, calc(24 * var(--px))); /* "About", "Contact", "OVER VIEW / INDEX": 24px in Figma */
+  --size-nav: max(12px, calc(16 * var(--px))); /* the top bar, its menus and "Random / Index": 16px in Figma */
 
   /* Font of the small texts on the home page */
   --font-body: "ArbelG", Arial, sans-serif;
@@ -361,11 +361,13 @@ body {
   color: var(--color-accent);
 }
 
-/* "YP" in the title font (Figma: 24px, letter spacing -24%, middle at 721.5px, 19px from the top) */
+/* "YP" in the title font (Figma: 22px next to the 16px words, letter spacing -24%,
+   middle at 721.5px, 19px from the top) */
 .top-bar-name {
   top: calc(19 * var(--px));
   left: calc(50% + 1.5 * var(--px));
   font-family: var(--font-display);
+  font-size: calc(var(--size-nav) * 22 / 16);
   letter-spacing: -0.24em;
   line-height: 1.04;
 }
@@ -462,7 +464,7 @@ body {
   height: 100%;
 }
 
-/* "Random / Index" under the box (Figma: 30px under it, Editor Sans 24px).
+/* "Random / Index" under the box (Figma: 30px under it, Editor Sans, the size of the top bar).
    Red under the mouse, and the one that is chosen stays red */
 .carousel-modes {
   position: relative;
