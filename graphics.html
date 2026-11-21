@@ -26,14 +26,17 @@
   <!-- The works and their names. Sizes are in Figma pixels (see "Columns and rows" in styles.css) -->
   <main class="figma-column">
 
-    <!-- 1+1= : the book (Hebrew, right to left). It turns its pages by itself until a click;
+    <!-- The two books (1+1= and Soccer) are in the middle of the right two thirds of the page
+         (480 to 1440, middle 960), so they don't go under the texts on the left. Their names moved with them.
+
+         1+1= : the book (Hebrew, right to left). It turns its pages by itself until a click;
          then a click on the left page shows the next pages, on the right page the pages before (book-pages.js).
          images/one-plus-one-page-00.webp is the cover, 01 to 28 are the pages (see-through background) -->
-    <div id="one-plus-one" class="photo-box from-left book" tabindex="0" role="button" aria-label="1+1=, click to turn the pages" style="--left: 324; --width: 800; --height: 602;">
+    <div id="one-plus-one" class="photo-box from-left book" tabindex="0" role="button" aria-label="1+1=, click to turn the pages" style="--left: 560; --width: 800; --height: 602;">
       <img src="images/one-plus-one-page-00.webp" width="1360" height="1024" alt="1+1=, the cover">
     </div>
 
-    <p class="photo-caption from-left" style="--left: 479; --width: 77; --height: 38; --space-before: -30;">1+1 =</p>
+    <p class="photo-caption from-left" style="--left: 715; --width: 77; --height: 38; --space-before: -30;">1+1 =</p>
 
     <!-- The text about 1+1= on the left (--top = Figma pixels from the top of this column) -->
     <aside class="project-text" style="--top: 51;">
@@ -70,13 +73,13 @@
     <!-- On The Line - Soccer: the notebook's pages turning (see-through background, .mov for Safari, .webm for the others).
          A click opens the whole project on the screen, on the grass (see "soccer-panel" at the bottom),
          like the projects on the branding page -->
-    <button id="soccer-joint" class="photo-box from-left" type="button" data-panel="soccer-panel" aria-haspopup="dialog" style="--left: 297; --width: 851; --height: 641; --space-before: 96;">
+    <button id="soccer-joint" class="photo-box from-left" type="button" data-panel="soccer-panel" aria-haspopup="dialog" style="--left: 534; --width: 851; --height: 641; --space-before: 96;">
       <video autoplay muted loop playsinline aria-label="On The Line - Soccer, the notebook's pages turning">
         <source src="images/soccer-joint-spreads.mov" type="video/quicktime">
         <source src="images/soccer-joint-spreads.webm" type="video/webm">
       </video>
     </button>
-    <p class="photo-caption from-left" style="--left: 479; --width: 388; --height: 23; --space-before: -24;">On The Line - Soccer</p>
+    <p class="photo-caption from-left" style="--left: 716; --width: 388; --height: 23; --space-before: -24;">On The Line - Soccer</p>
 
     <!-- The text about On The Line - Soccer on the left -->
     <aside class="project-text" style="--top: 1737;">
