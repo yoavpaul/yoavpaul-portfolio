@@ -113,6 +113,7 @@
 
   /* Spacing */
   --space-page: 16px;
+  --photo-row-gap: 30; /* Photography: the space between the photos of an open row (Figma pixels) */
 }
 
 /* ===== Base ===== */

@@ -28,22 +28,24 @@
        Photo overlays (like in the Figma prototype): a click on a photo opens a row with more photos
        from the same project, to the right of it. The row scrolls sideways, with the photo you clicked in it.
        A click on any photo of an open row closes it. Every row opens and closes on its own.
-       In each row the extra photos have their place next to the first photo:
-       --x, --y = where it starts, --w, --h = its size, --width = the width of the open row (Figma pixels) -->
-  <main class="figma-column">
+       In each row all the photos are as high as the first photo (as it shows before the row opens),
+       with the same space between them (--photo-row-gap in styles.css). photo-overlays.js places them.
+       --w, --h of an extra photo = its shape (width and height in Figma pixels): it keeps that shape.
+       To add a photo to a row, add one more <div> with --w and --h and an <img> in it. -->
+  <main class="figma-column has-even-rows">
 
     <!-- Dissociative self: the first photo shows only the middle of the photo, like in Figma -->
-    <div id="dissociative-self" class="photo-overlay from-left" style="--left: 198; --left-open: 477; --scale-open: 0.757;">
-      <div class="photo-overlay-row" style="--width: 3180;">
+    <div id="dissociative-self" class="photo-overlay from-left" style="--left: 198; --left-open: 477;">
+      <div class="photo-overlay-row">
         <button class="photo-box" aria-expanded="false" style="--width: 1049; --height: 855; --width-open: 794; --height-open: 648;">
           <img class="is-cropped" src="images/photo-my-project-6.webp" width="1697" height="2400" alt="Dissociative self: woman in a red dress with shopping carts"
                style="--img-top: -44.06; --img-left: -4.36; --img-width: 108.75; --img-height: 188.58;">
         </button>
-        <div style="--x: 1072; --y: 1; --w: 1039; --h: 849;">
+        <div style="--w: 1039; --h: 849;">
           <img class="is-cropped" src="images/photo-my-project-7.webp" width="1697" height="2400" alt="Dissociative self, photo 2" loading="lazy"
                style="--img-top: -42.54; --img-left: -3.47; --img-width: 107.02; --img-height: 185.17;">
         </div>
-        <div style="--x: 2141; --y: 3; --w: 1038.74; --h: 849;">
+        <div style="--w: 1038.74; --h: 849;">
           <img class="is-cropped" src="images/photo-my-project-8.webp" width="1697" height="2400" alt="Dissociative self, photo 3" loading="lazy"
                style="--img-top: -43.15; --img-left: -3.91; --img-width: 107.74; --img-height: 186.44;">
         </div>
@@ -51,58 +53,58 @@
     </div>
     <p class="photo-caption from-left only-open" style="--left: 477; --width: 391; --height: 26; --space-open: 25;">Dissociative self</p>
 
-    <div id="monsters-under-the-bed" class="photo-overlay from-left" style="--left: 409; --space-before: 63; --left-open: 477; --space-open: 39; --scale-open: 0.757;">
-      <div class="photo-overlay-row" style="--width: 8823;">
+    <div id="monsters-under-the-bed" class="photo-overlay from-left" style="--left: 409; --space-before: 63; --left-open: 477; --space-open: 39;">
+      <div class="photo-overlay-row">
         <button class="photo-box" aria-expanded="false" style="--width: 840; --height: 1216; --width-open: 636; --height-open: 922;">
           <img src="images/yarzin-photoshoot.webp" width="1658" height="2400" alt="Monsters Under The Bed, photo 1">
         </button>
-        <div style="--x: 875; --w: 840; --h: 1216;"><img src="images/monsters-02.webp" width="1658" height="2400" alt="Monsters Under The Bed, photo 2" loading="lazy"></div>
-        <div style="--x: 1750; --w: 840; --h: 1216;"><img src="images/monsters-03.webp" width="1658" height="2400" alt="Monsters Under The Bed, photo 3" loading="lazy"></div>
-        <div style="--x: 2635; --w: 856; --h: 1216;"><img src="images/monsters-04.webp" width="1688" height="2396" alt="Monsters Under The Bed, photo 4" loading="lazy"></div>
-        <div style="--x: 3526; --w: 857; --h: 1216;"><img src="images/monsters-05.webp" width="1688" height="2396" alt="Monsters Under The Bed, photo 5" loading="lazy"></div>
-        <div style="--x: 4418; --w: 856; --h: 1216;"><img src="images/monsters-06.webp" width="1688" height="2396" alt="Monsters Under The Bed, photo 6" loading="lazy"></div>
-        <div style="--x: 5309; --w: 857; --h: 1216;"><img src="images/monsters-07.webp" width="1688" height="2396" alt="Monsters Under The Bed, photo 7" loading="lazy"></div>
-        <div style="--x: 6201; --w: 856; --h: 1216;"><img src="images/monsters-08.webp" width="1688" height="2396" alt="Monsters Under The Bed, photo 8" loading="lazy"></div>
-        <div style="--x: 7092; --w: 856; --h: 1216;"><img src="images/monsters-09.webp" width="1688" height="2396" alt="Monsters Under The Bed, photo 9" loading="lazy"></div>
-        <div style="--x: 7983; --w: 840; --h: 1216;"><img src="images/monsters-10.webp" width="1658" height="2400" alt="Monsters Under The Bed, photo 10" loading="lazy"></div>
+        <div style="--w: 840; --h: 1216;"><img src="images/monsters-02.webp" width="1658" height="2400" alt="Monsters Under The Bed, photo 2" loading="lazy"></div>
+        <div style="--w: 840; --h: 1216;"><img src="images/monsters-03.webp" width="1658" height="2400" alt="Monsters Under The Bed, photo 3" loading="lazy"></div>
+        <div style="--w: 856; --h: 1216;"><img src="images/monsters-04.webp" width="1688" height="2396" alt="Monsters Under The Bed, photo 4" loading="lazy"></div>
+        <div style="--w: 857; --h: 1216;"><img src="images/monsters-05.webp" width="1688" height="2396" alt="Monsters Under The Bed, photo 5" loading="lazy"></div>
+        <div style="--w: 856; --h: 1216;"><img src="images/monsters-06.webp" width="1688" height="2396" alt="Monsters Under The Bed, photo 6" loading="lazy"></div>
+        <div style="--w: 857; --h: 1216;"><img src="images/monsters-07.webp" width="1688" height="2396" alt="Monsters Under The Bed, photo 7" loading="lazy"></div>
+        <div style="--w: 856; --h: 1216;"><img src="images/monsters-08.webp" width="1688" height="2396" alt="Monsters Under The Bed, photo 8" loading="lazy"></div>
+        <div style="--w: 856; --h: 1216;"><img src="images/monsters-09.webp" width="1688" height="2396" alt="Monsters Under The Bed, photo 9" loading="lazy"></div>
+        <div style="--w: 840; --h: 1216;"><img src="images/monsters-10.webp" width="1658" height="2400" alt="Monsters Under The Bed, photo 10" loading="lazy"></div>
       </div>
     </div>
     <p class="photo-caption from-left" style="--left: 407; --width: 557; --height: 63; --space-before: 19; --left-open: 482; --space-open: 30;">Monsters Under The Bed - Guy Jarzin</p>
 
-    <div id="four-noble-truths" class="photo-overlay from-left" style="--left: 205; --left-open: 482; --space-open: -7; --scale-open: 0.7566;">
-      <div class="photo-overlay-row" style="--width: 3399;">
+    <div id="four-noble-truths" class="photo-overlay from-left" style="--left: 205; --left-open: 482; --space-open: -7;">
+      <div class="photo-overlay-row">
         <button class="photo-box" aria-expanded="false" style="--width: 1044; --height: 818; --width-open: 789.852; --height-open: 619;">
           <img src="images/photo-yoav367.webp" width="2400" height="1881" alt="Four noble truths before bedtime: bed in an empty room" loading="lazy">
         </button>
-        <div style="--x: 1063; --y: 10; --w: 1129; --h: 808;"><img src="images/photo-yoav369.webp" width="2400" height="1751" alt="Four noble truths before bedtime, photo 2" loading="lazy"></div>
-        <div style="--x: 2214; --y: 10; --w: 581; --h: 808;"><img src="images/photo-yoav371.webp" width="1465" height="2400" alt="Four noble truths before bedtime, photo 3" loading="lazy"></div>
-        <div style="--x: 2818; --y: 10; --w: 581; --h: 808;"><img src="images/photo-yoav372.webp" width="1909" height="2400" alt="Four noble truths before bedtime, photo 4" loading="lazy"></div>
+        <div style="--w: 1129; --h: 808;"><img src="images/photo-yoav369.webp" width="2400" height="1751" alt="Four noble truths before bedtime, photo 2" loading="lazy"></div>
+        <div style="--w: 581; --h: 808;"><img src="images/photo-yoav371.webp" width="1465" height="2400" alt="Four noble truths before bedtime, photo 3" loading="lazy"></div>
+        <div style="--w: 581; --h: 808;"><img src="images/photo-yoav372.webp" width="1909" height="2400" alt="Four noble truths before bedtime, photo 4" loading="lazy"></div>
       </div>
     </div>
     <p class="photo-caption from-left" style="--left: 204; --width: 521; --height: 26; --space-before: 20; --left-open: 482; --space-open: 20;">Four noble truths before bedtime</p>
 
-    <div id="megi-solar" class="photo-overlay from-left" style="--left: 205; --space-before: 30; --left-open: 482; --space-open: 25; --scale-open: 0.7578;">
-      <div class="photo-overlay-row" style="--width: 2598;">
+    <div id="megi-solar" class="photo-overlay from-left" style="--left: 205; --space-before: 30; --left-open: 482; --space-open: 25;">
+      <div class="photo-overlay-row">
         <button class="photo-box" aria-expanded="false" style="--width: 845.913; --height: 1216; --width-open: 641; --height-open: 921;">
           <img src="images/photo-yoavp1150.webp" width="1670" height="2400" alt="Megi Solar: portrait in a forest" loading="lazy">
         </button>
-        <div style="--x: 876; --w: 846; --h: 1216;"><img src="images/photo-megi-solar-2.webp" width="1670" height="2400" alt="Megi Solar, photo 2" loading="lazy"></div>
-        <div style="--x: 1752; --w: 846; --h: 1216;"><img src="images/photo-megi-solar-3.webp" width="1670" height="2400" alt="Megi Solar, photo 3" loading="lazy"></div>
+        <div style="--w: 846; --h: 1216;"><img src="images/photo-megi-solar-2.webp" width="1670" height="2400" alt="Megi Solar, photo 2" loading="lazy"></div>
+        <div style="--w: 846; --h: 1216;"><img src="images/photo-megi-solar-3.webp" width="1670" height="2400" alt="Megi Solar, photo 3" loading="lazy"></div>
       </div>
     </div>
     <p class="photo-caption from-left" style="--left: 205; --width: 521; --height: 26; --space-before: 20; --left-open: 480; --space-open: 30;">Megi Solar</p>
 
     <!-- Bank Leumi - Otzar Mekomi - Roots & Blossoms: a click opens a row of 6 photos (Figma frame 291:58) -->
-    <div id="bank-leumi" class="photo-overlay from-left" style="--left: 205; --space-before: 40; --left-open: 482; --space-open: 38; --scale-open: 0.7582;">
-      <div class="photo-overlay-row" style="--width: 6391;">
+    <div id="bank-leumi" class="photo-overlay from-left" style="--left: 205; --space-before: 40; --left-open: 482; --space-open: 38;">
+      <div class="photo-overlay-row">
         <button class="photo-box" aria-expanded="false" style="--width: 1034; --height: 686; --width-open: 784; --height-open: 520;">
           <img src="images/photo-illustration-14.webp" width="2400" height="1591" alt="Otzar Mekomi: man working in a workshop" loading="lazy">
         </button>
-        <div style="--x: 1085; --w: 1036; --h: 687;"><img src="images/photo-illustration-12.webp" width="2400" height="1591" alt="Otzar Mekomi, photo 2" loading="lazy"></div>
-        <div style="--x: 2149; --w: 1037; --h: 687;"><img src="images/photo-illustration-9.webp" width="2400" height="1591" alt="Otzar Mekomi, photo 3" loading="lazy"></div>
-        <div style="--x: 3223; --w: 1037; --h: 687;"><img src="images/photo-illustration-13.webp" width="2400" height="1591" alt="Otzar Mekomi, photo 4" loading="lazy"></div>
-        <div style="--x: 4310; --y: 9; --w: 1021; --h: 677;"><img src="images/photo-illustration-11.webp" width="2400" height="1591" alt="Otzar Mekomi, photo 5" loading="lazy"></div>
-        <div style="--x: 5368; --y: 9; --w: 1023; --h: 678;"><img src="images/photo-illustration-15.webp" width="2400" height="1591" alt="Otzar Mekomi, photo 6" loading="lazy"></div>
+        <div style="--w: 1036; --h: 687;"><img src="images/photo-illustration-12.webp" width="2400" height="1591" alt="Otzar Mekomi, photo 2" loading="lazy"></div>
+        <div style="--w: 1037; --h: 687;"><img src="images/photo-illustration-9.webp" width="2400" height="1591" alt="Otzar Mekomi, photo 3" loading="lazy"></div>
+        <div style="--w: 1037; --h: 687;"><img src="images/photo-illustration-13.webp" width="2400" height="1591" alt="Otzar Mekomi, photo 4" loading="lazy"></div>
+        <div style="--w: 1021; --h: 677;"><img src="images/photo-illustration-11.webp" width="2400" height="1591" alt="Otzar Mekomi, photo 5" loading="lazy"></div>
+        <div style="--w: 1023; --h: 678;"><img src="images/photo-illustration-15.webp" width="2400" height="1591" alt="Otzar Mekomi, photo 6" loading="lazy"></div>
       </div>
     </div>
     <p class="photo-caption from-left" style="--left: 205; --width: 787; --height: 26; --space-before: 20; --left-open: 479; --space-open: 29;">Bank Leumi - Otzar Mekomi - Roots &amp; Blossoms</p>

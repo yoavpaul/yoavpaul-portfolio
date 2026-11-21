@@ -4,6 +4,37 @@
 // (also with the mouse wheel). A click on any photo of an open row closes it.
 // Every row opens and closes on its own, so a few rows can be open together.
 
+// --- Even rows (photography page: <main class="has-even-rows">) ---
+// Every photo of a row gets the height of the first photo, keeps its own shape (--w / --h),
+// and stands --photo-row-gap Figma pixels after the one before it (styles.css).
+// This writes the places and sizes the CSS uses: --x, --y, --w, --h on each photo,
+// --width on the row, and --scale-open (how much the row shrinks when the page shows the texts:
+// as much as the first photo, so the photos still have its height)
+const rowGap = parseFloat(getComputedStyle(document.documentElement).getPropertyValue("--photo-row-gap"));
+
+for (const overlay of document.querySelectorAll(".has-even-rows .photo-overlay")) {
+  const firstPhoto = overlay.querySelector(".photo-box");
+  const row = overlay.querySelector(".photo-overlay-row");
+  const width = parseFloat(firstPhoto.style.getPropertyValue("--width"));
+  const height = parseFloat(firstPhoto.style.getPropertyValue("--height"));
+  const heightOpen = parseFloat(firstPhoto.style.getPropertyValue("--height-open")) || height;
+
+  let x = width + rowGap; // the next photo starts after the first one and a space
+  for (const photo of row.querySelectorAll(":scope > div")) {
+    const shape = parseFloat(photo.style.getPropertyValue("--w")) / parseFloat(photo.style.getPropertyValue("--h"));
+    const photoWidth = height * shape;
+    photo.style.setProperty("--x", x);
+    photo.style.setProperty("--y", 0);
+    photo.style.setProperty("--w", photoWidth);
+    photo.style.setProperty("--h", height);
+    x += photoWidth + rowGap;
+  }
+  row.style.setProperty("--width", x - rowGap);
+  overlay.style.setProperty("--scale-open", heightOpen / height);
+  // In the text layout the first photo keeps exactly its shape too, so the first space is like the others
+  firstPhoto.style.setProperty("--width-open", width * heightOpen / height);
+}
+
 for (const overlay of document.querySelectorAll(".photo-overlay")) {
   const photo = overlay.querySelector(".photo-box");
 
