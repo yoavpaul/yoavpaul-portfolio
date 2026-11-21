@@ -1,5 +1,5 @@
 // Home page "over view": a row of all the works that moves from left to right in a loop.
-// - It stops under the mouse, and "Random / Index" under it turns into the category (red) / name
+// - It stops under the mouse (or while a finger is on it), and "Random / Index" under it turns into the category (red) / name
 //   of the work under the mouse.
 // - It can be scrolled sideways: trackpad, mouse wheel or finger.
 // - "Random / Index" under it changes the order of the works.
@@ -79,21 +79,31 @@ function step(time) {
 
 // --- Stop under the mouse (or a finger), and show the name of the work ---
 
-carousel.addEventListener("mouseenter", () => {
-  paused = true;
+// A mouse: the row stops while the mouse is on it
+carousel.addEventListener("pointerenter", (event) => {
+  if (event.pointerType === "mouse") paused = true;
 });
-carousel.addEventListener("mouseleave", () => {
+carousel.addEventListener("pointerleave", (event) => {
+  if (event.pointerType !== "mouse") return;
   paused = false;
   clearName();
 });
-carousel.addEventListener("pointerdown", () => {
+
+// A finger (phone, tablet): the row stops only while the finger is on it,
+// and moves on as soon as the finger is lifted
+let lastTouchTime = 0;
+carousel.addEventListener("touchstart", () => {
   paused = true;
-});
-carousel.addEventListener("pointerup", (event) => {
-  if (event.pointerType !== "mouse") {
-    paused = false; // a finger left the row
-  }
-});
+  lastTouchTime = Date.now();
+}, { passive: true });
+function fingerLifted(event) {
+  if (event.touches.length > 0) return; // another finger is still on the row
+  paused = false;
+  lastTouchTime = Date.now();
+  clearName();
+}
+carousel.addEventListener("touchend", fingerLifted);
+carousel.addEventListener("touchcancel", fingerLifted);
 
 // The category and name of the work under the mouse
 function showName(event) {
@@ -111,7 +121,10 @@ function clearName() {
   section.classList.remove("is-showing-name");
 }
 track.addEventListener("mouseover", showName);
+// The keyboard (Tab): the row stops on the work that has the focus.
+// (A tap with a finger also gives a work the focus: that one doesn't stop the row)
 track.addEventListener("focusin", (event) => {
+  if (Date.now() - lastTouchTime < 1000) return;
   paused = true;
   showName(event);
 });
