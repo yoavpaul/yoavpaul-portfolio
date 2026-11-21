@@ -622,10 +622,16 @@ body {
   height: calc(var(--height) * var(--px));
   margin-bottom: 0;
   font-family: var(--font-nav);
-  font-size: max(12px, calc(32 * var(--px)));
+  font-size: max(12px, calc(var(--caption-size, 32) * var(--px))); /* 32px in Figma */
   font-weight: 500; /* Medium */
   line-height: normal;
   text-align: var(--align, left);
+}
+
+/* Branding: the names under the logos are 30px in Figma, each on one line */
+.branding-page .photo-caption {
+  --caption-size: 30;
+  white-space: nowrap;
 }
 
 /* ===== Photography, branding and graphics pages ===== */
