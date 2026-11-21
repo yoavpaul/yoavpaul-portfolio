@@ -25,7 +25,8 @@
 </style>
 </head>
 <body>
-<!-- The real graphics page, with the Soccer project open (the #soccer-joint at the end opens it) -->
+<!-- The real graphics page, at the Soccer project (the #soccer-joint at the end opens it).
+     The grass shows behind the whole page here, just to see it (it isn't used on the site now) -->
 <iframe id="page" src="../graphics.html#soccer-joint"></iframe>
 
 <div class="panel" id="panel">
@@ -233,7 +234,7 @@
     tileCanvas.toBlob((blob) => {
       if (style.dataset.url) URL.revokeObjectURL(style.dataset.url);
       style.dataset.url = URL.createObjectURL(blob);
-      style.textContent = `#soccer-panel { background: ${inputs.color.value} url("${style.dataset.url}") 0 0 / ${inputs.size.value}px !important; }`;
+      style.textContent = `body { background: ${inputs.color.value} url("${style.dataset.url}") 0 0 / ${inputs.size.value}px !important; }`;
     });
   }
 

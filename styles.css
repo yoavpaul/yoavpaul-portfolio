@@ -843,6 +843,7 @@ button.photo-box {
    from the top of the column of works. On phones they come under the work (phone.css) */
 .graphics-page .project-text {
   top: calc(var(--top) * var(--px));
+  cursor: pointer; /* a click on the text closes it (graphics-texts.js) */
 }
 
 /* The names of the works are buttons (graphics-texts.js): they look like the other captions,
@@ -875,11 +876,19 @@ button.photo-box {
   cursor: pointer;
 }
 
-/* ===== On The Line - Soccer (graphics page): its project panel is on the grass =====
-   (the panel itself works like the branding ones, see "Project panels" below)
+/* ===== On The Line - Soccer (graphics page) =====
+   A thin light-gray line around the poster and the poster moving (in its row) */
+.photo-overlay-row > .has-line {
+  outline: 1px solid #e0e0e0;
+  outline-offset: -1px;
+}
+
+/* The grass from the poster: NOT USED NOW, kept in case we want it back.
+   (It was the background of the Soccer project, on its own screen like the branding projects.
+   To use it, add class="grass-background" to the element that should be on the grass.)
    images/grass-texture.webp = a piece of the poster's grass, with the green mixed in.
    It is made and saved by the grass editor: python3 tools/grass-editor.py */
-#soccer-panel {
+.grass-background {
   background: #3f9b2f url("images/grass-texture.webp") 0 0 / 415px;
 }
 

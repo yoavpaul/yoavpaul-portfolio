@@ -1,5 +1,6 @@
 # The grass editor: a page in the browser for making the grass behind the
-# Soccer project panel (graphics page) and seeing it on the page right away.
+# Soccer project (graphics page) and seeing it on the page right away.
+# (The grass isn't used on the site now: see ".grass-background" in styles.css)
 #
 # How to run it (from the project folder):   python3 tools/grass-editor.py
 # It opens http://127.0.0.1:8766/tools/grass-editor.html in the browser.
@@ -7,7 +8,7 @@
 #
 # "Save to the site" in the editor writes:
 #   - the grass picture          -> images/grass-texture.webp
-#   - its color and size on screen -> styles.css (the "Soccer - Joint" part)
+#   - its color and size on screen -> styles.css (".grass-background")
 #
 # Nothing to install: it uses only what comes with Python.
 

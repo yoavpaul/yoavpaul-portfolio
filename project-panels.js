@@ -31,9 +31,8 @@ function closeProjectPanel() {
   panelButton = null;
 }
 
-// A click on a project's photo opens its panel.
-// (The names on the graphics page, "caption-button", open their panel from graphics-texts.js)
-for (const button of document.querySelectorAll("[data-panel]:not(.caption-button)")) {
+// A click on a project's photo opens its panel
+for (const button of document.querySelectorAll("[data-panel]")) {
   button.addEventListener("click", () => openProjectPanel(button));
 }
 
