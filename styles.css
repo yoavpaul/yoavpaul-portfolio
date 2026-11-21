@@ -845,6 +845,23 @@ button.photo-box {
   top: calc(var(--top) * var(--px));
 }
 
+/* The names of the works are buttons (graphics-texts.js): they look like the other captions,
+   turn red under the mouse, and stay red while their text is open */
+.caption-button {
+  padding: 0;
+  border: none;
+  background: none;
+  font: inherit;
+  color: inherit;
+  text-align: inherit;
+  cursor: pointer;
+}
+
+.caption-button:hover,
+.caption-button[aria-expanded="true"] {
+  color: var(--color-accent);
+}
+
 /* The names: Editor Sans Bold 30px, lines 26px apart (on computers; phones use phone.css) */
 @media (min-width: 701px) {
   .graphics-page .project-text h2 {

@@ -26,20 +26,25 @@
   <!-- The works and their names. Sizes are in Figma pixels (see "Columns and rows" in styles.css) -->
   <main class="figma-column">
 
-    <!-- The two books (1+1= and Soccer) are in the middle of the right two thirds of the page
-         (480 to 1440, middle 960), so they don't go under the texts on the left. Their names moved with them.
+    <!-- Two layouts, like the photography page:
+         - At first the works alone (Figma "graphics option 2"): --left, --space-before, --width, --height.
+         - A click on the name of a work (under it) opens its text on the left, and the page changes to the
+           text layout (Figma "graphics option with text", graphics-texts.js). Then every work uses its
+           "-open" numbers: --left-open, --space-open, --width-open, --height-open (and --scale-open for a row).
+           The two books are then in the middle of the right two thirds of the page (480 to 1440, middle 960),
+           so they don't go under the texts, and their names move with them.
+         A second click on the name closes its text. When no text is open, the page goes back to the first layout.
+         --top of a text = where it starts in the text layout (Figma pixels from the top of this column). -->
 
-         1+1= : the book (Hebrew, right to left). It turns its pages by itself until a click;
+    <!-- 1+1= : the book (Hebrew, right to left). It turns its pages by itself until a click;
          then a click on the left page shows the next pages, on the right page the pages before (book-pages.js).
          images/one-plus-one-page-00.webp is the cover, 01 to 28 are the pages (see-through background) -->
-    <div id="one-plus-one" class="photo-box from-left book" tabindex="0" role="button" aria-label="1+1=, click to turn the pages" style="--left: 560; --width: 800; --height: 602;">
+    <div id="one-plus-one" class="photo-box from-left book" tabindex="0" role="button" aria-label="1+1=, click to turn the pages" style="--left: 335; --left-open: 560; --width: 800; --height: 602;">
       <img src="images/one-plus-one-page-00.webp" width="1360" height="1024" alt="1+1=, the cover">
     </div>
+    <p class="photo-caption from-left" style="--left: 448; --left-open: 715; --space-open: -30; --width: 391; --height: 38;"><button class="caption-button" type="button" aria-expanded="false" aria-controls="text-one-plus-one">1+1 =</button></p>
 
-    <p class="photo-caption from-left" style="--left: 715; --width: 77; --height: 38; --space-before: -30;">1+1 =</p>
-
-    <!-- The text about 1+1= on the left (--top = Figma pixels from the top of this column) -->
-    <aside class="project-text" style="--top: 51;">
+    <aside class="project-text" id="text-one-plus-one" style="--top: 51;" hidden>
       <h2>1+1 =</h2>
       <p class="has-line-space">Design and layout of a photography booklet by Yiftach Sofrin.</p>
       <p>The book offers an intimate look into the relationship between the photographer and his partner, to whom it is dedicated.</p>
@@ -47,22 +52,22 @@
 
     <!-- I'M HERE? (Tartoctober posters): a click on the poster opens a row with the 3 posters,
          like the photography page. A click on any poster of the open row closes it.
+         A click on its name opens its text and its row together.
          --x, --y = where each poster starts, --w, --h = its size (Figma frame "Im here?").
-         The first poster is smaller on the page (484 instead of 523), so the whole row is
-         made smaller the same way: --row-scale = 484 / 523 -->
-    <div id="im-here" class="photo-overlay from-left" style="--left: 478; --space-before: 237; --row-scale: 0.9254;">
+         In the text layout the first poster is smaller (484 instead of 523), so the whole row is
+         made smaller the same way: --scale-open = 484 / 523 -->
+    <div id="im-here" class="photo-overlay from-left" style="--left: 448; --space-before: 179; --left-open: 478; --space-open: 237; --scale-open: 0.9254;">
       <div class="photo-overlay-row" style="--width: 1645;">
-        <button class="photo-box" aria-expanded="false" style="--width: 484; --height: 684;">
+        <button class="photo-box" aria-expanded="false" style="--width: 523; --height: 740; --width-open: 484; --height-open: 684;">
           <img src="images/tartakover-poster.webp" width="1697" height="2400" alt="I'M HERE? poster, red">
         </button>
         <div style="--x: 561; --y: 0; --w: 523; --h: 740;"><img src="images/tartakover-poster-black.webp" width="1697" height="2400" alt="I'M HERE? poster, black (exhibition)" loading="lazy"></div>
         <div style="--x: 1122; --y: 0; --w: 523; --h: 739;"><img src="images/tartakover-poster-green.webp" width="1697" height="2400" alt="I'M HERE? poster, green" loading="lazy"></div>
       </div>
     </div>
-    <p class="photo-caption from-left" style="--left: 478; --width: 391; --height: 38; --space-before: 28;">I’M HERE?</p>
+    <p class="photo-caption from-left" style="--left: 448; --space-before: 33; --left-open: 478; --space-open: 28; --width: 391; --height: 38;"><button class="caption-button" type="button" aria-expanded="false" aria-controls="text-im-here" data-row="im-here">I’M HERE?</button></p>
 
-    <!-- The text about I'M HERE? on the left -->
-    <aside class="project-text" style="--top: 847;">
+    <aside class="project-text" id="text-im-here" style="--top: 847;" hidden>
       <h2>I’m Here? — Lino Prints Series</h2>
       <p class="has-line-space">A series of three lino prints originally created for the entrance exams to Weißensee Academy of Art Berlin, later exhibited at Bezalel as part of the “I Am Here” exhibition, Inspired by the work of Israeli designer David Tartakover.<br>
         The prints reflect the Israeli reality of the past three years and invite viewers to connect from both Israeli and Palestinian perspectives, using familiar symbols and colors that speak to shared cultural identities.</p>
@@ -71,18 +76,17 @@
     </aside>
 
     <!-- On The Line - Soccer: the notebook's pages turning (see-through background, .mov for Safari, .webm for the others).
-         A click opens the whole project on the screen, on the grass (see "soccer-panel" at the bottom),
-         like the projects on the branding page -->
-    <button id="soccer-joint" class="photo-box from-left" type="button" data-panel="soccer-panel" aria-haspopup="dialog" style="--left: 534; --width: 851; --height: 641; --space-before: 96;">
+         A click on the notebook opens the whole project on the screen, on the grass (see "soccer-panel" at the bottom),
+         like the projects on the branding page. A click on its name opens its text -->
+    <button id="soccer-joint" class="photo-box from-left" type="button" data-panel="soccer-panel" aria-haspopup="dialog" style="--left: 267; --space-before: 50; --width: 886; --height: 667; --left-open: 534; --space-open: 96; --width-open: 851; --height-open: 641;">
       <video autoplay muted loop playsinline aria-label="On The Line - Soccer, the notebook's pages turning">
         <source src="images/soccer-joint-spreads.mov" type="video/quicktime">
         <source src="images/soccer-joint-spreads.webm" type="video/webm">
       </video>
     </button>
-    <p class="photo-caption from-left" style="--left: 716; --width: 388; --height: 23; --space-before: -24;">On The Line - Soccer</p>
+    <p class="photo-caption from-left" style="--left: 479; --left-open: 716; --space-open: -24; --width: 388; --height: 23;"><button class="caption-button" type="button" aria-expanded="false" aria-controls="text-soccer-joint">On The Line - Soccer</button></p>
 
-    <!-- The text about On The Line - Soccer on the left -->
-    <aside class="project-text" style="--top: 1737;">
+    <aside class="project-text" id="text-soccer-joint" style="--top: 1737;" hidden>
       <h2>On The Lines — Football</h2>
       <p class="has-line-space">Graphic Design &amp; Typography Course lecturer by Michal Sahar.</p>
       <p>A visual interpretation of Wikipedia's football entry, transformed into a printed booklet.</p>
@@ -123,6 +127,7 @@
   <script src="photo-overlays.js"></script>
   <script src="project-panels.js"></script>
   <script src="book-pages.js"></script>
+  <script src="graphics-texts.js"></script>
   <script src="top-bar-menu.js"></script>
   <script src="top-bar-blur.js"></script>
 </body>
