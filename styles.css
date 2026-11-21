@@ -123,6 +123,10 @@
 body {
   margin: 0;
   background-color: var(--color-background);
+  /* The page never scrolls sideways. (A Figma pixel is measured on the whole window width,
+     which includes the scroll bar on computers with a mouse, so the page was a little
+     wider than the window there) */
+  overflow-x: clip;
 }
 
 /* ===== Flying fly ===== */
