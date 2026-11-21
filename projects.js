@@ -14,6 +14,8 @@
 //                 src, width, height = the image file and its real size in pixels
 //                 ratio = the width / height of its box in the carousel (from Figma)
 //                 size  = (optional) how high it is compared to the row, e.g. "50%"
+//                 align = (optional) where a smaller work sits in the row's height:
+//                         "start" (top), "center" (middle, the default) or "end" (bottom)
 //                 crop  = (optional) shows only part of the image: top, left, width, height in %
 
 // Reads projects.json and gives back the list of works
@@ -21,4 +23,34 @@ async function loadProjects() {
   const response = await fetch("projects.json");
   const data = await response.json();
   return data.projects;
+}
+
+// Makes one work of the home carousel from its line in projects.json
+// (used by home-carousel.js and by the carousel editor, carousel-editor.html)
+function makeCarouselItem(project) {
+  const cover = project.cover;
+  const item = document.createElement("a");
+  item.className = "carousel-item";
+  item.href = project.page;
+  item.dataset.name = project.title;
+  item.dataset.category = project.category;
+  item.dataset.index = project.order;
+  item.style.setProperty("--ratio", cover.ratio);
+  if (cover.size) item.style.setProperty("--item-height", cover.size);
+  if (cover.align) item.style.alignSelf = cover.align;
+
+  const img = document.createElement("img");
+  img.src = cover.src;
+  img.width = cover.width;
+  img.height = cover.height;
+  img.alt = project.title;
+  if (cover.crop) {
+    img.className = "is-cropped";
+    img.style.setProperty("--img-top", cover.crop.top);
+    img.style.setProperty("--img-left", cover.crop.left);
+    img.style.setProperty("--img-width", cover.crop.width);
+    img.style.setProperty("--img-height", cover.crop.height);
+  }
+  item.appendChild(img);
+  return item;
 }

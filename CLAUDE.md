@@ -21,6 +21,7 @@
 - רשימת כל העבודות: `projects.json` (ההסבר על השדות ב-`projects.js`). הקרוסלה בעמוד הבית והרשימות באינדקס נבנות ממנו. עבודה חדשה נכנסת קודם לשם.
 - טקסט האודות: `content/about.md`.
 - מה שעוד חסר: `todo.md`. מה שנשבר במבחן הלחץ: `gaps.md`.
+- עורך הקרוסלה: `python3 tools/carousel-editor.py` פותח בדפדפן את `carousel-editor.html`, שבו מכוונים את גודל ומיקום העבודות בקרוסלה. השמירה כותבת ל-`projects.json` ול-`styles.css`.
 - כלים: `tools/shrink-images.py` (תמונות ל-WebP) ו-`tools/compress-video.swift` (דחיסת וידאו). המקורות נשמרים ב-`originals`, שלא עולה לאתר.
 
 ## התאמה למסכים

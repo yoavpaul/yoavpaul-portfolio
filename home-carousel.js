@@ -25,33 +25,6 @@ const SECONDS_PER_ROUND = 75; // time for all the works to pass once
 // They are made at the end of this file, after projects.json has loaded
 let works = [];
 
-// Makes one work of the row from its line in projects.json
-function makeCarouselItem(project) {
-  const cover = project.cover;
-  const item = document.createElement("a");
-  item.className = "carousel-item";
-  item.href = project.page;
-  item.dataset.name = project.title;
-  item.dataset.category = project.category;
-  item.dataset.index = project.order;
-  item.style.setProperty("--ratio", cover.ratio);
-  if (cover.size) item.style.setProperty("--item-height", cover.size);
-
-  const img = document.createElement("img");
-  img.src = cover.src;
-  img.width = cover.width;
-  img.height = cover.height;
-  img.alt = project.title;
-  if (cover.crop) {
-    img.className = "is-cropped";
-    img.style.setProperty("--img-top", cover.crop.top);
-    img.style.setProperty("--img-left", cover.crop.left);
-    img.style.setProperty("--img-width", cover.crop.width);
-    img.style.setProperty("--img-height", cover.crop.height);
-  }
-  item.appendChild(img);
-  return item;
-}
 
 // People who asked their computer for less movement: no moving by itself (scrolling still works)
 const lessMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;

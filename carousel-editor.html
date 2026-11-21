@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Carousel editor – Yoav Paul</title>
+  <!-- The same styles as the site, so the row here looks exactly like on the home page -->
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="phone.css" media="(max-width: 700px)">
+  <style>
+    /* ===== Only for this editor page (not part of the site) ===== */
+    body {
+      font-family: var(--font-nav);
+      font-size: 14px;
+    }
+
+    .editor-bar {
+      position: sticky;
+      top: 0;
+      z-index: 5;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 12px var(--space-page);
+      background: #fff;
+      border-bottom: 1px solid #e5e5e5;
+    }
+
+    .editor-bar h1 {
+      margin: 0 auto 0 0;
+      font-size: 16px;
+      font-weight: 600;
+    }
+
+    .editor-status {
+      color: var(--color-text-muted);
+    }
+
+    .editor-button {
+      padding: 6px 14px;
+      border: 1px solid #000;
+      border-radius: 999px;
+      background: #fff;
+      font: inherit;
+      cursor: pointer;
+    }
+
+    .editor-button.is-main {
+      background: #000;
+      color: #fff;
+    }
+
+    .editor-button:disabled {
+      opacity: 0.35;
+      cursor: default;
+    }
+
+    /* The row: like on the home page, with a light frame so its height can be seen */
+    .editor-preview {
+      margin-top: 0;
+      padding: 32px 0 24px;
+    }
+
+    .editor-preview .carousel {
+      outline: 1px dashed #ccc;
+    }
+
+    .editor-preview .carousel-item {
+      cursor: pointer;
+    }
+
+    .editor-preview .carousel-item.is-selected {
+      outline: 2px solid var(--color-accent);
+      outline-offset: -2px;
+    }
+
+    .editor-hint {
+      margin: 8px var(--space-page) 0;
+      color: var(--color-text-muted);
+    }
+
+    /* The controls */
+    .editor-controls {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 12px;
+      padding: 16px var(--space-page) 60px;
+    }
+
+    .editor-card {
+      display: grid;
+      grid-template-columns: 56px 1fr;
+      gap: 6px 12px;
+      align-items: center;
+      padding: 12px;
+      border: 1px solid #e5e5e5;
+      border-radius: 8px;
+    }
+
+    .editor-card.is-row {
+      grid-template-columns: 1fr;
+      background: #f6f6f6;
+    }
+
+    .editor-card.is-selected {
+      border-color: var(--color-accent);
+    }
+
+    .editor-card img {
+      grid-row: span 3;
+      width: 56px;
+      height: 56px;
+      object-fit: contain;
+      background: #f2f2f2;
+    }
+
+    .editor-card strong {
+      font-weight: 600;
+    }
+
+    .editor-line {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .editor-line label {
+      flex: none;
+      width: 56px;
+      color: var(--color-text-muted);
+    }
+
+    .editor-line input[type="range"] {
+      flex: 1;
+      min-width: 0;
+      accent-color: var(--color-accent);
+    }
+
+    .editor-line input[type="number"] {
+      flex: none;
+      width: 52px;
+      font: inherit;
+    }
+
+    .editor-align button {
+      padding: 2px 8px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      background: #fff;
+      font: inherit;
+      cursor: pointer;
+    }
+
+    .editor-align button.is-active {
+      border-color: #000;
+      background: #000;
+      color: #fff;
+    }
+  </style>
+</head>
+<body>
+  <!-- The carousel editor (opened by tools/carousel-editor.py, see there).
+       It shows the home page row of works, still (it doesn't move), and lets you set:
+       - for every work: its size (% of the row's height) and where it sits (top / middle / bottom)
+       - for the whole row: its height and the space between the works (Figma pixels)
+       "Save" writes them to projects.json and styles.css -->
+  <header class="editor-bar">
+    <h1>Carousel editor</h1>
+    <span class="editor-status" aria-live="polite"></span>
+    <button class="editor-button" type="button" id="undo" disabled>Undo changes</button>
+    <button class="editor-button is-main" type="button" id="save" disabled>Save</button>
+  </header>
+
+  <!-- The same parts as on the home page, so styles.css draws them the same way -->
+  <main class="carousel-section editor-preview">
+    <div class="carousel">
+      <div class="carousel-track"></div>
+    </div>
+  </main>
+  <p class="editor-hint">Click a work in the row to find its controls. Scroll the row sideways to see all the works. The row is as wide as this window, like on the home page: make the window narrower to see it on a smaller screen.</p>
+
+  <section class="editor-controls"></section>
+
+  <script src="projects.js"></script>
+  <script src="carousel-editor.js"></script>
+</body>
+</html>
