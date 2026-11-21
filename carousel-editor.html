@@ -79,6 +79,69 @@
       color: var(--color-text-muted);
     }
 
+    /* Computer / Phone */
+    .editor-modes {
+      display: flex;
+      border: 1px solid #000;
+      border-radius: 999px;
+      overflow: hidden;
+    }
+
+    .editor-mode {
+      padding: 6px 14px;
+      border: none;
+      background: #fff;
+      font: inherit;
+      cursor: pointer;
+    }
+
+    .editor-mode.is-active {
+      background: #000;
+      color: #fff;
+    }
+
+    /* The phone frame: only in the Phone mode */
+    .editor-phone,
+    .editor-hint-phone,
+    body.is-phone-mode .editor-preview,
+    body.is-phone-mode .editor-hint-computer {
+      display: none;
+    }
+
+    body.is-phone-mode .editor-phone {
+      display: flex;
+      justify-content: center;
+      padding: 32px 0 8px;
+    }
+
+    body.is-phone-mode .editor-hint-phone {
+      display: block;
+      text-align: center;
+    }
+
+    .editor-phone-frame {
+      width: 390px;
+      height: 400px; /* changed by carousel-editor.js to fit the row */
+      border: 1px solid #000;
+      border-radius: 24px;
+    }
+
+    /* Inside the phone frame: only the row */
+    body.is-phone-frame .editor-bar,
+    body.is-phone-frame .editor-hint,
+    body.is-phone-frame .editor-phone,
+    body.is-phone-frame .editor-controls {
+      display: none;
+    }
+
+    body.is-phone-frame {
+      overflow: hidden;
+    }
+
+    body.is-phone-frame .editor-preview {
+      padding: 40px 0;
+    }
+
     /* The controls */
     .editor-controls {
       display: grid;
@@ -166,6 +229,10 @@
        "Save" writes them to projects.json and styles.css -->
   <header class="editor-bar">
     <h1>Carousel editor</h1>
+    <span class="editor-modes">
+      <button class="editor-mode is-active" type="button" data-mode="computer">Computer</button>
+      <button class="editor-mode" type="button" data-mode="phone">Phone</button>
+    </span>
     <span class="editor-status" aria-live="polite"></span>
     <button class="editor-button" type="button" id="undo" disabled>Undo changes</button>
     <button class="editor-button is-main" type="button" id="save" disabled>Save</button>
@@ -177,7 +244,13 @@
       <div class="carousel-track"></div>
     </div>
   </main>
-  <p class="editor-hint">Click a work in the row to find its controls. Scroll the row sideways to see all the works. The row is as wide as this window, like on the home page: make the window narrower to see it on a smaller screen.</p>
+  <!-- The phone version: the same page in a phone-sized frame (see carousel-editor.js) -->
+  <div class="editor-phone">
+    <iframe class="editor-phone-frame" src="carousel-editor.html?phone-frame" title="The row on a phone"></iframe>
+  </div>
+
+  <p class="editor-hint editor-hint-computer">Click a work in the row to find its controls. Scroll the row sideways to see all the works. The row is as wide as this window, like on the home page: make the window narrower to see it on a smaller screen.</p>
+  <p class="editor-hint editor-hint-phone">The row as it looks on a phone 390px wide (like an iPhone). Swipe or scroll it sideways, and click a work to find its controls. On the phone each work starts with its computer size; changing it here changes it only on phones.</p>
 
   <section class="editor-controls"></section>
 

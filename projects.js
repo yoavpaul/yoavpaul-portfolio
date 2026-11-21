@@ -16,6 +16,7 @@
 //                 size  = (optional) how high it is compared to the row, e.g. "50%"
 //                 align = (optional) where a smaller work sits in the row's height:
 //                         "start" (top), "center" (middle, the default) or "end" (bottom)
+//                 phoneSize, phoneAlign = (optional) the same, only on phones
 //                 crop  = (optional) shows only part of the image: top, left, width, height in %
 
 // Reads projects.json and gives back the list of works
@@ -37,7 +38,9 @@ function makeCarouselItem(project) {
   item.dataset.index = project.order;
   item.style.setProperty("--ratio", cover.ratio);
   if (cover.size) item.style.setProperty("--item-height", cover.size);
-  if (cover.align) item.style.alignSelf = cover.align;
+  if (cover.align) item.style.setProperty("--item-align", cover.align);
+  if (cover.phoneSize) item.style.setProperty("--item-height-phone", cover.phoneSize);
+  if (cover.phoneAlign) item.style.setProperty("--item-align-phone", cover.phoneAlign);
 
   const img = document.createElement("img");
   img.src = cover.src;

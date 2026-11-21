@@ -520,7 +520,7 @@ body {
   position: relative;
   flex: none;
   height: var(--item-height, 100%); /* a smaller work sits in the middle of the row's height */
-  align-self: center;
+  align-self: var(--item-align, center); /* or at the top / bottom (set in projects.json) */
   aspect-ratio: var(--ratio);
   margin-right: calc(35 * var(--px));
   overflow: hidden;

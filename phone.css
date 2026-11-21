@@ -81,6 +81,9 @@
 
 .carousel-item {
   margin-right: 12px;
+  /* A work can have its own size and place on the phone (phoneSize / phoneAlign in projects.json) */
+  height: var(--item-height-phone, var(--item-height, 100%));
+  align-self: var(--item-align-phone, var(--item-align, center));
 }
 
 /* "Random / Index" under the row */
