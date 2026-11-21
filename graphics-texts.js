@@ -2,8 +2,9 @@
 // A click on a name opens its text on the left, and the page changes to the text layout from Figma
 // ("graphics option with text"): the works move right, so the texts have room.
 // I'M HERE? and On The Line - Soccer (data-row): their row opens and closes together with their text.
-// A second click on the name, or a click on the open text, closes it, and the work goes back
-// to how it was (its row closes). A few texts can be open together.
+// While a text is open, the name under its work hides (it is in the text).
+// A click on the open text closes it: the work goes back to how it was (its row closes)
+// and its name comes back. A few texts can be open together.
 // When all are closed, the page goes back to the first layout.
 // (The text layout itself is in styles.css: "body.is-reading")
 
@@ -24,6 +25,9 @@
     const text = document.getElementById(name.getAttribute("aria-controls"));
     text.hidden = !open;
     name.setAttribute("aria-expanded", open);
+
+    // While the text is open, the name under the work hides (it is in the text). It keeps its place
+    name.closest(".photo-caption").classList.toggle("is-hidden", open);
 
     // The row follows the text (photo-overlays.js opens or closes it on "toggle-row")
     const row = rowOf(name);
