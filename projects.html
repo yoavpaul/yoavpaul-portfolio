@@ -23,19 +23,20 @@
   </section>
 
   <!-- The three categories. Each one turns red under the mouse.
-       A click on a category opens (or closes) the list of its projects under it.
+       A click on a category opens (or closes) the list of its projects under it,
+       and a double click leads to the category's page (data-page).
        Each project in the list turns red under the mouse and leads to that project.
        The projects in the lists come from projects.json (index-menu.js puts them here, by their "order").
        Places are in Figma pixels, measured from the bottom of the big name:
        --x, --y = where it starts, --w = its width -->
   <main class="index-categories">
-    <button class="index-category" aria-expanded="false" aria-controls="list-branding" style="--x: 82; --y: 79; --w: 352;">Branding</button>
+    <button class="index-category" aria-expanded="false" aria-controls="list-branding" data-page="branding.html" style="--x: 82; --y: 79; --w: 352;">Branding</button>
     <ul class="index-list" id="list-branding" style="--x: 82; --y: 234; --w: 282;" hidden></ul>
 
-    <button class="index-category" aria-expanded="false" aria-controls="list-photography" style="--x: 527; --y: 86; --w: 448;">Photography</button>
+    <button class="index-category" aria-expanded="false" aria-controls="list-photography" data-page="photography.html" style="--x: 527; --y: 86; --w: 448;">Photography</button>
     <ul class="index-list" id="list-photography" style="--x: 519; --y: 233; --w: 425;" hidden></ul>
 
-    <button class="index-category" aria-expanded="false" aria-controls="list-graphics" style="--x: 1068; --y: 93; --w: 316;">Graphics</button>
+    <button class="index-category" aria-expanded="false" aria-controls="list-graphics" data-page="graphics.html" style="--x: 1068; --y: 93; --w: 316;">Graphics</button>
     <ul class="index-list" id="list-graphics" style="--x: 1084; --y: 233; --w: 285;" hidden></ul>
   </main>
 

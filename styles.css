@@ -1086,6 +1086,7 @@ body.has-dark-panel .top-bar {
   line-height: normal;
   text-align: left;
   cursor: pointer;
+  touch-action: manipulation; /* a double tap on a phone doesn't zoom (it leads to the page) */
 }
 
 /* The list of projects under a category (hidden until the category is clicked).
