@@ -345,7 +345,7 @@ body {
   background: none;
   font: inherit;
   color: inherit;
-  cursor: pointer;
+  cursor: pointer;  touch-action: manipulation; /* a double tap on a phone doesn't zoom (it leads to the index page) */
 }
 
 /* The folded menu: only "Index" and the page you are on */
