@@ -5,6 +5,7 @@
 
 let openPanel = null;    // the panel that is open now
 let panelButton = null;  // the photo that opened it
+const rotateHint = document.querySelector(".rotate-hint"); // "Turn your phone sideways" (only on upright phones)
 
 function openProjectPanel(button) {
   panelButton = button;
@@ -16,12 +17,14 @@ function openProjectPanel(button) {
   document.body.classList.toggle("has-dark-panel", !openPanel.classList.contains("is-light"));
   for (const video of openPanel.querySelectorAll("video")) video.play();
   openPanel.focus();
+  rotateHint.hidden = false; // phone.css shows it only on a phone held upright
 }
 
 function closeProjectPanel() {
   if (!openPanel) return;
   for (const video of openPanel.querySelectorAll("video")) video.pause();
   openPanel.hidden = true;
+  rotateHint.hidden = true;
   document.body.classList.remove("has-open-panel", "has-dark-panel");
   panelButton.focus();
   openPanel = null;
@@ -56,6 +59,11 @@ const linkedButton = location.hash && document.querySelector(location.hash + "[d
 if (linkedButton) {
   openProjectPanel(linkedButton);
 }
+
+// A tap on the note hides it (the project stays open)
+rotateHint.addEventListener("click", () => {
+  rotateHint.hidden = true;
+});
 
 // The Esc key closes the panel
 document.addEventListener("keydown", (event) => {

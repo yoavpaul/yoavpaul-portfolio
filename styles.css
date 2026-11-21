@@ -842,7 +842,11 @@ button.photo-box {
    the Figma frame is 1069px high, so one Figma pixel = the screen height / 1069 */
 
 .project-panel {
-  --s: calc(100vh / 1069); /* one Figma pixel */
+  /* The height the frame fills: the whole screen.
+     dvh = the part of the screen you can really see on a phone (without the browser's bars) */
+  --panel-height: 100vh;
+  --panel-height: 100dvh;
+  --s: calc(var(--panel-height) / 1069); /* one Figma pixel */
   position: fixed;
   inset: 0;
   z-index: 4; /* above the page, under the top bar */
@@ -884,8 +888,27 @@ body.has-dark-panel .top-bar {
 .project-panel-stage {
   position: relative;
   width: calc(var(--width) * var(--s));
-  height: 100vh;
+  height: var(--panel-height);
   overflow: hidden; /* things that go over the top are cut, like in Figma */
+}
+
+/* A phone turned sideways (a wide, low screen): the top bar takes a big part of the height,
+   so the frame starts under it and fills the rest of the height */
+@media (orientation: landscape) and (max-height: 500px) {
+  .project-panel {
+    --panel-height: calc(100vh - var(--panel-bar));
+    --panel-height: calc(100dvh - var(--panel-bar));
+    --panel-bar: 48px; /* the top bar's two lines ("Index / Branding") */
+  }
+
+  .project-panel-stage {
+    margin-top: var(--panel-bar);
+  }
+}
+
+/* "Turn your phone sideways": hidden on computers (phone.css shows it on upright phones) */
+.rotate-hint {
+  display: none;
 }
 
 /* A work: its place and size (a click on it closes the panel) */

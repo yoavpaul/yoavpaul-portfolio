@@ -186,3 +186,27 @@
   transform: translateX(-50%);
   padding: 8px 0 0;
 }
+
+/* Branding: "Turn your phone sideways" over an open project, on a phone held upright.
+   Turning the phone hides it by itself (the screen is no longer upright); a tap also hides it */
+@media (orientation: portrait) {
+  body.has-open-panel .rotate-hint:not([hidden]) {
+    position: fixed;
+    inset: 0;
+    z-index: 6; /* above the project and the top bar */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 16px;
+    width: 100%;
+    padding: 0;
+    border: none;
+    background-color: rgba(0, 0, 0, 0.8);
+    color: #fff;
+    font-family: var(--font-nav);
+    font-size: 16px;
+    line-height: 1.4;
+    text-align: center;
+  }
+}
