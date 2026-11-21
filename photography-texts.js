@@ -59,10 +59,23 @@
     }
   }
 
+  // "Turn your phone sideways": shows when a row opens (only on upright phones, see phone.css),
+  // and hides with a tap on it, or when all the rows are closed
+  const rotateHint = document.querySelector(".rotate-hint");
+  rotateHint.addEventListener("click", () => {
+    rotateHint.hidden = true;
+  });
+
   // After every click on a row (photo-overlays.js has already opened or closed it)
   document.addEventListener("click", (event) => {
     const row = event.target.closest(".photo-overlay");
-    if (row) updateTexts(row);
+    if (!row) return;
+    updateTexts(row);
+    if (row.classList.contains("is-open")) {
+      rotateHint.hidden = false;
+    } else if (!document.querySelector(".photo-overlay.is-open")) {
+      rotateHint.hidden = true;
+    }
   });
 
   // When the window changes size, the texts move with their photos

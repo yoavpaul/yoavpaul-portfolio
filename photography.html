@@ -150,6 +150,17 @@
     </aside>
   </main>
 
+  <!-- On a phone held upright: when a row of photos opens, a note asks to turn the phone sideways
+       (it shows only on upright phones, see phone.css). A tap hides it -->
+  <button class="rotate-hint" type="button" hidden>
+    <svg class="rotate-hint-icon" viewBox="0 0 48 48" width="48" height="48" aria-hidden="true">
+      <rect x="14" y="6" width="20" height="34" rx="3" fill="none" stroke="currentColor" stroke-width="2"/>
+      <path d="M40 24a16 16 0 0 1-8 13.9" fill="none" stroke="currentColor" stroke-width="2"/>
+      <path d="M28 37l4 1.5-1 4" fill="none" stroke="currentColor" stroke-width="2"/>
+    </svg>
+    Turn your phone sideways<br>to see the whole project
+  </button>
+
   <script src="photo-overlays.js"></script>
   <script src="photography-texts.js"></script>
   <script src="top-bar-menu.js"></script>

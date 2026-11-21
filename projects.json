@@ -7,7 +7,12 @@
       "category": "Branding",
       "page": "branding.html#the-lodge",
       "order": 2,
-      "cover": { "src": "images/thelodge-corederoy-logo-negative.webp", "width": 2400, "height": 2400, "ratio": "1 / 1" }
+      "cover": {
+        "src": "images/thelodge-corederoy-logo-negative.webp",
+        "width": 2400,
+        "height": 2400,
+        "ratio": "1 / 1"
+      }
     },
     {
       "slug": "dissociative-self",
@@ -16,8 +21,18 @@
       "category": "Photography",
       "page": "photography.html#dissociative-self",
       "order": 4,
-      "cover": { "src": "images/photo-my-project-6.webp", "width": 1697, "height": 2400, "ratio": "1049 / 855",
-                 "crop": { "top": -44.06, "left": -4.36, "width": 108.75, "height": 188.58 } }
+      "cover": {
+        "src": "images/photo-my-project-6.webp",
+        "width": 1697,
+        "height": 2400,
+        "ratio": "1049 / 855",
+        "crop": {
+          "top": -44.06,
+          "left": -4.36,
+          "width": 108.75,
+          "height": 188.58
+        }
+      }
     },
     {
       "slug": "im-here",
@@ -26,7 +41,13 @@
       "category": "Graphics",
       "page": "graphics.html#im-here",
       "order": 10,
-      "cover": { "src": "images/tartakover-poster.webp", "width": 1697, "height": 2400, "ratio": "694 / 982" }
+      "cover": {
+        "src": "images/tartakover-poster.webp",
+        "width": 1697,
+        "height": 2400,
+        "ratio": "694 / 982",
+        "size": "89%"
+      }
     },
     {
       "slug": "monsters-under-the-bed",
@@ -35,7 +56,12 @@
       "category": "Photography",
       "page": "photography.html#monsters-under-the-bed",
       "order": 6,
-      "cover": { "src": "images/yarzin-photoshoot.webp", "width": 1658, "height": 2400, "ratio": "840 / 1216" }
+      "cover": {
+        "src": "images/yarzin-photoshoot.webp",
+        "width": 1658,
+        "height": 2400,
+        "ratio": "840 / 1216"
+      }
     },
     {
       "slug": "cinema-south-festival",
@@ -44,7 +70,12 @@
       "category": "Branding",
       "page": "branding.html#cinema-south-festival",
       "order": 1,
-      "cover": { "src": "images/sff-logo.webp", "width": 1484, "height": 1526, "ratio": "1484 / 1526" }
+      "cover": {
+        "src": "images/sff-logo.webp",
+        "width": 1484,
+        "height": 1526,
+        "ratio": "1484 / 1526"
+      }
     },
     {
       "slug": "four-noble-truths",
@@ -53,7 +84,12 @@
       "category": "Photography",
       "page": "photography.html#four-noble-truths",
       "order": 5,
-      "cover": { "src": "images/photo-yoav367.webp", "width": 2400, "height": 1881, "ratio": "1044 / 818" }
+      "cover": {
+        "src": "images/photo-yoav367.webp",
+        "width": 2400,
+        "height": 1881,
+        "ratio": "1044 / 818"
+      }
     },
     {
       "slug": "soccer-joint",
@@ -62,7 +98,13 @@
       "category": "Graphics",
       "page": "graphics.html#soccer-joint",
       "order": 9,
-      "cover": { "src": "images/poster-joint-soccer.webp", "width": 1680, "height": 2400, "ratio": "907 / 1296" }
+      "cover": {
+        "src": "images/poster-joint-soccer.webp",
+        "width": 1680,
+        "height": 2400,
+        "ratio": "907 / 1296",
+        "size": "89%"
+      }
     },
     {
       "slug": "megi-solar",
@@ -71,7 +113,12 @@
       "category": "Photography",
       "page": "photography.html#megi-solar",
       "order": 7,
-      "cover": { "src": "images/photo-yoavp1150.webp", "width": 1670, "height": 2400, "ratio": "845.913 / 1216" }
+      "cover": {
+        "src": "images/photo-yoavp1150.webp",
+        "width": 1670,
+        "height": 2400,
+        "ratio": "845.913 / 1216"
+      }
     },
     {
       "slug": "biss",
@@ -80,7 +127,12 @@
       "category": "Branding",
       "page": "branding.html#biss",
       "order": 3,
-      "cover": { "src": "images/logo-1.webp", "width": 2400, "height": 2392, "ratio": "2560 / 2551" }
+      "cover": {
+        "src": "images/logo-1.webp",
+        "width": 2400,
+        "height": 2392,
+        "ratio": "2560 / 2551"
+      }
     },
     {
       "slug": "bank-leumi",
@@ -89,7 +141,12 @@
       "category": "Photography",
       "page": "photography.html#bank-leumi",
       "order": 8,
-      "cover": { "src": "images/photo-illustration-14.webp", "width": 2400, "height": 1591, "ratio": "1034 / 686" }
+      "cover": {
+        "src": "images/photo-illustration-14.webp",
+        "width": 2400,
+        "height": 1591,
+        "ratio": "1034 / 686"
+      }
     },
     {
       "slug": "one-plus-one",
@@ -98,8 +155,19 @@
       "category": "Graphics",
       "page": "graphics.html#one-plus-one",
       "order": 11,
-      "cover": { "src": "images/one-plus-one-page-00.webp", "width": 1360, "height": 1024, "ratio": "600 / 864", "size": "50%",
-                 "crop": { "top": -8.56, "left": -63.33, "width": 226.67, "height": 118.52 } }
+      "cover": {
+        "src": "images/one-plus-one-page-00.webp",
+        "width": 1360,
+        "height": 1024,
+        "ratio": "600 / 864",
+        "size": "57%",
+        "crop": {
+          "top": -8.56,
+          "left": -63.33,
+          "width": 226.67,
+          "height": 118.52
+        }
+      }
     }
   ]
 }
