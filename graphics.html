@@ -29,38 +29,62 @@
     <!-- 1+1= : the book (Hebrew, right to left). It turns its pages by itself until a click;
          then a click on the left page shows the next pages, on the right page the pages before (book-pages.js).
          images/one-plus-one-page-00.webp is the cover, 01 to 28 are the pages (see-through background) -->
-    <div id="one-plus-one" class="photo-box from-left book" tabindex="0" role="button" aria-label="1+1=, click to turn the pages" style="--left: 335; --width: 800; --height: 602;">
+    <div id="one-plus-one" class="photo-box from-left book" tabindex="0" role="button" aria-label="1+1=, click to turn the pages" style="--left: 324; --width: 800; --height: 602;">
       <img src="images/one-plus-one-page-00.webp" width="1360" height="1024" alt="1+1=, the cover">
     </div>
 
-    <p class="photo-caption from-left" style="--left: 448; --width: 391; --height: 38;">1+1 =</p>
+    <p class="photo-caption from-left" style="--left: 479; --width: 77; --height: 38; --space-before: -30;">1+1 =</p>
+
+    <!-- The text about 1+1= on the left (--top = Figma pixels from the top of this column) -->
+    <aside class="project-text" style="--top: 51;">
+      <h2>1+1 =</h2>
+      <p class="has-line-space">Design and layout of a photography booklet by Yiftach Sofrin.</p>
+      <p>The book offers an intimate look into the relationship between the photographer and his partner, to whom it is dedicated.</p>
+    </aside>
 
     <!-- I'M HERE? (Tartoctober posters): a click on the poster opens a row with the 3 posters,
          like the photography page. A click on any poster of the open row closes it.
          --x, --y = where each poster starts, --w, --h = its size (Figma frame "Im here?").
-         The first poster is smaller on the page (523 instead of 689), so the whole row is
-         made smaller the same way: --row-scale = 523 / 689 -->
-    <div id="im-here" class="photo-overlay from-left" style="--left: 448; --space-before: 179; --row-scale: 0.759;">
-      <div class="photo-overlay-row" style="--width: 2167;">
-        <button class="photo-box" aria-expanded="false" style="--width: 523; --height: 740;">
+         The first poster is smaller on the page (484 instead of 523), so the whole row is
+         made smaller the same way: --row-scale = 484 / 523 -->
+    <div id="im-here" class="photo-overlay from-left" style="--left: 478; --space-before: 237; --row-scale: 0.9254;">
+      <div class="photo-overlay-row" style="--width: 1645;">
+        <button class="photo-box" aria-expanded="false" style="--width: 484; --height: 684;">
           <img src="images/tartakover-poster.webp" width="1697" height="2400" alt="I'M HERE? poster, red">
         </button>
-        <div style="--x: 739; --y: 0; --w: 689; --h: 975;"><img src="images/tartakover-poster-black.webp" width="1697" height="2400" alt="I'M HERE? poster, black (exhibition)" loading="lazy"></div>
-        <div style="--x: 1478; --y: 0; --w: 689; --h: 974;"><img src="images/tartakover-poster-green.webp" width="1697" height="2400" alt="I'M HERE? poster, green" loading="lazy"></div>
+        <div style="--x: 561; --y: 0; --w: 523; --h: 740;"><img src="images/tartakover-poster-black.webp" width="1697" height="2400" alt="I'M HERE? poster, black (exhibition)" loading="lazy"></div>
+        <div style="--x: 1122; --y: 0; --w: 523; --h: 739;"><img src="images/tartakover-poster-green.webp" width="1697" height="2400" alt="I'M HERE? poster, green" loading="lazy"></div>
       </div>
     </div>
-    <p class="photo-caption from-left" style="--left: 448; --width: 391; --height: 38; --space-before: 33;">I’M HERE?</p>
+    <p class="photo-caption from-left" style="--left: 478; --width: 391; --height: 38; --space-before: 28;">I’M HERE?</p>
+
+    <!-- The text about I'M HERE? on the left -->
+    <aside class="project-text" style="--top: 847;">
+      <h2>I’m Here? — Lino Prints Series</h2>
+      <p class="has-line-space">A series of three lino prints originally created for the entrance exams to Weißensee Academy of Art Berlin, later exhibited at Bezalel as part of the “I Am Here” exhibition, Inspired by the work of Israeli designer David Tartakover.<br>
+        The prints reflect the Israeli reality of the past three years and invite viewers to connect from both Israeli and Palestinian perspectives, using familiar symbols and colors that speak to shared cultural identities.</p>
+      <p class="is-medium has-space">I Am Here Exhibition, Bezalel Academy of Arts and Design, inspired by the work of Israeli designer David Tartakover.</p>
+      <p class="is-medium">2026</p>
+    </aside>
 
     <!-- On The Line - Soccer: the notebook's pages turning (see-through background, .mov for Safari, .webm for the others).
          A click opens the whole project on the screen, on the grass (see "soccer-panel" at the bottom),
          like the projects on the branding page -->
-    <button id="soccer-joint" class="photo-box from-left" type="button" data-panel="soccer-panel" aria-haspopup="dialog" style="--left: 297; --width: 851; --height: 641; --space-before: 50;">
+    <button id="soccer-joint" class="photo-box from-left" type="button" data-panel="soccer-panel" aria-haspopup="dialog" style="--left: 297; --width: 851; --height: 641; --space-before: 96;">
       <video autoplay muted loop playsinline aria-label="On The Line - Soccer, the notebook's pages turning">
         <source src="images/soccer-joint-spreads.mov" type="video/quicktime">
         <source src="images/soccer-joint-spreads.webm" type="video/webm">
       </video>
     </button>
     <p class="photo-caption from-left" style="--left: 479; --width: 388; --height: 23; --space-before: -24;">On The Line - Soccer</p>
+
+    <!-- The text about On The Line - Soccer on the left -->
+    <aside class="project-text" style="--top: 1737;">
+      <h2>On The Lines — Football</h2>
+      <p class="has-line-space">Graphic Design &amp; Typography Course lecturer by Michal Sahar.</p>
+      <p>A visual interpretation of Wikipedia's football entry, transformed into a printed booklet.</p>
+      <p class="is-indented">The project includes a booklet, a promotional poster, and a landing page for its launch event.</p>
+    </aside>
   </main>
 
   <!-- ===== On The Line - Soccer: the whole project on one screen, on the grass =====

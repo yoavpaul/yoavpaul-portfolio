@@ -838,6 +838,21 @@ button.photo-box {
   margin-top: calc(12 * var(--px));
 }
 
+/* ===== Graphics page: the texts about the projects, on the left (Figma "graphics option with text") =====
+   They use .project-text (above). Each text says where it starts: --top = Figma pixels
+   from the top of the column of works. On phones they come under the work (phone.css) */
+.graphics-page .project-text {
+  top: calc(var(--top) * var(--px));
+}
+
+/* The names: Editor Sans Bold 30px, lines 26px apart (on computers; phones use phone.css) */
+@media (min-width: 701px) {
+  .graphics-page .project-text h2 {
+    font-size: calc(30 * var(--px));
+    line-height: calc(26 * var(--px));
+  }
+}
+
 /* ===== The 1+1= book (graphics page): book-pages.js turns its pages on a click ===== */
 .book {
   cursor: pointer;
