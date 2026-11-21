@@ -28,6 +28,7 @@
 
     <!-- Two layouts, like the photography page:
          - At first the works alone (Figma "graphics option 2"): --left, --space-before, --width, --height.
+         - Only the names open things: a click on the work itself doesn't (the 1+1= book still turns its pages).
          - A click on the name of a work (under it) opens its text on the left, and the page changes to the
            text layout (Figma "graphics option with text", graphics-texts.js). Then every work uses its
            "-open" numbers: --left-open, --space-open, --width-open, --height-open (and --scale-open for a row).
@@ -51,16 +52,16 @@
     </aside>
 
     <!-- I'M HERE? (Tartoctober posters): a click on the poster opens a row with the 3 posters,
-         like the photography page. A click on any poster of the open row closes it.
-         A click on its name opens its text and its row together.
+         like the photography page, but only from its name (data-opens-by-name): the name opens its text
+         and its row together. A click on the black or green poster of the open row closes both.
          --x, --y = where each poster starts, --w, --h = its size (Figma frame "Im here?").
          In the text layout the first poster is smaller (484 instead of 523), so the whole row is
          made smaller the same way: --scale-open = 484 / 523 -->
-    <div id="im-here" class="photo-overlay from-left" style="--left: 448; --space-before: 179; --left-open: 478; --space-open: 237; --scale-open: 0.9254;">
+    <div id="im-here" class="photo-overlay from-left" data-opens-by-name style="--left: 448; --space-before: 179; --left-open: 478; --space-open: 237; --scale-open: 0.9254;">
       <div class="photo-overlay-row" style="--width: 1645;">
-        <button class="photo-box" aria-expanded="false" style="--width: 523; --height: 740; --width-open: 484; --height-open: 684;">
+        <span class="photo-box" style="--width: 523; --height: 740; --width-open: 484; --height-open: 684;">
           <img src="images/tartakover-poster.webp" width="1697" height="2400" alt="I'M HERE? poster, red">
-        </button>
+        </span>
         <div style="--x: 561; --y: 0; --w: 523; --h: 740;"><img src="images/tartakover-poster-black.webp" width="1697" height="2400" alt="I'M HERE? poster, black (exhibition)" loading="lazy"></div>
         <div style="--x: 1122; --y: 0; --w: 523; --h: 739;"><img src="images/tartakover-poster-green.webp" width="1697" height="2400" alt="I'M HERE? poster, green" loading="lazy"></div>
       </div>
@@ -76,15 +77,16 @@
     </aside>
 
     <!-- On The Line - Soccer: the notebook's pages turning (see-through background, .mov for Safari, .webm for the others).
-         A click on the notebook opens the whole project on the screen, on the grass (see "soccer-panel" at the bottom),
-         like the projects on the branding page. A click on its name opens its text -->
-    <button id="soccer-joint" class="photo-box from-left" type="button" data-panel="soccer-panel" aria-haspopup="dialog" style="--left: 267; --space-before: 50; --width: 886; --height: 667; --left-open: 534; --space-open: 96; --width-open: 851; --height-open: 641;">
+         A click on its name opens its text, and the whole project on the screen, on the grass
+         (see "soccer-panel" at the bottom), like the projects on the branding page.
+         When the project closes (a click or Esc), the text stays open -->
+    <div id="soccer-joint" class="photo-box from-left" style="--left: 267; --space-before: 50; --width: 886; --height: 667; --left-open: 534; --space-open: 96; --width-open: 851; --height-open: 641;">
       <video autoplay muted loop playsinline aria-label="On The Line - Soccer, the notebook's pages turning">
         <source src="images/soccer-joint-spreads.mov" type="video/quicktime">
         <source src="images/soccer-joint-spreads.webm" type="video/webm">
       </video>
-    </button>
-    <p class="photo-caption from-left" style="--left: 479; --left-open: 716; --space-open: -24; --width: 388; --height: 23;"><button class="caption-button" type="button" aria-expanded="false" aria-controls="text-soccer-joint">On The Line - Soccer</button></p>
+    </div>
+    <p class="photo-caption from-left" style="--left: 479; --left-open: 716; --space-open: -24; --width: 388; --height: 23;"><button class="caption-button" type="button" aria-expanded="false" aria-controls="text-soccer-joint" data-panel="soccer-panel" aria-haspopup="dialog">On The Line - Soccer</button></p>
 
     <aside class="project-text" id="text-soccer-joint" style="--top: 1737;" hidden>
       <h2>On The Lines — Football</h2>

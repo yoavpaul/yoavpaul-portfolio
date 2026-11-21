@@ -58,8 +58,13 @@ for (const overlay of document.querySelectorAll(".photo-overlay")) {
     }
   }
 
-  // Click on the first photo: open or close the row
-  photo.addEventListener("click", toggleRow);
+  // Click on the first photo: open or close the row.
+  // Rows with "data-opens-by-name" (graphics page) don't open from the photo:
+  // only a click on the work's name opens them (graphics-texts.js sends "toggle-row")
+  if (!overlay.hasAttribute("data-opens-by-name")) {
+    photo.addEventListener("click", toggleRow);
+  }
+  overlay.addEventListener("toggle-row", toggleRow);
 
   // Click on one of the other photos (they show only when the row is open): close the row
   for (const otherPhoto of overlay.querySelectorAll(".photo-overlay-row > div")) {
