@@ -843,6 +843,14 @@ button.photo-box {
   cursor: pointer;
 }
 
+/* ===== On The Line - Soccer (graphics page): its project panel is on the grass =====
+   (the panel itself works like the branding ones, see "Project panels" below)
+   images/grass-texture.webp = a piece of the poster's grass, with the green mixed in.
+   It is made and saved by the grass editor: python3 tools/grass-editor.py */
+#soccer-panel {
+  background: #3f9b2f url("images/grass-texture.webp") 0 0 / 415px;
+}
+
 /* ===== Project panels (branding page): the whole project on one screen =====
    project-panels.js opens and closes them. Everything inside is placed in Figma pixels
    (--x, --y, --w, --h) and grows or shrinks with the height of the screen:

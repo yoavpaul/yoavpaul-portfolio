@@ -51,25 +51,50 @@
     </div>
     <p class="photo-caption from-left" style="--left: 448; --width: 391; --height: 38; --space-before: 33;">I’M HERE?</p>
 
-    <!-- Soccer - Joint: the notebook's pages turning (see-through background, .mov for Safari, .webm for the others).
-         A click opens a row like I'M HERE?: the poster and the poster moving (a screen recording),
-         all as high as the notebook (667), 50 apart. A click on any of them closes the row -->
-    <div id="soccer-joint" class="photo-overlay from-left" style="--left: 267; --space-before: 50;">
-      <div class="photo-overlay-row" style="--width: 2591;">
-        <button class="photo-box" aria-expanded="false" style="--width: 886; --height: 667;">
-          <video autoplay muted loop playsinline aria-label="Soccer - Joint, the notebook's pages turning">
-            <source src="images/soccer-joint-spreads.mov" type="video/quicktime">
-            <source src="images/soccer-joint-spreads.webm" type="video/webm">
-          </video>
-        </button>
-        <div style="--x: 936; --y: 0; --w: 467; --h: 667;"><img src="images/poster-joint-soccer.webp" width="1680" height="2400" alt="Soccer - Joint poster" loading="lazy"></div>
-        <div style="--x: 1453; --y: 0; --w: 1138; --h: 667;"><video src="images/soccer-joint-poster-motion.mp4" poster="images/soccer-joint-poster-motion-poster.webp" muted loop playsinline preload="none" aria-label="Soccer - Joint, the poster moving"></video></div>
-      </div>
-    </div>
-    <p class="photo-caption from-left" style="--left: 479; --width: 241; --height: 23;">Soccer - Joint</p>
+    <!-- On The Line - Soccer: the notebook's pages turning (see-through background, .mov for Safari, .webm for the others).
+         A click opens the whole project on the screen, on the grass (see "soccer-panel" at the bottom),
+         like the projects on the branding page -->
+    <button id="soccer-joint" class="photo-box from-left" type="button" data-panel="soccer-panel" aria-haspopup="dialog" style="--left: 297; --width: 851; --height: 641; --space-before: 50;">
+      <video autoplay muted loop playsinline aria-label="On The Line - Soccer, the notebook's pages turning">
+        <source src="images/soccer-joint-spreads.mov" type="video/quicktime">
+        <source src="images/soccer-joint-spreads.webm" type="video/webm">
+      </video>
+    </button>
+    <p class="photo-caption from-left" style="--left: 479; --width: 388; --height: 23; --space-before: -24;">On The Line - Soccer</p>
   </main>
 
+  <!-- ===== On The Line - Soccer: the whole project on one screen, on the grass =====
+       It opens on top of the page and scrolls only sideways (project-panels.js), like on the branding page.
+       The works are placed like in the Figma frame "On The Line - Soccer", in the middle of the
+       screen's height (the frame is 1069 high, like the branding projects), and grow or shrink with it.
+       They are 57 apart: the first space is measured from where the notebook's pages end
+       (its video has 34 see-through pixels on the right). The grass: #soccer-panel in styles.css.
+       A click on any work (or the Esc key) closes it. -->
+  <div class="project-panel" id="soccer-panel" role="dialog" aria-label="On The Line - Soccer" tabindex="-1" hidden>
+    <div class="project-panel-stage" style="--width: 2223;">
+      <div class="panel-item" style="--x: 80; --y: 214; --w: 851; --h: 641;"><video muted loop playsinline aria-label="The notebook's pages turning">
+        <source src="images/soccer-joint-spreads.mov" type="video/quicktime">
+        <source src="images/soccer-joint-spreads.webm" type="video/webm">
+      </video></div>
+      <div class="panel-item" style="--x: 954; --y: 284; --w: 773; --h: 453;"><video src="images/soccer-joint-poster-motion.mp4" poster="images/soccer-joint-poster-motion-poster.webp" muted loop playsinline preload="none" aria-label="The poster moving"></video></div>
+      <div class="panel-item" style="--x: 1784; --y: 234; --w: 359; --h: 513;"><img src="images/poster-joint-soccer.webp" width="1680" height="2400" alt="On The Line - Soccer poster" loading="lazy"></div>
+    </div>
+  </div>
+
+  <!-- On a phone held upright: after a project opens, a note asks to turn the phone sideways
+       (it shows only on upright phones, see phone.css). A tap hides it -->
+  <button class="rotate-hint" type="button" hidden>
+    <svg class="rotate-hint-icon" viewBox="0 0 48 48" width="48" height="48" aria-hidden="true">
+      <rect x="14" y="6" width="20" height="34" rx="3" fill="none" stroke="currentColor" stroke-width="2"/>
+      <path d="M40 24a16 16 0 0 1-8 13.9" fill="none" stroke="currentColor" stroke-width="2"/>
+      <path d="M28 37l4 1.5-1 4" fill="none" stroke="currentColor" stroke-width="2"/>
+    </svg>
+    Turn your phone sideways<br>to see the whole project
+  </button>
+
+
   <script src="photo-overlays.js"></script>
+  <script src="project-panels.js"></script>
   <script src="book-pages.js"></script>
   <script src="top-bar-menu.js"></script>
   <script src="top-bar-blur.js"></script>

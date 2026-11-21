@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Grass editor</title>
+<style>
+  /* The graphics page fills the window, the panel floats on the left */
+  body { margin: 0; font: 14px "Editor Sans", -apple-system, sans-serif; }
+  #page { position: fixed; inset: 0; width: 100%; height: 100%; border: 0; }
+  .panel { position: fixed; left: 16px; top: 16px; bottom: 16px; width: 320px; overflow-y: auto; z-index: 2;
+    background: #fff; border: 1px solid #ccc; box-shadow: 0 4px 16px rgba(0, 0, 0, .15);
+    padding: 14px; display: flex; flex-direction: column; gap: 10px; box-sizing: border-box; }
+  .panel h1 { font-size: 16px; margin: 0; }
+  .panel p { margin: 0; color: #555; font-size: 12px; }
+  .panel label { display: grid; grid-template-columns: 1fr 44px; gap: 2px 8px; align-items: center; }
+  .panel label input[type=range] { grid-column: 1 / -1; width: 100%; }
+  .panel label span:last-of-type { text-align: right; font-variant-numeric: tabular-nums; }
+  #poster { width: 100%; cursor: crosshair; display: block; }
+  #tile { width: 120px; height: 120px; border: 1px solid #ccc; }
+  .row { display: flex; gap: 8px; align-items: center; }
+  button { font: inherit; padding: 6px 10px; border: 1px solid #000; background: #fff; cursor: pointer; }
+  #save { background: #000; color: #fff; }
+  #message { font-size: 12px; }
+  .panel.is-small > :not(h1):not(.row-top) { display: none; }
+</style>
+</head>
+<body>
+<!-- The real graphics page, with the Soccer project open (the #soccer-joint at the end opens it) -->
+<iframe id="page" src="../graphics.html#soccer-joint"></iframe>
+
+<div class="panel" id="panel">
+  <div class="row row-top"><h1>Grass behind Soccer</h1><button id="fold" type="button">Hide</button></div>
+
+  <p>1. Click on the poster where the grass should come from (a place without lines or text).</p>
+  <canvas id="poster"></canvas>
+  <label><span>Size of the piece (poster pixels)</span><span id="sample-value"></span>
+    <input id="sample" type="range" min="120" max="900" value="360"></label>
+
+  <p>2. The grass</p>
+  <label><span>Opacity of the texture</span><span id="opacity-value"></span>
+    <input id="opacity" type="range" min="0" max="100" value="53"></label>
+  <label><span>Softness (blur)</span><span id="blur-value"></span>
+    <input id="blur" type="range" min="0" max="8" step="0.5" value="1"></label>
+  <label><span>Saturation of the texture %</span><span id="sat-value"></span>
+    <input id="sat" type="range" min="0" max="150" value="100"></label>
+  <label><span>Size on the page (px)</span><span id="size-value"></span>
+    <input id="size" type="range" min="150" max="1600" value="520"></label>
+  <div class="row"><span>Color under the texture</span> <input id="color" type="color" value="#3f9b2f">
+    <button id="pick-color" type="button">From the piece</button></div>
+
+  <div class="row"><p>3. The whole background (color and texture together)</p>
+    <button id="reset" type="button">Reset</button></div>
+  <label><span>Brightness</span><span id="brightness-value"></span>
+    <input id="brightness" type="range" min="-100" max="100" value="0"></label>
+  <label><span>Contrast</span><span id="contrast-value"></span>
+    <input id="contrast" type="range" min="-100" max="100" value="0"></label>
+  <label><span>Highlights (the light parts)</span><span id="highlights-value"></span>
+    <input id="highlights" type="range" min="-100" max="100" value="0"></label>
+  <label><span>Shadows (the dark parts)</span><span id="shadows-value"></span>
+    <input id="shadows" type="range" min="-100" max="100" value="0"></label>
+  <label><span>Saturation</span><span id="saturation-value"></span>
+    <input id="saturation" type="range" min="-100" max="100" value="0"></label>
+  <label><span>Warmth (blue ↔ yellow)</span><span id="warmth-value"></span>
+    <input id="warmth" type="range" min="-100" max="100" value="0"></label>
+  <label><span>Tint (green ↔ pink)</span><span id="tint-value"></span>
+    <input id="tint" type="range" min="-100" max="100" value="0"></label>
+
+  <p>One tile (it repeats over the whole page; its edges melt into each other, so there are no seams):</p>
+  <canvas id="tile"></canvas>
+
+  <div class="row"><button id="save" type="button">Save to the site</button><span id="message"></span></div>
+</div>
+
+<script>
+  const page = document.getElementById("page");
+  const posterCanvas = document.getElementById("poster");
+  const tileCanvas = document.getElementById("tile");
+  const message = document.getElementById("message");
+  const inputs = {};
+  // The controls of the whole background (they all start at 0 = no change)
+  const WHOLE = ["brightness", "contrast", "highlights", "shadows", "saturation", "warmth", "tint"];
+  const NUMBERS = ["sample", "opacity", "blur", "sat", "size", ...WHOLE];
+  for (const name of [...NUMBERS, "color"]) {
+    inputs[name] = document.getElementById(name);
+  }
+
+  // Where on the poster the grass is taken from (poster pixels, the middle of the piece)
+  let sampleX = 690, sampleY = 390;
+
+  // The poster, drawn small in the panel
+  const poster = new Image();
+  poster.src = "../images/poster-joint-soccer.webp";
+  poster.onload = () => {
+    posterCanvas.width = 288;
+    posterCanvas.height = Math.round(288 * poster.height / poster.width);
+    update();
+  };
+
+  // A click on the small poster: take the grass from there
+  posterCanvas.addEventListener("click", (event) => {
+    const box = posterCanvas.getBoundingClientRect();
+    sampleX = (event.clientX - box.left) / box.width * poster.width;
+    sampleY = (event.clientY - box.top) / box.height * poster.height;
+    update();
+  });
+
+  // Draws the small poster with a square around the piece
+  function drawPoster() {
+    const c = posterCanvas.getContext("2d");
+    const scale = posterCanvas.width / poster.width;
+    const half = inputs.sample.value / 2;
+    c.drawImage(poster, 0, 0, posterCanvas.width, posterCanvas.height);
+    c.strokeStyle = "#ff0";
+    c.lineWidth = 2;
+    c.strokeRect((sampleX - half) * scale, (sampleY - half) * scale, half * 2 * scale, half * 2 * scale);
+  }
+
+  // Takes the piece from the poster (softened and with its saturation)
+  function takePiece(size) {
+    const piece = document.createElement("canvas");
+    piece.width = piece.height = size;
+    const c = piece.getContext("2d");
+    c.filter = `blur(${inputs.blur.value}px) saturate(${inputs.sat.value / 100})`;
+    // A little more around it, so the blur doesn't make dark edges
+    const extra = 20;
+    c.drawImage(poster, sampleX - size / 2 - extra, sampleY - size / 2 - extra, size + 2 * extra, size + 2 * extra,
+                -extra, -extra, size + 2 * extra, size + 2 * extra);
+    return c.getImageData(0, 0, size, size);
+  }
+
+  // Makes the piece repeat without seams: every edge is mixed with the piece moved by half,
+  // first from side to side, then from top to bottom (the middle stays the piece itself)
+  function withoutSeams(data, size, sideways) {
+    const result = new ImageData(size, size);
+    const half = size / 2;
+    for (let y = 0; y < size; y++) {
+      for (let x = 0; x < size; x++) {
+        const t = (sideways ? x : y) + 0.5;
+        const weight = Math.sin(Math.PI * t / size); // 1 in the middle, 0 at the edges
+        const mx = sideways ? (x + half) % size : x;
+        const my = sideways ? y : (y + half) % size;
+        const here = (y * size + x) * 4, moved = (my * size + mx) * 4;
+        for (let k = 0; k < 3; k++) {
+          result.data[here + k] = data.data[here + k] * weight + data.data[moved + k] * (1 - weight);
+        }
+        result.data[here + 3] = 255;
+      }
+    }
+    return result;
+  }
+
+  // The average color of the piece
+  function averageColor(data) {
+    const sum = [0, 0, 0];
+    for (let i = 0; i < data.data.length; i += 4) {
+      for (let k = 0; k < 3; k++) sum[k] += data.data[i + k];
+    }
+    const count = data.data.length / 4;
+    return "#" + sum.map((v) => Math.round(v / count).toString(16).padStart(2, "0")).join("");
+  }
+
+  let lastPiece = null;
+
+  // Makes the tile: the color, and the seamless grass over it with the chosen opacity
+  function makeTile() {
+    const size = Math.round(inputs.sample.value);
+    lastPiece = takePiece(size);
+    const smooth = withoutSeams(withoutSeams(lastPiece, size, true), size, false);
+    const grass = document.createElement("canvas");
+    grass.width = grass.height = size;
+    grass.getContext("2d").putImageData(smooth, 0, 0);
+
+    tileCanvas.width = tileCanvas.height = size;
+    const c = tileCanvas.getContext("2d");
+    c.fillStyle = inputs.color.value;
+    c.fillRect(0, 0, size, size);
+    c.globalAlpha = inputs.opacity.value / 100;
+    c.drawImage(grass, 0, 0);
+    c.globalAlpha = 1;
+    adjustWhole(c, size);
+  }
+
+  // Brightness, contrast, highlights, shadows, saturation, warmth and tint, on every pixel of the tile
+  function adjustWhole(c, size) {
+    const v = {};
+    for (const name of WHOLE) v[name] = inputs[name].value / 100; // -1 .. 1
+    if (WHOLE.every((name) => v[name] === 0)) return; // nothing to change
+
+    const picture = c.getImageData(0, 0, size, size);
+    const p = picture.data;
+    const contrast = v.contrast >= 0 ? 1 + v.contrast * 2 : 1 + v.contrast; // 0 .. 3
+    for (let i = 0; i < p.length; i += 4) {
+      let r = p[i] / 255, g = p[i + 1] / 255, b = p[i + 2] / 255;
+
+      // Brightness: everything lighter or darker
+      r += v.brightness * 0.5; g += v.brightness * 0.5; b += v.brightness * 0.5;
+
+      // Contrast: away from (or towards) the middle gray
+      r = (r - 0.5) * contrast + 0.5; g = (g - 0.5) * contrast + 0.5; b = (b - 0.5) * contrast + 0.5;
+
+      // Highlights and shadows: only the light parts / only the dark parts
+      const light = 0.299 * r + 0.587 * g + 0.114 * b;
+      const lightPart = Math.min(1, Math.max(0, (light - 0.35) / 0.5));  // 0 in the dark, 1 in the light
+      const darkPart = Math.min(1, Math.max(0, (0.65 - light) / 0.5));   // 1 in the dark, 0 in the light
+      const lift = v.highlights * 0.4 * lightPart * lightPart + v.shadows * 0.4 * darkPart * darkPart;
+      r += lift; g += lift; b += lift;
+
+      // Saturation: further from (or closer to) gray
+      const gray = 0.299 * r + 0.587 * g + 0.114 * b;
+      const saturation = 1 + v.saturation;
+      r = gray + (r - gray) * saturation; g = gray + (g - gray) * saturation; b = gray + (b - gray) * saturation;
+
+      // Warmth: more yellow (or blue). Tint: more pink (or green)
+      r += v.warmth * 0.08 + v.tint * 0.05;
+      g -= v.tint * 0.08;
+      b -= v.warmth * 0.08 - v.tint * 0.05;
+
+      p[i] = r * 255; p[i + 1] = g * 255; p[i + 2] = b * 255; // (the picture keeps it between 0 and 255)
+    }
+    c.putImageData(picture, 0, 0);
+  }
+
+  // Shows the tile as the background of the graphics page
+  function showOnPage() {
+    const doc = page.contentDocument;
+    if (!doc || !doc.head) return;
+    let style = doc.getElementById("grass-preview");
+    if (!style) {
+      style = doc.createElement("style");
+      style.id = "grass-preview";
+      doc.head.appendChild(style);
+    }
+    tileCanvas.toBlob((blob) => {
+      if (style.dataset.url) URL.revokeObjectURL(style.dataset.url);
+      style.dataset.url = URL.createObjectURL(blob);
+      style.textContent = `#soccer-panel { background: ${inputs.color.value} url("${style.dataset.url}") 0 0 / ${inputs.size.value}px !important; }`;
+    });
+  }
+
+  function showNumbers() {
+    for (const name of NUMBERS) {
+      document.getElementById(name + "-value").textContent = inputs[name].value;
+    }
+  }
+
+  // Everything again, after every change (a little later, so dragging a slider stays smooth)
+  let waiting = null;
+  function update() {
+    showNumbers();
+    if (!poster.complete) return;
+    drawPoster();
+    clearTimeout(waiting);
+    waiting = setTimeout(() => { makeTile(); showOnPage(); }, 60);
+  }
+
+  for (const input of Object.values(inputs)) input.addEventListener("input", update);
+  page.addEventListener("load", update);
+
+  document.getElementById("pick-color").addEventListener("click", () => {
+    if (!lastPiece) return;
+    inputs.color.value = averageColor(lastPiece);
+    update();
+  });
+
+  // Reset: the whole background back to no change
+  document.getElementById("reset").addEventListener("click", () => {
+    for (const name of WHOLE) inputs[name].value = 0;
+    update();
+  });
+
+  document.getElementById("fold").addEventListener("click", (event) => {
+    const small = document.getElementById("panel").classList.toggle("is-small");
+    event.target.textContent = small ? "Show" : "Hide";
+  });
+
+  // Save: the tile goes to images/grass-texture.webp, the color and size to styles.css
+  document.getElementById("save").addEventListener("click", async () => {
+    message.textContent = "Saving...";
+    const answer = await fetch("/save", {
+      method: "POST",
+      body: JSON.stringify({ image: tileCanvas.toDataURL("image/webp", 0.85), color: inputs.color.value, size: Number(inputs.size.value) })
+    }).then((r) => r.json()).catch((problem) => ({ ok: false, error: String(problem) }));
+    message.textContent = answer.ok ? "Saved ✓" : "Didn't save: " + answer.error;
+  });
+</script>
+</body>
+</html>
