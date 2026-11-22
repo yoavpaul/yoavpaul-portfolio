@@ -3,8 +3,8 @@
 // still opens the email app or the phone when clicked.
 // On a phone or tablet (no mouse) a tap on them shows the "Copy" button instead,
 // and a tap anywhere else hides it.
-// A click on "Copy" copies the email / number, the button says "Copied",
-// and 2 seconds later it hides (until the mouse leaves and comes back).
+// A click on "Copy" copies the email / number, the button says "Copied" for 2 seconds
+// (even if the mouse moves away), and then it hides (until the mouse leaves and comes back).
 // (It shows by the keyboard too, with Tab: ":focus-visible" in styles.css. A mouse click
 // doesn't count, so "Copy" doesn't stay after the mouse moves away.)
 
@@ -49,8 +49,10 @@
     button.addEventListener("click", async () => {
       await copyText(button.dataset.copy);
       button.textContent = "Copied";
+      contact.classList.add("is-showing-copy"); // "Copied" stays 2 seconds, even if the mouse moves away
       setTimeout(() => {
-        contact.classList.add("is-copied");
+        // Then it hides. If the mouse is still there, it stays hidden until the mouse leaves
+        if (contact.matches(":hover")) contact.classList.add("is-copied");
         contact.classList.remove("is-showing-copy");
         button.textContent = "Copy";
       }, 2000);
