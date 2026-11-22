@@ -1147,6 +1147,7 @@ body.has-dark-panel .top-bar {
   font-size: calc(27 * var(--px));
   line-height: calc(50 * var(--px));
   text-align: center;
+  scroll-margin-bottom: calc(60 * var(--px)); /* when the page scrolls to an open list, a little space stays under it */
 }
 
 .index-list[hidden] {
@@ -1232,9 +1233,15 @@ body.has-dark-panel .top-bar {
 }
 
 .about-contact:hover .copy-holder,
-.about-contact:focus-within .copy-holder,
+.about-contact:has(:focus-visible) .copy-holder,
 .about-contact.is-showing-copy .copy-holder {
   display: block;
+}
+
+/* 2 seconds after copying, "Copy" hides even if the mouse is still there
+   (contact-copy.js adds "is-copied"; it comes off when the mouse leaves) */
+.about-contact.is-copied .copy-holder {
+  display: none;
 }
 
 /* Just the word, no frame, half the size of the email / phone */

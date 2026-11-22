@@ -1,6 +1,7 @@
 // Index page: a click on a category (Branding, Photography, Graphics)
 // opens the list of its projects under it, and a second click closes it.
 // A double click (or a double tap on a phone) leads to the category's own page.
+// When a list opens, the page scrolls down to it (it opens low on the screen).
 // The projects in each list come from projects.json, in their "order",
 // and each one leads straight to its project.
 
@@ -21,6 +22,12 @@ for (const category of document.querySelectorAll(".index-category")) {
     // One click: open or close the list
     list.hidden = !list.hidden;
     category.setAttribute("aria-expanded", !list.hidden);
+
+    // The list opens low on the screen, so when it opens the page scrolls down (smoothly)
+    // just enough to show all of it ("nearest": no scrolling if it is already on the screen)
+    if (!list.hidden) {
+      list.scrollIntoView({ behavior: "smooth", block: "nearest" });
+    }
   });
 }
 
