@@ -786,6 +786,7 @@ button.photo-box {
   line-height: normal;
 }
 
+/* (not used now: the dates were taken off the names, kept in case they come back) */
 .project-text-year {
   margin-left: 0.4em;
 }
