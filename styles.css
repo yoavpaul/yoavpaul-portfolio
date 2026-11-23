@@ -550,6 +550,32 @@ body {
   visibility: hidden; /* keeps its place, so nothing moves */
 }
 
+/* The tag next to the mouse on the row: the category / name of the work under it (home-carousel.js).
+   Like the words of the top bar: the same letters, on a blurred see-through strip */
+.carousel-tag {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 6;
+  display: none;
+  margin: 0;
+  padding: 0.2em 0.45em;
+  border-radius: var(--bar-radius);
+  background-color: var(--color-bar);
+  backdrop-filter: blur(var(--bar-blur));
+  -webkit-backdrop-filter: blur(var(--bar-blur)); /* Safari */
+  font-family: var(--font-nav);
+  font-size: var(--size-nav);
+  line-height: normal;
+  color: var(--color-text);
+  white-space: nowrap;
+  pointer-events: none; /* a click goes to the work under it */
+}
+
+.carousel-tag.is-shown {
+  display: block;
+}
+
 /* One work: as high as the box, its width from its shape (--ratio = width / height).
    The space after each work (not "gap"), so the copy follows with the same space */
 .carousel-item {

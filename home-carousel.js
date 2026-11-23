@@ -1,6 +1,8 @@
 // Home page "over view": a row of all the works that moves from left to right in a loop.
-// - It stops under the mouse (or while a finger is on it), and "Random / Index" under it turns into the category (red) / name
-//   of the work under the mouse.
+// - Under the mouse it keeps moving, and a tag next to the mouse shows the category (red) / name
+//   of the work under it.
+// - It stops while a finger is on it (phones) or a work has the focus (keyboard), and then
+//   "Random / Index" under it turns into the category / name of the work.
 // - It can be scrolled sideways: trackpad, mouse wheel or finger.
 // - "Random / Index" under it changes the order of the works.
 //
@@ -30,7 +32,7 @@ let works = [];
 const lessMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
 let position = 0;      // where the row is scrolled to (more exact than scrollLeft)
-let paused = false;    // true while the mouse (or a finger) is on the row
+let paused = false;    // true while a finger is on the row (or a work has the keyboard focus)
 let lastStepTime = null;   // time of the last step, to move the same speed on every computer
 
 // The width of one copy of the works
@@ -73,28 +75,20 @@ function step(time) {
     position -= (oneCopyWidth() / SECONDS_PER_ROUND) * seconds;
     keepInLoop();
   }
+  updateTag(); // the row moved: maybe another work is under the mouse now
   lastStepTime = time;
   requestAnimationFrame(step);
 }
 
-// --- Stop under the mouse (or a finger), and show the name of the work ---
-
-// A mouse: the row stops while the mouse is on it
-carousel.addEventListener("pointerenter", (event) => {
-  if (event.pointerType === "mouse") paused = true;
-});
-carousel.addEventListener("pointerleave", (event) => {
-  if (event.pointerType !== "mouse") return;
-  paused = false;
-  clearName();
-});
+// --- Stop under a finger (or the keyboard), and show the name of the work under the row ---
 
 // A finger (phone, tablet): the row stops only while the finger is on it,
 // and moves on as soon as the finger is lifted
 let lastTouchTime = 0;
-carousel.addEventListener("touchstart", () => {
+carousel.addEventListener("touchstart", (event) => {
   paused = true;
   lastTouchTime = Date.now();
+  showName(event); // the name of the work under the finger, under the row
 }, { passive: true });
 function fingerLifted(event) {
   if (event.touches.length > 0) return; // another finger is still on the row
@@ -105,7 +99,7 @@ function fingerLifted(event) {
 carousel.addEventListener("touchend", fingerLifted);
 carousel.addEventListener("touchcancel", fingerLifted);
 
-// The category and name of the work under the mouse
+// The category and name of the work under the finger (or with the focus), under the row
 function showName(event) {
   const item = event.target.closest(".carousel-item");
   if (!item) {
@@ -120,7 +114,6 @@ function showName(event) {
 function clearName() {
   section.classList.remove("is-showing-name");
 }
-track.addEventListener("mouseover", showName);
 // The keyboard (Tab): the row stops on the work that has the focus.
 // (A tap with a finger also gives a work the focus: that one doesn't stop the row)
 track.addEventListener("focusin", (event) => {
@@ -152,6 +145,37 @@ carousel.addEventListener("scroll", () => {
     keepInLoop();
   }
 });
+
+// --- Under the mouse: a tag with the category (red) / name of the work, next to the mouse ---
+// The row keeps moving under the mouse, so the works move under a mouse that stands still:
+// every frame checks which work is under it.
+
+let mouse = null; // where the mouse is on the screen, while it is on the row
+
+const tag = document.createElement("p");
+tag.className = "carousel-tag";
+tag.setAttribute("aria-hidden", "true"); // the name is already in the work's picture (alt)
+tag.innerHTML = '<span class="carousel-category"></span> / <span class="carousel-tag-name"></span>';
+document.body.appendChild(tag);
+
+carousel.addEventListener("pointermove", (event) => {
+  if (event.pointerType === "mouse") mouse = { x: event.clientX, y: event.clientY };
+});
+carousel.addEventListener("pointerleave", () => {
+  mouse = null;
+  tag.classList.remove("is-shown");
+});
+
+function updateTag() {
+  const under = mouse && document.elementFromPoint(mouse.x, mouse.y);
+  const item = under ? under.closest(".carousel-item") : null;
+  tag.classList.toggle("is-shown", item !== null);
+  if (!item) return;
+  tag.querySelector(".carousel-category").textContent = item.dataset.category;
+  tag.querySelector(".carousel-tag-name").textContent = item.dataset.name;
+  // A little down and to the right of the mouse (under its arrow)
+  tag.style.transform = `translate(${mouse.x + 14}px, ${mouse.y + 22}px)`;
+}
 
 // --- Random / Index ---
 

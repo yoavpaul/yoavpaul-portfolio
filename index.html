@@ -26,7 +26,8 @@
   <p class="catch-me"><a class="page-link" href="about.html">Catch <span class="catch-me-big">ME</span> if you can!</a></p>
 
   <!-- Over view: all the works move slowly from left to right, in a loop (home-carousel.js).
-       It stops under the mouse, and "Random / Index" under it shows the category and name of the work,
+       Under the mouse it keeps moving, and a tag next to the mouse shows the category and name of the work.
+       It stops under a finger, and then "Random / Index" under it shows them instead,
        and it can be scrolled sideways (trackpad, mouse wheel or finger). A click on a work leads to it.
        "Random / Index" under it changes the order (the page always starts in Index):
        Random = the order of the works in projects.json, Index = by their "order" number.
@@ -37,7 +38,7 @@
       <!-- The works come from projects.json (home-carousel.js puts them here) -->
       </div>
     </div>
-    <!-- Under the row: "Random / Index". Under the mouse it turns into the category (red) / the name of the work -->
+    <!-- Under the row: "Random / Index". Under a finger it turns into the category (red) / the name of the work -->
     <p class="carousel-modes">
       <span class="carousel-switch">
         <button class="carousel-mode" type="button" data-mode="random" aria-pressed="false">Random</button> /
