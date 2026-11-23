@@ -177,6 +177,13 @@
   text-align: left;
 }
 
+/* The back arrow of the branding projects: in the corner, like the menu at the top */
+.panel-back {
+  bottom: 14px;
+  left: var(--space-page);
+  transform: none;
+}
+
 /* ===== Me page (about.html) ===== */
 
 /* "Copy" shows under the email / phone, in the middle (there is no room next to them) */

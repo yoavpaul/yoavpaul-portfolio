@@ -930,6 +930,40 @@ body.has-dark-panel .top-bar {
   color: #fff;
 }
 
+/* The back arrow: bottom left, under the menu of the top bar (the same middle as the menu
+   on the project pages, and as far from the bottom as the menu is from the top). Only while a panel is open.
+   Its color follows the top bar: white on a dark panel, black on a light one. Red under the mouse */
+.panel-back {
+  display: none;
+  position: fixed;
+  bottom: calc(25 * var(--px));
+  left: calc(50% - 511 * var(--px));
+  z-index: 5; /* above the panel */
+  transform: translateX(-50%); /* its middle sits on "left" */
+  -webkit-appearance: none; /* no button look in Safari */
+  appearance: none;
+  padding: 0;
+  border: none;
+  background: none;
+  font-family: var(--font-nav);
+  font-size: calc(var(--size-nav) * 2);
+  line-height: 1;
+  color: var(--color-text);
+  cursor: pointer;
+}
+
+body.has-open-panel .panel-back {
+  display: block;
+}
+
+body.has-dark-panel .panel-back {
+  color: #fff;
+}
+
+.panel-back:hover {
+  color: var(--color-accent);
+}
+
 /* A light panel (like biss): white, with black texts */
 .project-panel.is-light {
   --color-panel: #ffffff;

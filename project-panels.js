@@ -1,6 +1,7 @@
 // Project panels (branding page): a click on a project's photo opens the whole project
 // on top of the page, as high as the screen. It scrolls only sideways
-// (trackpad, mouse wheel or finger). A click on any work, or the Esc key, closes it.
+// (trackpad, mouse wheel or finger). A click on any work, on the back arrow
+// in the bottom left corner, or the Esc key, closes it.
 // Videos in a panel play only while it is open. On a dark panel the top bar turns white.
 
 let openPanel = null;    // the panel that is open now
@@ -64,6 +65,9 @@ if (linkedButton) {
 rotateHint.addEventListener("click", () => {
   rotateHint.hidden = true;
 });
+
+// The back arrow closes the panel
+document.querySelector(".panel-back").addEventListener("click", closeProjectPanel);
 
 // The Esc key closes the panel
 document.addEventListener("keydown", (event) => {
