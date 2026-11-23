@@ -9,15 +9,18 @@
 // (This file is loaded in the <head>, so the page shows the chosen version from the start)
 
 {
-  // A new choice in the address is remembered
   const address = new URLSearchParams(location.search);
-  if (address.has("logo")) {
-    localStorage.setItem("test-logo", address.get("logo"));
-  }
 
-  // The remembered choice puts a class on the page, like "test-logo-fly"
-  const choice = localStorage.getItem("test-logo");
-  if (choice) {
-    document.documentElement.classList.add("test-logo-" + choice);
+  for (const test of ["logo"]) {
+    // A new choice in the address is remembered
+    if (address.has(test)) {
+      localStorage.setItem("test-" + test, address.get(test));
+    }
+
+    // The remembered choice puts a class on the page, like "test-logo-fly"
+    const choice = localStorage.getItem("test-" + test);
+    if (choice) {
+      document.documentElement.classList.add("test-" + test + "-" + choice);
+    }
   }
 }

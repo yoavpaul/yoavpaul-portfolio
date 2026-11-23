@@ -377,61 +377,39 @@ body {
   line-height: 1.04;
 }
 
-/* ----- Logo test: other versions of "YP", only while trying them out -----
-   logo-test.js puts the class on the page (from ?logo= in the address) */
-
 /* No blurred strip behind "YP" (chosen after the test; its settings above stay, in case it comes back) */
 .top-bar-name::before {
   display: none;
 }
 
-/* ?logo=fly : the fly from the home page instead of "YP" (about as high as the menu's two lines).
-   The letters are still there for screen readers, only see-through */
-.test-logo-fly .top-bar-name {
-  width: calc(var(--size-nav) * 2.6);
-  height: calc(var(--size-nav) * 1.9);
-  margin-top: calc(var(--size-nav) * -0.25); /* its middle where the middle of "YP" was */
-  color: transparent;
-  background: url("images/fly.webp") center / contain no-repeat;
+/* A click on "YP" turns it into a fly that flies off to the home page (yp-fly.js) */
+
+/* "YP" turns on its side, like a card. perspective: the near side looks bigger while it turns,
+   so the turn can be seen (without it, it would only look like it gets thinner) */
+.top-bar-name {
+  transform: translateX(-50%) perspective(60px) rotateY(0deg);
+  transition: transform 0.2s ease-in;
 }
 
-/* ?logo=fly-tilted : like ?logo=fly, but the fly is turned like the fly on the home page
-   at the start (-26.64 degrees, from Figma). A background can't turn, so the fly is a ::after that turns */
-.test-logo-fly-tilted .top-bar-name {
-  width: calc(var(--size-nav) * 2.6);
-  height: calc(var(--size-nav) * 1.9);
-  margin-top: calc(var(--size-nav) * -0.25);
-  color: transparent;
+/* Red under the mouse, like the links of the menu */
+.top-bar-name:hover {
+  color: var(--color-accent);
 }
 
-.test-logo-fly-tilted .top-bar-name::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background: url("images/fly.webp") center / contain no-repeat;
-  rotate: -26.64deg;
+.top-bar-name.is-turned-away {
+  transform: translateX(-50%) perspective(60px) rotateY(90deg);
 }
 
-/* ?logo=fly-around : a tiny fly flies around "YP" all the time.
-   It follows a crooked loop around the letters (offset-path, in pixels from the top left of "YP"),
-   and turns its head to where it flies (offset-rotate: the picture's head points up, so + 90deg) */
-.test-logo-fly-around .top-bar-name::after {
-  content: "";
-  position: absolute;
+/* The fly that comes out of "YP": above everything, with the shadow of a flying fly.
+   yp-fly.js moves it (transform) and sets its width */
+.yp-fly {
+  position: fixed;
   top: 0;
   left: 0;
-  width: calc(var(--size-nav) * 0.9);
-  aspect-ratio: 680 / 500; /* the size of the fly picture */
-  background: url("images/fly.webp") center / contain no-repeat;
-  offset-path: path("M 12 -8 C 26 -12 38 -4 36 8 C 34 22 42 30 28 33 C 16 36 4 30 -6 31 C -16 32 -16 18 -10 10 C -4 2 -6 -6 12 -8 Z");
-  offset-rotate: auto 90deg;
-  animation: fly-around-yp 6s linear infinite;
+  z-index: 7;
+  height: auto;
   pointer-events: none;
-}
-
-@keyframes fly-around-yp {
-  from { offset-distance: 0%; }
-  to { offset-distance: 100%; }
+  filter: drop-shadow(6px 10px 4px var(--color-shadow));
 }
 
 /* Figma: middle at 1145.5px, 25px from the top */
