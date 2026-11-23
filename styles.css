@@ -378,10 +378,10 @@ body {
 }
 
 /* ----- Logo test: other versions of "YP", only while trying them out -----
-   logo-test.js puts the class on the page (from ?logo= / ?blur= in the address) */
+   logo-test.js puts the class on the page (from ?logo= in the address) */
 
-/* ?blur=off : no blurred strip behind "YP" */
-.test-blur-off .top-bar-name::before {
+/* No blurred strip behind "YP" (chosen after the test; its settings above stay, in case it comes back) */
+.top-bar-name::before {
   display: none;
 }
 
@@ -393,6 +393,23 @@ body {
   margin-top: calc(var(--size-nav) * -0.25); /* its middle where the middle of "YP" was */
   color: transparent;
   background: url("images/fly.webp") center / contain no-repeat;
+}
+
+/* ?logo=fly-tilted : like ?logo=fly, but the fly is turned like the fly on the home page
+   at the start (-26.64 degrees, from Figma). A background can't turn, so the fly is a ::after that turns */
+.test-logo-fly-tilted .top-bar-name {
+  width: calc(var(--size-nav) * 2.6);
+  height: calc(var(--size-nav) * 1.9);
+  margin-top: calc(var(--size-nav) * -0.25);
+  color: transparent;
+}
+
+.test-logo-fly-tilted .top-bar-name::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: url("images/fly.webp") center / contain no-repeat;
+  rotate: -26.64deg;
 }
 
 /* ?logo=fly-around : a tiny fly flies around "YP" all the time.

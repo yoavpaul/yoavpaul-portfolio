@@ -10,7 +10,7 @@
   const barWords = () => [
     ...document.querySelectorAll(".top-bar-left:not(:has(.is-current))"),
     ...document.querySelectorAll(".top-bar-left:has(.is-current) > *"),
-    ...document.querySelectorAll(".top-bar-name, .top-bar-contact"),
+    ...document.querySelectorAll(".top-bar-contact"), // ("YP" has no strip, see styles.css)
   ];
 
   // True if the point (x, y) on the screen is over a text
