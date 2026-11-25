@@ -38,6 +38,14 @@ for (const overlay of document.querySelectorAll(".has-even-rows .photo-overlay")
 for (const overlay of document.querySelectorAll(".photo-overlay")) {
   const photo = overlay.querySelector(".photo-box");
 
+  // Photography page (even rows): all the rows are open all the time. A click on a work opens
+  // its own screen (photography-works.js, project-panels.js), so the rows themselves do nothing
+  if (overlay.closest(".has-even-rows")) {
+    overlay.classList.add("is-open");
+    photo.setAttribute("aria-expanded", "true");
+    continue; // (the mouse wheel scrolls the page, not the row, so the page is easy to scroll)
+  }
+
   // Opens the row, or closes it if it is open
   function toggleRow() {
     const isOpen = overlay.classList.toggle("is-open");
@@ -91,12 +99,13 @@ for (const overlay of document.querySelectorAll(".photo-overlay")) {
   }, { passive: false });
 }
 
-// Coming from a link to a project (like photography.html#megi-solar from the home page or the index):
-// its row opens right away (on the photography page with its text), and the page goes to it.
+// Coming from a link to a project (like graphics.html#im-here from the home page or the index):
+// its row opens right away, and the page goes to it.
 // "DOMContentLoaded" = when all the scripts of the page are ready (so photography-texts.js
 // also hears the click), without waiting for all the photos to load.
 // When everything has loaded, the page goes to the row once more (in case something above it moved)
-const linkedRow = location.hash && document.querySelector(location.hash + ".photo-overlay");
+// (On the photography page project-panels.js opens the work's own screen instead)
+const linkedRow = location.hash && document.querySelector(location.hash + ".photo-overlay:not(.has-even-rows *)");
 if (linkedRow) {
   document.addEventListener("DOMContentLoaded", () => {
     linkedRow.querySelector(".photo-box").click();

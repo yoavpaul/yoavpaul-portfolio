@@ -25,9 +25,9 @@
 
   <!-- The photos and their names. Sizes are in Figma pixels (see "Columns and rows" in styles.css).
 
-       Photo overlays (like in the Figma prototype): a click on a photo opens a row with more photos
-       from the same project, to the right of it. The row scrolls sideways, with the photo you clicked in it.
-       A click on any photo of an open row closes it. Every row opens and closes on its own.
+       Every work is a row of all its photos, open all the time (it scrolls sideways), with its name under it.
+       A click on a work (a photo or its name) opens it on a screen of its own: its text (below, "Texts about
+       the projects") and all its photos, see photography-works.js.
        In each row all the photos are as high as the first photo (as it shows before the row opens),
        with the same space between them (--photo-row-gap in styles.css). photo-overlays.js places them.
        --w, --h of an extra photo = its shape (width and height in Figma pixels): it keeps that shape.
@@ -109,8 +109,7 @@
     </div>
     <p class="photo-caption from-left" style="--left: 205; --width: 787; --height: 26; --space-before: 20; --left-open: 479; --space-open: 29;">Bank Leumi - Otzar Mekomi - Roots &amp; Blossoms</p>
     <!-- ===== Texts about the projects =====
-         When a row is open, the page changes to the text layout from Figma ("Photography option 2 with text"):
-         the photos get smaller and move right, and the text of the open project shows on the left, next to it.
+         They are hidden here: photography-works.js copies each one to the start of its work's own screen.
          Each text belongs to the row with the same name (id="text-" + the id of the row). -->
     <aside class="project-text" id="text-dissociative-self" hidden>
       <h2>Dissociative self</h2>
@@ -165,8 +164,23 @@
     Turn your phone sideways<br>to see the whole project
   </button>
 
+  <!-- The arrows of a work's own screen (photography-works.js). They stay in the bottom corners
+       while the work scrolls sideways: on the left back to the page (like on the branding page),
+       on the right the work before / which work it is / the next work ("‹ 2 / 5 ›") -->
+  <button class="panel-back" type="button" aria-label="Back to Photography"><svg viewBox="0 0 24 24" width="24" height="24" aria-hidden="true"><path d="M15 4 7 12l8 8" fill="none" stroke="currentColor" stroke-width="1.25"/></svg>Photography</button>
+  <p class="panel-nav">
+    <span class="panel-hint" aria-live="polite"></span>
+    <button class="panel-prev" type="button" aria-label="Previous work"><svg viewBox="0 0 24 24" width="24" height="24" aria-hidden="true"><path d="M15 4 7 12l8 8" fill="none" stroke="currentColor" stroke-width="1.25"/></svg></button>
+    <span class="panel-count"></span>
+    <button class="panel-next" type="button" aria-label="Next work"><svg viewBox="0 0 24 24" width="24" height="24" aria-hidden="true"><path d="m9 4 8 8-8 8" fill="none" stroke="currentColor" stroke-width="1.25"/></svg></button>
+  </p>
+
+  <!-- The works open on screens of their own (see the file) -->
+  <script src="photography-works.js"></script>
   <script src="photo-overlays.js"></script>
-  <script src="photography-texts.js"></script>
+  <script src="project-panels.js"></script>
+  <!-- A tool for the spaces of a work's own screen (only with ?tune in the address) -->
+  <script src="tools/panel-tuner.js"></script>
   <script src="top-bar-menu.js"></script>
   <script src="top-bar-blur.js"></script>
   <!-- A click on "YP" turns it into a fly that flies off to the home page -->

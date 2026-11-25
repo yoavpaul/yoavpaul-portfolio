@@ -729,7 +729,8 @@ button.photo-box {
 /* A photo that shows only part of itself, placed like in Figma (in % of its box) */
 .photo-box img.is-cropped,
 .photo-overlay-row img.is-cropped,
-.carousel-item img.is-cropped {
+.carousel-item img.is-cropped,
+.photo-panel-photo img.is-cropped {
   position: absolute;
   top: calc(var(--img-top) * 1%);
   left: calc(var(--img-left) * 1%);
@@ -779,6 +780,59 @@ button.photo-box {
 
 .photo-overlay.is-open .photo-overlay-row > div {
   display: block;
+}
+
+/* ===== Photography page: every work is a row of all its photos, open all the time (photography-works.js) =====
+   A click on a work opens its own screen, and the names show always ("Dissociative self" too) */
+.photography-page .photo-overlay {
+  cursor: pointer;
+}
+
+.photography-page .photo-caption.only-open {
+  display: block;
+}
+
+/* The project's own screen (a .project-panel, see "Project panels"): its text, then its photos,
+   in one row that scrolls sideways. In Figma pixels (the screen is 1069 high):
+   --panel-photo-gap = the space between the photos, --panel-text-gap = the space after the text,
+   --panel-photo-height = how high the photos are. (photography.html?tune changes them live, tools/panel-tuner.js) */
+:root {
+  --panel-photo-gap: 40;
+  --panel-text-gap: 40;
+  --panel-photo-height: 800;
+}
+
+.photo-panel-stage {
+  display: flex;
+  align-items: center;
+  gap: calc(var(--panel-photo-gap) * var(--s));
+  width: max-content;
+  height: var(--panel-height);
+  padding: 0 calc(80 * var(--s)) 0 calc(15 * var(--s));
+  box-sizing: border-box;
+}
+
+.project-text.photo-panel-text {
+  position: static;
+  flex: none;
+  align-self: flex-start;
+  margin-top: calc((1069 - var(--panel-photo-height)) / 2 * var(--s)); /* its top on the top of the photos */
+  margin-right: calc((var(--panel-text-gap) - var(--panel-photo-gap)) * var(--s));
+}
+
+/* Each photo has the shape of its row (aspect-ratio, from photography-works.js), cut like in the row */
+.photo-panel-photo {
+  position: relative;
+  flex: none;
+  height: calc(var(--panel-photo-height) * var(--s));
+  overflow: hidden;
+}
+
+.photo-panel-photo img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 }
 
 /* ===== Photography page: the text layout =====
@@ -992,38 +1046,87 @@ body.has-dark-panel .top-bar {
   color: #fff;
 }
 
-/* The back arrow: bottom left, under the menu of the top bar (the same middle as the menu
-   on the project pages, and as far from the bottom as the menu is from the top). Only while a panel is open.
-   Its color follows the top bar: white on a dark panel, black on a light one. Red under the mouse */
-.panel-back {
+/* The arrows of a project panel: thin line drawings (SVG) in the color of the text.
+   Back ("‹ Branding", bottom left, under the menu of the top bar: the same middle as the menu on the project pages,
+   and as far from the bottom as the menu is from the top), and on the photography page, on the right,
+   "‹ 2 / 5 ›" (the work before / which work / the next work). Only while a panel is open.
+   Their color follows the top bar: white on a dark panel, black on a light one. Red under the mouse */
+.panel-back,
+.panel-nav {
   display: none;
   position: fixed;
   bottom: calc(25 * var(--px));
-  left: calc(50% - 511 * var(--px));
   z-index: 5; /* above the panel */
   transform: translateX(-50%); /* its middle sits on "left" */
+  margin: 0;
+  color: var(--color-text);
+}
+
+.panel-back {
+  left: calc(50% - 511 * var(--px));
+}
+
+.panel-nav {
+  left: calc(50% + 511 * var(--px));
+  align-items: center;
+  gap: 10px;
+  font-family: var(--font-nav);
+  font-size: var(--size-nav);
+  letter-spacing: 0.1em; /* "2 / 5" a little apart, like the arrows */
+  white-space: nowrap;
+}
+
+/* "‹ Photography" / "‹ Branding": the chevron and the word like the menu */
+body.has-open-panel .panel-back {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  font-family: var(--font-nav);
+  font-size: var(--size-nav);
+}
+
+.panel-back,
+.panel-prev,
+.panel-next {
   -webkit-appearance: none; /* no button look in Safari */
   appearance: none;
   padding: 0;
   border: none;
   background: none;
-  font-family: var(--font-nav);
-  font-size: calc(var(--size-nav) * 2);
-  line-height: 1;
-  color: var(--color-text);
+  color: inherit;
   cursor: pointer;
 }
 
-body.has-open-panel .panel-back {
+.panel-back svg,
+.panel-prev svg,
+.panel-next svg {
   display: block;
 }
 
-body.has-dark-panel .panel-back {
+body.has-open-panel .panel-nav {
+  display: flex;
+}
+
+body.has-dark-panel .panel-back,
+body.has-dark-panel .panel-nav {
   color: #fff;
 }
 
-.panel-back:hover {
+.panel-back:hover,
+.panel-prev:hover,
+.panel-next:hover {
   color: var(--color-accent);
+}
+
+/* Where an arrow leads, above it, under the mouse or with Tab (photography-works.js):
+   "Next work: Megi Solar" above "‹ 2 / 5 ›" (its right edge on theirs) */
+.panel-hint {
+  position: absolute;
+  right: 0;
+  bottom: calc(100% + 10px);
+  letter-spacing: normal;
+  white-space: nowrap;
+  pointer-events: none;
 }
 
 /* A light panel (like biss): white, with black texts */

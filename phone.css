@@ -184,6 +184,14 @@
   transform: none;
 }
 
+/* The "‹ 2 / 5 ›" arrows (photography page): in the other corner */
+.panel-nav {
+  bottom: 14px;
+  left: auto;
+  right: var(--space-page);
+  transform: none;
+}
+
 /* ===== Me page (about.html) ===== */
 
 /* "Copy" shows under the email / phone, in the middle (there is no room next to them) */
