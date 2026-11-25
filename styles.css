@@ -1393,7 +1393,7 @@ body.has-dark-panel .panel-nav {
   border: none;
   background: none;
   text-decoration: none;
-  font-size: calc(62 * var(--px));
+  font-size: calc(55 * var(--px));
   line-height: normal;
   text-align: left;
   cursor: pointer;
@@ -1401,11 +1401,11 @@ body.has-dark-panel .panel-nav {
 }
 
 /* The list of projects under a category (open all the time).
-   Figma: 22px, lines 50px apart (the same in all three lists) */
+   Figma: 21px, lines 50px apart (the same in all three lists) */
 .index-list {
   padding: 0;
   list-style: none;
-  font-size: calc(22 * var(--px));
+  font-size: calc(21 * var(--px));
   line-height: calc(50 * var(--px));
   text-align: center;
   scroll-margin-bottom: calc(60 * var(--px)); /* when the page scrolls to an open list, a little space stays under it */
