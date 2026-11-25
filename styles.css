@@ -933,7 +933,7 @@ button.photo-box {
   }
 }
 
-/* ===== The 1+1= book (graphics page): book-pages.js turns its pages on a click ===== */
+/* ===== The books (graphics page: 1+1= and the Soccer notebook): book-pages.js turns their pages on a click ===== */
 .book {
   cursor: pointer;
 }

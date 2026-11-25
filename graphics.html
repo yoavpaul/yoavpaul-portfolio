@@ -34,7 +34,7 @@
            "-open" numbers: --left-open, --space-open, --width-open, --height-open (and --scale-open for a row).
          - Everything stands on one line on the left: 448 at first (like I'M HERE? in Figma), 478 in the text layout
            (right of the texts). The works, and their names under them, start on it. For the two books it is where
-           their open pages start (their pictures have a see-through edge: 1+1= 80 and Soccer 58 pixels out of 1360).
+           their open pages start (their pictures have an empty edge: 1+1= 80 and Soccer about 55 pixels out of 1360).
          While a text is open, the name under its work hides. A click on the text closes it: the work goes back
          to how it was, and its name comes back. When no text is open, the page goes back to the first layout.
          --top of a text = where it starts in the text layout (Figma pixels from the top of this column). -->
@@ -42,7 +42,7 @@
     <!-- 1+1= : the book (Hebrew, right to left). It turns its pages by itself until a click;
          then a click on the left page shows the next pages, on the right page the pages before (book-pages.js).
          images/one-plus-one-page-00.webp is the cover, 01 to 28 are the pages (see-through background) -->
-    <div id="one-plus-one" class="photo-box from-left book" tabindex="0" role="button" aria-label="1+1=, click to turn the pages" style="--left: 401; --left-open: 431; --width: 800; --height: 602;">
+    <div id="one-plus-one" class="photo-box from-left book" data-files="images/one-plus-one-page-" data-pages="29" data-name="1+1=" tabindex="0" role="button" aria-label="1+1=, click to turn the pages" style="--left: 401; --left-open: 431; --width: 800; --height: 602;">
       <img src="images/one-plus-one-page-00.webp" width="1360" height="1024" alt="1+1=, the cover">
     </div>
     <p class="photo-caption from-left" style="--left: 448; --left-open: 478; --space-open: -30; --width: 391; --height: 38;"><button class="caption-button" type="button" aria-expanded="false" aria-controls="text-one-plus-one">1+1 =</button></p>
@@ -78,20 +78,18 @@
       <p class="is-medium">2026</p>
     </aside>
 
-    <!-- On The Line - Soccer: the notebook's pages turning (see-through background, .mov for Safari, .webm for the others).
+    <!-- On The Line - Soccer: the notebook (scans), it turns its pages like the 1+1= book (book-pages.js).
+         images/soccer-joint-page-00.webp is the cover, 01 to 15 the pages, 16 the back cover (white background).
          Like I'M HERE?: a click on its name opens its text and a row: the poster moving (a screen recording)
          and the poster (Figma frame "On The Line - Soccer"), both with a thin light-gray line around them.
          They are 57 apart: the first space is measured from where the notebook's pages end
-         (its video has 54 see-through pixels on the right out of 1360), not from the edge of its box.
+         (its pictures have about 54 white pixels on the right out of 1360), not from the edge of its box.
          The row is placed for the first layout (notebook 886 wide = the Figma frame x 886 / 851);
          in the text layout the notebook is 851 wide, so --scale-open = 851 / 886 -->
     <div id="soccer-joint" class="photo-overlay from-left" data-opens-by-name style="--left: 410; --space-before: 50; --left-open: 442; --space-open: 96; --scale-open: 0.9605;">
       <div class="photo-overlay-row" style="--width: 2147.8;">
-        <span class="photo-box" style="--width: 886; --height: 667; --width-open: 851; --height-open: 641;">
-          <video autoplay muted loop playsinline aria-label="On The Line - Soccer, the notebook's pages turning">
-            <source src="images/soccer-joint-spreads.mov" type="video/quicktime">
-            <source src="images/soccer-joint-spreads.webm" type="video/webm">
-          </video>
+        <span class="photo-box book" data-files="images/soccer-joint-page-" data-pages="17" data-name="On The Line - Soccer" data-back-cover tabindex="0" role="button" aria-label="On The Line - Soccer, click to turn the pages" style="--width: 886; --height: 667; --width-open: 851; --height-open: 641;">
+          <img src="images/soccer-joint-page-00.webp" width="1360" height="1024" alt="On The Line - Soccer, the cover">
         </span>
         <div class="has-line" style="--x: 909.9; --y: 72.9; --w: 804.8; --h: 471.6;"><video src="images/soccer-joint-poster-motion.mp4" poster="images/soccer-joint-poster-motion-poster.webp" muted loop playsinline preload="none" aria-label="On The Line - Soccer, the poster moving"></video></div>
         <div class="has-line" style="--x: 1774.1; --y: 20.8; --w: 373.8; --h: 534.1;"><img src="images/poster-joint-soccer.webp" width="1680" height="2400" alt="On The Line - Soccer poster" loading="lazy"></div>
