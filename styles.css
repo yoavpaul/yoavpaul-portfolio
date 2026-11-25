@@ -808,7 +808,7 @@ button.photo-box {
   gap: calc(var(--panel-photo-gap) * var(--s));
   width: max-content;
   height: var(--panel-height);
-  padding: 0 calc(80 * var(--s)) 0 calc(15 * var(--s));
+  padding: 0 calc(80 * var(--s)) 0 calc(30 * var(--s)); /* the text starts 30 from the left (Figma) */
   box-sizing: border-box;
 }
 
@@ -893,10 +893,10 @@ button.photo-box {
   display: none;
 }
 
-/* Name and year: Bold 28px (Figma "Photography option 2 with text") */
+/* The name: Bold, 28px (each text can set its own size, --title-size, like in Figma) */
 .project-text h2 {
   margin: 0;
-  font-size: calc(28 * var(--px));
+  font-size: calc(var(--title-size, 28) * var(--px));
   font-weight: 700;
   line-height: normal;
 }
@@ -904,6 +904,16 @@ button.photo-box {
 /* (not used now: the dates were taken off the names, kept in case they come back) */
 .project-text-year {
   margin-left: 0.4em;
+}
+
+/* A small dash in a name ("Megi Solar — Paris Fashion Editorial"): 16px, like the text */
+.project-text h2 .is-small {
+  font-size: calc(16 * var(--px));
+}
+
+/* Bold words in the text ("Featured In") */
+.project-text .is-bold {
+  font-weight: 700;
 }
 
 /* Megi Solar and Otzar Mekomi: the name's lines are 26px apart, like the text under it */
@@ -1127,6 +1137,11 @@ body.has-dark-panel .panel-nav {
   letter-spacing: normal;
   white-space: nowrap;
   pointer-events: none;
+}
+
+/* The name of the work in red, "Next work:" black */
+.panel-hint-name {
+  color: var(--color-accent);
 }
 
 /* A light panel (like biss): white, with black texts */

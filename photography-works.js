@@ -5,7 +5,7 @@
 // On that screen:
 //   - bottom left "‹ Photography" goes back to the page (Esc too),
 //   - bottom right "‹ 2 / 5 ›" opens the work before / after (after the last one comes the first).
-//     Under the mouse they say where they lead ("Next work: Megi Solar").
+//     Under the mouse they say where they lead ("Next work: Megi Solar", the name in red).
 //   - the arrow keys ← → scroll the photos (project-panels.js).
 // Next to the mouse, on the page, a tag says "Open the project".
 // This file is loaded before photo-overlays.js and project-panels.js (they use what it makes).
@@ -99,10 +99,18 @@
   const navHint = document.querySelector(".panel-nav .panel-hint");
   for (const [selector, step, words] of [[".panel-prev", -1, "Previous work: "], [".panel-next", 1, "Next work: "]]) {
     const arrow = document.querySelector(selector);
+    // Two parts, so each one can have its own color: "Next work: " and the name
     const showHint = () => {
-      if (openIndex() !== -1) navHint.textContent = words + nameOf(rowAfter(step));
+      if (openIndex() === -1) return;
+      const wordsPart = document.createElement("span");
+      wordsPart.className = "panel-hint-words";
+      wordsPart.textContent = words;
+      const namePart = document.createElement("span");
+      namePart.className = "panel-hint-name";
+      namePart.textContent = nameOf(rowAfter(step));
+      navHint.replaceChildren(wordsPart, namePart);
     };
-    const hideHint = () => (navHint.textContent = "");
+    const hideHint = () => navHint.replaceChildren();
     arrow.addEventListener("click", () => {
       goTo(step);
       arrow.focus(); // (with the keyboard, Enter again goes on to the one after)
