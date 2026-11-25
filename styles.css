@@ -1320,6 +1320,52 @@ body.has-dark-panel .panel-nav {
 
 /* ===== Index page (projects.html) ===== */
 
+/* The "screen" at the top: the moving row of works (like the home page), under the top bar.
+   Lower than on the home page (340 instead of 600), so the categories are on the screen with it */
+.index-screen {
+  --screen-height: 340;
+  position: relative;
+  margin-top: calc(110 * var(--px));
+  padding-bottom: 0;
+}
+
+.index-screen .carousel {
+  height: calc(var(--screen-height) * var(--px));
+}
+
+@media (min-width: 701px) {
+  /* The name of a work under the row shows only under a finger (phones) */
+  .index-screen .carousel-modes {
+    display: none;
+  }
+
+  /* The categories a little closer to the screen (".index-page": stronger than "margin: 0 auto" below) */
+  .index-page .index-categories {
+    margin-top: calc(-40 * var(--px));
+  }
+}
+
+/* One project on the screen, under the mouse on its name: its cover in the middle, on white,
+   over the moving row (index-menu.js adds "is-previewing") */
+.index-preview {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: calc(var(--screen-height) * var(--px));
+  display: none;
+  justify-content: center;
+  background-color: var(--color-background);
+}
+
+.index-screen.is-previewing .index-preview {
+  display: flex;
+}
+
+.index-preview .carousel-item {
+  margin: 0;
+}
+
 /* The area under the big name (1032 - 505 Figma pixels high).
    The categories and lists are placed in it by --x, --y and --w */
 .index-categories {
@@ -1341,24 +1387,25 @@ body.has-dark-panel .panel-nav {
   color: var(--color-text);
 }
 
-/* A category: a button with no button look, the text on the left */
+/* A category: a link to its page, the text on the left */
 .index-category {
   padding: 0;
   border: none;
   background: none;
-  font-size: calc(70.82 * var(--px));
+  text-decoration: none;
+  font-size: calc(62 * var(--px));
   line-height: normal;
   text-align: left;
   cursor: pointer;
   touch-action: manipulation; /* a double tap on a phone doesn't zoom (it leads to the page) */
 }
 
-/* The list of projects under a category (hidden until the category is clicked).
-   Figma: 27px, lines 50px apart (the same in all three lists) */
+/* The list of projects under a category (open all the time).
+   Figma: 22px, lines 50px apart (the same in all three lists) */
 .index-list {
   padding: 0;
   list-style: none;
-  font-size: calc(27 * var(--px));
+  font-size: calc(22 * var(--px));
   line-height: calc(50 * var(--px));
   text-align: center;
   scroll-margin-bottom: calc(60 * var(--px)); /* when the page scrolls to an open list, a little space stays under it */

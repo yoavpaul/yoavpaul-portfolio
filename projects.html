@@ -17,34 +17,43 @@
     <a class="top-bar-contact" href="about.html">Contact</a>
   </header>
 
-  <!-- Big name (the fly sits on it, see below) -->
-  <section class="hero">
-    <h1 class="hero-title">YOAVPAUL</h1>
+  <!-- The "screen": all the works moving in a row, like the home page (home-carousel.js).
+       Under the mouse on a category it shows only that category's works,
+       and on the name of a project it shows that project (index-menu.js) -->
+  <section class="carousel-section index-screen">
+    <div class="carousel">
+      <div class="carousel-track">
+      <!-- The works come from projects.json (home-carousel.js puts them here) -->
+      </div>
+    </div>
+    <!-- One project, under the mouse on its name (index-menu.js) -->
+    <div class="index-preview" aria-hidden="true"></div>
+    <!-- Under a finger on the row: the category (red) / the name of the work (home-carousel.js) -->
+    <p class="carousel-modes">
+      <span class="carousel-name" aria-hidden="true"><span class="carousel-category"></span> / <span class="carousel-work"></span></span>
+    </p>
   </section>
 
-  <!-- The three categories. Each one turns red under the mouse.
-       A click on a category opens (or closes) the list of its projects under it,
-       and a double click leads to the category's page (data-page).
-       Each project in the list turns red under the mouse and leads to that project.
+  <!-- The three categories, each with the list of its projects under it (open all the time).
+       A click on a category leads to its page, a click on a project leads to that project.
+       Each one turns red under the mouse.
        The projects in the lists come from projects.json (index-menu.js puts them here, by their "order").
-       Places are in Figma pixels, measured from the bottom of the big name:
+       Places are in Figma pixels (Figma frame "Index – screen + categories (site)"), measured from the top
+       of this area (410 in that frame):
        --x, --y = where it starts, --w = its width -->
   <main class="index-categories">
-    <button class="index-category" aria-expanded="false" aria-controls="list-branding" data-page="branding.html" style="--x: 82; --y: 79; --w: 352;">Branding</button>
-    <ul class="index-list" id="list-branding" style="--x: 82; --y: 234; --w: 282;" hidden></ul>
+    <a class="index-category" href="branding.html" data-category="Branding" style="--x: 82; --y: 85; --w: 352;">Branding</a>
+    <ul class="index-list" id="list-branding" style="--x: 72; --y: 194; --w: 282;"></ul>
 
-    <button class="index-category" aria-expanded="false" aria-controls="list-photography" data-page="photography.html" style="--x: 527; --y: 86; --w: 448;">Photography</button>
-    <ul class="index-list" id="list-photography" style="--x: 519; --y: 233; --w: 425;" hidden></ul>
+    <a class="index-category" href="photography.html" data-category="Photography" style="--x: 532; --y: 87; --w: 380;">Photography</a>
+    <ul class="index-list" id="list-photography" style="--x: 509; --y: 193; --w: 425;"></ul>
 
-    <button class="index-category" aria-expanded="false" aria-controls="list-graphics" data-page="graphics.html" style="--x: 1068; --y: 93; --w: 316;">Graphics</button>
-    <ul class="index-list" id="list-graphics" style="--x: 1084; --y: 233; --w: 285;" hidden></ul>
+    <a class="index-category" href="graphics.html" data-category="Graphics" style="--x: 1068; --y: 87; --w: 316;">Graphics</a>
+    <ul class="index-list" id="list-graphics" style="--x: 1064; --y: 193; --w: 285;"></ul>
   </main>
 
-  <!-- The fly: sits on the name and flies away when the mouse touches it (moved by script.js) -->
-  <img class="fly" src="images/fly.webp" width="680" height="500" alt="" aria-hidden="true">
-
-  <script src="script.js"></script>
   <script src="projects.js"></script>
+  <script src="home-carousel.js"></script>
   <script src="index-menu.js"></script>
   <script src="top-bar-blur.js"></script>
   <!-- A click on "YP" turns it into a fly that flies off to the home page -->

@@ -122,6 +122,15 @@
   margin-top: 6px;
 }
 
+/* Index page: the screen of works as high as the home page row (no hover on phones, so no preview) */
+.index-screen {
+  margin-top: 64px;
+}
+
+.index-screen .carousel {
+  height: 75vw;
+}
+
 /* The categories one under the other, each list under its category */
 .index-categories {
   width: auto;
