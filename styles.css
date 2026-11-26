@@ -1576,13 +1576,13 @@ body.has-dark-panel .panel-nav {
   white-space: nowrap;
 }
 
-/* The email address and the phone number under the big words (Medium 48px) */
+/* The email address and the phone number under the big words (Medium 39px) */
 .about-contact {
   top: calc(var(--top) * var(--px));
   left: calc(var(--middle) * var(--px));
   transform: translateX(-50%);
   font-family: var(--font-nav);
-  font-size: calc(48 * var(--px));
+  font-size: calc(39 * var(--px));
   font-weight: 500;
   line-height: normal;
   color: var(--color-text);
@@ -1590,7 +1590,7 @@ body.has-dark-panel .panel-nav {
   white-space: nowrap;
 }
 
-/* The text about me (Medium 32px, lines 62px apart) */
+/* The email / phone: no link look */
 .about-contact a {
   color: inherit;
   text-decoration: none;
@@ -1643,12 +1643,12 @@ body.has-dark-panel .panel-nav {
 
 .about-text {
   top: calc(var(--top) * var(--px));
-  left: calc(164 * var(--px));
-  width: calc(1175 * var(--px));
+  left: calc(231 * var(--px));
+  width: calc(1052 * var(--px));
   font-family: var(--font-nav);
-  font-size: calc(32 * var(--px));
+  font-size: calc(24 * var(--px));
   font-weight: 500;
-  line-height: calc(62 * var(--px));
+  line-height: calc(47 * var(--px));
   color: var(--color-text);
 }
 
@@ -1656,8 +1656,8 @@ body.has-dark-panel .panel-nav {
   margin: 0;
 }
 
-/* The second paragraph starts a little to the right, like in Figma */
+/* A paragraph after another one: an empty line between them */
 .about-text p + p {
-  text-indent: calc(30 * var(--px)); /* 4 spaces, like in Figma */
+  margin-top: calc(47 * var(--px));
 }
 

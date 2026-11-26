@@ -1,6 +1,6 @@
 // Me page: a "Copy" button for the email and the phone number.
-// On a computer it shows when the mouse is on them (see styles.css), and the email / phone
-// still opens the email app or the phone when clicked.
+// On a computer it shows when the mouse is on them (see styles.css).
+// A click on the email copies it too (it doesn't open the email app).
 // On a phone or tablet (no mouse) a tap on them shows the "Copy" button instead,
 // and a tap anywhere else hides it.
 // A click on "Copy" copies the email / number, the button says "Copied" for 2 seconds
@@ -37,9 +37,19 @@
     const link = contact.querySelector("a");
     const button = contact.querySelector(".copy-button");
 
-    // Phones: a tap shows (or hides) "Copy", instead of opening the email app / calling
+    // The email (data-copies): a click copies it, instead of opening the email app
+    if (link.hasAttribute("data-copies")) {
+      link.addEventListener("click", (event) => {
+        event.preventDefault();
+        contact.classList.remove("is-copied");
+        contact.classList.add("is-showing-copy");
+        button.click(); // the same as "Copy": it says "Copied", and hides 2 seconds later
+      });
+    }
+
+    // Phones: a tap on the phone number shows (or hides) "Copy", instead of calling
     link.addEventListener("click", (event) => {
-      if (!noMouse.matches) return;
+      if (!noMouse.matches || link.hasAttribute("data-copies")) return;
       event.preventDefault();
       hideAllCopyButtons(contact);
       contact.classList.remove("is-copied"); // after a copy, a new tap shows it again
