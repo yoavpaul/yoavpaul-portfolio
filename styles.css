@@ -1773,3 +1773,104 @@ body.has-dark-panel .panel-nav {
     line-height: 1.45;
   }
 }
+
+/* ===== Mobile test (mobile-test.js, only with ?mobile=test): a work's screen on an upright phone
+   is a page that scrolls down: its text, then all its parts one under the other, as wide as the screen ===== */
+@media (max-width: 700px) and (orientation: portrait) {
+  .test-mobile .rotate-hint {
+    display: none !important;
+  }
+
+  .test-mobile body.has-open-panel .top-bar-left {
+    display: none; /* the menu doesn't cover the work ("‹ Photography" goes back) */
+  }
+
+  .test-mobile .project-panel {
+    --s: 0.6px; /* the texts' sizes on this page (Figma pixels x 0.6) */
+    overflow-x: hidden;
+    overflow-y: auto;
+  }
+
+  .test-mobile .project-panel-stage,
+  .test-mobile .photo-panel-stage,
+  .test-mobile .screen-stage {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 12px;
+    width: auto;
+    height: auto;
+    margin: 0;
+    padding: 72px 16px 90px;
+    box-sizing: border-box;
+    overflow: visible;
+  }
+
+  .test-mobile .project-panel-stage > *,
+  .test-mobile .screen-stage > * {
+    position: relative;
+    left: auto;
+    top: auto;
+    width: auto;
+    height: auto;
+    transform: none;
+  }
+
+  .test-mobile .panel-item,
+  .test-mobile .screen-item[style*="--h"] {
+    width: 100%;
+    aspect-ratio: var(--w) / var(--h);
+  }
+
+  .test-mobile .photo-panel-photo {
+    width: 100%;
+    height: auto;
+  }
+
+  .test-mobile .project-panel .photo-panel-text {
+    width: auto;
+    max-height: none;
+    margin: 0 0 12px;
+    overflow: visible;
+  }
+
+  .test-mobile .panel-text {
+    text-align: left;
+  }
+
+  /* The arrows at the bottom stay readable over the photos: a soft strip behind them */
+  .test-mobile .panel-back,
+  .test-mobile .panel-nav {
+    padding: 4px 8px;
+    border-radius: 4px;
+    background-color: rgba(255, 255, 255, 0.85);
+  }
+
+  .test-mobile body.has-dark-panel .panel-back,
+  .test-mobile body.has-dark-panel .panel-nav {
+    background-color: rgba(0, 0, 0, 0.7);
+  }
+}
+
+/* Mobile test, "the computer layout, smaller", on a narrow screen: what would be too small or crowded */
+@media (max-width: 700px) {
+  /* the menu (4 lines) doesn't touch the big title */
+  .test-mobile .project-header {
+    margin-top: 48px;
+  }
+
+  /* each name stays on one line */
+  .test-mobile .photo-caption {
+    white-space: nowrap;
+  }
+
+  /* the contact page: the email, phone and text big enough to read */
+  .test-mobile .about-contact {
+    font-size: 14px;
+  }
+
+  .test-mobile .about-text {
+    font-size: 11px;
+    line-height: 1.6;
+  }
+}
