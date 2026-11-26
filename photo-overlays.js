@@ -38,11 +38,13 @@ for (const overlay of document.querySelectorAll(".has-even-rows .photo-overlay")
 for (const overlay of document.querySelectorAll(".photo-overlay")) {
   const photo = overlay.querySelector(".photo-box");
 
-  // Photography page (even rows): all the rows are open all the time. A click on a work opens
-  // its own screen (photography-works.js, project-panels.js), so the rows themselves do nothing
-  if (overlay.closest(".has-even-rows")) {
+  // Photography page (even rows) and rows with "data-always-open" (graphics page): open all the time.
+  // A click on a work opens its own screen (works-screens.js, project-panels.js),
+  // so the rows themselves do nothing. Their videos play
+  if (overlay.closest(".has-even-rows") || overlay.hasAttribute("data-always-open")) {
     overlay.classList.add("is-open");
     photo.setAttribute("aria-expanded", "true");
+    for (const video of overlay.querySelectorAll(".photo-overlay-row > div video")) video.play();
     continue; // (the mouse wheel scrolls the page, not the row, so the page is easy to scroll)
   }
 
@@ -66,13 +68,8 @@ for (const overlay of document.querySelectorAll(".photo-overlay")) {
     }
   }
 
-  // Click on the first photo: open or close the row.
-  // Rows with "data-opens-by-name" (graphics page) don't open from the photo:
-  // only a click on the work's name opens them (graphics-texts.js sends "toggle-row")
-  if (!overlay.hasAttribute("data-opens-by-name")) {
-    photo.addEventListener("click", toggleRow);
-  }
-  overlay.addEventListener("toggle-row", toggleRow);
+  // Click on the first photo: open or close the row
+  photo.addEventListener("click", toggleRow);
 
   // Click on one of the other photos (they show only when the row is open): close the row
   for (const otherPhoto of overlay.querySelectorAll(".photo-overlay-row > div")) {
@@ -104,8 +101,8 @@ for (const overlay of document.querySelectorAll(".photo-overlay")) {
 // "DOMContentLoaded" = when all the scripts of the page are ready (so photography-texts.js
 // also hears the click), without waiting for all the photos to load.
 // When everything has loaded, the page goes to the row once more (in case something above it moved)
-// (On the photography page project-panels.js opens the work's own screen instead)
-const linkedRow = location.hash && document.querySelector(location.hash + ".photo-overlay:not(.has-even-rows *)");
+// (On the photography and graphics pages project-panels.js opens the work's own screen instead)
+const linkedRow = location.hash && document.querySelector(location.hash + ".photo-overlay:not(.has-even-rows *):not([data-always-open])");
 if (linkedRow) {
   document.addEventListener("DOMContentLoaded", () => {
     linkedRow.querySelector(".photo-box").click();

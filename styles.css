@@ -782,9 +782,67 @@ button.photo-box {
   display: block;
 }
 
-/* ===== Photography page: every work is a row of all its photos, open all the time (photography-works.js) =====
-   A click on a work opens its own screen, and the names show always ("Dissociative self" too) */
-.photography-page .photo-overlay {
+/* The controls of a book on its own screen (book-pages.js): thin arrows on its sides
+   (‹ the next pages, › the pages before: it is in Hebrew) and ❚❚ under it for a second after a click,
+   in its empty edges.
+   Red under the mouse, like the other arrows */
+.book-control {
+  position: absolute;
+  z-index: 1;
+  padding: 4px;
+  border: none;
+  background: none;
+  color: var(--color-text);
+  cursor: pointer;
+}
+
+.book-control svg {
+  display: block;
+}
+
+.book-control:hover {
+  color: var(--color-accent);
+}
+
+.book-forward {
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.book-backward {
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.book-pause-sign {
+  left: 50%;
+  bottom: 0;
+  transform: translateX(-50%);
+  padding: 8px;
+  cursor: default;
+  pointer-events: none;
+}
+
+.book-pause-sign[hidden] {
+  display: none;
+}
+
+/* ❚❚: small (12px) */
+.book-pause-sign svg {
+  width: 12px;
+  height: 12px;
+}
+
+.book-pause-sign path {
+  fill: none;
+}
+
+/* ===== Photography and graphics pages: a click on a work opens its own screen (works-screens.js) =====
+   The rows of photos are open all the time, and the names show always ("Dissociative self" too) */
+.photo-overlay[data-panel],
+.book[data-panel] {
   cursor: pointer;
 }
 
@@ -820,7 +878,7 @@ button.photo-box {
   margin-right: calc((var(--panel-text-gap) - var(--panel-photo-gap)) * var(--s));
 }
 
-/* Each photo has the shape of its row (aspect-ratio, from photography-works.js), cut like in the row */
+/* Each photo has the shape of its row (aspect-ratio, from works-screens.js), cut like in the row */
 .photo-panel-photo {
   position: relative;
   flex: none;
@@ -828,7 +886,9 @@ button.photo-box {
   overflow: hidden;
 }
 
-.photo-panel-photo img {
+.photo-panel-photo img,
+.photo-panel-photo video,
+.photo-panel-photo .book {
   display: block;
   width: 100%;
   height: 100%;
@@ -1128,7 +1188,7 @@ body.has-dark-panel .panel-nav {
   color: var(--color-accent);
 }
 
-/* Where an arrow leads, above it, under the mouse or with Tab (photography-works.js):
+/* Where an arrow leads, above it, under the mouse or with Tab (works-screens.js):
    "Next work: Megi Solar" above "‹ 2 / 5 ›" (its right edge on theirs) */
 .panel-hint {
   position: absolute;

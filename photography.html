@@ -27,7 +27,7 @@
 
        Every work is a row of all its photos, open all the time (it scrolls sideways), with its name under it.
        A click on a work (a photo or its name) opens it on a screen of its own: its text (below, "Texts about
-       the projects") and all its photos, see photography-works.js.
+       the projects") and all its photos, see works-screens.js.
        In each row all the photos are as high as the first photo (as it shows before the row opens),
        with the same space between them (--photo-row-gap in styles.css). photo-overlays.js places them.
        --w, --h of an extra photo = its shape (width and height in Figma pixels): it keeps that shape.
@@ -65,8 +65,6 @@
         <div style="--w: 856; --h: 1216;"><img src="images/monsters-06.webp" srcset="images/monsters-06-1200.webp 1200w, images/monsters-06.webp 1688w" sizes="min(857px, 59.51vw)" width="1688" height="2396" alt="Monsters Under The Bed, photo 6" loading="lazy"></div>
         <div style="--w: 857; --h: 1216;"><img src="images/monsters-07.webp" srcset="images/monsters-07-1200.webp 1200w, images/monsters-07.webp 1688w" sizes="min(857px, 59.51vw)" width="1688" height="2396" alt="Monsters Under The Bed, photo 7" loading="lazy"></div>
         <div style="--w: 856; --h: 1216;"><img src="images/monsters-08.webp" srcset="images/monsters-08-1200.webp 1200w, images/monsters-08.webp 1688w" sizes="min(857px, 59.51vw)" width="1688" height="2396" alt="Monsters Under The Bed, photo 8" loading="lazy"></div>
-        <div style="--w: 856; --h: 1216;"><img src="images/monsters-09.webp" srcset="images/monsters-09-1200.webp 1200w, images/monsters-09.webp 1688w" sizes="min(857px, 59.51vw)" width="1688" height="2396" alt="Monsters Under The Bed, photo 9" loading="lazy"></div>
-        <div style="--w: 840; --h: 1216;"><img src="images/monsters-10.webp" srcset="images/monsters-10-1200.webp 1200w, images/monsters-10.webp 1658w" sizes="min(840px, 58.33vw)" width="1658" height="2400" alt="Monsters Under The Bed, photo 10" loading="lazy"></div>
       </div>
     </div>
     <p class="photo-caption from-left" style="--left: 407; --width: 557; --height: 63; --space-before: 19; --left-open: 482; --space-open: 30;">Monsters Under The Bed - Guy Jarzin</p>
@@ -109,7 +107,7 @@
     </div>
     <p class="photo-caption from-left" style="--left: 205; --width: 787; --height: 26; --space-before: 20; --left-open: 479; --space-open: 29;">Bank Leumi - Otzar Mekomi - Roots &amp; Blossoms</p>
     <!-- ===== Texts about the projects =====
-         They are hidden here: photography-works.js copies each one to the start of its work's own screen.
+         They are hidden here: works-screens.js copies each one to the start of its work's own screen.
          Each text belongs to the row with the same name (id="text-" + the id of the row). -->
     <aside class="project-text" id="text-dissociative-self" hidden>
       <h2 style="--title-size: 30;">Dissociative self</h2>
@@ -159,7 +157,7 @@
     Turn your phone sideways<br>to see the whole project
   </button>
 
-  <!-- The arrows of a work's own screen (photography-works.js). They stay in the bottom corners
+  <!-- The arrows of a work's own screen (works-screens.js). They stay in the bottom corners
        while the work scrolls sideways: on the left back to the page (like on the branding page),
        on the right the work before / which work it is / the next work ("‹ 2 / 5 ›") -->
   <button class="panel-back" type="button" aria-label="Back to Photography"><svg viewBox="0 0 24 24" width="24" height="24" aria-hidden="true"><path d="M15 4 7 12l8 8" fill="none" stroke="currentColor" stroke-width="1.25"/></svg>Photography</button>
@@ -171,7 +169,7 @@
   </p>
 
   <!-- The works open on screens of their own (see the file) -->
-  <script src="photography-works.js"></script>
+  <script src="works-screens.js"></script>
   <script src="photo-overlays.js"></script>
   <script src="project-panels.js"></script>
   <!-- A tool for the spaces of a work's own screen (only with ?tune in the address) -->
