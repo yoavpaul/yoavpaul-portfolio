@@ -87,7 +87,7 @@
           phase = "away";
           time = 0;
           heading = exitHeading;
-          speed = 600;
+          speed = 600 * Math.min(1, Math.max(0.5, window.innerWidth / 1440)); // slower on a small screen
         }
       } else if (phase === "away") {
         // Grows to the size of the fly on the home page (113 Figma pixels)
@@ -97,7 +97,7 @@
         // Wobbles a little like a fly, but keeps turning toward its way out, faster and faster
         heading += random(-120, 120) * seconds;
         heading += (exitHeading - heading) * Math.min(1, seconds * 3);
-        speed += 1100 * seconds;
+        speed += 1100 * Math.min(1, Math.max(0.5, window.innerWidth / 1440)) * seconds;
         const radians = heading * (Math.PI / 180);
         x += Math.cos(radians) * speed * seconds;
         y += Math.sin(radians) * speed * seconds;

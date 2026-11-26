@@ -55,8 +55,11 @@ let speed = 0; // pixels per second
 let isFlying = false;
 let timeLeft = 1.5; // seconds until it switches
 
-const MIN_SPEED = 250;
-const MAX_SPEED = 650;
+// Speeds are for a computer screen (1440 wide). A smaller screen gets a slower fly
+// (a phone: about half as fast), so it doesn't cross the whole screen in a blink
+const SPEED_SCALE = Math.min(1, Math.max(0.4, window.innerWidth / 1440));
+const MIN_SPEED = 250 * SPEED_SCALE;
+const MAX_SPEED = 650 * SPEED_SCALE;
 const EDGE = 80; // how close to the edge before it turns back
 
 function randomBetween(min, max) {
@@ -106,7 +109,7 @@ function update(seconds) {
   }
 
   // Speed up and slow down a little
-  speed += randomBetween(-900, 900) * seconds;
+  speed += randomBetween(-900, 900) * SPEED_SCALE * seconds;
   speed = Math.min(MAX_SPEED, Math.max(MIN_SPEED, speed));
 
   // Move forward in the direction it is facing

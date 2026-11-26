@@ -1738,3 +1738,38 @@ body.has-dark-panel .panel-nav {
   margin-top: calc(47 * var(--px));
 }
 
+/* ===== Phones and tablets (also turned sideways, when they are wider than 700 and phone.css is not used) ===== */
+
+/* Touch screens draw the shadow of a moving picture badly (gray smears around it),
+   so there the fly has no shadow */
+@media (hover: none) {
+  .fly,
+  .fly.is-flying,
+  .yp-fly {
+    filter: none;
+  }
+}
+
+/* A low screen (a phone turned sideways): on a work's own screen
+   - the menu at the top (4 lines) hides, so it doesn't cover the work ("‹ Photography" goes back)
+   - the text has sizes for reading on a phone, and scrolls if it is longer than the screen */
+@media (max-height: 500px) {
+  body.has-open-panel .top-bar-left {
+    display: none;
+  }
+
+  .project-panel .photo-panel-text {
+    max-height: calc(var(--panel-height) - 2 * 120 * var(--s));
+    overflow-y: auto;
+  }
+
+  .project-panel .photo-panel-text h2 {
+    font-size: 15px;
+    line-height: 1.25;
+  }
+
+  .project-panel .photo-panel-text p {
+    font-size: 11px;
+    line-height: 1.45;
+  }
+}
