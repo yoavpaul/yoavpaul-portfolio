@@ -1194,7 +1194,8 @@ button.photo-box {
 
 /* ===== On The Line - Soccer (graphics page) =====
    A thin light-gray line around the poster and the poster moving (in its row) */
-.photo-overlay-row > .has-line {
+.photo-overlay-row > .has-line,
+.photo-panel-photo.has-line {
   outline: 1px solid #e0e0e0;
   outline-offset: -1px;
 }

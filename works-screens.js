@@ -71,6 +71,7 @@
       const height = parseFloat(part.style.getPropertyValue(isFirst ? "--height" : "--h"));
       const box = document.createElement("div");
       box.className = "photo-panel-photo"; // (not "panel-item": a click on it doesn't close the screen)
+      if (part.classList.contains("has-line")) box.classList.add("has-line"); // its thin gray line too
       box.style.aspectRatio = width + " / " + height;
       if (part.classList.contains("book")) {
         const book = part.cloneNode(true);
