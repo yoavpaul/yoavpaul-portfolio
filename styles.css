@@ -957,9 +957,10 @@ button.photo-box {
   color: var(--color-text);
 }
 
-/* On a work's screen, the photos open big with a click (photography page).
+/* On a work's screen, the photos open big with a click (photography and branding pages).
    A tag "View" shows next to the mouse (photo-lightbox.js), so the mouse stays as it is */
-.photography-page .photo-panel-photo {
+.photography-page .photo-panel-photo,
+.panel-item:has(img) {
   cursor: pointer;
 }
 

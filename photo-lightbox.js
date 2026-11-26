@@ -1,13 +1,18 @@
-// Photography page: on a work's own screen, a tag "View" shows next to the mouse over a photo,
-// and a click on a photo opens it big, on the whole screen
+// Photography and branding pages: on a work's own screen, a tag "View" shows next to the mouse
+// over a photo (or a logo), and a click on it opens it big, on the whole screen
 // (the whole photo, not cut). Inside the big gallery:
 //   - ‹ › on the sides (or the arrow keys ← →) go to the photo before / after in the same work
 //     (after the last one comes the first),
 //   - "3 / 10" at the bottom says which photo it is,
 //   - × (or Esc, or a click on the empty space around the photo) closes it, back to the work's screen.
-// The photos come from the work's screen (works-screens.js makes it).
+// The photos come from the work's screen (photography: works-screens.js makes it; branding: in the page).
+// Videos are not in the gallery.
 
 {
+  // The photos on a work's screen: photography (.photo-panel-photo) and branding (.panel-item)
+  const PHOTOS = ".photo-panel-photo img, .panel-item img";
+  const PHOTOS_ON_A_SCREEN = ".project-panel .photo-panel-photo img, .project-panel .panel-item img";
+
   const line = (path) => `<svg viewBox="0 0 24 24" width="24" height="24" aria-hidden="true"><path d="${path}" fill="none" stroke="currentColor" stroke-width="1.25"/></svg>`;
 
   // The gallery: made once, and filled with the photos of the work that was clicked
@@ -38,7 +43,7 @@
   };
 
   const open = (screen, photo) => {
-    photos = [...screen.querySelectorAll(".photo-panel-photo img")];
+    photos = [...screen.querySelectorAll(PHOTOS)];
     show(photos.indexOf(photo));
     gallery.hidden = false;
     gallery.querySelector(".lightbox-close").focus();
@@ -58,7 +63,7 @@
   tag.textContent = "View";
   document.body.appendChild(tag);
   document.addEventListener("pointermove", (event) => {
-    const overPhoto = event.pointerType === "mouse" && gallery.hidden && event.target.closest(".project-panel .photo-panel-photo");
+    const overPhoto = event.pointerType === "mouse" && gallery.hidden && event.target.closest(PHOTOS_ON_A_SCREEN);
     tag.classList.toggle("is-shown", Boolean(overPhoto));
     if (overPhoto) tag.style.transform = `translate(${event.clientX + 14}px, ${event.clientY + 22}px)`;
   });
@@ -66,7 +71,7 @@
 
   // A click on a photo on a work's screen opens it big
   document.addEventListener("click", (event) => {
-    const photo = event.target.closest(".project-panel .photo-panel-photo img");
+    const photo = event.target.closest(PHOTOS_ON_A_SCREEN);
     if (photo) open(photo.closest(".project-panel"), photo);
   });
 

@@ -1,7 +1,7 @@
 // Project panels (branding page): a click on a project's photo opens the whole project
 // on top of the page, as high as the screen. It scrolls only sideways
-// (trackpad, mouse wheel, finger or the arrow keys). A click on any work (on the branding page),
-// on "‹ Branding" in the bottom left corner, or the Esc key, closes it.
+// (trackpad, mouse wheel, finger or the arrow keys). "‹ Branding" in the bottom left corner,
+// or the Esc key, closes it. (A click on a photo opens it big: photo-lightbox.js)
 // Videos in a panel play only while it is open. On a dark panel the top bar turns white.
 
 let openPanel = null;    // the panel that is open now
@@ -38,13 +38,6 @@ for (const button of document.querySelectorAll("[data-panel]")) {
 }
 
 for (const panel of document.querySelectorAll(".project-panel")) {
-  // A click on any work closes the panel
-  panel.addEventListener("click", (event) => {
-    if (event.target.closest(".panel-item")) {
-      closeProjectPanel();
-    }
-  });
-
   // The mouse wheel scrolls the panel sideways (it has nothing to scroll up or down)
   panel.addEventListener("wheel", (event) => {
     if (Math.abs(event.deltaY) > Math.abs(event.deltaX)) {

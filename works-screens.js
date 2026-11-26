@@ -5,8 +5,7 @@
 // (photos, books, videos) in one row that scrolls sideways, without the other works under it.
 // On that screen:
 //   - bottom left "‹ Photography" / "‹ Graphics" goes back to the page (Esc too),
-//   - bottom right "‹ 2 / 5 ›" opens the work before / after (after the last one comes the first).
-//     Under the mouse they say where they lead ("Next work: Megi Solar", the name in red).
+//   - bottom right "‹ 2 / 5 ›" opens the work before / after (panel-nav.js).
 //   - the arrow keys ← → scroll it (project-panels.js), and a click on a book turns its pages.
 // Next to the mouse, on the page, a tag says "Open the project".
 // A work on the page = a row of photos (.photo-overlay) or a book (.book) in the column of works.
@@ -98,58 +97,6 @@
     const name = row.nextElementSibling && row.nextElementSibling.querySelector(".caption-button");
     if (name) name.dataset.panel = panel.id;
   }
-
-  // "‹ 2 / 5 ›": the work before / which work it is / the next work.
-  // (openProjectPanel and closeProjectPanel are in project-panels.js)
-  const count = document.querySelector(".panel-count");
-  const openIndex = () => {
-    const openPanel = document.querySelector(".project-panel:not([hidden])");
-    return openPanel ? rows.findIndex((row) => row.dataset.panel === openPanel.id) : -1;
-  };
-  const showCount = () => {
-    count.textContent = (openIndex() + 1) + " / " + rows.length;
-  };
-  const rowAfter = (step) => rows[(openIndex() + step + rows.length) % rows.length];
-  const goTo = (step) => {
-    if (openIndex() === -1) return;
-    const next = rowAfter(step);
-    closeProjectPanel();
-    openProjectPanel(next);
-    showCount();
-  };
-
-  // Under the mouse (or with Tab), the arrows say where they lead, above them:
-  // "Next work: Megi Solar". The name of a work = the name in its text (the panel's aria-label)
-  const nameOf = (row) => document.getElementById(row.dataset.panel).getAttribute("aria-label");
-  const navHint = document.querySelector(".panel-nav .panel-hint");
-  for (const [selector, step, words] of [[".panel-prev", -1, "Previous work: "], [".panel-next", 1, "Next work: "]]) {
-    const arrow = document.querySelector(selector);
-    // Two parts, so each one can have its own color: "Next work: " and the name
-    const showHint = () => {
-      if (openIndex() === -1) return;
-      const wordsPart = document.createElement("span");
-      wordsPart.className = "panel-hint-words";
-      wordsPart.textContent = words;
-      const namePart = document.createElement("span");
-      namePart.className = "panel-hint-name";
-      namePart.textContent = nameOf(rowAfter(step));
-      navHint.replaceChildren(wordsPart, namePart);
-    };
-    const hideHint = () => navHint.replaceChildren();
-    arrow.addEventListener("click", () => {
-      goTo(step);
-      arrow.focus(); // (with the keyboard, Enter again goes on to the one after)
-      showHint(); // the mouse is still there: now it leads to the one after
-    });
-    arrow.addEventListener("mouseenter", showHint);
-    arrow.addEventListener("focus", showHint);
-    arrow.addEventListener("mouseleave", hideHint);
-    arrow.addEventListener("blur", hideHint);
-  }
-
-  // A work opens with a click on it, or from a link (photography.html#megi-solar)
-  document.addEventListener("click", showCount);
-  document.addEventListener("DOMContentLoaded", showCount);
 
   // The tag next to the mouse on the page: "Open the project" (the same look as the tag on the home page)
   const tag = document.createElement("p");
