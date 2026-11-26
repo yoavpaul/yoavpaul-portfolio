@@ -170,6 +170,13 @@
   padding-top: 52px; /* room for the top bar (44px high on phones) */
 }
 
+/* On the category pages the menu has 4 lines (Index and the 3 categories), so the title starts under it */
+.branding-page .project-header,
+.photography-page .project-header,
+.graphics-page .project-header {
+  padding-top: 96px;
+}
+
 .project-title {
   position: static;
 }
@@ -202,6 +209,23 @@
 }
 
 /* ===== Me page (about.html) ===== */
+
+/* The email, the phone and the text about me: big enough to read on a phone
+   (on a computer they are 39px and 24px, which would be tiny here) */
+.about-contact {
+  font-size: 19px;
+}
+
+.about-text {
+  left: var(--space-page);
+  width: calc(100% - 2 * var(--space-page));
+  font-size: 15px;
+  line-height: 1.6;
+}
+
+.about-text p + p {
+  margin-top: 1.6em;
+}
 
 /* "Copy" shows under the email / phone, in the middle (there is no room next to them) */
 .copy-holder {
