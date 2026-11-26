@@ -695,6 +695,11 @@ body {
   text-align: var(--align, left);
 }
 
+/* Photography: the names under the works are 22px in Figma (Medium) */
+.photography-page .photo-caption {
+  --caption-size: 22;
+}
+
 /* Branding: the names under the logos are 30px in Figma, each on one line */
 .branding-page .photo-caption {
   --caption-size: 30;

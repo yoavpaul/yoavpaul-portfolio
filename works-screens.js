@@ -14,9 +14,7 @@
 // This file is loaded before photo-overlays.js, book-pages.js and project-panels.js (they use what it makes).
 
 {
-  // The names under the works become buttons (so they can be clicked, and reached with Tab).
-  // "Dissociative self" has a name only in the text layout in Figma: here it shows always,
-  // so it stands under its photo, like the other names
+  // The names under the works become buttons (so they can be clicked, and reached with Tab)
   const rows = [...document.querySelectorAll(".figma-column > .photo-overlay, .figma-column > .book")];
   for (const row of rows) {
     const caption = row.nextElementSibling;
@@ -27,10 +25,6 @@
       button.type = "button";
       button.textContent = caption.textContent;
       caption.replaceChildren(button);
-    }
-    if (caption.classList.contains("only-open")) {
-      caption.style.setProperty("--left", row.style.getPropertyValue("--left"));
-      caption.style.setProperty("--space-before", 19);
     }
   }
 
