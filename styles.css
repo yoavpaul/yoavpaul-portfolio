@@ -1511,13 +1511,13 @@ body.has-dark-panel .panel-nav {
 
 /* ===== Index page (projects.html) ===== */
 
-/* The "screen" at the top: the moving row of works (like the home page), under the top bar.
-   Lower than on the home page (340 instead of 600), so the categories are on the screen with it */
+/* The "screen" under the categories: the moving row of works (like the home page).
+   Lower than on the home page (340 instead of 600). Figma: from 587 to 927, the page ends at 1000 */
 .index-screen {
   --screen-height: 340;
   position: relative;
-  margin-top: calc(110 * var(--px));
-  padding-bottom: 0;
+  margin-top: 0;
+  padding-bottom: calc(73 * var(--px));
 }
 
 .index-screen .carousel {
@@ -1530,9 +1530,9 @@ body.has-dark-panel .panel-nav {
     display: none;
   }
 
-  /* The categories a little closer to the screen (".index-page": stronger than "margin: 0 auto" below) */
+  /* The categories at the top: their area goes down to the screen (587 Figma pixels) */
   .index-page .index-categories {
-    margin-top: calc(-40 * var(--px));
+    height: calc(587 * var(--px));
   }
 }
 

@@ -123,8 +123,8 @@
 }
 
 /* Index page: the screen of works as high as the home page row (no hover on phones, so no preview) */
-.index-screen {
-  margin-top: 64px;
+.index-page .index-categories {
+  padding-top: 64px; /* room for the top bar */
 }
 
 .index-screen .carousel {
