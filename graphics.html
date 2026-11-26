@@ -10,10 +10,10 @@
 </head>
 <body class="graphics-page">
   <!-- Top bar (stays at the top while scrolling, with a soft blur behind it):
-       on the left the menu (the page you are on in red; a click on "Index" folds it, see top-bar-menu.js),
+       on the left the menu: "Index" and the three categories, the page you are on in red (top-bar-menu.js),
        "YP" in the middle (leads home), Contact on the right -->
   <header class="top-bar">
-    <p class="top-bar-left is-folded"><button class="page-link top-bar-index" type="button" aria-expanded="false">Index</button><a class="page-link menu-other" href="branding.html">Branding</a><a class="page-link menu-other" href="photography.html">Photography</a><span class="is-current">Graphics</span></p>
+    <p class="top-bar-left"><a class="page-link" href="projects.html">Index</a><a class="page-link" href="branding.html">Branding</a><a class="page-link" href="photography.html">Photography</a><span class="is-current">Graphics</span></p>
     <a class="top-bar-name" href="index.html" aria-label="Yoav Paul, home page">YP</a>
     <a class="top-bar-contact" href="about.html">Contact</a>
   </header>
@@ -49,16 +49,16 @@
     </aside>
 
     <!-- I'M HERE? (Tartoctober posters): a row with the 3 posters, open all the time (data-always-open).
-         --x, --y = where each poster starts, --w, --h = its size (Figma frame "Im here?").
+         --x, --y = where each poster starts, --w, --h = its size (Figma frame "Im here?"), 9 apart like the photography page.
          In the text layout the first poster is smaller (484 instead of 523), so the whole row is
          made smaller the same way: --scale-open = 484 / 523 -->
     <div id="im-here" class="photo-overlay from-left" data-always-open style="--left: 448; --space-before: 179; --left-open: 478; --space-open: 237; --scale-open: 0.9254;">
-      <div class="photo-overlay-row" style="--width: 1645;">
+      <div class="photo-overlay-row" style="--width: 1587;">
         <span class="photo-box" style="--width: 523; --height: 740; --width-open: 484; --height-open: 684;">
           <img src="images/tartakover-poster.webp" width="1697" height="2400" alt="I'M HERE? poster, red">
         </span>
-        <div style="--x: 561; --y: 0; --w: 523; --h: 740;"><img src="images/tartakover-poster-black.webp" width="1697" height="2400" alt="I'M HERE? poster, black (exhibition)" loading="lazy"></div>
-        <div style="--x: 1122; --y: 0; --w: 523; --h: 739;"><img src="images/tartakover-poster-green.webp" width="1697" height="2400" alt="I'M HERE? poster, green" loading="lazy"></div>
+        <div style="--x: 532; --y: 0; --w: 523; --h: 740;"><img src="images/tartakover-poster-black.webp" width="1697" height="2400" alt="I'M HERE? poster, black (exhibition)" loading="lazy"></div>
+        <div style="--x: 1064; --y: 0; --w: 523; --h: 739;"><img src="images/tartakover-poster-green.webp" width="1697" height="2400" alt="I'M HERE? poster, green" loading="lazy"></div>
       </div>
     </div>
     <p class="photo-caption from-left" style="--left: 448; --space-before: 33; --left-open: 478; --space-open: 28; --width: 391; --height: 38;"><button class="caption-button" type="button" aria-expanded="false" aria-controls="text-im-here" data-row="im-here">I’M HERE?</button></p>
@@ -90,12 +90,31 @@
     </div>
     <p class="photo-caption from-left" style="--left: 448; --left-open: 478; --space-open: -24; --width: 388; --height: 23;"><button class="caption-button" type="button" aria-expanded="false" aria-controls="text-soccer-joint" data-row="soccer-joint">On The Line - Soccer</button></p>
 
-    <aside class="project-text" id="text-soccer-joint" style="--top: 1737;" hidden>
-      <h2>On The Lines — Football</h2>
-      <p class="has-line-space">Graphic Design &amp; Typography Course lecturer by Michal Sahar.</p>
-      <p>A visual interpretation of Wikipedia's football entry, transformed into a printed booklet.</p>
-      <p class="is-indented">The project includes a booklet, a promotional poster, and a landing page for its launch event.</p>
+    <aside class="project-text" id="text-soccer-joint" hidden>
+      <h2>On The Lines</h2>
+      <p class="has-line-space">Editorial design &amp; event Identity, a visual interpretation of Wikipedia’s article on football, transformed into a printed booklet titled <i>Football</i>. The project extends into the visual identity of its launch event, <i>On the Lines</i>, including a promotional poster and a dedicated landing page.</p>
+      <p class="has-space">Created as part of a Graphic Design &amp; Typography course led by Michal Sahar.</p>
     </aside>
+
+    <!-- The exact layout of the works' own screens, from their Figma frames ("… – own screen"),
+         in Figma pixels of a screen 1069 high: --x, --y = where it starts, --w, --h = its size.
+         [data-part="text"] gets the text above, [data-part="1"], "2"... the parts of the work (works-screens.js).
+         A label = a small name over a part. (1+1= has no template: text, then the book) -->
+    <template id="screen-im-here" data-width="2314">
+      <div class="screen-item" data-part="text" style="--x: 30; --y: 134.5; --w: 450;"></div>
+      <div class="screen-item" data-part="1" style="--x: 520; --y: 135; --w: 565; --h: 800;"></div>
+      <div class="screen-item" data-part="2" style="--x: 1094; --y: 135; --w: 565; --h: 800;"></div>
+      <div class="screen-item" data-part="3" style="--x: 1668; --y: 135; --w: 566; --h: 800;"></div>
+    </template>
+    <template id="screen-soccer-joint" data-width="3668">
+      <div class="screen-item" data-part="text" style="--x: 30; --y: 204.5; --w: 464;"></div>
+      <p class="screen-item screen-label" style="--x: 558; --y: 147; --w: 243;">Football — Editorial Booklet</p>
+      <div class="screen-item" data-part="1" style="--x: 520; --y: 134.5; --w: 1063; --h: 800;"></div>
+      <p class="screen-item screen-label" style="--x: 1591; --y: 132; --w: 243;">Event Landing Page</p>
+      <div class="screen-item" data-part="2" style="--x: 1593; --y: 185; --w: 1221; --h: 715;"></div>
+      <p class="screen-item screen-label" style="--x: 2841; --y: 62; --w: 243;">Event Poster</p>
+      <div class="screen-item" data-part="3" style="--x: 2841; --y: 106; --w: 640; --h: 914;"></div>
+    </template>
   </main>
 
 

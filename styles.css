@@ -113,7 +113,7 @@
 
   /* Spacing */
   --space-page: 16px;
-  --photo-row-gap: 30; /* Photography: the space between the photos of an open row (Figma pixels) */
+  --photo-row-gap: 9; /* Photography: the space between the photos, in the rows and on the works' screens (Figma pixels) */
 }
 
 /* ===== Base ===== */
@@ -339,19 +339,24 @@ body {
   margin-top: var(--bar-line-gap);
 }
 
-/* "Index" is a button: a click folds the menu (top-bar-menu.js). No button look */
-.top-bar-index {
-  padding: 0;
-  border: none;
-  background: none;
-  font: inherit;
-  color: inherit;
-  cursor: pointer;  touch-action: manipulation; /* a double tap on a phone doesn't zoom (it leads to the index page) */
+/* "Next: Graphics ›" at the end of a category page, in the middle (top-bar-menu.js) */
+.next-category {
+  margin: calc(120 * var(--px)) 0 calc(80 * var(--px));
+  font-family: var(--font-nav);
+  font-size: calc(var(--size-nav) * 1.25);
+  text-align: center;
 }
 
-/* The folded menu: only "Index" and the page you are on */
-.top-bar-left.is-folded .menu-other {
-  display: none;
+.next-category a {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  color: var(--color-text);
+  text-decoration: none;
+}
+
+.next-category a:hover {
+  color: var(--color-accent);
 }
 
 /* On the project pages "Contact" is a little more to the right (Figma: its middle at 1202.5px) */
@@ -855,7 +860,7 @@ button.photo-box {
    --panel-photo-gap = the space between the photos, --panel-text-gap = the space after the text,
    --panel-photo-height = how high the photos are. (photography.html?tune changes them live, tools/panel-tuner.js) */
 :root {
-  --panel-photo-gap: 40;
+  --panel-photo-gap: var(--photo-row-gap); /* the same space as between the photos on the page */
   --panel-text-gap: 40;
   --panel-photo-height: 800;
 }
@@ -876,6 +881,51 @@ button.photo-box {
   align-self: flex-start;
   margin-top: calc((1069 - var(--panel-photo-height)) / 2 * var(--s)); /* its top on the top of the photos */
   margin-right: calc((var(--panel-text-gap) - var(--panel-photo-gap)) * var(--s));
+}
+
+/* A screen with an exact layout from Figma (a <template id="screen-…"> in graphics.html):
+   everything placed by --x, --y, --w, --h in Figma pixels (like the branding projects) */
+.screen-stage {
+  position: relative;
+  width: calc(var(--width) * var(--s));
+  height: var(--panel-height);
+}
+
+.screen-item {
+  position: absolute;
+  left: calc(var(--x) * var(--s));
+  top: calc(var(--y) * var(--s));
+  width: calc(var(--w) * var(--s));
+  margin: 0;
+}
+
+.screen-item[style*="--h"] {
+  height: calc(var(--h) * var(--s));
+}
+
+.screen-item > .photo-panel-photo {
+  width: 100%;
+  height: 100%;
+}
+
+.screen-item > .photo-panel-text {
+  position: static;
+  width: auto;
+  margin: 0;
+}
+
+/* The text on a work's screen grows and shrinks with the screen's height, like everything on it
+   (one Figma pixel = --s), so it keeps its lines like in the Figma frame */
+.project-panel .photo-panel-text {
+  --px: var(--s);
+}
+
+/* A small name over a part ("Event Poster"): Editor Sans 18px (Figma) */
+.screen-label {
+  font-family: var(--font-nav);
+  font-size: calc(18 * var(--s));
+  line-height: calc(37 * var(--s));
+  color: var(--color-text);
 }
 
 /* Each photo has the shape of its row (aspect-ratio, from works-screens.js), cut like in the row */

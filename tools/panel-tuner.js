@@ -1,15 +1,23 @@
-// A tool for the photography test: sliders that change the spaces of a work's own screen live.
-// Only with ?tune in the address (photography.html?rows=open&tune). It changes the CSS variables
-// --panel-photo-gap, --panel-text-gap and --panel-photo-height (see styles.css), only in this browser
-// window: nothing is saved. When it looks right, send the numbers (or "Copy") and they go into styles.css.
+// A tool for the photography page: sliders that change the spaces live.
+// Only with ?tune in the address (photography.html?tune). Only in this browser window: nothing is saved.
+// When it looks right, press "Copy" and send the numbers (they go into styles.css / photography.html).
+//   - Space between the photos: one space for all of them, in the rows on the page and on the works'
+//     own screens (--photo-row-gap; photo-overlays.js places the rows again)
+//   - Space between the works: from a work's name to the next work, the same for all (--space-before)
+//   - Space after the text and height of the photos: on the works' own screens
 
 {
   if (new URLSearchParams(location.search).has("tune")) {
     const root = document.documentElement;
+    const works = [...document.querySelectorAll(".has-even-rows > .photo-overlay")].slice(1); // (not the first)
     const settings = [
-      { name: "--panel-photo-gap", label: "Space between the photos", min: 0, max: 120 },
-      { name: "--panel-text-gap", label: "Space after the text", min: 0, max: 200 },
-      { name: "--panel-photo-height", label: "Height of the photos", min: 500, max: 1000 },
+      { name: "--photo-row-gap", label: "Space between the photos", min: 0, max: 120,
+        apply: () => layoutEvenRows() },
+      { label: "Space between the works", min: 0, max: 200,
+        value: () => parseFloat(works[0].style.getPropertyValue("--space-before")),
+        apply: (value) => works.forEach((work) => work.style.setProperty("--space-before", value)) },
+      { name: "--panel-text-gap", label: "Space after the text (work screen)", min: 0, max: 200 },
+      { name: "--panel-photo-height", label: "Height of the photos (work screen)", min: 500, max: 1000 },
     ];
 
     const box = document.createElement("div");
@@ -20,10 +28,11 @@
     copyButton.type = "button";
     copyButton.textContent = "Copy";
 
-    const valuesText = () => settings.map((s) => s.label + ": " + getComputedStyle(root).getPropertyValue(s.name).trim()).join(", ");
+    const valueOf = (setting) => setting.value ? setting.value() : parseFloat(getComputedStyle(root).getPropertyValue(setting.name));
+    const valuesText = () => settings.map((s) => s.label + ": " + valueOf(s)).join(", ");
 
     for (const setting of settings) {
-      const value = parseFloat(getComputedStyle(root).getPropertyValue(setting.name));
+      const value = valueOf(setting);
       const row = document.createElement("label");
       row.innerHTML = `<span>${setting.label}</span>`;
       const slider = document.createElement("input");
@@ -34,7 +43,8 @@
       const number = document.createElement("b");
       number.textContent = value;
       slider.addEventListener("input", () => {
-        root.style.setProperty(setting.name, slider.value);
+        if (setting.name) root.style.setProperty(setting.name, slider.value);
+        if (setting.apply) setting.apply(slider.value);
         number.textContent = slider.value;
       });
       row.append(slider, number);

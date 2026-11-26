@@ -43,22 +43,35 @@
     panel.setAttribute("tabindex", "-1");
     panel.hidden = true;
 
+    // A work can have an exact layout from its Figma frame: <template id="screen-" + its id> (graphics.html).
+    // Without one: its text, then its parts in a row, as high as each other (photography)
+    const layout = document.getElementById("screen-" + row.id);
     const stage = document.createElement("div");
-    stage.className = "photo-panel-stage";
+    stage.className = layout ? "screen-stage" : "photo-panel-stage";
+    if (layout) {
+      stage.style.setProperty("--width", layout.dataset.width);
+      stage.appendChild(layout.content.cloneNode(true));
+    }
+    // The place of the text and of each part in the exact layout ([data-part="text"], [data-part="1"]...)
+    const slot = (name) => (layout ? stage.querySelector(`[data-part="${name}"]`) : null) || stage;
+
     const text = document.getElementById("text-" + row.id);
     if (text) {
       const copy = text.cloneNode(true);
       copy.removeAttribute("id");
+      copy.removeAttribute("style");
       copy.hidden = false;
       copy.className = "project-text photo-panel-text";
-      stage.appendChild(copy);
+      slot("text").appendChild(copy);
       panel.setAttribute("aria-label", copy.querySelector("h2").textContent.trim());
     }
 
     // Each part in the shape it has on the page (from Figma), cut the same way.
     // A book is copied whole (book-pages.js makes the copy turn its pages too)
     const parts = row.classList.contains("book") ? [row] : row.querySelectorAll(".photo-box, .photo-overlay-row > div");
+    let partNumber = 0;
     for (const part of parts) {
+      partNumber += 1;
       const isFirst = part.classList.contains("photo-box");
       const width = parseFloat(part.style.getPropertyValue(isFirst ? "--width" : "--w"));
       const height = parseFloat(part.style.getPropertyValue(isFirst ? "--height" : "--h"));
@@ -79,7 +92,7 @@
         img.sizes = "70vh";
         img.loading = "lazy";
       }
-      stage.appendChild(box);
+      slot(String(partNumber)).appendChild(box);
     }
     panel.appendChild(stage);
     // Before the arrows, so Tab goes from the screen to its arrows
